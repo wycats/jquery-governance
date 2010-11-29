@@ -8,6 +8,7 @@ gem 'factory_girl', '~>2.0.0.beta1'
 gem 'devise'
 gem 'jquery-rails'
 gem 'haml',         '~>3.0.23'
+gem 'haml-rails'
 
 # Use unicorn as the web server
 # gem 'unicorn'
