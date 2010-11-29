@@ -5,6 +5,7 @@ gem 'rack-cache', :git => "https://github.com/rtomayko/rack-cache.git"
 gem 'rack', :git => "https://github.com/rack/rack.git"
 
 gem 'factory_girl', '~> 2.0.0.beta1'
+gem 'devise'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
