@@ -8,6 +8,9 @@ require 'rspec/rails'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 require "factory_girl"
 
+# Find and load all the factories in "factories" for use across all specs"
+FactoryGirl.find_definitions
+
 RSpec.configure do |config|
   # == Mock Framework
   #

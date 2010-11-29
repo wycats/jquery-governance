@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+  <head profile="http://gmpg.org/xfn/11">
+	  <title>jQuery Voting Tools</title>
+  	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="http://static.jquery.com/files/rocker/css/reset.css" type="text/css" />
+    <link rel="stylesheet" href="http://static.jquery.com/files/rocker/css/screen.css" type="text/css" />
+    <link rel="stylesheet" href="http://jquery.org/wp-content/themes/green/green/additions.css" type="text/css" />
+  	<link rel="stylesheet" type="text/css" href="http://static.jquery.com/org/style.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://static.jquery.com/files/rocker/scripts/custom.js"></script>
+    <link rel='index' title='jQuery Project' href='http://jquery.org' /> 
+    <link rel="shortcut icon" href="http://static.jquery.com/org/favicon.png" type="image/x-icon"/>
+  </head>
+  <body>
+    <div id="access">
+      <div class="skip-link"><a href="#jq-content" title="Skip to content">Skip to content</a></div>
+    </div><!-- #access -->
+
+    <div id="jq-siteBurst" class="jq-breakout">
+      <div id="jq-siteContain">
+        <div id="jq-header">
+          <a id="jq-siteLogo" href="/" title="jQuery Home"><img src="http://static.jquery.com/org/images/project/jquery-project-sm.png" alt="jQuery: Write Less, Do More." /></a>
+          <div id="jq-primaryNavigation" class="roundbottom shadow">
+          <ul>
+            <li class="jq-jquery"><a href="http://jquery.com/" title="jQuery Home">jQuery</a></li>
+            <li class="jq-plugins"><a href="http://plugins.jquery.com/" title="jQuery Plugins">Plugins</a></li>
+            <li class="jq-ui"><a href="http://jqueryui.com/" title="jQuery UI">UI</a></li>
+            <li class="jq-meetup"><a href="http://meetups.jquery.com/" title="jQuery Meetups">Meetups</a></li>
+            <li class="jq-forum"><a href="http://forum.jquery.com/" title="jQuery Forum">Forum</a></li>
+            <li class="jq-blog"><a href="http://blog.jquery.com/" title="jQuery Blog">Blog</a></li>
+            <li class="jq-about jq-current"><a href="http://jquery.org/about" title="About jQuery">About</a></li>
+            <li class="jq-donate"><a href="http://jquery.org/donate" title="Donate to jQuery">Donate</a></li>
+          </ul>
+        </div><!-- /#primaryNavigation -->
+
+        <div id="jq-secondaryNavigation" class="">
+          <ul>
+            <div id="menu"><ul><li class="page_item page-item-4"><a href="http://jquery.org" title="Projects">Projects</a></li><li class="page_item page-item-14"><a href="http://jquery.org/team" title="Team">Team</a></li><li class="page_item page-item-185"><a href="http://jquery.org/history" title="History">History</a></li><li class="page_item page-item-232"><a href="http://jquery.org/sponsors" title="Sponsors">Sponsors</a></li><li class="page_item page-item-180"><a href="http://jquery.org/license" title="License">License</a></li><li class="page_item page-item-2"><a href="http://jquery.org/about" title="About">About</a></li><li class="page_item page-item-16"><a href="http://jquery.org/donate" title="Donate">Donate</a></li></ul></div> 
+          </ul>
+        </div><!-- /#secondaryNavigation -->
+      </div><!-- /#header -->
+      <div id="jq-contentContain" class="rounded shadow">
+        <div id="jq-content" class="jq-clearfix jq-overvlowContain roundedTop">
+          <hr class="space" />
+
+          <div id="container">
+            <div id="content">
+
+              <div>
+                <div>
+                  <div class="post-header roundedTop"> 
+                    <h2>Voting Tool</h2>
+                    <p class="large">The <span class="jqueryType">
+                      Members of the jQuery Team vote on issues using this tool. Keep an eye on the official business of jQuery here.
+                    </p>
+                  </div>
+                  <div class="inner-content">
+                    <p class="notice"><%= notice %></p>
+                    <p class="alert"><%= alert %></p>
+                    <%= yield %>
+                  </div>
+
+
+                </div>
+              </div><!-- .post -->
+
+
+            </div><!-- #content -->
+          </div><!-- #container -->
+
+        </div><!-- /#content -->
+        <div id="jq-footer" class="jq-clearfix">
+          <div id="jq-credits">
+            <p id="jq-copyright">&copy; 2010 <a href="http://jquery.org/">The jQuery Project</a></p>
+            <p id="jq-hosting">Sponsored by <a href="http://mediatemple.net" class="jq-mediaTemple">Media Temple</a> and <a href="http://jquery.org/sponsors">others</a>.</p>
+          </div>
+          <div id="jq-footerNavigation">
+            <ul>
+					 		<div id="menu"><ul><li class="page_item page-item-4 current_page_item"><a href="http://jquery.org" title="Projects">Projects</a></li><li class="page_item page-item-307"><a href="http://jquery.org/reimbursements" title="Reimbursements">Reimbursements</a></li><li class="page_item page-item-14"><a href="http://jquery.org/team" title="Team">Team</a></li><li class="page_item page-item-185"><a href="http://jquery.org/history" title="History">History</a></li><li class="page_item page-item-232"><a href="http://jquery.org/sponsors" title="Sponsors">Sponsors</a></li><li class="page_item page-item-180"><a href="http://jquery.org/license" title="License">License</a></li><li class="page_item page-item-2"><a href="http://jquery.org/about" title="About">About</a></li><li class="page_item page-item-16"><a href="http://jquery.org/donate" title="Donate">Donate</a></li></ul></div> 
+            </ul>
+          </div><!-- /#secondaryNavigation -->
+        </div><!-- /#footer -->
+      </div><!-- /#contet/#footer /.shadow wrapper-->
+    </div><!-- /#siteContain -->
+  </div><!-- /#siteBurst -->
+  <!--<script type="text/javascript">
+  var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-1076265-1']); _gaq.push(['_trackPageview']); _gaq.push(['_setDomainName', '.jquery.org']);
+  (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);})();
+  </script>-->
+</body>
+</html>
+

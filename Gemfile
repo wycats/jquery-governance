@@ -5,6 +5,7 @@ gem 'rails',        :git      => "https://github.com/rails/rails.git"
 gem 'rack-cache',   :git      => "https://github.com/rtomayko/rack-cache.git"
 gem 'rack',         :git      => "https://github.com/rack/rack.git"
 gem 'factory_girl', '~>2.0.0.beta1'
+gem 'devise'
 gem 'jquery-rails'
 gem 'haml',         '~>3.0.23'
 
@@ -27,5 +28,7 @@ gem 'haml',         '~>3.0.23'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
+  gem "ruby-debug19"
   gem "rspec-rails"
+  gem "factory_girl_rails", :git => 'git://github.com/thoughtbot/factory_girl_rails', :tag => 'v1.1.beta1'
 end
