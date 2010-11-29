@@ -31,6 +31,7 @@ gem 'jquery-rails'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
+  gem "ruby-debug19"
   gem "rspec-rails"
   gem "factory_girl_rails", :git => 'git://github.com/thoughtbot/factory_girl_rails', :tag => 'v1.1.beta1'
 end
