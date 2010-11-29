@@ -17,26 +17,33 @@ class Motion < ActiveRecord::Base
     %w(waitingsecond waitingexpedited waitingobjection
        objected voting passed failed approved)
 
+  # @return [Fixnum] The current count of yea votes
   def yeas
     votes.yeas.count
   end
   alias :ayes :yeas
 
+  # @return [Fixnum] The current count of nay votes
   def nays
     votes.nays.count
   end
 
+  # @return [Fixnum] The number of votes required to pass this Motion
   def required_votes
     possible_votes / 2 + 1
   end
 
-  def seconds_for_expediting
+  # @return [Fixnum] The numbers of seconds required to expedite
+  def seconds_for_expedition
     possible_votes / 3
   end
+  alias :seconds_for_expediting :seconds_for_expedition
 
+  # Seconds this Motion
+  #   @param [Member] member The member who is seconding this motion
+  #   @return [true, false] Whether or not the second was accepted
+  # @TODO @return
   def second(member)
-    # TODO: Members cannot second their own motions
-
     seconds.create(:member => member)
 
     second_count = seconds
@@ -48,8 +55,13 @@ class Motion < ActiveRecord::Base
     end
   end
 
+  # Cast a Member's Vote
+  #   @param [Member] member An active member
+  #   @param [true, false] value An aye or nay vote
+  #   @return [true, false] Whether or not the vote was accepted
+  # @TODO @return
   def vote(member, value)
-    events.create(:member => member, :type => "vote", :value => value)
+    votes.create(:member => member, :value => value)
     passed! if ayes > required_votes
   end
 
