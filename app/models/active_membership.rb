@@ -7,6 +7,7 @@ class ActiveMembership < ActiveRecord::Base
   end
 
   def self.members_active_at(time)
-    active_at(time).include(:member).map(&:member)
+    members = active_at(time).map(&:member)
+    members.uniq
   end
 end
