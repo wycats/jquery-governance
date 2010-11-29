@@ -31,5 +31,13 @@ gem 'jquery-rails'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  gem "rspec-rails"
+  gem 'rspec-rails'
+  gem 'cucumber-rails'
+end
+
+group :test do
+  gem 'cucumber', git: 'git://github.com/dtrasbo/cucumber.git'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
 end
