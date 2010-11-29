@@ -1,17 +1,5 @@
 require 'spec_helper'
 
-# FactoryGirl.define do
-#   factory :john_resig, :class => Member do
-#     name "John Resig"
-#   end
-# 
-#   factory :active_membership do
-#     association :member, :factory => :john_resig
-#     start_time 4.days.ago
-#     end_time nil
-#   end
-# end
-
 describe Member do
   describe "active_at?" do
     describe "a currently active member" do
@@ -38,7 +26,7 @@ describe Member do
         @member = Factory.create(:active_membership, :end_time => 2.days.ago).member
       end
 
-      it "knows that it is active today" do
+      it "knows that it is not active today" do
         @member.should_not be_active_at(Time.now)
         @member.should_not be_active
       end
