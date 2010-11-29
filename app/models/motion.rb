@@ -1,22 +1,29 @@
 class Motion < ActiveRecord::Base
-  belongs_to :member
+  belongs_to  :member
+  has_many    :seconds
+  has_many    :votes    do
+    # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
+    def yeas
+      where :value => true
+    end
 
-  has_many :events
+    # @return [ActiveRecord::Relation] An Array-like structure, of all nay-votes cast
+    def nays
+      where :value => false
+    end
+  end
 
   validates_inclusion_of :state, :in =>
     %w(waitingsecond waitingexpedited waitingobjection
        objected voting passed failed approved)
 
-  def seconds
-    events.where(:type => "second").count
+  def yeas
+    votes.yeas.count
   end
-
-  def ayes
-    events.where(:type => "vote", :value => true).count
-  end
+  alias :ayes :yeas
 
   def nays
-    events.where(:type => "vote", :value => false).count
+    votes.nays.count
   end
 
   def required_votes
@@ -30,7 +37,7 @@ class Motion < ActiveRecord::Base
   def second(member)
     # TODO: Members cannot second their own motions
 
-    events.create(:member => member, :type => "second")
+    seconds.create(:member => member)
 
     second_count = seconds
 
@@ -99,7 +106,7 @@ class Motion < ActiveRecord::Base
   end
 
   def approved!
-    votes = ayes + nays
+    votes = yeas + nays
 
     update_attributes(
       :state => "approved",
