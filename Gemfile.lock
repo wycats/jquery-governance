@@ -44,6 +44,15 @@ GIT
       thor (~> 0.14.4)
 
 GIT
+  remote: git://github.com/thoughtbot/factory_girl_rails
+  revision: cc88e0841773cbe07da7ddcf38058d75456c071e
+  tag: v1.1.beta1
+  specs:
+    factory_girl_rails (1.1.beta1)
+      factory_girl (~> 2.0.0.beta)
+      railties (>= 3.0.0)
+
+GIT
   remote: https://github.com/rack/rack.git
   revision: 85ca454e6143a3081d90e4546ccad602a4c3ad2e
   specs:
@@ -102,13 +111,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  factory_girl (~> 2.0.0.beta1)
+  factory_girl_rails!
   jquery-rails
   rack!
   rack-cache!
   rails!
   rspec-rails
   sqlite3-ruby
-
-METADATA
-  version: 1.1.pre
