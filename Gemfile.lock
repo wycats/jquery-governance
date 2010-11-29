@@ -1,6 +1,12 @@
 GIT
-  remote: git://github.com/rails/rails.git
-  revision: e444439fe28f873c783a4b99b1c9f29a7405dd0d
+  remote: https://github.com/rack/rack.git
+  revision: 85ca454e6143a3081d90e4546ccad602a4c3ad2e
+  specs:
+    rack (1.2.1)
+
+GIT
+  remote: https://github.com/rails/rails.git
+  revision: 28896a9f4ae0830726619bc479f69263acb80e4b
   specs:
     actionmailer (3.1.0.beta)
       actionpack (= 3.1.0.beta)
@@ -44,12 +50,6 @@ GIT
       thor (~> 0.14.4)
 
 GIT
-  remote: https://github.com/rack/rack.git
-  revision: 85ca454e6143a3081d90e4546ccad602a4c3ad2e
-  specs:
-    rack (1.2.1)
-
-GIT
   remote: https://github.com/rtomayko/rack-cache.git
   revision: 428ac19e727fdff3ace20d1727129c689d65ff4d
   specs:
@@ -66,6 +66,7 @@ GEM
     erubis (2.6.6)
       abstract (>= 1.0.0)
     factory_girl (2.0.0.beta1)
+    haml (3.0.24)
     i18n (0.4.2)
     jquery-rails (0.2.5)
       rails (~> 3.0)
@@ -103,6 +104,7 @@ PLATFORMS
 
 DEPENDENCIES
   factory_girl (~> 2.0.0.beta1)
+  haml (~> 3.0.23)
   jquery-rails
   rack!
   rack-cache!
