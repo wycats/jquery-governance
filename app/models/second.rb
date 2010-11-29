@@ -1,6 +1,8 @@
 class Second < Event
-  validates :member_id, :presence   =>  true,
-                        :uniqueness =>  {
-                          :scope => :motion_member_id
-                        }
+  validate :motion_creator_cannot_second
+
+private
+  def motion_creator_cannot_second
+    errors.add(:member, "Member cannot second a motion that they created.") if motion.member == member
+  end
 end
