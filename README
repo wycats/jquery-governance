@@ -1,1 +1,12 @@
 This app will eventually be an open source tool for managing jQuery governance in accordance with its governance rules.
+
+::Redis::
+
+For development, be sure to run redis-server at the default 6379 port.
+For testing, be sure to run redis-server at 6380.
+
+IE:
+
+$ redis-server -
+port 6380
+CTRL-D
