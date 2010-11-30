@@ -6,3 +6,4 @@ tmp/**/*
 *.tmproj
 .yardoc
 *.swp
+*.rdb
