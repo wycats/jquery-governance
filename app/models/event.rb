@@ -4,17 +4,31 @@ class Event < ActiveRecord::Base
   validates   :member_id, :uniqueness => {
                             :scope => :motion_id
                           }
-  validate    :motion_creator_cannot_second,  :if => :second?
-  after_save  :assert_motion_state,           :if => :vote?
 
-  # @return [true, false]
-  def vote?
-    type == "vote"
+  validate    :motion_creator_cannot_second,  :if => :is_second?
+  after_save  :assert_motion_state,           :if => :is_vote?
+
+  scope :votes,   :conditions => {:event_type  => "vote"}
+  scope :seconds, :conditions => {:event_type  => "second"}
+
+  # @return [true, false] Whether or not this is a Voting Event
+  def is_vote?
+    event_type == "vote"
   end
 
-  # @return [true, false]
-  def second?
-    type == "second"
+  # @return [true, false] Whether or not this is a Seconding Event
+  def is_second?
+    event_type == "second"
+  end
+
+  # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
+  def self.yeas
+    where :value => true
+  end
+
+  # @return [ActiveRecord::Relation] An Array-like structure, of all nay-votes cast
+  def self.nays
+    where :value => false
   end
 
 private

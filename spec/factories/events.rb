@@ -5,7 +5,7 @@ FactoryGirl.define do
   end
   
   factory :vote, :parent => :event do
-    type "Vote"
+    event_type "vote"
   end
 
   factory :yes_vote, :parent => :vote  do 
@@ -17,6 +17,6 @@ FactoryGirl.define do
   end
 
   factory :second, :parent => :event do
-    type "Second"
+    event_type "second"
   end
 end

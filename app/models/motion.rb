@@ -4,16 +4,17 @@ class Motion < ActiveRecord::Base
        objected voting passed failed approved)
 
   belongs_to  :member
-  has_many    :seconds
-  has_many    :votes
 
-  # @return [Fixnum] The current count of yea votes
+  has_many :votes, :class_name => "Event", :conditions => {:event_type => "vote"} 
+  has_many :seconds, :class_name => "Event", :conditions => {:event_type => "second"}
+  
+  # @return [Fixnum] Count of current yea votes
   def yeas
     votes.yeas.count
   end
   alias :ayes :yeas
 
-  # @return [Fixnum] The current count of nay votes
+  # @return [Fixnum] Count of current nay votes
   def nays
     votes.nays.count
   end
@@ -56,7 +57,7 @@ class Motion < ActiveRecord::Base
   #   @return [true, false] Whether or not the vote was accepted
   # @TODO @return
   def vote(member, value)
-    votes.create(:member => member, :value => value)
+    events.create(:member => member, :event_type => "vote", :value => value)
     passed! if ayes > required_votes
   end
 
