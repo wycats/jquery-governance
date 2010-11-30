@@ -57,12 +57,14 @@ against this total.
 ### The Models
 
 _conflicts_
+
 * motion_id
 * member_id
 * conflict\_reason_id
 * timestamps
 
 _conflict\_reasons_
+
 * reason
 * direct_conflict (boolean)
 
@@ -71,5 +73,5 @@ is allowed to vote on a given motion:
 
 Conflict model:
 <pre><code>
-  scope :has\_direct\_conflict, joins(:conflict\_reasons).where('direct\_conflict = ?', true)
+  scope :has_direct_conflict, joins(:conflict_reasons).where('direct_conflict = ?', true)
 </code></pre>
