@@ -7,14 +7,14 @@ class Event < ActiveRecord::Base
   validate    :motion_creator_cannot_second,  :if => :second?
   after_save  :assert_motion_state,           :if => :vote?
 
-  # @return [true, false]
+  # @return [true, false] Whether or not this is a Voting Event
   def vote?
-    type == "vote"
+    event_type == "vote"
   end
 
-  # @return [true, false]
+  # @return [true, false] Whether or not this is a Seconding Event
   def second?
-    type == "second"
+    event_type == "second"
   end
 
 private

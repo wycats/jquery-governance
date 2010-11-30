@@ -158,7 +158,7 @@ describe Member do
 
     describe "an inactive member" do
       before do
-        @member = Factory.create(:active_membership, :end_time => 2.days.ago).member
+        @member = Factory.create(:expired_membership).member
         @motion = Factory.create(:motion)
       end
 
