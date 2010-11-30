@@ -10,6 +10,9 @@ gem 'jquery-rails'
 gem 'haml',         '~>3.0.23'
 gem 'haml-rails'
 
+gem 'resque'
+gem 'resque-scheduler', :require => "resque_scheduler"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -32,7 +35,7 @@ group :development, :test do
   gem "ruby-debug19"
   gem "rspec-rails"
   gem "factory_girl_rails", :git => 'git://github.com/thoughtbot/factory_girl_rails', :tag => 'v1.1.beta1'
-  gem 'cucumber', git: 'git://github.com/dtrasbo/cucumber.git'
+  gem 'cucumber', :git => 'git://github.com/dtrasbo/cucumber.git'
   gem 'cucumber-rails'
   gem 'capybara'
   gem 'database_cleaner'
