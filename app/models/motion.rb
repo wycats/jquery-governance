@@ -1,13 +1,20 @@
 class Motion < ActiveRecord::Base
   validates_inclusion_of :state, :in =>
     %w(waitingsecond waitingexpedited waitingobjection
-       objected voting passed failed approved)
+       objected voting passed failed approved).push(nil)
 
   belongs_to  :member
-
-  has_many :votes, :class_name => "Event", :conditions => {:event_type => "vote"} 
-  has_many :seconds, :class_name => "Event", :conditions => {:event_type => "second"}
   
+  has_many    :events
+
+  def votes
+    events.where(:event_type => "vote")
+  end
+
+  def seconds
+    events.where(:event_type => "second")
+  end
+
   # @return [Fixnum] Count of current yea votes
   def yeas
     votes.yeas.count
@@ -42,11 +49,11 @@ class Motion < ActiveRecord::Base
   def permit?(action, member)
     case action
     when :vote
-      member.active? && voting? && votes.find_by_member_id(id).nil?
+      member.membership_active? && voting? && votes.find_by_member_id(id).nil?
     when :see
-      member.active? || voting? || passed? || failed?
+      member.membership_active? || publicly_visible?
     when :second
-      member.active? && member != self.member && !voting? && !passed? && !failed? && seconds.find_by_member_id(member.id).nil?
+      member.membership_active? && member != self.member && !publicly_visible? && !voting? && !passed? && !failed? && seconds.find_by_member_id(member.id).nil?
     end
   end
 
@@ -57,7 +64,7 @@ class Motion < ActiveRecord::Base
   def second(member)
     seconds.create(:member => member)
 
-    second_count = seconds.size
+    second_count = seconds.count
 
     if state == "waitingsecond" && second_count >= 2
       waitingobjection!
@@ -79,6 +86,11 @@ class Motion < ActiveRecord::Base
   ##
   # States
   ##
+
+  # @TODO - Description
+  def publicly_visible?
+    voting? || passed? || failed?
+  end
 
   # @TODO - Description
   def waitingsecond!
@@ -129,6 +141,7 @@ class Motion < ActiveRecord::Base
     end
   end
 
+  # @TODO - Description
   def waitingobjection?
     state == "waitingobjection"
   end

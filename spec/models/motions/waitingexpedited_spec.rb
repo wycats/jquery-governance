@@ -15,10 +15,10 @@ describe Motion do
     end
 
     it "post 24 hours and with two seconds moves the motion to waitingobjection state" do
-      motion = Factory(:motion)
+      motion = Factory.create(:motion)
 
       2.times do
-        Factory.create(:second, :member => Factory(:member), :motion => motion)
+        Factory.create(:second, :motion => motion)
       end
 
       motion.waitingexpedited!

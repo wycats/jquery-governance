@@ -1,9 +1,16 @@
 class Event < ActiveRecord::Base
+  EVENT_TYPES = %w(vote second)
+
   belongs_to  :member
   belongs_to  :motion
-  validates   :member_id, :uniqueness => {
-                            :scope => :motion_id
-                          }
+
+  validates   :member_id,   :uniqueness => {
+                              :scope => :motion_id
+                            }
+  validates   :event_type,  :presence   => true,
+                            :inclusion  => {
+                              :in => EVENT_TYPES
+                            }
 
   validate    :motion_creator_cannot_second,  :if => :is_second?
   after_save  :assert_motion_state,           :if => :is_vote?
@@ -15,11 +22,13 @@ class Event < ActiveRecord::Base
   def is_vote?
     event_type == "vote"
   end
+  alias :vote? :is_vote?
 
   # @return [true, false] Whether or not this is a Seconding Event
   def is_second?
     event_type == "second"
   end
+  alias :second? :is_second?
 
   # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
   def self.yeas

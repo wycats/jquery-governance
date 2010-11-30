@@ -6,19 +6,19 @@ describe Motion do
   end
 
   it "knows how many yea votes have been cast for the motion" do
-    4.times{  Factory.create(:yes_vote, :motion => @motion)}
+    4.times { Factory.create(:yes_vote, :motion => @motion) }
     @motion.yeas.should == 4
   end
 
   it "knows how many nea votes have been cast for the motion" do
-    3.times{  Factory.create(:no_vote, :motion => @motion)}
+    3.times { Factory.create(:no_vote, :motion => @motion) }
     @motion.nays.should == 3
   end
 
   describe 'voting requirements' do
     before do
       #This reprsents all of the members who currently have the right to vote
-      8.times{ Factory.create(:active_membership)}
+      8.times { Factory.create(:active_membership) }
     end
 
     describe 'required_votes' do
@@ -31,7 +31,7 @@ describe Motion do
 
       describe "when there more than half of the possible votes are yeas" do
         before do
-          5.times{  Factory.create(:yes_vote, :motion => @motion)}
+          5.times { Factory.create(:yes_vote, :motion => @motion) }
         end
 
         it "knows the requirment for passage has been met" do
@@ -67,14 +67,14 @@ describe Motion do
     end
 
     describe 'second(member)' do
-      
       before do
         @member = Factory.create(:member)
       end
 
       it "creates a new second for the member" do
-        @motion.seconds.should_receive(:create)
-        @motion.second(@member)
+        lambda do
+          @motion.second(@member)
+        end.should change { @motion.seconds.count }
       end
 
     end
