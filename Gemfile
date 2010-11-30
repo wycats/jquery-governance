@@ -12,6 +12,10 @@ gem 'factory_girl', '~> 2.0.0.beta1'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'jquery-rails'
 
+gem 'resque'
+gem 'resque-scheduler', :require => "resque_scheduler"
+gem 'SystemTimer'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

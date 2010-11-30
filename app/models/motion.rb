@@ -55,7 +55,13 @@ class Motion < ActiveRecord::Base
     #
     # - if in the waitingsecond state, go into the failed state
     # - otherwise, do nothing
-    update_attributes(:state => "waitingsecond")
+    if update_attributes(:state => "waitingsecond")
+      Resque.enqueue_at(48.hours.from_now, Motions::WaitingsecondToFailed, self.id)
+    end
+  end
+
+  def waitingsecond?
+    state == "waitingsecond"
   end
 
   def waitingexpedited!
@@ -69,7 +75,14 @@ class Motion < ActiveRecord::Base
     #
     # - if in the waitingexpedited state, go to the failed state
     # - otherwise, do nothing
-    update_attributes(:state => "waitingexpedited")
+    if update_attributes(:state => "waitingexpedited")
+      Resque.enqueue_at(24.hours.from_now, Motions::WaitingexpeditedToWaitingobjection, self.id)
+      Resque.enqueue_at(48.hours.from_now, Motions::WaitingexpeditedToFailed, self.id)
+    end
+  end
+
+  def waitingexpedited?
+    state == "waitingexpedited"
   end
 
   def waitingobjection!
@@ -78,11 +91,21 @@ class Motion < ActiveRecord::Base
     # - if in the waitingobjection state, go to the voting state
     # - if in the objected state, enqueue a job for 24 hours
     #   - at that time, go to the voting state
-    update_attributes(:state => "waitingobjection")
+    if update_attributes(:state => "waitingobjection")
+      Resque.enqueue_at(24.hours.from_now, Motions::WaitingobjectionToVoting, self.id)
+    end
+  end
+
+  def waitingobjection?
+    state == "waitingobjection"
   end
 
   def objected!
     update_attributes(:state => "objected")
+  end
+
+  def objected?
+    state == "objected"
   end
 
   def voting!
@@ -91,11 +114,21 @@ class Motion < ActiveRecord::Base
     # - if a majority of active members did not vote yes,
     #   go to the failed state
     # - otherwise, go into the closed state
-    update_attributes(:state => "voting")
+    if update_attributes(:state => "voting")
+      Resque.enqueue_at(48.hours.from_now, Motions::Voting, self.id)
+    end
+  end
+
+  def voting?
+    state == "voting"
   end
 
   def passed!
     update_attributes(:state => "passed")
+  end
+  
+  def passed?
+    state == "passed"
   end
 
   def approved!
@@ -107,8 +140,16 @@ class Motion < ActiveRecord::Base
     )
   end
 
+  def approved?
+    state == "approved"
+  end
+
   def failed!
     update_attributes(:state => "failed")
+  end
+
+  def failed?
+    state == "failed"
   end
 
 private
