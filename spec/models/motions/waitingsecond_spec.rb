@@ -1,11 +1,6 @@
 require 'spec_helper'
 
-
-# SHOULD NOT HAVE TO DO THIS
-require File.dirname(__FILE__) + "/../../factories.rb"
-
 describe Motion do
-
   before(:each) do
     Resque.redis.flushall
   end

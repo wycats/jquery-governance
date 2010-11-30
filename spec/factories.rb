@@ -1,20 +1,18 @@
-FactoryGirl.define do
-  sequence :motion_title do |n|
-    "motion-#{n}"
-  end
+Factory.sequence :motion_title do |n|
+  "motion-#{n}"
+end
 
-  factory :event do
-    member
-    motion
-    type { "vote" }
-  end
+Factory.define :event do |event|
+  event.member
+  event.motion
+  event.type { "vote" }
+end
 
-  factory :member do
-    name "Member"
-  end
+Factory.define :member do |member|
+  member.name "Member"
+end
  
-  factory :motion do
-    member 
-    title Factory.next(:motion_title)
-  end
+Factory.define :motion do |motion|
+ motion.member 
+ motion.title Factory.next(:motion_title)
 end
