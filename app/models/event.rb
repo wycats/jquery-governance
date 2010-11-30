@@ -15,8 +15,8 @@ class Event < ActiveRecord::Base
   validate    :motion_creator_cannot_second,  :if => :is_second?
   after_save  :assert_motion_state,           :if => :is_vote?
 
-  scope :votes,   :where => {:event_type  => "vote"}
-  scope :seconds, :where => {:event_type  => "second"}
+  scope :votes,   :conditions => {:event_type  => "vote"}
+  scope :seconds, :conditions => {:event_type  => "second"}
 
   # @return [true, false] Whether or not this is a Voting Event
   def is_vote?
@@ -29,6 +29,16 @@ class Event < ActiveRecord::Base
     event_type == "second"
   end
   alias :second? :is_second?
+
+  # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
+  def self.yeas
+    where :value => true
+  end
+
+  # @return [ActiveRecord::Relation] An Array-like structure, of all nay-votes cast
+  def self.nays
+    where :value => false
+  end
 
 private
   # Will error if the motion creator attempts to second their motion
