@@ -1,6 +1,7 @@
 .bundle
 .rvmrc
 db/*.sqlite3
+dump.rdb
 log/*.log
 tmp/**/*
 *.tmproj

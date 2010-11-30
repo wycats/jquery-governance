@@ -92,4 +92,112 @@ describe Member do
       end
     end
   end
+
+  describe "can?" do
+    describe "an active member" do
+      before do
+        @member = Factory.create(:active_membership).member
+        @motion = Factory.create(:motion)
+      end
+
+      it "can see a motion that hasn't been brought to a vote" do
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can see a motion that has been brought to a vote" do
+        @motion.voting!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can see a motion that has been closed" do
+        @motion.passed!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can vote a motion that has been brought to a vote" do
+        @motion.voting!
+        @member.can?(:vote, @motion).should be_true
+      end
+
+      it "can't vote a motion that has been brought to vote more than once" do
+        @motion.voting!
+        @motion.vote(@member, true)
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion if there's a conflict of interest"
+
+      it "can't vote a motion that hasn't been brought to a vote" do
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can second other user's motion that hasn't been brought to vote" do
+        @member.can?(:second, @motion).should be_true
+      end
+
+      it "can't second other user's motion that hasn't been brought to vote more than once" do
+        @motion.second(@member)
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second other user's motion that has been brought to vote" do
+        @motion.voting!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second other user's motion that has been closed" do
+        @motion.failed!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second his o her own motion" do
+        @motion = Factory.create(:motion, :member => @member)
+        @member.can?(:second, @motion).should be_false
+      end
+    end
+
+    describe "an inactive member" do
+      before do
+        @member = Factory.create(:active_membership, :end_time => 2.days.ago).member
+        @motion = Factory.create(:motion)
+      end
+
+      it "can't see a motion that hasn't been brought to a vote" do
+        @member.can?(:see, @motion).should be_false
+      end
+
+      it "can see a motion that has been brought to a vote" do
+        @motion.voting!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can see a motion that has been closed" do
+        @motion.passed!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can't vote a motion that has been brought to a vote" do
+        @motion.voting!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion that hasn't been brought to a vote" do
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't second other user's motion that hasn't been brought to vote" do
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second other user's motion that has been brought to vote" do
+        @motion.voting!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second other user's motion that has been closed" do
+        @motion.passed!
+        @member.can?(:second, @motion).should be_false
+      end
+    end
+  end
 end
