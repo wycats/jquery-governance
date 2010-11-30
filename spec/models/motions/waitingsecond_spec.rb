@@ -31,9 +31,9 @@ describe Motion do
       Resque.size("waitingsecond_to_failed").should == 1
 
       worker = Resque::Worker.new(:waitingsecond_to_failed)
-      worker.work(0)
-
-      motion.reload.should be_failed
+      worker.work(0) do
+        motion.reload.should be_failed
+      end
     end
   end
 end
