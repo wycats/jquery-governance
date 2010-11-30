@@ -4,28 +4,17 @@ class Motion < ActiveRecord::Base
        objected voting passed failed approved)
 
   belongs_to  :member
-  has_many    :seconds
-  has_many    :votes  do
-    # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
-    def yeas
-      where :value => true
-    end
+  has_many    :events
 
-    # @return [ActiveRecord::Relation] An Array-like structure, of all nay-votes cast
-    def nays
-      where :value => false
-    end
-  end
-
-  # @return [Fixnum] The current count of yea votes
+  # @return [Fixnum] Count of current yea votes
   def yeas
-    votes.yeas.count
+    events.where(:type => "vote", :value => true).count
   end
   alias :ayes :yeas
 
-  # @return [Fixnum] The current count of nay votes
+  # @return [Fixnum] Count of current nay votes
   def nays
-    votes.nays.count
+    events.where(:type => "vote", :value => false).count
   end
 
   # @return [Fixnum] The number of votes required to pass this Motion
@@ -49,7 +38,7 @@ class Motion < ActiveRecord::Base
   #   @return [true, false] Whether or not the second was accepted
   # @TODO @return
   def second(member)
-    seconds.create(:member => member)
+    events.create(:member => member, :type => "second")
 
     second_count = seconds
 
@@ -66,7 +55,7 @@ class Motion < ActiveRecord::Base
   #   @return [true, false] Whether or not the vote was accepted
   # @TODO @return
   def vote(member, value)
-    votes.create(:member => member, :value => value)
+    events.create(:member => member, :type => "vote", :value => value)
     passed! if ayes > required_votes
   end
 

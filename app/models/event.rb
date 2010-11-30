@@ -4,4 +4,28 @@ class Event < ActiveRecord::Base
   validates   :member_id, :uniqueness => {
                             :scope => :motion_id
                           }
+
+  validate    :motion_creator_cannot_second,  :if => :is_second?
+  after_save  :assert_motion_state,           :if => :is_vote?
+
+  # @return [true, false]
+  def is_vote?
+    type == "vote"
+  end
+
+  # @return [true, false]
+  def is_second?
+    type == "second"
+  end
+
+private
+  # Will error if the motion creator attempts to second their motion
+  def motion_creator_cannot_second
+    errors.add(:member, "Member cannot second a motion that they created.") if motion.member == member
+  end
+
+  # Sets the motion to passed, if it has met all requirements
+  def assert_motion_state
+    motion.passed! if motion.has_met_requirement?
+  end
 end
