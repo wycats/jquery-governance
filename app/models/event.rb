@@ -1,21 +1,34 @@
 class Event < ActiveRecord::Base
+  EVENT_TYPES = %w(vote second)
+
   belongs_to  :member
   belongs_to  :motion
-  validates   :member_id, :uniqueness => {
-                            :scope => :motion_id
-                          }
-  validate    :motion_creator_cannot_second,  :if => :second?
-  after_save  :assert_motion_state,           :if => :vote?
 
-  # @return [true, false]
-  def vote?
-    type == "vote"
-  end
+  validates   :member_id,   :uniqueness => {
+                              :scope => :motion_id
+                            }
+  validates   :event_type,  :presence   => true,
+                            :inclusion  => {
+                              :in => EVENT_TYPES
+                            }
 
-  # @return [true, false]
-  def second?
-    type == "second"
+  validate    :motion_creator_cannot_second,  :if => :is_second?
+  after_save  :assert_motion_state,           :if => :is_vote?
+
+  scope :votes,   :where => {:event_type  => "vote"}
+  scope :seconds, :where => {:event_type  => "second"}
+
+  # @return [true, false] Whether or not this is a Voting Event
+  def is_vote?
+    event_type == "vote"
   end
+  alias :vote? :is_vote?
+
+  # @return [true, false] Whether or not this is a Seconding Event
+  def is_second?
+    event_type == "second"
+  end
+  alias :second? :is_second?
 
 private
   # Will error if the motion creator attempts to second their motion

@@ -1,31 +1,28 @@
 class Motion < ActiveRecord::Base
   validates_inclusion_of :state, :in =>
     %w(waitingsecond waitingexpedited waitingobjection
-       objected voting passed failed approved)
+       objected voting passed failed approved).push(nil)
 
   belongs_to  :member
-  has_many    :seconds
-  has_many    :votes  do
-    # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
-    def yeas
-      where :value => true
-    end
+  has_many    :events
 
-    # @return [ActiveRecord::Relation] An Array-like structure, of all nay-votes cast
-    def nays
-      where :value => false
-    end
+  def votes
+    events.where(:event_type => "vote")
   end
 
-  # @return [Fixnum] The current count of yea votes
+  def seconds
+    events.where(:event_type => "second")
+  end
+
+  # @return [Fixnum] Count of current yea votes
   def yeas
-    votes.yeas.count
+    votes.where(:value => true).count
   end
   alias :ayes :yeas
 
-  # @return [Fixnum] The current count of nay votes
+  # @return [Fixnum] Count of current nay votes
   def nays
-    votes.nays.count
+    votes.where(:value => false).count
   end
 
   # @return [Fixnum] The number of votes required to pass this Motion
@@ -40,9 +37,24 @@ class Motion < ActiveRecord::Base
 
   # @return [Fixnum] The numbers of seconds required to expedite
   def seconds_for_expedition
-    possible_votes / 3
+    possible_votes / 3 + 1
   end
   alias :seconds_for_expediting :seconds_for_expedition
+
+  # Check if the member is allowed to perform the given action
+  #   @param [Symbol] action The action the member wants to perform
+  #   @param [Member] member The member who wants to perfrom the action
+  #   @return [true, false] Whether or not it permits the member to perform the action, respectively
+  def permit?(action, member)
+    case action
+    when :vote
+      member.membership_active? && voting? && votes.find_by_member_id(id).nil?
+    when :see
+      member.membership_active? || publicly_visible?
+    when :second
+      member.membership_active? && member != self.member && !publicly_visible? && !voting? && !passed? && !failed? && seconds.find_by_member_id(member.id).nil?
+    end
+  end
 
   # Second this Motion
   #   @param [Member] member The member who is seconding this motion
@@ -51,11 +63,11 @@ class Motion < ActiveRecord::Base
   def second(member)
     seconds.create(:member => member)
 
-    second_count = seconds
+    second_count = seconds.count
 
     if state == "waitingsecond" && second_count >= 2
       waitingobjection!
-    elsif state == "waitingexpedited" && second_count >= seconds_for_expediting
+    elsif state == "waitingexpedited" && second_count >= seconds_for_expedition
       voting!
     end
   end
@@ -66,13 +78,18 @@ class Motion < ActiveRecord::Base
   #   @return [true, false] Whether or not the vote was accepted
   # @TODO @return
   def vote(member, value)
-    votes.create(:member => member, :value => value)
+    events.create(:member => member, :event_type => "vote", :value => value)
     passed! if ayes > required_votes
   end
 
   ##
   # States
   ##
+
+  # @TODO - Description
+  def publicly_visible?
+    voting? || passed? || failed?
+  end
 
   # @TODO - Description
   def waitingsecond!
@@ -123,6 +140,7 @@ class Motion < ActiveRecord::Base
     end
   end
 
+  # @TODO - Description
   def waitingobjection?
     state == "waitingobjection"
   end

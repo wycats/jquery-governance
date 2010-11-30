@@ -10,12 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101129173209) do
+ActiveRecord::Schema.define(:version => 20101130194636) do
 
   create_table "active_memberships", :force => true do |t|
     t.integer  "member_id"
-    t.time     "start_time"
-    t.time     "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(:version => 20101129173209) do
   create_table "events", :force => true do |t|
     t.integer  "member_id"
     t.integer  "motion_id"
-    t.string   "type"
+    t.string   "event_type"
     t.boolean  "value",      :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -39,12 +39,8 @@ ActiveRecord::Schema.define(:version => 20101129173209) do
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
   end
 
-  add_index "members", ["confirmation_token"], :name => "index_members_on_confirmation_token", :unique => true
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
   add_index "members", ["reset_password_token"], :name => "index_members_on_reset_password_token", :unique => true
 
