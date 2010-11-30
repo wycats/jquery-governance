@@ -29,9 +29,24 @@ class Motion < ActiveRecord::Base
 
   # @return [Fixnum] The numbers of seconds required to expedite
   def seconds_for_expedition
-    possible_votes / 3
+    possible_votes / 3 + 1
   end
   alias :seconds_for_expediting :seconds_for_expedition
+
+  # Check if the member is allowed to perform the given action
+  #   @param [Symbol] action The action the member wants to perform
+  #   @param [Member] member The member who wants to perfrom the action
+  #   @return [true, false] Whether or not it permits the member to perform the action, respectively
+  def permit?(action, member)
+    case action
+    when :vote
+      member.active? && voting? && votes.find_by_member_id(id).nil?
+    when :see
+      member.active? || voting? || passed? || failed?
+    when :second
+      member.active? && member != self.member && !voting? && !passed? && !failed? && seconds.find_by_member_id(member.id).nil?
+    end
+  end
 
   # Second this Motion
   #   @param [Member] member The member who is seconding this motion
@@ -40,11 +55,11 @@ class Motion < ActiveRecord::Base
   def second(member)
     events.create(:member => member, :event_type => "second")
 
-    second_count = seconds
+    second_count = seconds.size
 
     if state == "waitingsecond" && second_count >= 2
       waitingobjection!
-    elsif state == "waitingexpedited" && second_count >= seconds_for_expediting
+    elsif state == "waitingexpedited" && second_count >= seconds_for_expedition
       voting!
     end
   end
@@ -69,7 +84,13 @@ class Motion < ActiveRecord::Base
     #
     # - if in the waitingsecond state, go into the failed state
     # - otherwise, do nothing
-    update_attributes(:state => "waitingsecond")
+    if update_attributes(:state => "waitingsecond")
+      Resque.enqueue_at(48.hours.from_now, Motions::WaitingsecondToFailed, self.id)
+    end
+  end
+
+  def waitingsecond?
+    state == "waitingsecond"
   end
 
   # @TODO - Description
@@ -84,7 +105,14 @@ class Motion < ActiveRecord::Base
     #
     # - if in the waitingexpedited state, go to the failed state
     # - otherwise, do nothing
-    update_attributes(:state => "waitingexpedited")
+    if update_attributes(:state => "waitingexpedited")
+      Resque.enqueue_at(24.hours.from_now, Motions::WaitingexpeditedToWaitingobjection, self.id)
+      Resque.enqueue_at(48.hours.from_now, Motions::WaitingexpeditedToFailed, self.id)
+    end
+  end
+
+  def waitingexpedited?
+    state == "waitingexpedited"
   end
 
   # @TODO - Description
@@ -94,12 +122,23 @@ class Motion < ActiveRecord::Base
     # - if in the waitingobjection state, go to the voting state
     # - if in the objected state, enqueue a job for 24 hours
     #   - at that time, go to the voting state
-    update_attributes(:state => "waitingobjection")
+    if update_attributes(:state => "waitingobjection")
+      Resque.enqueue_at(24.hours.from_now, Motions::WaitingobjectionToVoting, self.id)
+    end
+  end
+
+  # @TODO - Description
+  def waitingobjection?
+    state == "waitingobjection"
   end
 
   # @TODO - Description
   def objected!
     update_attributes(:state => "objected")
+  end
+
+  def objected?
+    state == "objected"
   end
 
   # @TODO - Description
@@ -109,12 +148,22 @@ class Motion < ActiveRecord::Base
     # - if a majority of active members did not vote yes,
     #   go to the failed state
     # - otherwise, go into the closed state
-    update_attributes(:state => "voting")
+    if update_attributes(:state => "voting")
+      Resque.enqueue_at(48.hours.from_now, Motions::Voting, self.id)
+    end
+  end
+
+  def voting?
+    state == "voting"
   end
 
   # @TODO - Description
   def passed!
     update_attributes(:state => "passed")
+  end
+  
+  def passed?
+    state == "passed"
   end
 
   # @TODO - Description
@@ -127,9 +176,17 @@ class Motion < ActiveRecord::Base
     )
   end
 
+  def approved?
+    state == "approved"
+  end
+
   # @TODO - Description
   def failed!
     update_attributes(:state => "failed")
+  end
+
+  def failed?
+    state == "failed"
   end
 
 private
