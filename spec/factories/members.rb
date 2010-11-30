@@ -1,7 +1,10 @@
 FactoryGirl.define do
-  factory :john_resig, :class => Member do 
-    name "John Resig"
+  factory :member do
+    name "Test Member"
     sequence(:email) {|n| "TestMan#{n}@example.com"}
     password               "secret"
+  end
+  factory :john_resig, :parent => :member do 
+    name "John Resig"
   end
 end
