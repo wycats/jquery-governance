@@ -8,4 +8,8 @@ JqueryVoting::Application.routes.draw do
 
   
   root :to => "welcome#index"
+
+  if Rails.env.cucumber?
+    match '/sessions_backdoor/:email' => 'sessions#backdoor'
+  end
 end
