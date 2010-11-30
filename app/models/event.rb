@@ -4,16 +4,16 @@ class Event < ActiveRecord::Base
   validates   :member_id, :uniqueness => {
                             :scope => :motion_id
                           }
-  validate    :motion_creator_cannot_second,  :if => is_second?
-  after_save  :assert_motion_state,           :if => is_vote?
+  validate    :motion_creator_cannot_second,  :if => :second?
+  after_save  :assert_motion_state,           :if => :vote?
 
   # @return [true, false]
-  def is_vote?
+  def vote?
     type == "vote"
   end
 
   # @return [true, false]
-  def is_second?
+  def second?
     type == "second"
   end
 
