@@ -2,7 +2,7 @@
 
 ## Basic Premise
 
-A tool to manage voting in accordance with the jQuery governance tool (https://groups.google.com/group/jquery-team-public/browse_thread/thread/3e7168383e151eb2)
+A tool to manage voting in accordance with the [jQuery governance tool][governance].
 
 ### Basic Process
 
@@ -126,3 +126,5 @@ end
 * `type` (string: second, vote, or objection)
 * `value` (boolean)
 
+
+[governance]: https://groups.google.com/group/jquery-team-public/browse_thread/thread/3e7168383e151eb2

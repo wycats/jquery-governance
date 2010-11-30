@@ -1,16 +1,14 @@
 source 'http://rubygems.org'
 
-gem 'rails', :git => "git://github.com/rails/rails.git"
-gem 'rack-cache', :git => "https://github.com/rtomayko/rack-cache.git"
-gem 'rack', :git => "https://github.com/rack/rack.git"
-
+gem 'sqlite3-ruby', :require  => 'sqlite3'
+gem 'rails',        :git      => "https://github.com/rails/rails.git"
+gem 'rack-cache',   :git      => "https://github.com/rtomayko/rack-cache.git"
+gem 'rack',         :git      => "https://github.com/rack/rack.git"
+gem 'factory_girl', '~>2.0.0.beta1'
 gem 'devise'
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
-gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'jquery-rails'
+gem 'haml',         '~>3.0.23'
+gem 'haml-rails'
 
 # Use unicorn as the web server
 # gem 'unicorn'
