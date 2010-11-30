@@ -1,7 +1,11 @@
 class Motion < ActiveRecord::Base
+  validates_inclusion_of :state, :in =>
+    %w(waitingsecond waitingexpedited waitingobjection
+       objected voting passed failed approved)
+
   belongs_to  :member
   has_many    :seconds
-  has_many    :votes    do
+  has_many    :votes  do
     # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
     def yeas
       where :value => true
@@ -12,10 +16,6 @@ class Motion < ActiveRecord::Base
       where :value => false
     end
   end
-
-  validates_inclusion_of :state, :in =>
-    %w(waitingsecond waitingexpedited waitingobjection
-       objected voting passed failed approved)
 
   # @return [Fixnum] The current count of yea votes
   def yeas
@@ -31,6 +31,11 @@ class Motion < ActiveRecord::Base
   # @return [Fixnum] The number of votes required to pass this Motion
   def required_votes
     possible_votes / 2 + 1
+  end
+
+  # @return [true, false] Whether or not Motion has met its requirement for passage
+  def has_met_requirement?
+    yeas >= required_votes
   end
 
   # @return [Fixnum] The numbers of seconds required to expedite
@@ -69,6 +74,7 @@ class Motion < ActiveRecord::Base
   # States
   ##
 
+  # @TODO - Description
   def waitingsecond!
     # enqueue a job for 48 hours
     #
@@ -77,6 +83,7 @@ class Motion < ActiveRecord::Base
     update_attributes(:state => "waitingsecond")
   end
 
+  # @TODO - Description
   def waitingexpedited!
     # enqueue a job for 24 hours
     #
@@ -91,6 +98,7 @@ class Motion < ActiveRecord::Base
     update_attributes(:state => "waitingexpedited")
   end
 
+  # @TODO - Description
   def waitingobjection!
     # enqueue a job for 24 hours from now.
     #
@@ -100,10 +108,12 @@ class Motion < ActiveRecord::Base
     update_attributes(:state => "waitingobjection")
   end
 
+  # @TODO - Description
   def objected!
     update_attributes(:state => "objected")
   end
 
+  # @TODO - Description
   def voting!
     # enqueue a job for 48 hours for now
     #
@@ -113,6 +123,7 @@ class Motion < ActiveRecord::Base
     update_attributes(:state => "voting")
   end
 
+  # @TODO - Description
   def passed!
     update_attributes(:state => "passed")
   end
