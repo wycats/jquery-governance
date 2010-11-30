@@ -27,7 +27,13 @@ member to recuse themselves from the vote or log their conflict status. Ticking
 the box will bring up a popup menu where the voting member can select the appropriate
 conflict status.
 
+The conflict statuses will be populated from the conflict_reasons table. This
+table will have an additional field to state whether the conflict reason is a
+direct or indirect conflict.
+
 Submitting the conflict status will add an entry in the conflicts table.
+
+A member could conceivably have multiple conflicts for a motion.
 
 Direct conflict: If you fall into the second or third conflict status, then you
 cannot vote. Your voting actions will not appear on the page. If you have
@@ -48,9 +54,22 @@ against this total.
 - have a fiduciary duty to the company, such as membership on the company's
   Board of Directors.
 
-### The Model
+### The Models
 
+_conflicts_
 * motion_id
 * member_id
-* reason_id (enumerated in the model or in another table)
+* conflict\_reason_id
 * timestamps
+
+_conflict\_reasons_
+* reason
+* direct_conflict (boolean)
+
+There could be a scope or helper method on conflicts to show whether the member
+is allowed to vote on a given motion:
+
+Conflict model:
+<pre><code>
+  scope :has\_direct\_conflict, joins(:conflict\_reasons).where('direct\_conflict = ?', true)
+</code></pre>
