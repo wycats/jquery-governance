@@ -5,17 +5,7 @@ class Motion < ActiveRecord::Base
 
   belongs_to  :member
   has_many    :seconds
-  has_many    :votes  do
-    # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
-    def yeas
-      where :value => true
-    end
-
-    # @return [ActiveRecord::Relation] An Array-like structure, of all nay-votes cast
-    def nays
-      where :value => false
-    end
-  end
+  has_many    :votes
 
   # @return [Fixnum] The current count of yea votes
   def yeas
@@ -40,7 +30,7 @@ class Motion < ActiveRecord::Base
 
   # @return [Fixnum] The numbers of seconds required to expedite
   def seconds_for_expedition
-    possible_votes / 3
+    possible_votes / 3 + 1
   end
   alias :seconds_for_expediting :seconds_for_expedition
 
@@ -51,11 +41,11 @@ class Motion < ActiveRecord::Base
   def second(member)
     seconds.create(:member => member)
 
-    second_count = seconds
+    second_count = seconds.size
 
     if state == "waitingsecond" && second_count >= 2
       waitingobjection!
-    elsif state == "waitingexpedited" && second_count >= seconds_for_expediting
+    elsif state == "waitingexpedited" && second_count >= seconds_for_expedition
       voting!
     end
   end
