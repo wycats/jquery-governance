@@ -44,7 +44,7 @@ class Motion < ActiveRecord::Base
   end
   alias :seconds_for_expediting :seconds_for_expedition
 
-  # Seconds this Motion
+  # Second this Motion
   #   @param [Member] member The member who is seconding this motion
   #   @return [true, false] Whether or not the second was accepted
   # @TODO @return
@@ -128,6 +128,7 @@ class Motion < ActiveRecord::Base
     update_attributes(:state => "passed")
   end
 
+  # @TODO - Description
   def approved!
     votes = yeas + nays
 
@@ -137,11 +138,13 @@ class Motion < ActiveRecord::Base
     )
   end
 
+  # @TODO - Description
   def failed!
     update_attributes(:state => "failed")
   end
 
 private
+  # @TODO - Description
   def possible_votes
     # TODO: Deal with conflicts of interest
     ActiveMembership.active_at(Time.now).count
