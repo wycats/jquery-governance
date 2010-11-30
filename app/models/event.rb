@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  EVENT_TYPES %w(vote second)
+  EVENT_TYPES = %w(vote second)
 
   belongs_to  :member
   belongs_to  :motion
@@ -7,7 +7,9 @@ class Event < ActiveRecord::Base
                               :scope => :motion_id
                             }
   validates   :event_type,  :presence   => true,
-                            :in         => EVENT_TYPES
+                            :inclusion  => {
+                              :in => EVENT_TYPES
+                            }
 
   validate    :motion_creator_cannot_second,  :if => :is_second?
   after_save  :assert_motion_state,           :if => :is_vote?
@@ -17,13 +19,13 @@ class Event < ActiveRecord::Base
 
   # @return [true, false] Whether or not this is a Voting Event
   def is_vote?
-    type == "vote"
+    event_type == "vote"
   end
   alias :vote? :is_vote?
 
   # @return [true, false] Whether or not this is a Seconding Event
   def is_second?
-    type == "second"
+    event_type == "second"
   end
   alias :second? :is_second?
 
