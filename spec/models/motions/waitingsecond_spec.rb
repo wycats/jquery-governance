@@ -6,11 +6,11 @@ require File.dirname(__FILE__) + "/../../factories.rb"
 
 describe Motion do
 
-  before do
+  before(:each) do
     Resque.redis.flushall
   end
 
-  context "moving to the waitingsecond state" do
+  describe "#waitingsecond!" do
     it "enqueues a Motions::WaitingsecondToFailed job" do
       motion = Factory(:motion)
 
@@ -18,10 +18,8 @@ describe Motion do
 
       Resque.delayed_queue_schedule_size.should == 1
     end
-  end
 
-  context "in the waitingsecond state post 48 hours" do
-    it "moves the motion to failed state" do
+    it "post 48 hours moves the motion to failed state" do
       motion = Factory(:motion)
       
       motion.waitingsecond!
@@ -30,10 +28,8 @@ describe Motion do
       Resque::Scheduler.handle_delayed_items(48.hours.from_now.to_i)
       Resque.size("waitingsecond_to_failed").should == 1
 
-      worker = Resque::Worker.new(:waitingsecond_to_failed)
-      worker.work(0) do
-        motion.reload.should be_failed
-      end
+      @worker.process
+      motion.reload.should be_failed
     end
   end
 end

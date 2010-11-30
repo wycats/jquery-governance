@@ -4,8 +4,8 @@ class Motions::WaitingexpeditedToWaitingobjection
   def self.perform(motion_id)
     motion = Motion.find(motion_id)
 
-    if motion.waitingexpedited? and motions.seconds == 2
-      motion.waitingobjected!
+    if motion.waitingexpedited? and motion.seconds == 2
+      motion.waitingobjection!
     end
   end
 end

@@ -3,6 +3,12 @@ FactoryGirl.define do
     "motion-#{n}"
   end
 
+  factory :event do
+    member
+    motion
+    type { "vote" }
+  end
+
   factory :member do
     name "Member"
   end
