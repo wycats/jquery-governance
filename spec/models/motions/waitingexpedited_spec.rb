@@ -18,7 +18,7 @@ describe Motion do
       motion = Factory(:motion)
 
       2.times do
-        Factory.create(:event, :member => Factory(:member), :motion => motion, :type => "second")
+        Factory.create(:second, :member => Factory(:member), :motion => motion)
       end
 
       motion.waitingexpedited!
