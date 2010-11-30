@@ -1,36 +1,55 @@
 class Motion < ActiveRecord::Base
-  belongs_to :member
-
-  has_many :events
-
   validates_inclusion_of :state, :in =>
     %w(waitingsecond waitingexpedited waitingobjection
        objected voting passed failed approved)
 
-  def seconds
-    events.where(:type => "second").count
+  belongs_to  :member
+  has_many    :seconds
+  has_many    :votes  do
+    # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
+    def yeas
+      where :value => true
+    end
+
+    # @return [ActiveRecord::Relation] An Array-like structure, of all nay-votes cast
+    def nays
+      where :value => false
+    end
   end
 
-  def ayes
-    events.where(:type => "vote", :value => true).count
+  # @return [Fixnum] The current count of yea votes
+  def yeas
+    votes.yeas.count
   end
+  alias :ayes :yeas
 
+  # @return [Fixnum] The current count of nay votes
   def nays
-    events.where(:type => "vote", :value => false).count
+    votes.nays.count
   end
 
+  # @return [Fixnum] The number of votes required to pass this Motion
   def required_votes
     possible_votes / 2 + 1
   end
 
-  def seconds_for_expediting
-    possible_votes / 3
+  # @return [true, false] Whether or not Motion has met its requirement for passage
+  def has_met_requirement?
+    yeas >= required_votes
   end
 
-  def second(member)
-    # TODO: Members cannot second their own motions
+  # @return [Fixnum] The numbers of seconds required to expedite
+  def seconds_for_expedition
+    possible_votes / 3
+  end
+  alias :seconds_for_expediting :seconds_for_expedition
 
-    events.create(:member => member, :type => "second")
+  # Second this Motion
+  #   @param [Member] member The member who is seconding this motion
+  #   @return [true, false] Whether or not the second was accepted
+  # @TODO @return
+  def second(member)
+    seconds.create(:member => member)
 
     second_count = seconds
 
@@ -41,8 +60,13 @@ class Motion < ActiveRecord::Base
     end
   end
 
+  # Cast a Member's Vote
+  #   @param [Member] member An active member
+  #   @param [true, false] value An aye or nay vote
+  #   @return [true, false] Whether or not the vote was accepted
+  # @TODO @return
   def vote(member, value)
-    events.create(:member => member, :type => "vote", :value => value)
+    votes.create(:member => member, :value => value)
     passed! if ayes > required_votes
   end
 
@@ -50,6 +74,7 @@ class Motion < ActiveRecord::Base
   # States
   ##
 
+  # @TODO - Description
   def waitingsecond!
     # enqueue a job for 48 hours
     #
@@ -64,6 +89,7 @@ class Motion < ActiveRecord::Base
     state == "waitingsecond"
   end
 
+  # @TODO - Description
   def waitingexpedited!
     # enqueue a job for 24 hours
     #
@@ -85,6 +111,7 @@ class Motion < ActiveRecord::Base
     state == "waitingexpedited"
   end
 
+  # @TODO - Description
   def waitingobjection!
     # enqueue a job for 24 hours from now.
     #
@@ -100,6 +127,7 @@ class Motion < ActiveRecord::Base
     state == "waitingobjection"
   end
 
+  # @TODO - Description
   def objected!
     update_attributes(:state => "objected")
   end
@@ -108,6 +136,7 @@ class Motion < ActiveRecord::Base
     state == "objected"
   end
 
+  # @TODO - Description
   def voting!
     # enqueue a job for 48 hours for now
     #
@@ -123,6 +152,7 @@ class Motion < ActiveRecord::Base
     state == "voting"
   end
 
+  # @TODO - Description
   def passed!
     update_attributes(:state => "passed")
   end
@@ -131,8 +161,9 @@ class Motion < ActiveRecord::Base
     state == "passed"
   end
 
+  # @TODO - Description
   def approved!
-    votes = ayes + nays
+    votes = yeas + nays
 
     update_attributes(
       :state => "approved",
@@ -144,6 +175,7 @@ class Motion < ActiveRecord::Base
     state == "approved"
   end
 
+  # @TODO - Description
   def failed!
     update_attributes(:state => "failed")
   end
@@ -153,6 +185,7 @@ class Motion < ActiveRecord::Base
   end
 
 private
+  # @TODO - Description
   def possible_votes
     # TODO: Deal with conflicts of interest
     ActiveMembership.active_at(Time.now).count

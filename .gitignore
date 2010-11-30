@@ -1,5 +1,8 @@
 .bundle
+.rvmrc
 db/*.sqlite3
 log/*.log
 tmp/**/*
+*.tmproj
+.yardoc
 *.swp

@@ -1,6 +1,5 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
-
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 
@@ -9,7 +8,8 @@ require 'rspec/rails'
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 require "factory_girl"
 
-require "#{Rails.root.join('spec/factories.rb')}"
+# Find and load all the factories in "factories" for use across all specs"
+FactoryGirl.find_definitions
 
 RSpec.configure do |config|
   # == Mock Framework
