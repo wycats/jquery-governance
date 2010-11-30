@@ -35,6 +35,21 @@ class Motion < ActiveRecord::Base
   end
   alias :seconds_for_expediting :seconds_for_expedition
 
+  # Check if the member is allowed to perform the given action
+  #   @param [Symbol] action The action the member wants to perform
+  #   @param [Member] member The member who wants to perfrom the action
+  #   @return [true, false] Whether or not it permits the member to perform the action, respectively
+  def permit?(action, member)
+    case action
+    when :vote
+      member.active? && voting? && votes.find_by_member_id(id).nil?
+    when :see
+      member.active? || voting? || passed? || failed?
+    when :second
+      member.active? && member != self.member && !voting? && !passed? && !failed? && seconds.find_by_member_id(member.id).nil?
+    end
+  end
+
   # Second this Motion
   #   @param [Member] member The member who is seconding this motion
   #   @return [true, false] Whether or not the second was accepted
