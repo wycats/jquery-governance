@@ -28,7 +28,7 @@ describe Member do
 
       it "knows that it is not active today" do
         @member.should_not be_active_at(Time.now)
-        @member.should_not be_active
+        @member.should_not be_membership_active
       end
 
       it "knows it is not active before the start time" do
@@ -72,7 +72,7 @@ describe Member do
 
       it "knows that it is not active today" do
         @member.should_not be_active_at(Time.now)
-        @member.should_not be_active
+        @member.should_not be_membership_active
       end
 
       it "knows it is active in the second active period" do
