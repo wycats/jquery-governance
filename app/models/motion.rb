@@ -79,7 +79,7 @@ class Motion < ActiveRecord::Base
   #   @return [true, false] Whether or not the vote was accepted
   # @TODO @return
   def vote(member, value)
-    events.create(:member => member, :event_type => "vote", :value => value)
+    votes.create(:member => member, :value => value)
     passed! if ayes > required_votes
   end
 
