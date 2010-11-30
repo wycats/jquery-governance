@@ -6,4 +6,3 @@ tmp/**/*
 *.tmproj
 .yardoc
 *.swp
-bin/

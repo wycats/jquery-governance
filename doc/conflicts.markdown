@@ -20,39 +20,24 @@ f. If votes do not count because they exceed the maximum allowed from those asso
 
 ## Implementation
 
-Create a new Conflict model that will track all the conflicts of interest for a motion.
+Create a new Conflict model that will track all the conflicts of interest for
+a motion (b and c from above).
 
-The Motion Discussion/Upvote form will have an additional input to allow a voting
-member to recuse themselves from the vote or log their conflict status. Ticking
-the box will bring up a popup menu where the voting member can select the appropriate
-conflict status.
-
-The conflict statuses will be populated from the conflict_reasons table. This
-table will have an additional field to state whether the conflict reason is a
-direct or indirect conflict.
+The Motion Discussion/Upvote form will have an additional input to allow a
+voting member to recuse themselves from the vote if they have a direct
+conflict of interest.
 
 Submitting the conflict status will add an entry in the conflicts table.
 
-A member could conceivably have multiple conflicts for a motion.
+A group of voters employed by the same company or with any other association
+in common fall into section e of the rule.  No more than 1/4 of the affirmative
+votes can come from a single interest.
 
-Direct conflict: If you fall into the second or third conflict status, then you
-cannot vote. Your voting actions will not appear on the page. If you have
-already voted, then your vote will be deleted or nullified.
-
-Indirect conflict: If you are employed by the conflicting company, then you
-can vote. However, no more than 1/4 of the core team can be employed by the
-conflicting company and vote FOR the motion. Negative votes do not count
-against this total.
-
-### Indirect (voting) Conflicts
-
-- employed by the company
-
-### Direct (non-voting) Conflicts
-
-- have a significant financial interest in the company; or
-- have a fiduciary duty to the company, such as membership on the company's
-  Board of Directors.
+The ActiveMemberships model will be used for these indirect conflicts, and
+voting members will be able to maintain their active memberships so that the
+votes can be properly counted. The model will be modified to include a
+company_id, and there will be a new Company table. This will allow a voting
+member to log multiple associations.
 
 ### The Models
 
@@ -60,18 +45,17 @@ _conflicts_
 
 * motion_id
 * member_id
-* conflict\_reason_id
 * timestamps
 
-_conflict\_reasons_
+_active_memberships_
 
-* reason
-* direct_conflict (boolean)
+* member_id
+* company_id (new field)
+* start_time
+* end_time
+* timestamps
 
-There could be a scope or helper method on conflicts to show whether the member
-is allowed to vote on a given motion:
+_companies_
 
-Conflict model:
-<pre><code>
-  scope :has_direct_conflict, joins(:conflict_reasons).where('direct_conflict = ?', true)
-</code></pre>
+* name
+* timestamps
