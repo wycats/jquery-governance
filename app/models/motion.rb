@@ -8,13 +8,13 @@ class Motion < ActiveRecord::Base
 
   # @return [Fixnum] Count of current yea votes
   def yeas
-    events.where(:type => "vote", :value => true).count
+    events.where(:event_type => "vote", :value => true).count
   end
   alias :ayes :yeas
 
   # @return [Fixnum] Count of current nay votes
   def nays
-    events.where(:type => "vote", :value => false).count
+    events.where(:event_type => "vote", :value => false).count
   end
 
   # @return [Fixnum] The number of votes required to pass this Motion
@@ -38,7 +38,7 @@ class Motion < ActiveRecord::Base
   #   @return [true, false] Whether or not the second was accepted
   # @TODO @return
   def second(member)
-    events.create(:member => member, :type => "second")
+    events.create(:member => member, :event_type => "second")
 
     second_count = seconds
 
@@ -55,7 +55,7 @@ class Motion < ActiveRecord::Base
   #   @return [true, false] Whether or not the vote was accepted
   # @TODO @return
   def vote(member, value)
-    events.create(:member => member, :type => "vote", :value => value)
+    events.create(:member => member, :event_type => "vote", :value => value)
     passed! if ayes > required_votes
   end
 

@@ -8,12 +8,15 @@ class Event < ActiveRecord::Base
   validate    :motion_creator_cannot_second,  :if => :is_second?
   after_save  :assert_motion_state,           :if => :is_vote?
 
-  # @return [true, false]
+  scope :votes,   :where => {:event_type  => "vote"}
+  scope :seconds, :where => {:event_type  => "second"}
+
+  # @return [true, false] Whether or not this is a Voting Event
   def is_vote?
     type == "vote"
   end
 
-  # @return [true, false]
+  # @return [true, false] Whether or not this is a Seconding Event
   def is_second?
     type == "second"
   end
