@@ -7,7 +7,7 @@ class Motions::WaitingobjectionToVoting
     if motion.waitingobjection?
       motion.voting!
     elsif motion.objected?
-      Resque.enqueue_at(24.hours.from_now, Motions::ObjectedToVoting, :id => motion_id)
+      Resque.enqueue_at(24.hours.from_now, Motions::ObjectedToVoting, motion_id)
     end
   end
 end

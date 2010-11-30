@@ -8,7 +8,7 @@ describe Motion do
   end
   
   describe "#waitingexpedited!" do 
-    it "enqueus a Motions::WaitingexpededToFailed and Motions::WaitingexpeditedToWaitingobjection job" do
+    it "enqueues a Motions::WaitingexpededToFailed and Motions::WaitingexpeditedToWaitingobjection job" do
       motion = Factory(:motion)
 
       motion.waitingexpedited!
