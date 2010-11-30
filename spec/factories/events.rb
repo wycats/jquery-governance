@@ -1,5 +1,4 @@
-Factory.define do
-  
+FactoryGirl.define do
   factory :event do
     member
     motion
