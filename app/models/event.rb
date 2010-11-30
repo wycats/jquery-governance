@@ -1,9 +1,13 @@
 class Event < ActiveRecord::Base
+  EVENT_TYPES %w(vote second)
+
   belongs_to  :member
   belongs_to  :motion
-  validates   :member_id, :uniqueness => {
-                            :scope => :motion_id
-                          }
+  validates   :member_id,   :uniqueness => {
+                              :scope => :motion_id
+                            }
+  validates   :event_type,  :presence   => true,
+                            :in         => EVENT_TYPES
 
   validate    :motion_creator_cannot_second,  :if => :is_second?
   after_save  :assert_motion_state,           :if => :is_vote?
