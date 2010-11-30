@@ -3,24 +3,14 @@
 ## The Rules
 
 a. Members are associated with a company if they:
-  - are employed by the company; or
-  - have a significant financial interest in the company; or
-  - have a fiduciary duty to the company, such as membership on the company's
-    Board of Directors.
-b. Members are associated with a vote if it pertains to them or a company they
-    are associated with.
-c. Members are expected not to vote in cases where they have a personal conflict
-    of interest (such as votes pertaining to a spouse or close relative). In
-    these cases, members should disclose the conflict of interest to the core team.
-d. Members must abstain from votes they are associated with, and a majority of
-    the remaining members is required for approval.
-e. The affirmative or negative votes of no more than 1/4 of the core team may
-    be from members associated with the same company. This does not preclude
-    excess members associated with a single company from voting, but it means
-    that the votes of no more than 1/4 of the membership will count.
-f. If votes do not count because they exceed the maximum allowed from those
-    associated with a single company, a majority of the counted votes is
-    required for approval.
+- are employed by the company; or
+- have a significant financial interest in the company; or
+- have a fiduciary duty to the company, such as membership on the company's Board of Directors.
+b. Members are associated with a vote if it pertains to them or a company they are associated with.
+c. Members are expected not to vote in cases where they have a personal conflict of interest (such as votes pertaining to a spouse or close relative). In these cases, members should disclose the conflict of interest to the core team.
+d. Members must abstain from votes they are associated with, and a majority of the remaining members is required for approval.
+e. The affirmative or negative votes of no more than 1/4 of the core team may be from members associated with the same company. This does not preclude excess members associated with a single company from voting, but it means that the votes of no more than 1/4 of the membership will count.
+f. If votes do not count because they exceed the maximum allowed from those associated with a single company, a majority of the counted votes is required for approval.
 
 ## Implementation
 
