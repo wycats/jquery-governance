@@ -1,5 +1,8 @@
 class Second < Event
-  validate :motion_creator_cannot_second
+  validate    :motion_creator_cannot_second
+  validates   :member_id, :uniqueness => {
+                            :scope => :motion_id
+                          }
 
 private
   def motion_creator_cannot_second
