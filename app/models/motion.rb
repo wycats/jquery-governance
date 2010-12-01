@@ -90,7 +90,7 @@ class Motion < ActiveRecord::Base
 
   # @TODO - Description
   def publicly_visible?
-    voting? || passed? || failed?
+    voting? || passed? || approved? || failed?
   end
 
   # @TODO - Description
