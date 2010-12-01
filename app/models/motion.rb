@@ -48,7 +48,7 @@ class Motion < ActiveRecord::Base
   # Checks to see if a member has a conflict on a motion
   #   @param [Member] member The member who is voting on this motion
   #   @return [true, false] Whether or not member has a conflict
-  def conflicted_member?(member)
+  def conflicts_with_member?(member)
     motion_conflicts = conflicts
     member_conflicts = member.conflicts
     (member_conflicts & motion_conflicts).size > 0
@@ -61,11 +61,11 @@ class Motion < ActiveRecord::Base
   def permit?(action, member)
     case action
     when :vote
-      member.membership_active? && voting? && votes.find_by_member_id(id).nil? && !conflicted_member?(member)
+      member.membership_active? && voting? && votes.where(:member_id => member.id).empty? && !conflicts_with_member?(member)
     when :see
       member.membership_active? || publicly_visible?
     when :second
-      member.membership_active? && member != self.member && !publicly_visible? && seconds.find_by_member_id(member.id).nil?
+      member.membership_active? && member != self.member && !publicly_visible? && seconds.where(:member_id => member.id).empty?
     end
   end
 

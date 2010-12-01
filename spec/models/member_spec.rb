@@ -119,20 +119,20 @@ describe Member do
         @member.can?(:vote, @motion).should be_true
       end
 
-      it "can't vote a motion that has been brought to vote more than once" do
+      it "can't vote more than once on a motion that has been brought to vote" do
+        #Since we are not testing Motion#vote, stub it out, to just return a yes vote  
+        @motion.stub(:vote).and_return(Factory(:yes_vote, :motion => @motion, :member => @member))
+        
         @motion.voting!
         @motion.vote(@member, true)
         @member.can?(:vote, @motion).should be_false
       end
 
-      it "can't vote a motion if there's a conflict of interest" do
-        conflict = Factory.create(:conflict)
-        @motion.voting!
-        @member.can?(:vote, @motion).should be_true
-        @motion.conflicts << conflict
-        @member.can?(:vote, @motion).should be_true
-        @member.conflicts << conflict
-        @member.can?(:vote, @motion).should be_false
+      context "voting and conflicts of interest" do
+        it "can't vote on a motion if he has conflicts of interest associated with this motion" do
+          @motion.stub(:conflicts_with_member).with(@member).and_return(true)
+          @member.can?(:vote, @motion).should be_false
+        end
       end
 
       it "can't vote a motion that hasn't been brought to a vote" do
