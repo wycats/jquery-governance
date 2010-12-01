@@ -4,3 +4,8 @@ Given /^I am signed in as an active member$/ do
   fill_in 'Password', with: active_member.password
   click_button 'Sign in'
 end
+
+Given /^there is an active member with email "([^"]*)" and password "([^"]*)"$/ do |email, password|
+  member = Factory(:member, email: email, password: password)
+  Factory(:active_membership, member: member)
+end
