@@ -16,7 +16,7 @@ describe Motion do
 
     it "post 48 hours moves the motion to failed state" do
       motion = Factory(:motion)
-      
+
       motion.waitingsecond!
 
       Resque.size("waitingsecond_to_failed").should == 0

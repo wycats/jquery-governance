@@ -44,7 +44,7 @@ describe Motion do
           4.times{  Factory.create(:yes_vote, :motion => @motion)}
         end
 
-        it "knows that the requirement for passage hasn't been met" do 
+        it "knows that the requirement for passage hasn't been met" do
            @motion.should_not be_has_met_requirement
         end
       end
@@ -54,7 +54,7 @@ describe Motion do
           3.times{  Factory.create(:yes_vote, :motion => @motion)}
         end
 
-        it "knows that the requirement for passage hasn't been met" do 
+        it "knows that the requirement for passage hasn't been met" do
            @motion.should_not be_has_met_requirement
         end
       end

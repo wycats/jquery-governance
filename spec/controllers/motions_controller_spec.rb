@@ -8,7 +8,7 @@ describe MotionsController do
       controller.stub!(:authenticate_member!).and_return true
       controller.stub!(:current_member).and_return @member
     end
-    
+
     it "should set memeber id" do
       get :new, :member_id => @member.id
       assigns(:motion).member_id.should_not be_nil
@@ -20,7 +20,7 @@ describe MotionsController do
       assigns(:motion).should be_a_new_record
     end
   end
-  
+
   describe "#new with member logged out" do
     it "should redirect to login path" do
       get :new

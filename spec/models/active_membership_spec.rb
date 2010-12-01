@@ -49,7 +49,7 @@ describe ActiveMembership do
       before do
         @future_membership = Factory.create(:future_membership)
       end
-      
+
       it "knows that it isn't currently active" do
         ActiveMembership.active_at(Time.now).should_not include(@future_membership)
       end

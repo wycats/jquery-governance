@@ -176,7 +176,7 @@ class Motion < ActiveRecord::Base
   def passed!
     update_attributes(:state => "passed")
   end
-  
+
   def passed?
     state == "passed"
   end
