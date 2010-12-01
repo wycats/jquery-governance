@@ -8,3 +8,9 @@ For testing, be sure to run redis-server at 6380.
 You can use:
 RAILS_ENV=test rake redis:start
 RAILS_ENV=test rake redis:stop
+
+::Resque::
+
+Run your resque workers with:
+
+QUEUE='*' rake environment resque:work
