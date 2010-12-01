@@ -54,7 +54,7 @@ class Motion < ActiveRecord::Base
     when :see
       member.membership_active? || publicly_visible?
     when :second
-      member.membership_active? && member != self.member && !publicly_visible? && !voting? && !passed? && !failed? && seconds.find_by_member_id(member.id).nil?
+      member.membership_active? && member != self.member && !publicly_visible? && seconds.find_by_member_id(member.id).nil?
     end
   end
 
@@ -90,7 +90,7 @@ class Motion < ActiveRecord::Base
 
   # @TODO - Description
   def publicly_visible?
-    voting? || passed? || failed?
+    voting? || passed? || approved? || failed?
   end
 
   # @TODO - Description

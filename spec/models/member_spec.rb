@@ -110,7 +110,7 @@ describe Member do
       end
 
       it "can see a motion that has been closed" do
-        @motion.passed!
+        @motion.approved!
         @member.can?(:see, @motion).should be_true
       end
 
@@ -172,7 +172,7 @@ describe Member do
       end
 
       it "can see a motion that has been closed" do
-        @motion.passed!
+        @motion.approved!
         @member.can?(:see, @motion).should be_true
       end
 
@@ -195,7 +195,7 @@ describe Member do
       end
 
       it "can't second other user's motion that has been closed" do
-        @motion.passed!
+        @motion.failed!
         @member.can?(:second, @motion).should be_false
       end
     end
