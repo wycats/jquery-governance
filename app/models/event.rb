@@ -5,7 +5,7 @@ class Event < ActiveRecord::Base
   belongs_to  :motion
 
   validates   :member_id,   :uniqueness => {
-                              :scope => :motion_id
+                              :scope => [:motion_id, :event_type]
                             }
   validates   :event_type,  :presence   => true,
                             :inclusion  => {
