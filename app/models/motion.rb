@@ -4,17 +4,18 @@ class Motion < ActiveRecord::Base
        objected voting passed failed approved).push(nil)
 
   belongs_to  :member
-  
   has_many    :events
   has_many    :motion_conflicts
   has_many    :conflicts, :through => :motion_conflicts
 
+  # @return [ActiveRecord::Relation] All of the votes cast on this motion
   def votes
-    events.where(:event_type => "vote")
+    events.votes
   end
 
+  # @return [ActiveRecord::Relation] All of the seconds cast in support of this motion
   def seconds
-    events.where(:event_type => "second")
+    events.seconds
   end
 
   # @return [Fixnum] Count of current yea votes
@@ -201,6 +202,7 @@ class Motion < ActiveRecord::Base
     )
   end
 
+  # @TODO - Description
   def approved?
     state == "approved"
   end
