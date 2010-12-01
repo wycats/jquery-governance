@@ -3,9 +3,9 @@ class Motions::WaitingsecondToFailed
 
   def self.perform(motion_id)
     motion = Motion.find(motion_id)
-   
+
     if motion.waitingsecond?
-      motion.failed! 
-    end  
+      motion.failed!
+    end
   end
 end
