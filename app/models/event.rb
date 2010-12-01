@@ -30,6 +30,16 @@ class Event < ActiveRecord::Base
   end
   alias :second? :is_second?
 
+  # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
+  def self.yeas
+    where :value => true
+  end
+
+  # @return [ActiveRecord::Relation] An Array-like structure, of all nay-votes cast
+  def self.nays
+    where :value => false
+  end
+
 private
   # Will error if the motion creator attempts to second their motion
   def motion_creator_cannot_second
