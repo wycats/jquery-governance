@@ -23,7 +23,7 @@ describe Member do
 
     describe "an inactive member" do
       before do
-        @member = Factory.create(:active_membership, :end_time => 2.days.ago).member
+        @member = Factory.create(:active_membership, :ended_at => 2.days.ago).member
       end
 
       it "knows that it is not active today" do
@@ -42,8 +42,8 @@ describe Member do
 
     describe "a reactivated member who is active now" do
       before do
-        Factory.create(:active_membership, :start_time => 2.years.ago, :end_time => 1.year.ago)
-        @member = Factory.create(:active_membership, :start_time => 2.days.ago).member
+        Factory.create(:active_membership, :started_at => 2.years.ago, :ended_at => 1.year.ago)
+        @member = Factory.create(:active_membership, :started_at => 2.days.ago).member
       end
 
       it "knows that it is active today" do
@@ -66,8 +66,8 @@ describe Member do
 
     describe "a reactivated member who has been deactivated again" do
       before do
-        Factory.create(:active_membership, :start_time => 2.years.ago, :end_time => 1.year.ago)
-        @member = Factory.create(:active_membership, :start_time => 6.months.ago, :end_time => 3.months.ago).member
+        Factory.create(:active_membership, :started_at => 2.years.ago, :ended_at => 1.year.ago)
+        @member = Factory.create(:active_membership, :started_at => 6.months.ago, :ended_at => 3.months.ago).member
       end
 
       it "knows that it is not active today" do
