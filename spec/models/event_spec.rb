@@ -58,7 +58,11 @@ describe Event do
       member  = Factory.create(:active_membership).member
       motion  = Factory.create(:motion, :member => member)
 
-      lambda { Factory.create(:second, :member => member) }.should raise_exception
+      lambda { Factory.create(:second, :motion => motion, :member => member) }.should raise_exception
+    end
+
+    it "should bring motion to a vote if expedition threshold has been met" do
+      pending "Needs a callback in the Event model."
     end
 
     it "should scope seconds for a motion" do
@@ -67,5 +71,14 @@ describe Event do
 
       motion.events.seconds.count.should == 4
     end
+  end
+
+  describe "Objecting" do
+    pending "Objection process needs specs"
+  end
+
+  describe "Event Collisions" do
+    pending "Member activity for a given Motion should not override Events of differing type, unless they are in conflict"
+    pending "Members should be able to override (negate) prior votes, but only within the given motion-event's timeframe"
   end
 end
