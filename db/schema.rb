@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101201024751) do
+ActiveRecord::Schema.define(:version => 20101201031645) do
 
   create_table "active_memberships", :force => true do |t|
     t.integer  "member_id"
@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(:version => 20101201024751) do
   add_index "active_memberships", ["ended_at"], :name => "index_active_memberships_on_ended_at"
   add_index "active_memberships", ["member_id"], :name => "index_active_memberships_on_member_id"
   add_index "active_memberships", ["started_at"], :name => "index_active_memberships_on_started_at"
+
+  create_table "conflicts", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "events", :force => true do |t|
     t.integer  "member_id"
@@ -37,6 +43,13 @@ ActiveRecord::Schema.define(:version => 20101201024751) do
   add_index "events", ["member_id", "motion_id", "event_type"], :name => "event_validation_of_member_event_type", :unique => true
   add_index "events", ["motion_id", "event_type"], :name => "motion_events_by_event_type"
   add_index "events", ["motion_id", "value"], :name => "motion_events_by_value"
+
+  create_table "member_conflicts", :force => true do |t|
+    t.integer  "member_id"
+    t.integer  "conflict_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "members", :force => true do |t|
     t.string   "name"
@@ -56,6 +69,13 @@ ActiveRecord::Schema.define(:version => 20101201024751) do
   add_index "members", ["confirmation_token"], :name => "index_members_on_confirmation_token", :unique => true
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
   add_index "members", ["reset_password_token"], :name => "index_members_on_reset_password_token", :unique => true
+
+  create_table "motion_conflicts", :force => true do |t|
+    t.integer  "motion_id"
+    t.integer  "conflict_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "motions", :force => true do |t|
     t.integer  "member_id"

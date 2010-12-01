@@ -5,6 +5,8 @@ class Motion < ActiveRecord::Base
 
   belongs_to  :member
   has_many    :events
+  has_many    :motion_conflicts
+  has_many    :conflicts, :through => :motion_conflicts
 
   # @return [ActiveRecord::Relation] All of the votes cast on this motion
   def votes
@@ -43,6 +45,15 @@ class Motion < ActiveRecord::Base
   end
   alias :seconds_for_expediting :seconds_for_expedition
 
+  # Checks to see if a member has a conflict on a motion
+  #   @param [Member] member The member who is voting on this motion
+  #   @return [true, false] Whether or not member has a conflict
+  def conflicted_member?(member)
+    motion_conflicts = conflicts
+    member_conflicts = member.conflicts
+    (member_conflicts & motion_conflicts).size > 0
+  end
+
   # Check if the member is allowed to perform the given action
   #   @param [Symbol] action The action the member wants to perform
   #   @param [Member] member The member who wants to perfrom the action
@@ -50,7 +61,7 @@ class Motion < ActiveRecord::Base
   def permit?(action, member)
     case action
     when :vote
-      member.membership_active? && voting? && votes.find_by_member_id(id).nil?
+      member.membership_active? && voting? && votes.find_by_member_id(id).nil? && !conflicted_member?(member)
     when :see
       member.membership_active? || publicly_visible?
     when :second
