@@ -14,7 +14,7 @@ Feature: Creating and Seconding Motions
     Given I am logged in as an active member
     And an existing motion with "title" "jQuery is cool"
     And I am on the motions page
-    When I press "More..."
+    When I follow "More..."
     Then I should see the title "jQuery is cool"
     When I press "Second"
     Then I should see "You have successfully seconded the motion."
@@ -24,7 +24,7 @@ Feature: Creating and Seconding Motions
     And an existing motion
     And with one second
     And I am on the motions page
-    When I press "More..."
+    When I follow "More..."
     And I press "Second"
     Then I should see "You have successfully seconded the motion."
     And I should see "The motion is open for objections."
@@ -35,7 +35,7 @@ Feature: Creating and Seconding Motions
     And with one second
     And with "expedited" "true"
     And I am on the motions page
-    When I press "More..."
+    When I follow "More..."
     And  I press "Second"
     Then I should see "You have successfully seconded the motion."
     And I should not see "The motion is open for objections."
@@ -46,7 +46,7 @@ Feature: Creating and Seconding Motions
     And with two seconds
     And with "expedited" "true"
     And I am on the motions page
-    When I press "More..."
+    When I follow "More..."
     And  I press "Second"
     Then I should see "You have successfully seconded the motion."
     And I should not see "The motion is open for objections."
@@ -58,5 +58,3 @@ Feature: Creating and Seconding Motions
     And with "created at" "2 days ago"
     And I am on the motions page
     Then I should see "Closed"
-=======
->>>>>>> 6846931f6da63e49bbccda056fb4c84021c2b89a
