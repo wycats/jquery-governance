@@ -2,8 +2,8 @@ class ActiveMembership < ActiveRecord::Base
   belongs_to :member
 
   def self.active_at(time)
-    where("start_time <= ?", time).
-      where("end_time >= ? OR end_time IS NULL", time)
+    where("started_at <= ?", time).
+      where("ended_at >= ? OR ended_at IS NULL", time)
   end
 
   def self.members_active_at(time)
