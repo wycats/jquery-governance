@@ -3,3 +3,9 @@
 
 en:
   hello: "Hello world"
+  admin:
+    members:
+      titles:
+        index: "Manage members"
+      actions:
+        add_new_member: "Add new member"

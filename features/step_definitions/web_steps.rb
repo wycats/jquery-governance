@@ -103,6 +103,12 @@ Then /^(?:|I )should see JSON:$/ do |expected_json|
   expected.should == actual
 end
 
+Then /^(?:|I )should see ([a-z\._]*)(?: within "([^"]*)")?$/ do |text, selector|
+  with_scope(selector) do
+    page.should have_content(I18N.t(text))
+  end
+end
+
 Then /^(?:|I )should see "([^"]*)"(?: within "([^"]*)")?$/ do |text, selector|
   with_scope(selector) do
     if page.respond_to? :should
