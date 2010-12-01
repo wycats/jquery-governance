@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/aslakhellesoy/cucumber-rails.git
+  revision: ad3a1f4ffdab02fe6871ce1e0a9a5cc753dd677c
+  specs:
+    cucumber-rails (0.4.0)
+      cucumber (~> 0.9.4)
+
+GIT
   remote: git://github.com/dtrasbo/cucumber.git
   revision: a017fb9
   specs:
@@ -98,8 +105,6 @@ GEM
       ffi (~> 0.6.3)
     columnize (0.3.2)
     configuration (1.2.0)
-    cucumber-rails (0.3.2)
-      cucumber (>= 0.8.0)
     culerity (0.2.12)
     database_cleaner (0.6.0)
     devise (1.1.5)
@@ -207,7 +212,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   cucumber!
-  cucumber-rails
+  cucumber-rails!
   database_cleaner
   devise
   factory_girl (~> 2.0.0.beta1)

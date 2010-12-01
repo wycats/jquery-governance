@@ -1,7 +1,11 @@
-Given /^I am logged in as an active member$/ do 
-   @current_member = Factory.create(:"active_membership").member
-   Given "I go to the sign in page"
-   When "I fill in \"Email\" with \"#{@current_member.email}\""
-   And "I fill in \"Password\" with \"secret\""
-   And "I press \"Sign in\""
+Given "I am an active member with the email \"$email\"" do |email|
+  @member = Factory.create(:member, :email => email)
+  Factory.create(:active_membership, :member => @member)
+end
+
+And "I log in" do
+  Given "I am on the sign in page"
+  And "I fill in \"#{@member.email}\" for \"Email\""
+  And "I fill in \"#{@member.password}\" for \"Password\""
+  And "I press \"Sign in\""
 end
