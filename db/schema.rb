@@ -20,6 +20,10 @@ ActiveRecord::Schema.define(:version => 20101201031645) do
     t.datetime "updated_at"
   end
 
+  add_index "active_memberships", ["ended_at"], :name => "index_active_memberships_on_ended_at"
+  add_index "active_memberships", ["member_id"], :name => "index_active_memberships_on_member_id"
+  add_index "active_memberships", ["started_at"], :name => "index_active_memberships_on_started_at"
+
   create_table "conflicts", :force => true do |t|
     t.string   "title"
     t.datetime "created_at"
@@ -39,6 +43,13 @@ ActiveRecord::Schema.define(:version => 20101201031645) do
   add_index "events", ["member_id", "motion_id", "event_type"], :name => "event_validation_of_member_event_type", :unique => true
   add_index "events", ["motion_id", "event_type"], :name => "motion_events_by_event_type"
   add_index "events", ["motion_id", "value"], :name => "motion_events_by_value"
+
+  create_table "member_conflicts", :force => true do |t|
+    t.integer  "member_id"
+    t.integer  "conflict_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "members", :force => true do |t|
     t.string   "name"
