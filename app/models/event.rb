@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  EVENT_TYPES = %w(vote second)
+  EVENT_TYPES = ["vote", "second"]
 
   belongs_to  :member
   belongs_to  :motion
