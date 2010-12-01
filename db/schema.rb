@@ -10,15 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101130194636) do
+ActiveRecord::Schema.define(:version => 20101201024751) do
 
   create_table "active_memberships", :force => true do |t|
     t.integer  "member_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.datetime "started_at"
+    t.datetime "ended_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "active_memberships", ["ended_at"], :name => "index_active_memberships_on_ended_at"
+  add_index "active_memberships", ["member_id"], :name => "index_active_memberships_on_member_id"
+  add_index "active_memberships", ["started_at"], :name => "index_active_memberships_on_started_at"
 
   create_table "events", :force => true do |t|
     t.integer  "member_id"
@@ -28,6 +32,11 @@ ActiveRecord::Schema.define(:version => 20101130194636) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "events", ["member_id", "event_type"], :name => "member_events_by_event_type"
+  add_index "events", ["member_id", "motion_id", "event_type"], :name => "event_validation_of_member_event_type", :unique => true
+  add_index "events", ["motion_id", "event_type"], :name => "motion_events_by_event_type"
+  add_index "events", ["motion_id", "value"], :name => "motion_events_by_value"
 
   create_table "members", :force => true do |t|
     t.string   "name"
@@ -58,5 +67,7 @@ ActiveRecord::Schema.define(:version => 20101130194636) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "motions", ["member_id"], :name => "index_motions_on_member_id"
 
 end

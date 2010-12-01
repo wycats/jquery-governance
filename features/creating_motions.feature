@@ -10,13 +10,6 @@ Feature: Creating and Seconding Motions
     Given I am logged in as an inactive member
     Then I should not see "New Motion"
 
-  Scenario: Create a motion as an active member 
-    Given I am logged in as an active member
-    When I press "New Motion"
-    And I fill in "title" with "jQuery should take over the JS world."
-    And I press "Create Motion"
-    Then I should see "New motion was successfully created"
-
   Scenario: Second a motion
     Given I am logged in as an active member
     And an existing motion with "title" "jQuery is cool"
@@ -65,3 +58,5 @@ Feature: Creating and Seconding Motions
     And with "created at" "2 days ago"
     And I am on the motions page
     Then I should see "Closed"
+=======
+>>>>>>> 6846931f6da63e49bbccda056fb4c84021c2b89a
