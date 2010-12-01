@@ -46,7 +46,7 @@ class Motion < ActiveRecord::Base
   alias :seconds_for_expediting :seconds_for_expedition
 
   # Checks to see if a member has a conflict on a motion
-  #   @param [Member]
+  #   @param [Member] member The member who is voting on this motion
   #   @return [true, false] Whether or not member has a conflict
   def conflicted_member?(member)
     motion_conflicts = conflicts

@@ -125,7 +125,15 @@ describe Member do
         @member.can?(:vote, @motion).should be_false
       end
 
-      it "can't vote a motion if there's a conflict of interest"
+      it "can't vote a motion if there's a conflict of interest" do
+        conflict = Factory.create(:conflict)
+        @motion.voting!
+        @member.can?(:vote, @motion).should be_true
+        @motion.conflicts << conflict
+        @member.can?(:vote, @motion).should be_true
+        @member.conflicts << conflict
+        @member.can?(:vote, @motion).should be_false
+      end
 
       it "can't vote a motion that hasn't been brought to a vote" do
         @member.can?(:vote, @motion).should be_false
