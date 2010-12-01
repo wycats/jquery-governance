@@ -64,11 +64,15 @@ Scenario: Update existing member
 
 @wip
 Scenario: Delete member
+  Given these other members exist:
+    | name              | email              |
+    | John Resig        | jresig@example.org |
+    | Grandmaster Flash | gmflash@adobe.com  |
   When I go to the members admin page
-  And I follow "Edit member" within "some selector"
-  Then I should be on the edit member page
-  And I should see "Delete this member" within "header a"
-  When I follow "Delete this member" within "header a"
+  And I follow the edit link for "Grandmaster Flash"
+  Then I should be on the edit member admin page for "Grandmaster Flash"
+  And I should see "Delete this member"
+  When I follow "Delete this member"
   Then I should be on the members admin page
-  And I should not see "Donald Duck"
+  And I should not see "Grandmaster Flash"
   And I should see "Member deleted"
