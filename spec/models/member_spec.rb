@@ -28,7 +28,7 @@ describe Member do
 
       it "knows that it is not active today" do
         @member.should_not be_active_at(Time.now)
-        @member.should_not be_active
+        @member.should_not be_membership_active
       end
 
       it "knows it is not active before the start time" do
@@ -72,7 +72,7 @@ describe Member do
 
       it "knows that it is not active today" do
         @member.should_not be_active_at(Time.now)
-        @member.should_not be_active
+        @member.should_not be_membership_active
       end
 
       it "knows it is active in the second active period" do
@@ -89,6 +89,114 @@ describe Member do
 
       it "knows it is not active in the future" do
         @member.should_not be_active_at(1.month.from_now)
+      end
+    end
+  end
+
+  describe "can?" do
+    describe "an active member" do
+      before do
+        @member = Factory.create(:active_membership).member
+        @motion = Factory.create(:motion)
+      end
+
+      it "can see a motion that hasn't been brought to a vote" do
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can see a motion that has been brought to a vote" do
+        @motion.voting!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can see a motion that has been closed" do
+        @motion.passed!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can vote a motion that has been brought to a vote" do
+        @motion.voting!
+        @member.can?(:vote, @motion).should be_true
+      end
+
+      it "can't vote a motion that has been brought to vote more than once" do
+        @motion.voting!
+        @motion.vote(@member, true)
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion if there's a conflict of interest"
+
+      it "can't vote a motion that hasn't been brought to a vote" do
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can second other user's motion that hasn't been brought to vote" do
+        @member.can?(:second, @motion).should be_true
+      end
+
+      it "can't second other user's motion that hasn't been brought to vote more than once" do
+        @motion.second(@member)
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second other user's motion that has been brought to vote" do
+        @motion.voting!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second other user's motion that has been closed" do
+        @motion.failed!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second his o her own motion" do
+        @motion = Factory.create(:motion, :member => @member)
+        @member.can?(:second, @motion).should be_false
+      end
+    end
+
+    describe "an inactive member" do
+      before do
+        @member = Factory.create(:expired_membership).member
+        @motion = Factory.create(:motion)
+      end
+
+      it "can't see a motion that hasn't been brought to a vote" do
+        @member.can?(:see, @motion).should be_false
+      end
+
+      it "can see a motion that has been brought to a vote" do
+        @motion.voting!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can see a motion that has been closed" do
+        @motion.passed!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can't vote a motion that has been brought to a vote" do
+        @motion.voting!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion that hasn't been brought to a vote" do
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't second other user's motion that hasn't been brought to vote" do
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second other user's motion that has been brought to vote" do
+        @motion.voting!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second other user's motion that has been closed" do
+        @motion.passed!
+        @member.can?(:second, @motion).should be_false
       end
     end
   end

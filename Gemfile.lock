@@ -10,15 +10,6 @@ GIT
       term-ansicolor (~> 1.0.5)
 
 GIT
-  remote: git://github.com/thoughtbot/factory_girl_rails
-  revision: cc88e0841773cbe07da7ddcf38058d75456c071e
-  tag: v1.1.beta1
-  specs:
-    factory_girl_rails (1.1.beta1)
-      factory_girl (~> 2.0.0.beta)
-      railties (>= 3.0.0)
-
-GIT
   remote: https://github.com/rack/rack.git
   revision: 85ca454e6143a3081d90e4546ccad602a4c3ad2e
   specs:
@@ -26,7 +17,7 @@ GIT
 
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 76a15dd0599779f86bda063bb545bba68c6ff17b
+  revision: a9b666b51d28b2e74da630c31327dee7cbe96d37
   specs:
     actionmailer (3.1.0.beta)
       actionpack (= 3.1.0.beta)
@@ -75,6 +66,15 @@ GIT
   specs:
     rack-cache (0.5.3)
       rack (>= 0.4)
+
+GIT
+  remote: https://github.com/thoughtbot/factory_girl_rails.git
+  revision: cc88e0841773cbe07da7ddcf38058d75456c071e
+  tag: v1.1.beta1
+  specs:
+    factory_girl_rails (1.1.beta1)
+      factory_girl (~> 2.0.0.beta)
+      railties (>= 3.0.0)
 
 GEM
   remote: http://rubygems.org/
