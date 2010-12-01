@@ -1,3 +1,8 @@
+Given "a member exists named \"$name\" with email \"$email\"" do |name, email|
+  Factory.create(:member, :email => email, :name => name)
+  Factory.create(:active_membership, :member => @member)
+end
+
 Given "I am an active member with the email \"$email\"" do |email|
   @member = Factory.create(:member, :email => email)
   Factory.create(:active_membership, :member => @member)
@@ -19,4 +24,11 @@ end
 Given  /^(?:|I )am logged in$/ do
   Given "I log in"
 end
+
+Given /^these (?:other )members exist:$/ do |table|
+  table.rows.each do |name, email|
+    Given %{a member exists named "#{name}" with email "#{email}"}
+  end
+end
+
 

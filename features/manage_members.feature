@@ -8,9 +8,15 @@ Background:
   And am logged in
     
 Scenario: View all users
+  Given these other members exist:
+    | name       | email              |
+    | John Resig | jresig@example.org |
+    | Paul Irish | paul@example.com   |
   When I go to the members admin page
   Then I should see "Manage members"
   And I should see "Yehuda Katz" within "table.members"
+  And I should see "John Resig" within "table.members"
+  And I should see "Paul Irish" within "table.members"
 
 @wip
 Scenario: Create new member
