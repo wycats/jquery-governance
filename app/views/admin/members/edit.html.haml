@@ -1,2 +1,8 @@
-%h1 Admin::Members#edit
-%p Find me in app/views/admin/members/edit.html.haml
+%header
+  %h1= t("admin.members.titles.edit")
+
+%section#main
+  = form_for [:admin, @member] do |form|
+    = render form
+    .buttons
+      = form.submit t("admin.members.actions.update_member")

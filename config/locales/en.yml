@@ -7,5 +7,12 @@ en:
     members:
       titles:
         index: "Manage members"
+        new:   "New member"
+      headings:
+        name: "Name"
+        email: "E-mail address"
+        actions: "Actions"
       actions:
         add_new_member: "Add new member"
+        edit_member: "Edit member"
+        update_member: "Update member info"

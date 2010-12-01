@@ -1,0 +1,8 @@
+%header
+  %h1= t("admin.members.titles.new")
+
+%section#main
+  = form_for [:admin, @member] do |form|
+    = render form
+    .buttons
+      = form.submit t("admin.members.actions.add_new_member")
