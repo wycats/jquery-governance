@@ -8,6 +8,7 @@ en:
       titles:
         index: "Manage members"
         new:   "New member"
+        edit:  "Edit member info"
       headings:
         name: "Name"
         email: "E-mail address"
@@ -16,3 +17,9 @@ en:
         add_new_member: "Add new member"
         edit_member: "Edit member"
         update_member: "Update member info"
+      notices:
+        member_created: "Member added"
+        member_updated: "Member updated"
+      alerts:
+        member_not_created: "Member could not be created"
+        member_not_saved:   "Member could not be saved"

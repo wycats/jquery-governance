@@ -18,7 +18,6 @@ Scenario: View all users
   And I should see "John Resig" within "table.members"
   And I should see "Paul Irish" within "table.members"
 
-@wip
 Scenario: Create new member
   When I go to the members admin page
   And I follow "Add new member"
@@ -31,8 +30,21 @@ Scenario: Create new member
   Then I should be on the members admin page
   And I should see "Sam Spade" within "table.members"
   And I should see "Member added"
- 
+
 @wip
+Scenario: Validation failure on create
+  When I go to the members admin page
+  And I follow "Add new member"
+  Then I should be on the new member admin page
+  And I should see "New member" within "header"
+  When I fill in "member[name]" with ""
+  And I fill in "member[email]" with ""
+  And I press "Add new member"
+  Then I should be on /admin/members
+  And I should see "New member"
+  And I should see "Member could not be created"
+  And the "member[name]" field should contain ""
+ 
 Scenario: Update existing member
   Given these other members exist:
     | name       | email              |
@@ -40,16 +52,14 @@ Scenario: Update existing member
     | Paul Irish | paul@example.com   |
   When I go to the members admin page
   And I follow the edit link for "Paul Irish"
-  Then I should be on the edit member page
+  Then I should be on the edit member admin page for "Paul Irish" 
   And I should see "Edit member info" within "header"
-  And the field "member[name]" should contain "Paul Irish"
-  And the field "member[email]" should contain "paul@example.com"
-  And the checkbox "member[is_admin]" should not be checked
-  When I fill in "name" with "Donald Duck"
+  And the "member[name]" field should contain "Paul Irish"
+  And the "member[email]" field should contain "paul@example.com"
+  When I fill in "member[name]" with "Donald Duck"
   And I press "Update member info"
-  Then I should be on the members admin page
-  And I should see "Donald Duck"
-  And I should not see "Paul Irish"
+  Then I should be on the edit member admin page for "Donald Duck"
+  And the "member[name]" field should contain "Donald Duck"
   And I should see "Member updated"
 
 @wip

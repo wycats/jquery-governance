@@ -31,4 +31,10 @@ Given /^these (?:other )members exist:$/ do |table|
   end
 end
 
+When /^I follow the edit link for "([^"]*)"$/ do |arg1|
+  with_scope("tr:contains('#{arg1}')") do
+    click_link( I18n.t("admin.members.actions.edit_member") )
+  end
+end
+
 
