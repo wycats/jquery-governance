@@ -4,15 +4,16 @@ class Motion < ActiveRecord::Base
        objected voting passed failed approved).push(nil)
 
   belongs_to  :member
-  
   has_many    :events
 
+  # @return [ActiveRecord::Relation] All of the votes cast on this motion
   def votes
-    events.where(:event_type => "vote")
+    events.votes
   end
 
+  # @return [ActiveRecord::Relation] All of the seconds cast in support of this motion
   def seconds
-    events.where(:event_type => "second")
+    events.seconds
   end
 
   # @return [Fixnum] Count of current yea votes
@@ -53,7 +54,7 @@ class Motion < ActiveRecord::Base
     when :see
       member.membership_active? || publicly_visible?
     when :second
-      member.membership_active? && member != self.member && !publicly_visible? && !voting? && !passed? && !failed? && seconds.find_by_member_id(member.id).nil?
+      member.membership_active? && member != self.member && !publicly_visible? && seconds.find_by_member_id(member.id).nil?
     end
   end
 
@@ -89,7 +90,7 @@ class Motion < ActiveRecord::Base
 
   # @TODO - Description
   def publicly_visible?
-    voting? || passed? || failed?
+    voting? || passed? || approved? || failed?
   end
 
   # @TODO - Description
@@ -190,6 +191,7 @@ class Motion < ActiveRecord::Base
     )
   end
 
+  # @TODO - Description
   def approved?
     state == "approved"
   end

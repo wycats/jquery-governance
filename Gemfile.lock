@@ -1,6 +1,13 @@
 GIT
+  remote: git://github.com/aslakhellesoy/cucumber-rails.git
+  revision: ad3a1f4ffdab02fe6871ce1e0a9a5cc753dd677c
+  specs:
+    cucumber-rails (0.4.0)
+      cucumber (~> 0.9.4)
+
+GIT
   remote: git://github.com/dtrasbo/cucumber.git
-  revision: a017fb9532940d3fef14e1381278c51aa22040d1
+  revision: a017fb9
   specs:
     cucumber (0.9.4)
       builder (~> 3.0.0)
@@ -11,13 +18,13 @@ GIT
 
 GIT
   remote: https://github.com/rack/rack.git
-  revision: 85ca454e6143a3081d90e4546ccad602a4c3ad2e
+  revision: 85ca454
   specs:
     rack (1.2.1)
 
 GIT
   remote: https://github.com/rails/rails.git
-  revision: a9b666b51d28b2e74da630c31327dee7cbe96d37
+  revision: 542cb5c
   specs:
     actionmailer (3.1.0.beta)
       actionpack (= 3.1.0.beta)
@@ -62,14 +69,14 @@ GIT
 
 GIT
   remote: https://github.com/rtomayko/rack-cache.git
-  revision: 428ac19e727fdff3ace20d1727129c689d65ff4d
+  revision: 428ac19
   specs:
     rack-cache (0.5.3)
       rack (>= 0.4)
 
 GIT
   remote: https://github.com/thoughtbot/factory_girl_rails.git
-  revision: cc88e0841773cbe07da7ddcf38058d75456c071e
+  revision: cc88e08
   tag: v1.1.beta1
   specs:
     factory_girl_rails (1.1.beta1)
@@ -81,7 +88,7 @@ GEM
   specs:
     abstract (1.0.0)
     archive-tar-minitar (0.5.2)
-    arel (2.0.4)
+    arel (2.0.5)
     bcrypt-ruby (2.1.2)
     builder (3.0.0)
     capybara (0.4.0)
@@ -98,8 +105,6 @@ GEM
       ffi (~> 0.6.3)
     columnize (0.3.2)
     configuration (1.2.0)
-    cucumber-rails (0.3.2)
-      cucumber (>= 0.8.0)
     culerity (0.2.12)
     database_cleaner (0.6.0)
     devise (1.1.5)
@@ -207,7 +212,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   cucumber!
-  cucumber-rails
+  cucumber-rails!
   database_cleaner
   devise
   factory_girl (~> 2.0.0.beta1)
