@@ -9,6 +9,8 @@ class Member < ActiveRecord::Base
   has_many :active_memberships
   has_many :motions
   has_many :events
+  has_many :member_conflicts
+  has_many :conflicts, :through => :member_conflicts
 
   # Checks membership status at a given Date/Time
   #   @param [Date, Time, DateTime] time The time for which membership status should be checked
@@ -16,7 +18,7 @@ class Member < ActiveRecord::Base
   def active_at?(time)
     active_memberships.active_at(time).first
   end
-
+  
   # Returns the active membership status, of this member
   #   @return [true, false] Whether or not member is currently active as true or false, respectively
   def membership_active?

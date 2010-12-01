@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101130194636) do
+ActiveRecord::Schema.define(:version => 20101201031645) do
 
   create_table "active_memberships", :force => true do |t|
     t.integer  "member_id"
@@ -20,11 +20,24 @@ ActiveRecord::Schema.define(:version => 20101130194636) do
     t.datetime "updated_at"
   end
 
+  create_table "conflicts", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "events", :force => true do |t|
     t.integer  "member_id"
     t.integer  "motion_id"
     t.string   "event_type"
     t.boolean  "value",      :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "member_conflicts", :force => true do |t|
+    t.integer  "member_id"
+    t.integer  "conflict_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,6 +60,13 @@ ActiveRecord::Schema.define(:version => 20101130194636) do
   add_index "members", ["confirmation_token"], :name => "index_members_on_confirmation_token", :unique => true
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
   add_index "members", ["reset_password_token"], :name => "index_members_on_reset_password_token", :unique => true
+
+  create_table "motion_conflicts", :force => true do |t|
+    t.integer  "motion_id"
+    t.integer  "conflict_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "motions", :force => true do |t|
     t.integer  "member_id"
