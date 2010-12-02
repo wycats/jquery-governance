@@ -11,7 +11,7 @@ describe Motion do
 
       motion.waitingobjection!
 
-      Resque.delayed_queue_schedule_size.should == 1
+      Resque.delayed_queue_schedule_size.should == 2
     end
 
     it "post 24 hours and still in waitingobjection moves motion to voting" do
@@ -40,7 +40,7 @@ describe Motion do
       @worker.process
       motion.reload.should be_objected
 
-      Resque.delayed_queue_schedule_size.should == 1
+      Resque.delayed_queue_schedule_size.should == 2
     end
   end
 end

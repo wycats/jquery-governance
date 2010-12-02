@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101201143811) do
+ActiveRecord::Schema.define(:version => 20101202035154) do
 
   create_table "active_memberships", :force => true do |t|
     t.integer  "member_id"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(:version => 20101201143811) do
   create_table "motions", :force => true do |t|
     t.integer  "member_id"
     t.string   "title"
-    t.string   "state",       :default => "waitingsecond"
+    t.string   "state"
     t.text     "description"
     t.text     "rationale"
     t.integer  "abstains"

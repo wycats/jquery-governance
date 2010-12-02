@@ -10,6 +10,7 @@ class Motion < ActiveRecord::Base
   has_many    :motion_conflicts
   has_many    :conflicts, :through => :motion_conflicts
 
+  after_create :initialize_state
 
   # # @return [ActiveRecord::Relation] All of the votes cast on this motion
   # def votes
@@ -224,5 +225,9 @@ private
   def possible_votes
     # TODO: Deal with conflicts of interest
     ActiveMembership.active_at(Time.now).count
+  end
+
+  def initialize_state
+    waitingsecond! unless state
   end
 end
