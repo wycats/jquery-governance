@@ -1,6 +1,6 @@
 /* @group Variables */
 
-$border_color: #999;
+$border_color: #ccc;
 $font_base: 12px;
 $font_label: $font_base + 2px;
 $font_label_height: 30px;
@@ -8,6 +8,7 @@ $font_label_height: 30px;
 $form_row_spacing: 10px;
 $label_width: 120px;
 $input_padding: 5px;
+$input_width: 200px;
 
 /* @end */
 
@@ -103,9 +104,16 @@ body {
 .form_row input[type=text],
 .form_row input[type=password] {
   padding: $input_padding;
+  width: $input_width;
+  border: 1px solid $border_color;
 }
 
 #user_signin_form {
+  width: 400px;
+  margin: 20px auto;
+}
+
+#new_motion_form {
   width: 400px;
   margin: 20px auto;
 }
