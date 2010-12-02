@@ -95,7 +95,7 @@ class Motion < ActiveRecord::Base
   # @TODO @return
   def vote(member, value)
     votes.create(:member => member, :value => value)
-    passed! if ayes > required_votes
+    passed! if ayes >= required_votes
   end
 
   ##
