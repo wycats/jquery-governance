@@ -5,7 +5,6 @@ JqueryVoting::Application.routes.draw do
   end
 
   resources :motions
-
   
   root :to => "welcome#index"
 end
