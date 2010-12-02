@@ -35,11 +35,17 @@ class Member < ActiveRecord::Base
     motion.permit?(action, self)
   end
 
+  # Check if Member has voted on a given motion
+  #   @param [Motion] motion The motion in question
+  #   @return [true, false] If Member has voted on a given motion
   def has_voted_on?(motion)
-    return true unless votes.where(:motion_id => motion.id).empty?
+    votes.where(:motion_id => motion.id).present?
   end
 
+  # Check if Member has seconded a given motion
+  #   @param [Motion] motion The motion in question
+  #   @return [true, false] If Member has seconded a given motion
   def has_seconded?(motion)
-    return true unless seconds.where(:motion_id => motion.id).empty?
+    seconds.where(:motion_id => motion.id).present?
   end
 end
