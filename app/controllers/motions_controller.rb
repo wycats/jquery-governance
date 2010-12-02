@@ -5,7 +5,7 @@ class MotionsController < ApplicationController
   def index
     @motions = Motion.all
   end
-  
+
   def new
     @motion = Motion.new(:member_id => current_member.id)
   end

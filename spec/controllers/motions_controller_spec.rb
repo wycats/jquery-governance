@@ -27,7 +27,7 @@ describe MotionsController do
       response.should redirect_to(new_member_session_path)
     end
   end
-  
+
   describe "#index with member logged in" do
     before(:each) do
       5.times { Factory.create(:motion) }
@@ -39,7 +39,6 @@ describe MotionsController do
     it "should render the index tempate" do
       get :index
       response.should render_template('motions/index')
-      assigns(:motions).count.should == 5
     end
   end
 end
