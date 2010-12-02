@@ -208,4 +208,22 @@ describe Member do
       end
     end
   end
+
+  describe "has_voted_on?" do
+    it "knows if the member has voted on the specified motion" do
+      @motion = Factory(:motion)
+      @member = Factory(:member)
+      Factory(:yes_vote, :motion => @motion, :member => @member)
+      @member.has_voted_on?(@motion).should be_true
+    end
+  end
+  
+  describe "has_voted_on?" do
+    it "knows if the member has voted on the specified motion" do
+      @motion = Factory(:motion)
+      @member = Factory(:member)
+      Factory(:second, :motion => @motion, :member => @member)
+      @member.has_seconded?(@motion).should be_true
+    end
+  end
 end
