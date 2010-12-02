@@ -3,7 +3,7 @@ Feature: Active member creates motion
   I want to create a motion
   So that others may second it, and begin the voting process
 
-  Scenario: I am an active member 
+  Scenario: I am an active member
     Given I am signed in as an active member
     When I follow "New Motion"
     And I fill in "Title" with "jQuery should take over the JS world."

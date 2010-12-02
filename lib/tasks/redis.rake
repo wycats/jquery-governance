@@ -4,12 +4,12 @@ namespace :redis do
   desc "start redis"
   task :start do
     fork do
-      Process.daemon 
+      Process.daemon
 
       RedisRunner.start(Rails.env)
     end
   end
-  
+
   desc "stop redis"
   task :stop do
     RedisRunner.stop(Rails.env)
@@ -19,6 +19,6 @@ namespace :redis do
   task :restart do
     Rake::Task["redis:stop"].invoke
     sleep 1
-    Rake::Task["redis:start"].invoke 
+    Rake::Task["redis:start"].invoke
   end
 end

@@ -1,6 +1,6 @@
 class Motion < ActiveRecord::Base
   include Voting
-  
+
   validates_inclusion_of :state, :in =>
     %w(waitingsecond waitingexpedited waitingobjection
        objected voting passed failed approved).push(nil)
@@ -68,7 +68,7 @@ class Motion < ActiveRecord::Base
     when :see
       member.membership_active? || publicly_visible?
     when :second
-      member.membership_active? && member != self.member && !publicly_visible? && !member.has_seconded?(self) 
+      member.membership_active? && member != self.member && !publicly_visible? && !member.has_seconded?(self)
     end
   end
 
@@ -190,7 +190,7 @@ class Motion < ActiveRecord::Base
   def passed!
     update_attributes(:state => "passed")
   end
-  
+
   def passed?
     state == "passed"
   end

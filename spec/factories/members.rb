@@ -4,7 +4,8 @@ FactoryGirl.define do
     sequence(:email) {|n| "TestMan#{n}@example.com"}
     password               "secret"
   end
-  factory :john_resig, :parent => :member do 
+
+  factory :john_resig, :parent => :member do
     name "John Resig"
   end
 end

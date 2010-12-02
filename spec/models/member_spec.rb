@@ -122,7 +122,7 @@ describe Member do
       it "can't vote more than once on a motion that has been brought to vote" do
         #Since we are not testing Motion#vote, stub it out, to just return a yes vote  
         @motion.stub(:vote).and_return(Factory(:yes_vote, :motion => @motion, :member => @member))
-        
+
         @motion.voting!
         @motion.vote(@member, true)
         @member.can?(:vote, @motion).should be_false
@@ -217,7 +217,7 @@ describe Member do
       @member.has_voted_on?(@motion).should be_true
     end
   end
-  
+
   describe "has_voted_on?" do
     it "knows if the member has voted on the specified motion" do
       @motion = Factory(:motion)

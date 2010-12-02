@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :active_membership do 
+  factory :active_membership do
     association :member, :factory => :john_resig
     started_at 4.days.ago
     ended_at nil

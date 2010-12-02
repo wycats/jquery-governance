@@ -8,7 +8,7 @@ FactoryGirl.define do
     event_type "vote"
   end
 
-  factory :yes_vote, :parent => :vote  do 
+  factory :yes_vote, :parent => :vote  do
     value true
   end
 

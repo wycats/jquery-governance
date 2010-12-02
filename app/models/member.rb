@@ -1,6 +1,6 @@
 class Member < ActiveRecord::Base
-  include Voting 
-  
+  include Voting
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :recoverable, :rememberable
@@ -20,7 +20,7 @@ class Member < ActiveRecord::Base
   def active_at?(time)
     active_memberships.active_at(time).first
   end
-  
+
   # Returns the active membership status, of this member
   #   @return [true, false] Whether or not member is currently active as true or false, respectively
   def membership_active?
@@ -38,7 +38,7 @@ class Member < ActiveRecord::Base
   def has_voted_on?(motion)
     return true unless votes.where(:motion_id => motion.id).empty?
   end
-  
+
   def has_seconded?(motion)
     return true unless seconds.where(:motion_id => motion.id).empty?
   end

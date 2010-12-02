@@ -1,5 +1,5 @@
 class MotionsController < ApplicationController
-  
+
   before_filter :authenticate_member!
 
   def new
