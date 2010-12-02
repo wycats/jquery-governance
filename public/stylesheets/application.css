@@ -1,0 +1,23 @@
+.motion {
+  border-left: 3px solid #999;
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+  margin-bottom: 5px;
+  padding: 0px 3px 0px 3px;
+}
+.motion_title {
+  font-weight: bold;
+  font-size: 105%;
+}
+.motion_date, .motion_member {
+  width: 49%;
+}
+.motion_description, .motion_rationale {
+  margin-top: 2px;
+}
+.motion_state_passed {
+  background-color: #90EE90;
+}
+.motion_state_failed {
+  background-color: #FAAFBE;
+}
