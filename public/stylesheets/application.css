@@ -71,18 +71,24 @@ body {
 
 .form_row input[type=text],
 .form_row input[type=password] {
-  padding: 5px; }
+  padding: 5px;
+  width: 200px;
+  border: 1px solid #cccccc; }
 
 #user_signin_form {
+  width: 400px;
+  margin: 20px auto; }
+
+#new_motion_form {
   width: 400px;
   margin: 20px auto; }
 
 /* @end */
 /* @group Motions */
 .motion {
-  border-left: 3px solid #999999;
-  border-top: 1px solid #999999;
-  border-bottom: 1px solid #999999;
+  border-left: 3px solid #cccccc;
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
   margin-bottom: 5px;
   padding: 0px 3px 0px 3px; }
 

@@ -1,11 +1,12 @@
 %h1 New motion
 
-= form_for @motion do |f|
-  .form_row
-    = f.label :title
-    = f.text_field :title
-  .form_row
-    = f.label :description
-    = f.text_field :description
-  .form_row
-    = f.submit
+#new_motion_form
+  = form_for @motion do |f|
+    .form_row
+      = f.label :title
+      = f.text_field :title
+    .form_row
+      = f.label :description
+      = f.text_field :description
+    .form_row.centered.submit
+      = f.submit "Create Motion", :class => 'button large_button'
