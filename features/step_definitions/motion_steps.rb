@@ -8,14 +8,6 @@ def to_m(name)
   name.gsub(/ /,'_').to_sym
 end
 
-Given /^I am logged in as an (.*) member$/ do |active_inactive|
-   @current_member = Factory.create(:"#{active_inactive}_membership").member
-   Given "I go to the sign in page"
-   When "I fill in \"Email\" with \"#{@current_member.email}\""
-   And "I fill in \"Password\" with \"secret\""
-   And "I press \"Sign in\""
-end
-
 # Has the potential to create 3 instance variables for future use
 # in the current scenario:
 # Example:
