@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101202035154) do
+ActiveRecord::Schema.define(:version => 20101202055105) do
 
   create_table "active_memberships", :force => true do |t|
     t.integer  "member_id"
@@ -62,8 +62,6 @@ ActiveRecord::Schema.define(:version => 20101202035154) do
     t.string   "remember_token"
     t.datetime "remember_created_at"
     t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
     t.boolean  "is_admin"
   end
 
