@@ -7,3 +7,4 @@ tmp/**/*
 *.tmproj
 .yardoc
 *.swp
+public/stylesheets/.sass-cache/*

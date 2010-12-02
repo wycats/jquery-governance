@@ -1,23 +1,105 @@
+/* @group Variables */
+/* @end */
+/* @group Global */
+body {
+  font-size: 12px; }
+
+.centered {
+  text-align: center; }
+
+/* @end */
+/* @group Buttons */
+.button, .button:visited {
+  border: 0;
+  background: #222222 url("/images/btn_overlay.png") repeat-x;
+  display: inline-block;
+  padding: 5px 10px 6px;
+  color: #fff;
+  text-decoration: none;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  position: relative;
+  cursor: pointer; }
+
+.button:hover {
+  background-color: #111;
+  color: #fff; }
+
+.button:active {
+  top: 1px; }
+
+.small_button, .small.button:visited {
+  font-size: 11px;
+  padding: 5px; }
+
+.button, .button:visited,
+.medium_button, .medium_button:visited {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25); }
+
+.large_button, .large_button:visited {
+  font-size: 14px;
+  padding: 8px 14px 9px; }
+
+.green_button, .green_button:visited {
+  background-color: #91bd09; }
+
+.green_button:hover {
+  background-color: #749a02; }
+
+/* @end */
+/* @group Forms */
+.form_row {
+  margin-bottom: 10px;
+  clear: both; }
+
+.form_row.submit {
+  margin-top: 40px; }
+
+.form_row label {
+  float: left;
+  font-size: 14px;
+  line-height: 30px;
+  vertical-align: middle;
+  width: 120px; }
+
+.form_row input[type=text],
+.form_row input[type=password] {
+  padding: 5px; }
+
+#user_signin_form {
+  width: 400px;
+  margin: 20px auto; }
+
+/* @end */
+/* @group Motions */
 .motion {
-  border-left: 3px solid #999;
-  border-top: 1px solid #999;
-  border-bottom: 1px solid #999;
+  border-left: 3px solid #999999;
+  border-top: 1px solid #999999;
+  border-bottom: 1px solid #999999;
   margin-bottom: 5px;
-  padding: 0px 3px 0px 3px;
-}
+  padding: 0px 3px 0px 3px; }
+
 .motion_title {
   font-weight: bold;
-  font-size: 105%;
-}
+  font-size: 105%; }
+
 .motion_date, .motion_member {
-  width: 49%;
-}
+  width: 49%; }
+
 .motion_description, .motion_rationale {
-  margin-top: 2px;
-}
+  margin-top: 2px; }
+
 .motion_state_passed {
-  background-color: #90EE90;
-}
+  background-color: #90EE90; }
+
 .motion_state_failed {
-  background-color: #FAAFBE;
-}
+  background-color: #FAAFBE; }
+
+/* @end */
