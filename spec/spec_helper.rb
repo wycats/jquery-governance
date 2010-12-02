@@ -30,4 +30,6 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   config.before(:all) { @worker = Resque::Worker.new("*") }
+
+  config.include CustomMatchers
 end

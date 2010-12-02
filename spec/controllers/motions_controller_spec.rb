@@ -8,7 +8,7 @@ describe MotionsController do
       controller.stub!(:authenticate_member!).and_return true
       controller.stub!(:current_member).and_return @member
     end
-    
+
     it "should set memeber id" do
       get :new, :member_id => @member.id
       assigns(:motion).member_id.should_not be_nil
@@ -20,11 +20,25 @@ describe MotionsController do
       assigns(:motion).should be_a_new_record
     end
   end
-  
+
   describe "#new with member logged out" do
     it "should redirect to login path" do
       get :new
       response.should redirect_to(new_member_session_path)
+    end
+  end
+
+  describe "#index with member logged in" do
+    before(:each) do
+      5.times { Factory.create(:motion) }
+      @member = Factory(:member)
+      controller.stub!(:authenticate_member!).and_return true
+      controller.stub!(:current_member).and_return @member
+    end
+
+    it "should render the index tempate" do
+      get :index
+      response.should render_template('motions/index')
     end
   end
 end

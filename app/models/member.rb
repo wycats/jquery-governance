@@ -1,14 +1,18 @@
 class Member < ActiveRecord::Base
+  include Voting
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :recoverable, :rememberable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   has_many :active_memberships
   has_many :motions
   has_many :events
+  has_many :member_conflicts
+  has_many :conflicts, :through => :member_conflicts
 
   # Checks membership status at a given Date/Time
   #   @param [Date, Time, DateTime] time The time for which membership status should be checked
@@ -29,5 +33,13 @@ class Member < ActiveRecord::Base
   #   @return [true, false] Whether or not the member has permissions to perform the action over the motion, respectively
   def can?(action, motion)
     motion.permit?(action, self)
+  end
+
+  def has_voted_on?(motion)
+    return true unless votes.where(:motion_id => motion.id).empty?
+  end
+
+  def has_seconded?(motion)
+    return true unless seconds.where(:motion_id => motion.id).empty?
   end
 end

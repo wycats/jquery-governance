@@ -4,15 +4,15 @@ class DeviseCreateMembers < ActiveRecord::Migration
       t.database_authenticatable :null => false
       t.recoverable
       t.rememberable
-      
+
 
       # anything below to be uncommented would need a touch to self.down
       # t.trackable
       # t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
       # t.token_authenticatable
       # t.confirmable
-      
-      
+
+
 
     end
 

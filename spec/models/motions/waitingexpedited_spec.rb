@@ -4,8 +4,8 @@ describe Motion do
   before(:each) do
     Resque.redis.flushall
   end
-  
-  describe "#waitingexpedited!" do 
+
+  describe "#waitingexpedited!" do
     it "enqueues a Motions::WaitingexpededToFailed and Motions::WaitingexpeditedToWaitingobjection job" do
       motion = Factory(:motion)
 

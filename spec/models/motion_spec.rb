@@ -44,7 +44,7 @@ describe Motion do
           4.times{  Factory.create(:yes_vote, :motion => @motion)}
         end
 
-        it "knows that the requirement for passage hasn't been met" do 
+        it "knows that the requirement for passage hasn't been met" do
            @motion.should_not be_has_met_requirement
         end
       end
@@ -54,7 +54,7 @@ describe Motion do
           3.times{  Factory.create(:yes_vote, :motion => @motion)}
         end
 
-        it "knows that the requirement for passage hasn't been met" do 
+        it "knows that the requirement for passage hasn't been met" do
            @motion.should_not be_has_met_requirement
         end
       end
@@ -76,7 +76,57 @@ describe Motion do
           @motion.second(@member)
         end.should change { @motion.seconds.count }
       end
+    end
+  end
 
+  describe 'conflicts_with_member?' do
+    before :all do
+      @conflict = Factory(:conflict)
+      @member = Factory.create(:member)
+    end
+
+    describe "when a member has a conflict unrelated to this motion" do
+      it "knows that it doesn't conflict with the member" do
+        @member.conflicts << @conflict
+        @motion.should_not be_conflicts_with_member(@member)
+      end
+    end
+
+    describe "when a motion has conflict unrelated to this member" do
+      it "knows that it doesn't conflict with the member" do
+        @motion.conflicts << @conflict
+        @member.conflicts.clear
+        @motion.should_not be_conflicts_with_member(@member)
+      end
+    end
+
+    describe "when a motion and a member share the same conflict" do
+      it "knows that it conflicts with the member" do
+        @motion.conflicts << @conflict
+        @member.conflicts << @conflict
+        @motion.should be_conflicts_with_member(@member)
+      end
+    end
+  end
+
+  describe "vote" do
+    it "creates a new vote with the given member and value" do
+      @member = Factory.create(:active_membership).member
+      @motion.vote(@member, true)
+      Event.votes.last.member.should == @member
+      Event.votes.last.value.should == true
+    end
+
+    it "changes it's state to passed if the required number of votes is reached" do
+      @motion.stub(:required_votes => 3)
+      3.times { @motion.vote(Factory.create(:active_membership).member, true) }
+      @motion.should be_passed
+    end
+
+    it "doesn't change it's state to passed if the required number of votes isn't reached" do
+      @motion.stub(:required_votes => 3)
+      2.times { @motion.vote(Factory.create(:active_membership).member, true) }
+      @motion.should_not be_passed
     end
   end
 end
