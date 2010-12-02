@@ -1,0 +1,23 @@
+%header
+  %h1= t("admin.members.titles.index")
+  %nav
+    %ul
+      %li= link_to t("admin.members.actions.add_new_member"), new_admin_member_path
+
+- if flash[:notice].present? || flash[:alert].present?
+  %p.notice{:class => ('alert' if flash[:alert])}
+    = flash[:notice] || flash[:alert]
+
+%section#main
+  %table.members
+    %tr.headings
+      %th= t("admin.members.headings.name")
+      %th= t("admin.members.headings.email")
+      %th.actions= t("admin.members.headings.actions")
+    - @members.each do |member|
+      %tr.member[member]{:class => cycle("", "alt")}
+        %td= member.name
+        %td= member.email
+        %td
+          %ul
+            %li= link_to t("admin.members.actions.edit_member"), [:edit, :admin, member]
