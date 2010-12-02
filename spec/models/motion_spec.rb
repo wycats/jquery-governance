@@ -76,7 +76,36 @@ describe Motion do
           @motion.second(@member)
         end.should change { @motion.seconds.count }
       end
+    end
+  end
 
+  describe 'conflicts_with_member?' do
+    before :all do
+      @conflict = Factory(:conflict)
+      @member = Factory.create(:member)
+    end
+
+    describe "when a member has a conflict unrelated to this motion" do
+      it "knows that it doesn't conflict with the member" do
+        @member.conflicts << @conflict
+        @motion.should_not be_conflicts_with_member(@member)
+      end
+    end
+
+    describe "when a motion has conflict unrelated to this member" do
+      it "knows that it doesn't conflict with the member" do
+        @motion.conflicts << @conflict
+        @member.conflicts.clear
+        @motion.should_not be_conflicts_with_member(@member)
+      end
+    end
+
+    describe "when a motion and a member share the same conflict" do
+      it "knows that it conflicts with the member" do
+        @motion.conflicts << @conflict
+        @member.conflicts << @conflict
+        @motion.should be_conflicts_with_member(@member)
+      end
     end
   end
 end

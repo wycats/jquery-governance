@@ -1,4 +1,6 @@
 class Motion < ActiveRecord::Base
+  include Voting
+  
   validates_inclusion_of :state, :in =>
     %w(waitingsecond waitingexpedited waitingobjection
        objected voting passed failed approved).push(nil)
@@ -8,26 +10,27 @@ class Motion < ActiveRecord::Base
   has_many    :motion_conflicts
   has_many    :conflicts, :through => :motion_conflicts
 
-  # @return [ActiveRecord::Relation] All of the votes cast on this motion
-  def votes
-    events.votes
-  end
 
-  # @return [ActiveRecord::Relation] All of the seconds cast in support of this motion
-  def seconds
-    events.seconds
-  end
+  # # @return [ActiveRecord::Relation] All of the votes cast on this motion
+  # def votes
+  #   events.votes
+  # end
 
-  # @return [Fixnum] Count of current yea votes
-  def yeas
-    votes.yeas.count
-  end
-  alias :ayes :yeas
+  # # @return [ActiveRecord::Relation] All of the seconds cast in support of this motion
+  # def seconds
+  #   events.seconds
+  # end
 
-  # @return [Fixnum] Count of current nay votes
-  def nays
-    votes.nays.count
-  end
+  # # @return [Fixnum] Count of current yea votes
+  # def yeas
+  #   votes.yeas.count
+  # end
+  # alias :ayes :yeas
+
+  # # @return [Fixnum] Count of current nay votes
+  # def nays
+  #   votes.nays.count
+  # end
 
   # @return [Fixnum] The number of votes required to pass this Motion
   def required_votes
@@ -48,7 +51,7 @@ class Motion < ActiveRecord::Base
   # Checks to see if a member has a conflict on a motion
   #   @param [Member] member The member who is voting on this motion
   #   @return [true, false] Whether or not member has a conflict
-  def conflicted_member?(member)
+  def conflicts_with_member?(member)
     motion_conflicts = conflicts
     member_conflicts = member.conflicts
     (member_conflicts & motion_conflicts).size > 0
@@ -61,11 +64,11 @@ class Motion < ActiveRecord::Base
   def permit?(action, member)
     case action
     when :vote
-      member.membership_active? && voting? && votes.find_by_member_id(id).nil? && !conflicted_member?(member)
+      member.membership_active? && voting? && !member.has_voted_on?(self) && !conflicts_with_member?(member)
     when :see
       member.membership_active? || publicly_visible?
     when :second
-      member.membership_active? && member != self.member && !publicly_visible? && seconds.find_by_member_id(member.id).nil?
+      member.membership_active? && member != self.member && !publicly_visible? && !member.has_seconded?(self) 
     end
   end
 
