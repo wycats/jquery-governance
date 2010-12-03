@@ -23,10 +23,10 @@ class MotionEventsController < ApplicationController
   def new
     @motion = Motion.find(params[:motion_id])
 
-    if @motion
-      @event  = @motion.events.new  :event_type => params[:event_type],
+    @event  = if @motion
+                @motion.events.new  :event_type => params[:event_type],
                                     :member_id  => current_member.id
-    end
+              end
   end
 
   # Create a new Event
