@@ -31,6 +31,23 @@ describe Motion do
       motion.reload.should be_waitingobjection
     end
 
+    it "post 24 hours and with more than two seconds moves the motion to waitingobjection state" do
+      motion = Factory.create(:motion)
+
+      3.times do
+        Factory.create(:second, :motion => motion)
+      end
+
+      motion.waitingexpedited!
+
+      Resque.size("waitingexpedited_to_waitingobjection").should == 0
+      Resque::Scheduler.handle_delayed_items(24.hours.from_now.to_i)
+      Resque.size("waitingexpedited_to_waitingobjection").should == 1
+
+      @worker.process
+      motion.reload.should be_waitingobjection
+    end
+
     it "post 48 hours moves the motion to failed state" do
       motion = Factory(:motion)
 

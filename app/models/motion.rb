@@ -127,7 +127,7 @@ class Motion < ActiveRecord::Base
     # enqueue a job for 24 hours
     #
     # - if in the waitingexpedited state and there are 2
-    #   seconds, go into the waitingobjection state
+    #   or more seconds, go into the waitingobjection state
     # - otherwise, do nothing
     #
     # enqueue a job for 48 hours
