@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'sqlite3-ruby', :require  => 'sqlite3'
+gem 'arel',         :git      => "https://github.com/rails/arel.git"
 gem 'rails',        :git      => "https://github.com/rails/rails.git"
 gem 'rack-cache',   :git      => "https://github.com/rtomayko/rack-cache.git"
 gem 'rack',         :git      => "https://github.com/rack/rack.git"
