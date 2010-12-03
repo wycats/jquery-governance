@@ -1,18 +1,19 @@
 desc "Sets up the application for development"
-task :setup => ["setup:bundle", "setup:copy_default_files"]
+task :setup =>  [
+                  "setup:bundle", # Bundler, keep this first
+                  "doc:app",      # YARD docs
+                  "setup:intro"   # tl;dr, keep this last
+                ]
 
 namespace :setup do
-
   desc "Installs required gems"
   task :bundle do
     system %{bundle}
   end
 
-  desc "Copies needed files into place (.rvmrc)"
-  task :copy_default_files do
-    if File.exists?(".rvmrc.example") && !File.exists?(".rvmrc")
-      cp ".rvmrc.example", ".rvmrc"
-    end
+  desc "Hello, my name is ________"
+  task :intro do
+    puts "To get started: review the README and doc/README_FOR_APP files, as well as the generated YARD docs."
+    puts "  -- The YARD docs for this project can be viewed at doc/index.html --"
   end
-
 end
