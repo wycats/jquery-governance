@@ -22,8 +22,10 @@ class MotionEventsController < ApplicationController
   #   @option params [String] :event_type The type of event to be created
   def new
     @motion = Motion.find(params[:motion_id])
-    @event  = @motion.events.new  :event_type => params[:event_type], 
-                                  :member_id  => current_member.id
+    if @motion
+      @event  = @motion.events.new  :event_type => params[:event_type],
+                                    :member_id  => current_member.id
+    end
   end
 
   # Create a new Event
