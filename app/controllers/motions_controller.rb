@@ -3,7 +3,15 @@ class MotionsController < ApplicationController
   before_filter :authenticate_member!
 
   def index
-    @motions = Motion.all
+    @motions = Motion.paginate :page => params[:page],
+      :order => 'created_at DESC',
+      :conditions => "state NOT IN ('passed', 'failed', 'approved')"
+  end
+  
+  def closed
+    @motions = Motion.paginate :page => params[:page],
+      :order => 'updated_at DESC',
+      :conditions => "state IN ('passed', 'failed', 'approved')"
   end
 
   def new

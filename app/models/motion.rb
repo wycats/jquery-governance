@@ -1,6 +1,8 @@
 class Motion < ActiveRecord::Base
   include Voting
 
+  self.per_page = 10
+  
   validates_inclusion_of :state, :in =>
     %w(waitingsecond waitingexpedited waitingobjection
        objected voting passed failed approved).push(nil)

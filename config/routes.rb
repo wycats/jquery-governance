@@ -11,6 +11,9 @@ JqueryVoting::Application.routes.draw do
 
   resources :motions do
     resources :events, :controller => :motion_events
+    collection do
+      get :closed
+    end
   end
 
   root :to => "welcome#index"
