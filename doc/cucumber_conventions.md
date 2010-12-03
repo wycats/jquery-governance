@@ -1,11 +1,9 @@
 Cucumber Conventions
 ====================
 
-I think it's about time we agree on some conventions for the Cucumber features.
-It's already becoming a bit of a mess, and we've barely even gotten started yet.
-This is my (David Trasbo) personal suggestions. Yehuda has the final call here,
-but I think he'll agree with most of the following - at least that some
-conventions are needed.
+I (David Trasbo) wrote the following conventions because I saw a need for
+preventing the features becoming a huge mess. After getting positive feedback
+from the team (including Yehuda) this is now our official Cucumber conventions.
 
 The intent of the following is not to pick on anyone. I just think it's
 important to keep things consistent and clean in order to move the project
@@ -70,23 +68,23 @@ action. What actions do I have to take in order to satisfy the `Then` steps?
     When I do something
     Then I *should* see "something"
 
-Don't Hardcode CSS Selectors & URLs
------------------------------------
+Don't Hardcode Low-Level Details
+--------------------------------
 
-Please don't put CSS selectors and URLs directly in the feature files. For two
-reasons:
+Please don't put low-level details, including CSS selectors, URLs, and input
+names (e.g. 'member[name]'), directly in the feature files. For two reasons:
 
 First of all because features are supposed to provide a high-level view of how
 the app works. The fact that members happen to be listed in a table with a class
 of `members` is not high-level - it's a nitty-gritty, low-level, implementation
-detail. Same goes for URLs.
+detail. Same goes for URLs and input names.
 
-The other reason is that both selectors and URLs (and other low-level details)
-are subject to change. It shouldn't be necessary to change the high-level
-documentation of the app because someone fixed a spelling error in a CSS class
-name, for example.
+The other reason is that selectors, URLs, and input names (and other low-level
+details) are all subject to change. It shouldn't be necessary to change the
+high-level documentation of the app because someone fixed a spelling error in a
+CSS class name, for example.
 
-Calling Step Definitions From Within Step Defitions
+Calling Step Definitions from Within Step Defitions
 ---------------------------------------------------
 
 That is perfectly cool; in fact I encourage you all to do that. With one
