@@ -9,7 +9,9 @@ JqueryVoting::Application.routes.draw do
     get "sign_out", :to => "devise/sessions#destroy"
   end
 
-  resources :motions
+  resources :motions do
+    resources :events, :controller => :motion_events
+  end
 
   root :to => "welcome#index"
 end
