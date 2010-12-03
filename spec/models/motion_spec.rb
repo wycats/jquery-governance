@@ -66,6 +66,15 @@ describe Motion do
       end
     end
 
+    describe "vote" do
+      it "creates a new vote with the given member and value" do
+        @member = Factory.create(:active_membership).member
+        @motion.vote(@member, true)
+        Event.votes.last.member.should eql @member
+        Event.votes.last.value.should be_true
+      end
+    end
+
     describe 'second(member)' do
       before do
         @member = Factory.create(:member)
@@ -80,7 +89,7 @@ describe Motion do
   end
 
   describe 'conflicts_with_member?' do
-    before :all do
+    before :each do
       @conflict = Factory(:conflict)
       @member = Factory.create(:member)
     end
@@ -109,12 +118,45 @@ describe Motion do
     end
   end
 
-  describe "vote" do
-    it "creates a new vote with the given member and value" do
-      @member = Factory.create(:active_membership).member
-      @motion.vote(@member, true)
-      Event.votes.last.member.should == @member
-      Event.votes.last.value.should == true
+  describe "assert_state" do
+    it "knows that when the motion is waiting for seconds and there is 1 second that it should continue to wait for another second" do
+      @motion.state = "waitingsecond"
+      Factory(:second, :motion => @motion)
+      @motion.should be_waitingsecond
+    end
+
+    it "knows that when the motion is waiting for seconds and there are 2 seconds that it should now be waiting for objections" do
+      @motion.state = "waitingsecond"
+      2.times{Factory(:second, :motion => @motion)}
+      @motion.should be_waitingobjection
+    end
+
+    it "knows that when the motion is waiting for expedition and there are less seconds than required, then it should continue to wait for expedition" do
+      @motion.state = "waitingexpedited"
+      @motion.stub(:seconds_for_expedition).and_return(2)
+      Factory(:second, :motion => @motion)
+      @motion.should be_waitingexpedited
+    end
+
+    it "knows that when the motion is waiting for expedition and there are at least as many seconds as required, then it should be open for voting" do
+      @motion.state = "waitingexpedited"
+      @motion.stub(:seconds_for_expedition).and_return(2)
+      2.times{Factory(:second, :motion => @motion)}
+      @motion.should be_voting
+    end
+
+    it "knows that when the motion is open for voting and it has yet to get votes required for passing, it should remain open for voting" do
+      @motion.state = "voting"
+      @motion.stub(:has_met_requirement?).and_return(false)
+      @motion.assert_state
+      @motion.should be_voting
+    end
+
+    it "knows that when the motion is open for voting and it has gotten the votes required for passing, it should now be passed" do
+      @motion.state = "voting"
+      @motion.stub(:has_met_requirement?).and_return(true)
+      @motion.assert_state
+      @motion.should be_passed
     end
   end
 end

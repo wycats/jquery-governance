@@ -19,19 +19,6 @@ describe Event do
       vote.value.should         be_false
     end
 
-    it "should pass a vote only when yea requirements are met" do
-      motion  = Factory.create(:motion)
-
-      8.times { Factory.create(:active_membership) }
-      4.times { Factory.create(:yes_vote, :motion => motion) }
-
-      motion.passed?.should be_false
-
-      Factory.create(:yes_vote, :motion => motion)
-
-      motion.passed?.should be_true
-    end
-
     it "should not allow a member to vote twice on a motion" do
       motion  = Factory.create(:motion)
       member  = Factory.create(:active_membership).member

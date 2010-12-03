@@ -79,14 +79,6 @@ class Motion < ActiveRecord::Base
   # @TODO @return
   def second(member)
     seconds.create(:member => member)
-
-    second_count = seconds.count
-
-    if state == "waitingsecond" && second_count >= 2
-      waitingobjection!
-    elsif state == "waitingexpedited" && second_count >= seconds_for_expedition
-      voting!
-    end
   end
 
   # Cast a Member's Vote
@@ -217,6 +209,19 @@ class Motion < ActiveRecord::Base
 
   def failed?
     state == "failed"
+  end
+
+  # Sets the motion to passed, if it has met all requirements
+  def assert_state
+    second_count = seconds.count
+
+    if state == "waitingsecond" && second_count >= 2
+      waitingobjection!
+    elsif state == "waitingexpedited" && second_count >= seconds_for_expedition
+      voting!
+    elsif state == "voting" && has_met_requirement?
+      passed!
+    end
   end
 
 private
