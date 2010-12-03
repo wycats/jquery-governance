@@ -13,7 +13,11 @@ class Event < ActiveRecord::Base
                             }
 
   validate    :motion_creator_cannot_second,  :if => :is_second?
-  after_save  :assert_motion_state,           :if => :is_vote?
+
+  after_save  do
+    motion.assert_state
+  end
+
 
   scope :votes,   where(:event_type  => "vote")
   scope :seconds, where(:event_type  => "second")
@@ -44,10 +48,5 @@ private
   # Will error if the motion creator attempts to second their motion
   def motion_creator_cannot_second
     errors.add(:member, "Member cannot second a motion that they created.") if motion.member == member
-  end
-
-  # Sets the motion to passed, if it has met all requirements
-  def assert_motion_state
-    motion.passed! if motion.has_met_requirement?
   end
 end
