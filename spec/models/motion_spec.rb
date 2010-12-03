@@ -80,7 +80,7 @@ describe Motion do
   end
 
   describe 'conflicts_with_member?' do
-    before :all do
+    before do
       @conflict = Factory(:conflict)
       @member = Factory.create(:member)
     end
