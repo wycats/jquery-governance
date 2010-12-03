@@ -2,7 +2,13 @@ require 'spec_helper'
 
 describe MotionEventsController do
 
-  describe "#new with member logged in" do
+  describe "#index" do
+  end # describe #index
+
+  describe "#show" do
+  end # describe #show
+
+  describe "#new" do
     before(:each) do
       @member = Factory(:member)
       controller.stub!(:authenticate_member!).and_return true
@@ -23,5 +29,8 @@ describe MotionEventsController do
       response.should render_template('motion_events/new')
       assigns(:event).should be_a_new_record
     end
-  end # describe "#new with member logged in"
+  end # describe #new
+
+  describe "#create" do
+  end # describe #create
 end
