@@ -34,13 +34,13 @@ Given /^with "([^"]*)" "(.*)"$/ do |property, value|
   @current.update_attribute(to_m(property), value)
 end
 
-Given /^with (\d+) (second|abstain|vote|yes vote|no vote)s?$/ do |several, event_type|
+Given /^the motion has (\d+) (second|abstain|vote|yes vote|no vote)s?$/ do |several, event_type|
   several.to_i.times do
     Factory.create(factory_name(event_type), :motion => @motion)
   end
 end
 
-Given /^waiting "([^"]*)"$/ do |waiting_on|
+Given /^(?:it's) waiting "([^"]*)"$/ do |waiting_on|
   @motion.send(:"waiting#{waiting_on}!")
 end
 

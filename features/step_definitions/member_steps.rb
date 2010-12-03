@@ -20,6 +20,11 @@ Given "I am an active member with the email \"$email\"" do |email|
   Factory.create(:active_membership, :member => @member)
 end
 
+Given "I am an expired member with the email \"$email\"" do |email|
+  @member = Factory.create(:member, :email => email)
+  Factory.create(:expired_membership, :member => @member)
+end
+
 # Allows setting name and email
 Given "I am an active member named \"$name\"" do |name|
   @member = Factory.create(:member, :name => name)
