@@ -57,7 +57,7 @@ be declarative and describe a prerequisite. For example:
 
     Not good:
     Given I sign in
-    
+
     Good:
     Given I am signed in
 
