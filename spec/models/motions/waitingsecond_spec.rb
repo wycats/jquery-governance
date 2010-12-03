@@ -9,15 +9,11 @@ describe Motion do
     it "enqueues a Motions::WaitingsecondToFailed job" do
       motion = Factory(:motion)
 
-      motion.waitingsecond!
-
       Resque.delayed_queue_schedule_size.should == 1
     end
 
     it "post 48 hours moves the motion to failed state" do
       motion = Factory(:motion)
-      
-      motion.waitingsecond!
 
       Resque.size("waitingsecond_to_failed").should == 0
       Resque::Scheduler.handle_delayed_items(48.hours.from_now.to_i)

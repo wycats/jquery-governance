@@ -98,68 +98,218 @@ describe Member do
       before do
         @member = Factory.create(:active_membership).member
         @motion = Factory.create(:motion)
+        5.times { Factory.create(:active_membership, :member => Factory.create(:member)) }
       end
 
-      it "can see a motion that hasn't been brought to a vote" do
+      it "can see a motion that is in the 'waiting second' state" do
+        @motion.waitingsecond!
         @member.can?(:see, @motion).should be_true
       end
 
-      it "can see a motion that has been brought to a vote" do
+      it "can see a motion that is in the 'waiting expedited' state" do
+        @motion.waitingexpedited!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can see a motion that is in the 'waiting objection' state" do
+        @motion.waitingobjection!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can see a motion that is in the 'objected' state" do
+        @motion.objected!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can see a motion that is in the 'voting' state" do
         @motion.voting!
         @member.can?(:see, @motion).should be_true
       end
 
-      it "can see a motion that has been closed" do
+      it "can see a motion that is in the 'passed' state" do
+        @motion.passed!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can see a motion that is in the 'approved' state" do
         @motion.approved!
         @member.can?(:see, @motion).should be_true
       end
 
-      it "can vote a motion that has been brought to a vote" do
+      it "can see a motion that is in the 'failed' state" do
+        @motion.failed!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can't vote a motion that is in the 'waiting second' state" do
+        @motion.waitingsecond!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion that is in the 'waiting expedited' state" do
+        @motion.waitingexpedited!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion that is in the 'waiting objection' state" do
+        @motion.waitingobjection!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion that is in the 'objected' state" do
+        @motion.objected!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can vote a motion that is in the 'voting' state" do
         @motion.voting!
         @member.can?(:vote, @motion).should be_true
       end
 
-      it "can't vote more than once on a motion that has been brought to vote" do
-        #Since we are not testing Motion#vote, stub it out, to just return a yes vote  
+      it "can't vote more than once on a motion that is in the 'voting' state" do
+        # Since we are not testing Motion#vote, stub it out, to just return a yes vote
         @motion.stub(:vote).and_return(Factory(:yes_vote, :motion => @motion, :member => @member))
-        
         @motion.voting!
         @motion.vote(@member, true)
+        @motion.voting?.should be_true
         @member.can?(:vote, @motion).should be_false
       end
 
-      context "voting and conflicts of interest" do
-        it "can't vote on a motion if he has conflicts of interest associated with this motion" do
-          @motion.stub(:conflicts_with_member).with(@member).and_return(true)
-          @member.can?(:vote, @motion).should be_false
-        end
-      end
-
-      it "can't vote a motion that hasn't been brought to a vote" do
+      it "can't vote a motion in the 'voting' state if there's a conflict of interest" do
+        @motion.stub(:conflicts_with_member?).with(@member).and_return(true)
+        @motion.voting!
         @member.can?(:vote, @motion).should be_false
       end
 
-      it "can second other user's motion that hasn't been brought to vote" do
+      it "can vote a motion that is in the 'passed' state" do
+        @motion.passed!
+        @member.can?(:vote, @motion).should be_true
+      end
+
+      it "can't vote more than once on a motion that is in the 'passed' state" do
+        # Since we are not testing Motion#vote, stub it out, to just return a yes vote
+        @motion.stub(:vote).and_return(Factory(:yes_vote, :motion => @motion, :member => @member))
+        @motion.passed!
+        @motion.vote(@member, true)
+        @motion.passed?.should be_true
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion in the 'passed' state if there's a conflict of interest" do
+        @motion.stub(:conflicts_with_member?).with(@member).and_return(true)
+        @motion.passed!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion in the 'approved' state" do
+        @motion.approved!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion in the 'failed' state" do
+        @motion.failed!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can second a motion from another active member that is in the 'waiting second' state" do
+        @motion.waitingsecond!
         @member.can?(:second, @motion).should be_true
       end
 
-      it "can't second other user's motion that hasn't been brought to vote more than once" do
+      it "can't second more than once on a motion from another active member that is in the 'waiting second' state" do
+        @motion.waitingsecond!
         @motion.second(@member)
+        @motion.waitingsecond?.should be_true
         @member.can?(:second, @motion).should be_false
       end
 
-      it "can't second other user's motion that has been brought to vote" do
+      it "can't second a motion in the 'waiting second' state if it was made by him or her" do
+        @motion = Factory.create(:motion, :member => @member)
+        @motion.waitingsecond!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can second a motion from another active member that is in the 'waiting expedited' state" do
+        @motion.waitingexpedited!
+        @member.can?(:second, @motion).should be_true
+      end
+
+      it "can't second more than once on a motion from another active member that is in the 'waiting expedited' state" do
+        @motion.waitingexpedited!
+        @motion.second(@member)
+        @motion.waitingexpedited?.should be_true
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion in the 'waiting expedited' state if it was made by him or her" do
+        @motion = Factory.create(:motion, :member => @member)
+        @motion.waitingexpedited!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion from another active member that is in the 'waiting objection' state" do
+        @motion.waitingobjection!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion in the 'waiting objection' state made by him or her" do
+        @motion = Factory.create(:motion, :member => @member)
+        @motion.waitingobjection!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion from another active member that is in the 'objected' state" do
+        @motion.objected!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion in the 'objected' state made by him or her" do
+        @motion = Factory.create(:motion, :member => @member)
+        @motion.objected!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion from another active member that is in the 'voting' state" do
         @motion.voting!
         @member.can?(:second, @motion).should be_false
       end
 
-      it "can't second other user's motion that has been closed" do
+      it "can't second a motion in the 'voting' state made by him or her" do
+        @motion = Factory.create(:motion, :member => @member)
+        @motion.voting!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion from another active member that is in the 'passed' state" do
+        @motion.passed!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion in the 'passed' state made by him or her" do
+        @motion = Factory.create(:motion, :member => @member)
+        @motion.passed!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion from another active member that is in the 'approved' state" do
+        @motion.approved!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion in the 'approved' state made by him or her" do
+        @motion = Factory.create(:motion, :member => @member)
+        @motion.approved!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion from another active member that is in the 'failed' state" do
         @motion.failed!
         @member.can?(:second, @motion).should be_false
       end
 
-      it "can't second his o her own motion" do
+      it "can't second a motion in the 'failed' state made by him or her" do
         @motion = Factory.create(:motion, :member => @member)
+        @motion.failed!
         @member.can?(:second, @motion).should be_false
       end
     end
@@ -170,39 +320,122 @@ describe Member do
         @motion = Factory.create(:motion)
       end
 
-      it "can't see a motion that hasn't been brought to a vote" do
+      it "can't see a motion that is in the 'waiting second' state" do
+        @motion.waitingsecond!
         @member.can?(:see, @motion).should be_false
       end
 
-      it "can see a motion that has been brought to a vote" do
+      it "can't see a motion that is in the 'waiting expedited' state" do
+        @motion.waitingexpedited!
+        @member.can?(:see, @motion).should be_false
+      end
+
+      it "can't see a motion that is in the 'waiting objection' state" do
+        @motion.waitingobjection!
+        @member.can?(:see, @motion).should be_false
+      end
+
+      it "can't see a motion that is in the 'objected' state" do
+        @motion.objected!
+        @member.can?(:see, @motion).should be_false
+      end
+
+      it "can see a motion that is in the 'voting' state" do
         @motion.voting!
         @member.can?(:see, @motion).should be_true
       end
 
-      it "can see a motion that has been closed" do
+      it "can see a motion that is in the 'passed' state" do
+        @motion.passed!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can see a motion that is in the 'approved' state" do
         @motion.approved!
         @member.can?(:see, @motion).should be_true
       end
 
-      it "can't vote a motion that has been brought to a vote" do
+      it "can see a motion that is in the 'failed' state" do
+        @motion.failed!
+        @member.can?(:see, @motion).should be_true
+      end
+
+      it "can't vote a motion that is in the 'waiting second' state" do
+        @motion.waitingsecond!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion that is in the 'waiting expedited' state" do
+        @motion.waitingexpedited!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion that is in the 'waiting objection' state" do
+        @motion.waitingobjection!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion that is in the 'objected' state" do
+        @motion.objected!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion that is in the 'voting' state" do
         @motion.voting!
         @member.can?(:vote, @motion).should be_false
       end
 
-      it "can't vote a motion that hasn't been brought to a vote" do
+      it "can't vote a motion that is in the 'passed' state" do
+        @motion.passed!
         @member.can?(:vote, @motion).should be_false
       end
 
-      it "can't second other user's motion that hasn't been brought to vote" do
+      it "can't vote a motion that is in the 'approved' state" do
+        @motion.approved!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't vote a motion that is in the 'failed' state" do
+        @motion.failed!
+        @member.can?(:vote, @motion).should be_false
+      end
+
+      it "can't second a motion from an active member that is in the 'waiting second' state" do
+        @motion.waitingsecond!
         @member.can?(:second, @motion).should be_false
       end
 
-      it "can't second other user's motion that has been brought to vote" do
+      it "can't second a motion from an active member that is in the 'waiting expedited' state" do
+        @motion.waitingexpedited!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion from an active member that is in the 'waiting objection' state" do
+        @motion.waitingobjection!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion from an active member that is in the 'objected' state" do
+        @motion.objected!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion from an active member that is in the 'voting' state" do
         @motion.voting!
         @member.can?(:second, @motion).should be_false
       end
 
-      it "can't second other user's motion that has been closed" do
+      it "can't second a motion from an active member that is in the 'passed' state" do
+        @motion.passed!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion from an active member that is in the 'approved' state" do
+        @motion.approved!
+        @member.can?(:second, @motion).should be_false
+      end
+
+      it "can't second a motion from an active member that is in the 'failed' state" do
         @motion.failed!
         @member.can?(:second, @motion).should be_false
       end
@@ -217,7 +450,7 @@ describe Member do
       @member.has_voted_on?(@motion).should be_true
     end
   end
-  
+
   describe "has_voted_on?" do
     it "knows if the member has voted on the specified motion" do
       @motion = Factory(:motion)

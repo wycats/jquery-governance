@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/dtrasbo/cucumber.git
-  revision: a017fb9
+  revision: a017fb9532940d3fef14e1381278c51aa22040d1
   specs:
     cucumber (0.9.4)
       builder (~> 3.0.0)
@@ -18,13 +18,13 @@ GIT
 
 GIT
   remote: https://github.com/rack/rack.git
-  revision: 85ca454
+  revision: 85ca454e6143a3081d90e4546ccad602a4c3ad2e
   specs:
     rack (1.2.1)
 
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 542cb5c
+  revision: 7148b933c4865a5140187d7ed792fd6df9b860a4
   specs:
     actionmailer (3.1.0.beta)
       actionpack (= 3.1.0.beta)
@@ -69,14 +69,14 @@ GIT
 
 GIT
   remote: https://github.com/rtomayko/rack-cache.git
-  revision: 428ac19
+  revision: 428ac19e727fdff3ace20d1727129c689d65ff4d
   specs:
     rack-cache (0.5.3)
       rack (>= 0.4)
 
 GIT
   remote: https://github.com/thoughtbot/factory_girl_rails.git
-  revision: cc88e08
+  revision: cc88e0841773cbe07da7ddcf38058d75456c071e
   tag: v1.1.beta1
   specs:
     factory_girl_rails (1.1.beta1)
@@ -161,16 +161,19 @@ GEM
       redis (>= 2.0.1)
       resque (>= 1.8.0)
       rufus-scheduler
-    rspec (2.1.0)
-      rspec-core (~> 2.1.0)
-      rspec-expectations (~> 2.1.0)
-      rspec-mocks (~> 2.1.0)
-    rspec-core (2.1.0)
-    rspec-expectations (2.1.0)
+    rspec (2.2.0)
+      rspec-core (~> 2.2)
+      rspec-expectations (~> 2.2)
+      rspec-mocks (~> 2.2)
+    rspec-core (2.2.1)
+    rspec-expectations (2.2.0)
       diff-lcs (~> 1.1.2)
-    rspec-mocks (2.1.0)
-    rspec-rails (2.1.0)
-      rspec (~> 2.1.0)
+    rspec-mocks (2.2.0)
+    rspec-rails (2.2.1)
+      actionpack (~> 3.0)
+      activesupport (~> 3.0)
+      railties (~> 3.0)
+      rspec (~> 2.2.0)
     ruby-debug-base19 (0.11.24)
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)

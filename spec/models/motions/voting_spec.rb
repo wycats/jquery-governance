@@ -19,7 +19,7 @@ describe Motion do
 
     it "fails after 48 hours if not enough for pass" do
 
-      @motion.voting!  
+      @motion.voting!
 
       Resque.size("voting").should == 0
       Resque::Scheduler.handle_delayed_items(48.hours.from_now.to_i)
@@ -31,7 +31,7 @@ describe Motion do
 
     it "does nothing if vote passed prior to 48 hours" do
 
-      @motion.voting!  
+      @motion.voting!
       @motion.passed!
 
       Resque.size("voting").should == 0
@@ -40,6 +40,6 @@ describe Motion do
 
       @worker.process
       @motion.reload.should be_passed
-    end  
+    end
   end
 end
