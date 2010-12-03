@@ -1,2 +1,11 @@
 = flash[:notice] unless flash[:notice].blank?
+%h1 "Current Motions"
 = link_to "New Motion", new_motion_path
+
+%ul
+- for motion in @motions
+  %li
+  = motion.title
+- if @motions.empty?
+  %li
+    There are no motions available to review
