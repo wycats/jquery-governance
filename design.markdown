@@ -8,8 +8,8 @@ A tool to manage voting in accordance with the [jQuery governance tool][governan
 
 1. Any member can create a motion
    a. optional feature: email all members every time a motion has been made
-2. A motion must be seconded by at least two additional members within 24 hours
-3. A motion not seconded within 24 hours is closed
+2. A motion must be seconded by at least two additional members within 48 hours
+3. A motion not seconded within 48 hours is closed
 4. A motion may be objected to within 24 hours
    a. if it is, an additional 24 hours must be waited
 5. A motion may be marked expedited when originally made
