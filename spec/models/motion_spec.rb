@@ -116,17 +116,5 @@ describe Motion do
       Event.votes.last.member.should == @member
       Event.votes.last.value.should == true
     end
-
-    it "changes it's state to passed if the required number of votes is reached" do
-      @motion.stub(:required_votes => 3)
-      3.times { @motion.vote(Factory.create(:active_membership).member, true) }
-      @motion.should be_passed
-    end
-
-    it "doesn't change it's state to passed if the required number of votes isn't reached" do
-      @motion.stub(:required_votes => 3)
-      2.times { @motion.vote(Factory.create(:active_membership).member, true) }
-      @motion.should_not be_passed
-    end
   end
 end
