@@ -1,11 +1,14 @@
 = flash[:notice] unless flash[:notice].blank?
-%h1 "Current Motions"
-= link_to "New Motion", new_motion_path
+.current-motions
+  = link_to "New Motion", new_motion_path, {:class => "quick-tool"}
+  %h1 Current Motions
 
-%ul
-- for motion in @motions
-  %li
-  = motion.title
-- if @motions.empty?
-  %li
-    There are no motions available to review
+  %ul
+    - @motions.each_with_index do |motion, i|
+      %li{ :class => (i % 2).zero? ? 'even' : 'odd' }
+        =link_to "[+]", motion_path(motion), :class => "plus"
+        =link_to "\"#{motion.title}\"", motion_path(motion)
+        %span.meta by Test Username
+        %p= truncate(motion.description)
+    - if @motions.empty?
+      %li There are no motions available to review

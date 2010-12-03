@@ -1,5 +1,5 @@
 Given /^I am an anonymous visitor$/ do
-  visit path_to("the sign out page")  
+  visit path_to("the sign out page")
 end
 
 Given /^a motion exists titled "(.+)"$/ do |name|
