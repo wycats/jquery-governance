@@ -12,6 +12,8 @@ class Motion < ActiveRecord::Base
 
   after_create :initialize_state
 
+  attr_reader :state
+
   # @return [Fixnum] The number of votes required to pass this Motion
   def required_votes
     possible_votes / 2 + 1
@@ -72,6 +74,11 @@ class Motion < ActiveRecord::Base
   ##
   # States
   ##
+
+  def state_name=(state_name)
+    @state = MotionState.for(state_name)
+    write_attribute(:state_name, state_name)
+  end
 
   # @TODO - Description
   def publicly_visible?
