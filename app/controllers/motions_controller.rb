@@ -4,7 +4,11 @@ class MotionsController < ApplicationController
 
   # List Motions
   def index
-    @motions = Motion.all
+    @motions = Motion.open_state.paginate :page => params[:page], :order => "state, created_at DESC", :per_page => 10
+  end
+
+  def closed
+    @motions = Motion.closed_state.paginate :page => params[:page], :order => 'state, updated_at DESC', :per_page => 10
   end
 
   # Start a new Motion
