@@ -1,11 +1,22 @@
 require 'spec_helper'
 
 describe Member do
+  before :all do
+    @member = Factory.create(:active_membership).member
+    @inactive_member = Factory.create(:expired_membership).member
+
+    @renewed_member = Factory.create(:active_membership).member
+    Factory.create(:expired_membership, :member => @renewed_member)
+
+    @expired_member = Factory.create(:expired_membership, :started_at => 2.years.ago, :ended_at => 8.months.ago).member
+    Factory.create(:expired_membership, :member => @expired_member, :started_at => 5.months.ago, :ended_at => 4.days.ago)
+
+    @motion = Factory.create(:motion)
+    @member_motion = Factory.create(:motion, :member => @member)
+  end
+
   describe "active_at?" do
     describe "a currently active member" do
-      before do
-        @member = Factory.create(:active_membership).member
-      end
 
       it "knows that it is active today" do
         @member.should be_active_at(Time.now)
@@ -22,85 +33,68 @@ describe Member do
     end
 
     describe "an inactive member" do
-      before do
-        @member = Factory.create(:active_membership, :ended_at => 2.days.ago).member
-      end
-
       it "knows that it is not active today" do
-        @member.should_not be_active_at(Time.now)
-        @member.should_not be_membership_active
+        @inactive_member.should_not be_active_at(Time.now)
+        @inactive_member.should_not be_membership_active
       end
 
       it "knows it is not active before the start time" do
-        @member.should_not be_active_at(20.days.ago)
+        @inactive_member.should_not be_active_at(20.days.ago)
       end
 
       it "is not active after the end time" do
-        @member.should_not be_active_at(20.days.from_now)
+        @inactive_member.should_not be_active_at(20.days.from_now)
       end
     end
 
     describe "a reactivated member who is active now" do
-      before do
-        Factory.create(:active_membership, :started_at => 2.years.ago, :ended_at => 1.year.ago)
-        @member = Factory.create(:active_membership, :started_at => 2.days.ago).member
-      end
-
       it "knows that it is active today" do
-        @member.should be_active_at(Time.now)
-        @member.should be_active
+        @renewed_member.should be_active_at(Time.now)
+        @renewed_member.should be_active
       end
 
       it "knows it is not active between the two activity times" do
-        @member.should_not be_active_at(1.month.ago)
+        @renewed_member.should_not be_active_at(1.month.ago)
       end
 
       it "knows it is not active before the start time" do
-        @member.should_not be_active_at(3.years.ago)
+        @renewed_member.should_not be_active_at(3.years.ago)
       end
 
       it "knows it is still active in the future" do
-        @member.should be_active_at(20.days.from_now)
+        @renewed_member.should be_active_at(20.days.from_now)
       end
     end
 
     describe "a reactivated member who has been deactivated again" do
-      before do
-        Factory.create(:active_membership, :started_at => 2.years.ago, :ended_at => 1.year.ago)
-        @member = Factory.create(:active_membership, :started_at => 6.months.ago, :ended_at => 3.months.ago).member
+      before :all do
       end
 
       it "knows that it is not active today" do
-        @member.should_not be_active_at(Time.now)
-        @member.should_not be_membership_active
+        @expired_member.should_not be_active_at(Time.now)
+        @expired_member.should_not be_membership_active
       end
 
       it "knows it is active in the second active period" do
-        @member.should be_active_at(4.months.ago)
+        @expired_member.should be_active_at(4.months.ago)
       end
 
       it "knows it is not active between the two activity times" do
-        @member.should_not be_active_at(7.months.ago)
+        @expired_member.should_not be_active_at(7.months.ago)
       end
 
       it "knows it is not active before the start time" do
-        @member.should_not be_active_at(3.years.ago)
+        @expired_member.should_not be_active_at(3.years.ago)
       end
 
       it "knows it is not active in the future" do
-        @member.should_not be_active_at(1.month.from_now)
+        @expired_member.should_not be_active_at(1.month.from_now)
       end
     end
   end
 
   describe "can?" do
     describe "an active member" do
-      before do
-        @member = Factory.create(:active_membership).member
-        @motion = Factory.create(:motion)
-        5.times { Factory.create(:active_membership, :member => Factory.create(:member)) }
-      end
-
       it "can see a motion that is in the 'waiting second' state" do
         @motion.waitingsecond!
         @member.can?(:see, @motion).should be_true
@@ -163,6 +157,7 @@ describe Member do
 
       it "can vote a motion that is in the 'voting' state" do
         @motion.voting!
+        debugger
         @member.can?(:vote, @motion).should be_true
       end
 
@@ -224,9 +219,8 @@ describe Member do
       end
 
       it "can't second a motion in the 'waiting second' state if it was made by him or her" do
-        @motion = Factory.create(:motion, :member => @member)
-        @motion.waitingsecond!
-        @member.can?(:second, @motion).should be_false
+        @member_motion.waitingsecond!
+        @member.can?(:second, @member_motion).should be_false
       end
 
       it "can second a motion from another active member that is in the 'waiting expedited' state" do
@@ -242,9 +236,8 @@ describe Member do
       end
 
       it "can't second a motion in the 'waiting expedited' state if it was made by him or her" do
-        @motion = Factory.create(:motion, :member => @member)
-        @motion.waitingexpedited!
-        @member.can?(:second, @motion).should be_false
+        @member_motion.waitingexpedited!
+        @member.can?(:second, @member_motion).should be_false
       end
 
       it "can't second a motion from another active member that is in the 'waiting objection' state" do
@@ -253,9 +246,8 @@ describe Member do
       end
 
       it "can't second a motion in the 'waiting objection' state made by him or her" do
-        @motion = Factory.create(:motion, :member => @member)
-        @motion.waitingobjection!
-        @member.can?(:second, @motion).should be_false
+        @member_motion.waitingobjection!
+        @member.can?(:second, @member_motion).should be_false
       end
 
       it "can't second a motion from another active member that is in the 'objected' state" do
@@ -264,9 +256,8 @@ describe Member do
       end
 
       it "can't second a motion in the 'objected' state made by him or her" do
-        @motion = Factory.create(:motion, :member => @member)
-        @motion.objected!
-        @member.can?(:second, @motion).should be_false
+        @member_motion.objected!
+        @member.can?(:second, @member_motion).should be_false
       end
 
       it "can't second a motion from another active member that is in the 'voting' state" do
@@ -275,9 +266,8 @@ describe Member do
       end
 
       it "can't second a motion in the 'voting' state made by him or her" do
-        @motion = Factory.create(:motion, :member => @member)
-        @motion.voting!
-        @member.can?(:second, @motion).should be_false
+        @member_motion.voting!
+        @member.can?(:second, @member_motion).should be_false
       end
 
       it "can't second a motion from another active member that is in the 'passed' state" do
@@ -286,9 +276,8 @@ describe Member do
       end
 
       it "can't second a motion in the 'passed' state made by him or her" do
-        @motion = Factory.create(:motion, :member => @member)
-        @motion.passed!
-        @member.can?(:second, @motion).should be_false
+        @member_motion.passed!
+        @member.can?(:second, @member_motion).should be_false
       end
 
       it "can't second a motion from another active member that is in the 'approved' state" do
@@ -297,9 +286,8 @@ describe Member do
       end
 
       it "can't second a motion in the 'approved' state made by him or her" do
-        @motion = Factory.create(:motion, :member => @member)
-        @motion.approved!
-        @member.can?(:second, @motion).should be_false
+        @member_motion.approved!
+        @member.can?(:second, @member_motion).should be_false
       end
 
       it "can't second a motion from another active member that is in the 'failed' state" do
@@ -308,154 +296,144 @@ describe Member do
       end
 
       it "can't second a motion in the 'failed' state made by him or her" do
-        @motion = Factory.create(:motion, :member => @member)
-        @motion.failed!
-        @member.can?(:second, @motion).should be_false
+        @member_motion.failed!
+        @member.can?(:second, @member_motion).should be_false
       end
     end
 
     describe "an inactive member" do
-      before do
-        @member = Factory.create(:expired_membership).member
-        @motion = Factory.create(:motion)
-      end
-
       it "can't see a motion that is in the 'waiting second' state" do
         @motion.waitingsecond!
-        @member.can?(:see, @motion).should be_false
+        @inactive_member.can?(:see, @motion).should be_false
       end
 
       it "can't see a motion that is in the 'waiting expedited' state" do
         @motion.waitingexpedited!
-        @member.can?(:see, @motion).should be_false
+        @inactive_member.can?(:see, @motion).should be_false
       end
 
       it "can't see a motion that is in the 'waiting objection' state" do
         @motion.waitingobjection!
-        @member.can?(:see, @motion).should be_false
+        @inactive_member.can?(:see, @motion).should be_false
       end
 
       it "can't see a motion that is in the 'objected' state" do
         @motion.objected!
-        @member.can?(:see, @motion).should be_false
+        @inactive_member.can?(:see, @motion).should be_false
       end
 
       it "can see a motion that is in the 'voting' state" do
         @motion.voting!
-        @member.can?(:see, @motion).should be_true
+        @inactive_member.can?(:see, @motion).should be_true
       end
 
       it "can see a motion that is in the 'passed' state" do
         @motion.passed!
-        @member.can?(:see, @motion).should be_true
+        @inactive_member.can?(:see, @motion).should be_true
       end
 
       it "can see a motion that is in the 'approved' state" do
         @motion.approved!
-        @member.can?(:see, @motion).should be_true
+        @inactive_member.can?(:see, @motion).should be_true
       end
 
       it "can see a motion that is in the 'failed' state" do
         @motion.failed!
-        @member.can?(:see, @motion).should be_true
+        @inactive_member.can?(:see, @motion).should be_true
       end
 
       it "can't vote a motion that is in the 'waiting second' state" do
         @motion.waitingsecond!
-        @member.can?(:vote, @motion).should be_false
+        @inactive_member.can?(:vote, @motion).should be_false
       end
 
       it "can't vote a motion that is in the 'waiting expedited' state" do
         @motion.waitingexpedited!
-        @member.can?(:vote, @motion).should be_false
+        @inactive_member.can?(:vote, @motion).should be_false
       end
 
       it "can't vote a motion that is in the 'waiting objection' state" do
         @motion.waitingobjection!
-        @member.can?(:vote, @motion).should be_false
+        @inactive_member.can?(:vote, @motion).should be_false
       end
 
       it "can't vote a motion that is in the 'objected' state" do
         @motion.objected!
-        @member.can?(:vote, @motion).should be_false
+        @inactive_member.can?(:vote, @motion).should be_false
       end
 
       it "can't vote a motion that is in the 'voting' state" do
         @motion.voting!
-        @member.can?(:vote, @motion).should be_false
+        @inactive_member.can?(:vote, @motion).should be_false
       end
 
       it "can't vote a motion that is in the 'passed' state" do
         @motion.passed!
-        @member.can?(:vote, @motion).should be_false
+        @inactive_member.can?(:vote, @motion).should be_false
       end
 
       it "can't vote a motion that is in the 'approved' state" do
         @motion.approved!
-        @member.can?(:vote, @motion).should be_false
+        @inactive_member.can?(:vote, @motion).should be_false
       end
 
       it "can't vote a motion that is in the 'failed' state" do
         @motion.failed!
-        @member.can?(:vote, @motion).should be_false
+        @inactive_member.can?(:vote, @motion).should be_false
       end
 
       it "can't second a motion from an active member that is in the 'waiting second' state" do
         @motion.waitingsecond!
-        @member.can?(:second, @motion).should be_false
+        @inactive_member.can?(:second, @motion).should be_false
       end
 
       it "can't second a motion from an active member that is in the 'waiting expedited' state" do
         @motion.waitingexpedited!
-        @member.can?(:second, @motion).should be_false
+        @inactive_member.can?(:second, @motion).should be_false
       end
 
       it "can't second a motion from an active member that is in the 'waiting objection' state" do
         @motion.waitingobjection!
-        @member.can?(:second, @motion).should be_false
+        @inactive_member.can?(:second, @motion).should be_false
       end
 
       it "can't second a motion from an active member that is in the 'objected' state" do
         @motion.objected!
-        @member.can?(:second, @motion).should be_false
+        @inactive_member.can?(:second, @motion).should be_false
       end
 
       it "can't second a motion from an active member that is in the 'voting' state" do
         @motion.voting!
-        @member.can?(:second, @motion).should be_false
+        @inactive_member.can?(:second, @motion).should be_false
       end
 
       it "can't second a motion from an active member that is in the 'passed' state" do
         @motion.passed!
-        @member.can?(:second, @motion).should be_false
+        @inactive_member.can?(:second, @motion).should be_false
       end
 
       it "can't second a motion from an active member that is in the 'approved' state" do
         @motion.approved!
-        @member.can?(:second, @motion).should be_false
+        @inactive_member.can?(:second, @motion).should be_false
       end
 
       it "can't second a motion from an active member that is in the 'failed' state" do
         @motion.failed!
-        @member.can?(:second, @motion).should be_false
+        @inactive_member.can?(:second, @motion).should be_false
       end
     end
   end
 
   describe "has_voted_on?" do
     it "knows if the member has voted on the specified motion" do
-      @motion = Factory(:motion)
-      @member = Factory(:member)
-      Factory(:yes_vote, :motion => @motion, :member => @member)
+      @yes_vote = Factory.create(:yes_vote, :member => @member, :motion => @motion)
       @member.has_voted_on?(@motion).should be_true
     end
   end
 
   describe "has_voted_on?" do
     it "knows if the member has voted on the specified motion" do
-      @motion = Factory(:motion)
-      @member = Factory(:member)
-      Factory(:second, :motion => @motion, :member => @member)
+      @second = Factory.create(:second, :member => @member, :motion => @motion)
       @member.has_seconded?(@motion).should be_true
     end
   end
