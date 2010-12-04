@@ -114,11 +114,6 @@ class Motion < ActiveRecord::Base
   end
 
   # @TODO - Description
-  def publicly_visible?
-    voting? || passed? || approved? || failed?
-  end
-
-  # @TODO - Description
   def waitingsecond!
     # enqueue a job for 48 hours
     #
