@@ -13,26 +13,40 @@ module MotionState
   end
 
   class WaitingSecond
+    def assert_state(motion)
+      motion.waitingobjection! if motion.seconds.count >= 2
+    end
   end
 
   class WaitingExpedited
+    def assert_state(motion)
+      motion.voting! if motion.seconds.count >= motion.seconds_for_expedition
+    end
   end
 
   class WaitingObjection
+    def assert_state(*) end
   end
 
   class Objected
+    def assert_state(*) end
   end
 
   class Voting
+    def assert_state(motion)
+      motion.passed! if motion.has_met_requirement?
+    end
   end
 
   class Passed
+    def assert_state(*) end
   end
 
   class Failed
+    def assert_state(*) end
   end
 
   class Approved
+    def assert_state(*) end
   end
 end

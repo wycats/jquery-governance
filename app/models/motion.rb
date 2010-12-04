@@ -28,6 +28,8 @@ class Motion < ActiveRecord::Base
 
   after_create :initialize_state
 
+  after_initialize :assign_state
+
   attr_reader :state
 
   # @return [Fixnum] The number of votes required to pass this Motion
@@ -114,8 +116,8 @@ class Motion < ActiveRecord::Base
   ##
 
   def state_name=(state_name)
-    @state = MotionState.for(state_name)
     write_attribute(:state_name, state_name)
+    assign_state
   end
 
   # @TODO - Description
@@ -241,11 +243,7 @@ class Motion < ActiveRecord::Base
 
   # Sets the motion to passed, if it has met all requirements
   def assert_state
-    case state_name
-    when "waitingsecond"    then  waitingobjection! if self.can_wait_objection?
-    when "waitingexpedited" then  voting!           if self.can_expedite?
-    when "voting"           then  passed!           if self.has_met_requirement?
-    end
+    state.assert_state(self)
   end
 
   def formatted_state(format = :human)
@@ -265,5 +263,9 @@ private
 
   def initialize_state
     waitingsecond! unless state_name
+  end
+
+  def assign_state
+    @state = MotionState.for(state_name)
   end
 end
