@@ -13,6 +13,11 @@ Given /^I am signed in as an inactive member$/ do
   Given "I am signed in as \"#{inactive_member.email}\""
 end
 
+Given /^I am signed in as an active member called "([^"]*)"$/ do |name|
+  active_member.update_attribute(:name, name)
+  Given "I am signed in as \"#{active_member.email}\""
+end
+
 Given /^there is an active member with email "([^"]*)" and password "([^"]*)"$/ do |email, password|
   member = Factory(:member, email: email, password: password)
   Factory(:active_membership, member: member)
@@ -20,17 +25,6 @@ end
 
 Given "a member exists named \"$name\" with email \"$email\"" do |name, email|
   Factory.create(:member, :email => email, :name => name)
-  Factory.create(:active_membership, :member => @member)
-end
-
-Given "I am an active member with the email \"$email\"" do |email|
-  @member = Factory.create(:member, :email => email)
-  Factory.create(:active_membership, :member => @member)
-end
-
-# Allows setting name and email
-Given "I am an active member named \"$name\"" do |name|
-  @member = Factory.create(:member, :name => name)
   Factory.create(:active_membership, :member => @member)
 end
 
