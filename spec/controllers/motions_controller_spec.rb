@@ -8,6 +8,10 @@ describe MotionsController do
       controller.stub!(:authenticate_member!).and_return true
       controller.stub!(:current_member).and_return @member
     end
+    after(:each) do
+      Motion.delete_all
+      Member.delete_all
+    end
 
     it "should set memeber id" do
       get :new, :member_id => @member.id
@@ -35,6 +39,10 @@ describe MotionsController do
       controller.stub!(:authenticate_member!).and_return true
       controller.stub!(:current_member).and_return @member
     end
+    after(:each) do
+      Motion.delete_all
+      Member.delete_all
+    end
 
     it "should render the index tempate with 10 motions" do
       get :index
@@ -44,6 +52,26 @@ describe MotionsController do
     it "should render the second page with 1 motion" do
       get :index, :page => 2
       response.should render_template('motions/index')
+      assigns(:motions).count.should == 1
+    end
+  end
+
+  describe "#closed with member logged in" do
+    before(:each) do
+      @motion = Factory.create(:motion)
+      @motion.passed!
+      @member = Factory(:member)
+      controller.stub!(:authenticate_member!).and_return true
+      controller.stub!(:current_member).and_return @member
+    end
+    after(:each) do
+      Motion.delete_all
+      Member.delete_all
+    end
+
+    it "should render the page page with 1 motion" do
+      get :closed
+      response.should render_template('motions/closed')
       assigns(:motions).count.should == 1
     end
   end

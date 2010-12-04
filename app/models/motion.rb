@@ -1,11 +1,23 @@
 class Motion < ActiveRecord::Base
   include Voting
 
-  self.per_page = 10
-  
-  validates_inclusion_of :state, :in =>
-    %w(waitingsecond waitingexpedited waitingobjection
-       objected voting passed failed approved).push(nil)
+  MOTION_STATES = %w(waitingsecond waitingexpedited waitingobjection
+                     objected voting passed failed approved)
+  HUMAN_READABLE_MOTION_STATES = {
+    'waitingsecond'     => 'Waiting For Seconds',
+    'waitingexpedited'  => 'Waiting To Be Expedited',
+    'waitingobjection'  => 'Waiting For Objections',
+    'objected'          => 'Objected',
+    'voting'            => 'In Voting',
+    'passed'            => 'Passed',
+    'failed'            => 'Failed',
+    'approved'          => 'Approved'
+  }
+
+  scope :open_state, where("state NOT IN ('passed', 'failed', 'approved')")
+  scope :closed_state, where("state IN ('passed', 'failed', 'approved')")
+
+  validates_inclusion_of :state, :in => MOTION_STATES.push(nil)
 
   belongs_to  :member
   has_many    :events
