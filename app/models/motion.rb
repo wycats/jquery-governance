@@ -1,7 +1,7 @@
 class Motion < ActiveRecord::Base
   include Voting
 
-  validates_inclusion_of :state, :in =>
+  validates_inclusion_of :state_name, :in =>
     %w(waitingsecond waitingexpedited waitingobjection
        objected voting passed failed approved).push(nil)
 
@@ -84,13 +84,13 @@ class Motion < ActiveRecord::Base
     #
     # - if in the waitingsecond state, go into the failed state
     # - otherwise, do nothing
-    if update_attributes(:state => "waitingsecond")
+    if update_attributes(:state_name => "waitingsecond")
       Resque.enqueue_at(48.hours.from_now, Motions::WaitingsecondToFailed, self.id)
     end
   end
 
   def waitingsecond?
-    state == "waitingsecond"
+    state_name == "waitingsecond"
   end
 
   # @TODO - Description
@@ -105,14 +105,14 @@ class Motion < ActiveRecord::Base
     #
     # - if in the waitingexpedited state, go to the failed state
     # - otherwise, do nothing
-    if update_attributes(:state => "waitingexpedited")
+    if update_attributes(:state_name => "waitingexpedited")
       Resque.enqueue_at(24.hours.from_now, Motions::WaitingexpeditedToWaitingobjection, self.id)
       Resque.enqueue_at(48.hours.from_now, Motions::WaitingexpeditedToFailed, self.id)
     end
   end
 
   def waitingexpedited?
-    state == "waitingexpedited"
+    state_name == "waitingexpedited"
   end
 
   # @TODO - Description
@@ -122,23 +122,23 @@ class Motion < ActiveRecord::Base
     # - if in the waitingobjection state, go to the voting state
     # - if in the objected state, enqueue a job for 24 hours
     #   - at that time, go to the voting state
-    if update_attributes(:state => "waitingobjection")
+    if update_attributes(:state_name => "waitingobjection")
       Resque.enqueue_at(24.hours.from_now, Motions::WaitingobjectionToVoting, self.id)
     end
   end
 
   # @TODO - Description
   def waitingobjection?
-    state == "waitingobjection"
+    state_name == "waitingobjection"
   end
 
   # @TODO - Description
   def objected!
-    update_attributes(:state => "objected")
+    update_attributes(:state_name => "objected")
   end
 
   def objected?
-    state == "objected"
+    state_name == "objected"
   end
 
   # @TODO - Description
@@ -148,22 +148,22 @@ class Motion < ActiveRecord::Base
     # - if a majority of active members did not vote yes,
     #   go to the failed state
     # - otherwise, go into the closed state
-    if update_attributes(:state => "voting")
+    if update_attributes(:state_name => "voting")
       Resque.enqueue_at(48.hours.from_now, Motions::Voting, self.id)
     end
   end
 
   def voting?
-    state == "voting"
+    state_name == "voting"
   end
 
   # @TODO - Description
   def passed!
-    update_attributes(:state => "passed")
+    update_attributes(:state_name => "passed")
   end
 
   def passed?
-    state == "passed"
+    state_name == "passed"
   end
 
   # @TODO - Description
@@ -171,34 +171,34 @@ class Motion < ActiveRecord::Base
     votes = yeas + nays
 
     update_attributes(
-      :state => "approved",
+      :state_name => "approved",
       :abstains => possible_votes - votes
     )
   end
 
   # @TODO - Description
   def approved?
-    state == "approved"
+    state_name == "approved"
   end
 
   # @TODO - Description
   def failed!
-    update_attributes(:state => "failed")
+    update_attributes(:state_name => "failed")
   end
 
   def failed?
-    state == "failed"
+    state_name == "failed"
   end
 
   # Sets the motion to passed, if it has met all requirements
   def assert_state
     second_count = seconds.count
 
-    if state == "waitingsecond" && second_count >= 2
+    if state_name == "waitingsecond" && second_count >= 2
       waitingobjection!
-    elsif state == "waitingexpedited" && second_count >= seconds_for_expedition
+    elsif state_name == "waitingexpedited" && second_count >= seconds_for_expedition
       voting!
-    elsif state == "voting" && has_met_requirement?
+    elsif state_name == "voting" && has_met_requirement?
       passed!
     end
   end
@@ -211,6 +211,6 @@ private
   end
 
   def initialize_state
-    waitingsecond! unless state
+    waitingsecond! unless state_name
   end
 end

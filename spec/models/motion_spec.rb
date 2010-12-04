@@ -120,40 +120,40 @@ describe Motion do
 
   describe "assert_state" do
     it "knows that when the motion is waiting for seconds and there is 1 second that it should continue to wait for another second" do
-      @motion.state = "waitingsecond"
+      @motion.waitingsecond!
       Factory(:second, :motion => @motion)
       @motion.should be_waitingsecond
     end
 
     it "knows that when the motion is waiting for seconds and there are 2 seconds that it should now be waiting for objections" do
-      @motion.state = "waitingsecond"
+      @motion.waitingsecond!
       2.times{Factory(:second, :motion => @motion)}
       @motion.should be_waitingobjection
     end
 
     it "knows that when the motion is waiting for expedition and there are less seconds than required, then it should continue to wait for expedition" do
-      @motion.state = "waitingexpedited"
+      @motion.waitingexpedited!
       @motion.stub(:seconds_for_expedition).and_return(2)
       Factory(:second, :motion => @motion)
       @motion.should be_waitingexpedited
     end
 
     it "knows that when the motion is waiting for expedition and there are at least as many seconds as required, then it should be open for voting" do
-      @motion.state = "waitingexpedited"
+      @motion.waitingexpedited!
       @motion.stub(:seconds_for_expedition).and_return(2)
       2.times{Factory(:second, :motion => @motion)}
       @motion.should be_voting
     end
 
     it "knows that when the motion is open for voting and it has yet to get votes required for passing, it should remain open for voting" do
-      @motion.state = "voting"
+      @motion.voting!
       @motion.stub(:has_met_requirement?).and_return(false)
       @motion.assert_state
       @motion.should be_voting
     end
 
     it "knows that when the motion is open for voting and it has gotten the votes required for passing, it should now be passed" do
-      @motion.state = "voting"
+      @motion.voting!
       @motion.stub(:has_met_requirement?).and_return(true)
       @motion.assert_state
       @motion.should be_passed
