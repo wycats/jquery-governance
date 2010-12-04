@@ -16,10 +16,10 @@ class Motion < ActiveRecord::Base
     'approved'          => 'Approved'
   }
 
-  scope :open_state,    where(:state => OPEN_STATES)
-  scope :closed_state,  where(:state => CLOSED_STATES)
+  scope :open_state,    where(:state_name => OPEN_STATES)
+  scope :closed_state,  where(:state_name => CLOSED_STATES)
 
-  validates_inclusion_of :state, :in => MOTION_STATES.push(nil)
+  validates_inclusion_of :state_name, :in => MOTION_STATES.push(nil)
 
   belongs_to  :member
   has_many    :events
@@ -56,13 +56,13 @@ class Motion < ActiveRecord::Base
 
   # @return [true, false] Motion state is open for voting or not
   def open?
-    OPEN_STATES.include? self.state
+    OPEN_STATES.include? self.state_name
   end
   alias :is_open? :open?
 
   # @return [true, false] Motion state is closed for voting or not
   def closed?
-    CLOSED_STATES.include? self.state
+    CLOSED_STATES.include? self.state_name
   end
   alias :is_cloed? :closed?
 
@@ -122,13 +122,13 @@ class Motion < ActiveRecord::Base
     #
     # - if in the waitingsecond state, go into the failed state
     # - otherwise, do nothing
-    if update_attributes(:state => "waitingsecond")
+    if update_attributes(:state_name => "waitingsecond")
       Resque.enqueue_at(48.hours.from_now, Motions::WaitingsecondToFailed, self.id)
     end
   end
 
   def waitingsecond?
-    state == "waitingsecond"
+    state_name == "waitingsecond"
   end
 
   # @TODO - Description
@@ -143,14 +143,14 @@ class Motion < ActiveRecord::Base
     #
     # - if in the waitingexpedited state, go to the failed state
     # - otherwise, do nothing
-    if update_attributes(:state => "waitingexpedited")
+    if update_attributes(:state_name => "waitingexpedited")
       Resque.enqueue_at(24.hours.from_now, Motions::WaitingexpeditedToWaitingobjection, self.id)
       Resque.enqueue_at(48.hours.from_now, Motions::WaitingexpeditedToFailed, self.id)
     end
   end
 
   def waitingexpedited?
-    state == "waitingexpedited"
+    state_name == "waitingexpedited"
   end
 
   # @TODO - Description
@@ -160,23 +160,23 @@ class Motion < ActiveRecord::Base
     # - if in the waitingobjection state, go to the voting state
     # - if in the objected state, enqueue a job for 24 hours
     #   - at that time, go to the voting state
-    if update_attributes(:state => "waitingobjection")
+    if update_attributes(:state_name => "waitingobjection")
       Resque.enqueue_at(24.hours.from_now, Motions::WaitingobjectionToVoting, self.id)
     end
   end
 
   # @TODO - Description
   def waitingobjection?
-    state == "waitingobjection"
+    state_name == "waitingobjection"
   end
 
   # @TODO - Description
   def objected!
-    update_attributes(:state => "objected")
+    update_attributes(:state_name => "objected")
   end
 
   def objected?
-    state == "objected"
+    state_name == "objected"
   end
 
   # @TODO - Description
@@ -186,13 +186,13 @@ class Motion < ActiveRecord::Base
     # - if a majority of active members did not vote yes,
     #   go to the failed state
     # - otherwise, go into the closed state
-    if update_attributes(:state => "voting")
+    if update_attributes(:state_name => "voting")
       Resque.enqueue_at(48.hours.from_now, Motions::Voting, self.id)
     end
   end
 
   def voting?
-    state == "voting"
+    state_name == "voting"
   end
 
   def seconding?
@@ -201,11 +201,11 @@ class Motion < ActiveRecord::Base
 
   # @TODO - Description
   def passed!
-    update_attributes(:state => "passed")
+    update_attributes(:state_name => "passed")
   end
 
   def passed?
-    state == "passed"
+    state_name == "passed"
   end
 
   # @TODO - Description
@@ -213,28 +213,28 @@ class Motion < ActiveRecord::Base
     votes = yeas + nays
 
     update_attributes(
-      :state => "approved",
+      :state_name => "approved",
       :abstains => possible_votes - votes
     )
   end
 
   # @TODO - Description
   def approved?
-    state == "approved"
+    state_name == "approved"
   end
 
   # @TODO - Description
   def failed!
-    update_attributes(:state => "failed")
+    update_attributes(:state_name => "failed")
   end
 
   def failed?
-    state == "failed"
+    state_name == "failed"
   end
 
   # Sets the motion to passed, if it has met all requirements
   def assert_state
-    case state
+    case state_name
     when "waitingsecond"    then  waitingobjection! if self.can_wait_objection?
     when "waitingexpedited" then  voting!           if self.can_expedite?
     when "voting"           then  passed!           if self.has_met_requirement?
@@ -243,9 +243,9 @@ class Motion < ActiveRecord::Base
 
   def formatted_state(format = :human)
     if format == :humand
-      HUMAN_READABLE_MOTION_STATES[attributes["state"]]
+      HUMAN_READABLE_MOTION_STATES[attributes["state_name"]]
     else
-      state
+      state_name
     end
   end
 
@@ -257,6 +257,6 @@ private
   end
 
   def initialize_state
-    waitingsecond! unless state
+    waitingsecond! unless state_name
   end
 end

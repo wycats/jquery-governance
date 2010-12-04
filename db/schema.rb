@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(:version => 20101205193144) do
   create_table "motions", :force => true do |t|
     t.integer  "member_id"
     t.string   "title"
-    t.string   "state"
+    t.string   "state_name"
     t.text     "description"
     t.text     "rationale"
     t.integer  "abstains"
