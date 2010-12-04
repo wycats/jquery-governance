@@ -1,63 +1,59 @@
 require 'spec_helper'
 
 describe Event do
-  describe "Voting" do
-    it "should create a Voting Event" do
-      vote = Factory.create(:vote)
-      vote.event_type.should == "vote"
+
+  before :all do
+      @motion  = Factory.create(:motion)
+      @member  = Factory.create(:active_membership).member
+      @vote = Factory.create(:yes_vote)
+      @second_vote = Factory.create(:yes_vote)
+      @no_vote = Factory.create(:no_vote)
+      @second = Factory.create(:second)
+      @second_second = Factory.create(:second)
+  end
+
+  it "should know which of the events are votes" do
+    Event.votes.should == ([@vote, @second_vote, @no_vote])
+  end
+
+  it "should know which of the events are seconds" do
+    Event.seconds.should == ([@second, @second_second])
+  end
+
+  it "knows how many of the votes are yeas" do
+    Event.votes.yeas.count.should == 2
+  end
+
+  it "knows how many of the votes are nays" do
+    Event.votes.nays.count.should == 1
+  end
+
+  describe "a vote" do
+    it "knows that it is a vote" do
+      @vote.should be_vote
     end
 
-    it "should create a yes vote" do
-      vote = Factory.create(:yes_vote)
-      vote.event_type.should == "vote"
-      vote.value.should         be_true
-    end
-
-    it "should create a no vote" do
-      vote = Factory.create(:no_vote)
-      vote.event_type.should == "vote"
-      vote.value.should         be_false
-    end
-
-    it "should not allow a member to vote twice on a motion" do
-      motion  = Factory.create(:motion)
-      member  = Factory.create(:active_membership).member
-
-      Factory.create(:yes_vote, :motion => motion, :member => member).should be_an_instance_of(Event)
-      lambda { Factory.create(:yes_vote, :motion => motion, :member => member) }.should raise_exception
-    end
-
-    it "should scope votes for a motion" do
-      motion  = Factory.create(:motion)
-      4.times { Factory.create(:yes_vote, :motion => motion) }
-
-      motion.events.votes.count.should == 4
+    it "knows that it isn't a second" do
+      @vote.should_not be_second
     end
   end
 
-  describe "Seconding" do
-    it "should create a Seconding Event" do
-      seconding = Factory.create(:second)
-      seconding.event_type.should == "second"
+  describe "a second" do
+    it "knows that it is a second" do
+      @second.should be_second
     end
 
-    it "should not allow a member to author a motion and also second that motion" do
-      member  = Factory.create(:active_membership).member
-      motion  = Factory.create(:motion, :member => member)
-
-      lambda { Factory.create(:second, :motion => motion, :member => member) }.should raise_exception
+    it "knows that it isn't a vote" do
+      @second.should_not be_vote
     end
+  end
 
-    it "should bring motion to a vote if expedition threshold has been met" do
-      pending "Needs a callback in the Event model."
-    end
+  it "should not allow a member to vote twice on a motion" do
+    Factory.create(:yes_vote, :motion => @motion, :member => @member).should raise_exception
+  end
 
-    it "should scope seconds for a motion" do
-      motion  = Factory.create(:motion)
-      4.times { Factory.create(:second, :motion => motion) }
-
-      motion.events.seconds.count.should == 4
-    end
+  it "should prevent a motion's author from seconding that motion" do
+    Factory.create(:second, :motion => @motion, :member => @member).should raise_exception
   end
 
   describe "Objecting" do
