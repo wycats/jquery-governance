@@ -5,9 +5,8 @@ Feature: Public browses votes
 
   Background:
     Given I am an anonymous visitor
-    And a motion exists titled "jQuery should rule the JS World"
+    And a motion titled "jQuery should rule the JS World" exists
 
   Scenario: A visitor sees the a list of votes
     Given I am on the homepage
-    Then I should see "Current Motions"
-    And I should see "jQuery should rule the JS World"
+    Then I should see "jQuery should rule the JS World"
