@@ -1,4 +1,4 @@
-= render :partial => 'motion_list', :locals => { :motions => @motions }
+= render :partial => 'motion_list', :locals => { :motions => @motions, :motions_grouped_by_state => @motions.group_by(&:state) }
 = link_to 'See closed motions', closed_motions_path
 
 / TODO: show/hide motions you've already acted on

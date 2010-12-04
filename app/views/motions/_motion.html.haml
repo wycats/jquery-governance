@@ -1,0 +1,5 @@
+%div.motion{ :id => "motion_#{motion.id}", :class => "motion_state_#{motion.state}" }
+  %div{ :class => 'motion_title' }= motion.title
+  %div Motion created #{motion.created_at} by #{motion.member.name}
+  %div{ :class => 'motion_description' }= motion.description
+  %div{ :class => 'motion_rationale' } Rationale: #{motion.rationale}
