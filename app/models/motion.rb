@@ -46,14 +46,7 @@ class Motion < ActiveRecord::Base
   #   @param [Member] member The member who wants to perfrom the action
   #   @return [true, false] Whether or not it permits the member to perform the action, respectively
   def permit?(action, member)
-    case action
-    when :vote
-      member.membership_active? && (voting? || passed?) && !member.has_voted_on?(self) && !conflicts_with_member?(member)
-    when :see
-      member.membership_active? || publicly_visible?
-    when :second
-      member.membership_active? && member != self.member && !publicly_visible? && !waitingobjection? && !objected? && !member.has_seconded?(self)
-    end
+    state.permit?(self, action, member)
   end
 
   # Second this Motion
