@@ -1,16 +1,8 @@
-Given /^I am signed in as "([^"]*)"$/ do |email|
+Given /^I am signed in as an active member$/ do
   visit new_member_session_path
-  fill_in 'Email', with: email
+  fill_in 'Email', with: active_member.email
   fill_in 'Password', with: 'secret'
   click_button 'Sign in'
-end
-
-Given /^I am signed in as an active member$/ do
-  Given "I am signed in as \"#{active_member.email}\""
-end
-
-Given /^I am signed in as an inactive member$/ do
-  Given "I am signed in as \"#{inactive_member.email}\""
 end
 
 Given /^there is an active member with email "([^"]*)" and password "([^"]*)"$/ do |email, password|
