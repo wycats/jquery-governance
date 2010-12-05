@@ -4,7 +4,7 @@ describe MotionState do
   describe "for" do
     # TODO transform this specs into anothers that you can actually read
     %w{WaitingSecond Discussing
-      Voting Failed Approved}.each do |class_name|
+      Voting Closed}.each do |class_name|
       state = class_name.downcase
       it "returns a #{class_name} instance for '#{state}'" do
         MotionState.for(state).should be_instance_of "MotionState::#{class_name}".constantize

@@ -3,7 +3,7 @@ class Motion < ActiveRecord::Base
 
   validates_inclusion_of :state_name, :in =>
     %w(waitingsecond discussing
-       voting passed failed approved).push(nil)
+       voting passed closed).push(nil)
 
   belongs_to  :member
   has_many    :events
@@ -169,23 +169,23 @@ class Motion < ActiveRecord::Base
     votes = yeas + nays
 
     update_attributes(
-      :state_name => "approved",
+      :state_name => "closed",
       :abstains => possible_votes - votes
     )
   end
 
   # @TODO - Description
   def approved?
-    state_name == "approved"
+    state_name == "closed" && has_met_requirement?
   end
 
   # @TODO - Description
   def failed!
-    update_attributes(:state_name => "failed")
+    update_attributes(:state_name => "closed")
   end
 
   def failed?
-    state_name == "failed"
+    state_name == "closed" && !has_met_requirement?
   end
 
   # Sets the motion to passed, if it has met all requirements
