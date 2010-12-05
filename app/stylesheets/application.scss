@@ -12,6 +12,8 @@ $input_width: 200px;
 $textarea_width: 320px;
 $header_green: #407A27;
 
+$header_green: #407A27;
+
 /* @end */
 
 /* @group Global */
@@ -226,9 +228,13 @@ body {
   color: $header_green;
   font-size: 3em;
 }
+<<<<<<< HEAD
 #motion p.meta {
   font-size: 1.25em !important;
   color: #80a080;
 }
+=======
+
+>>>>>>> add simple 'motionsapp/stylesheets/application.scssshow' action and steps approved by Joseph and Yehuda
 /* @end */
 
