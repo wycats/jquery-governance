@@ -157,11 +157,11 @@ class Motion < ActiveRecord::Base
 
   # @TODO - Description
   def passed!
-    update_attributes(:state_name => "passed")
+    update_attributes(:state_name => "voting")
   end
 
   def passed?
-    state_name == "passed"
+    state_name == "voting" && has_met_requirement?
   end
 
   # @TODO - Description

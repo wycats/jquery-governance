@@ -4,7 +4,6 @@ module MotionState
     when 'waitingsecond' then WaitingSecond.new
     when 'discussing' then Discussing.new
     when 'voting' then Voting.new
-    when 'passed' then Passed.new
     when 'failed' then Failed.new
     when 'approved' then Approved.new
     end
@@ -69,13 +68,10 @@ module MotionState
     end
 
     def scheduled_update(motion, time_elapsed)
-      motion.failed! if !motion.passed? && time_elapsed >= 24.hours
+      if time_elapsed >= 24.hours
+        motion.passed? ? motion.approved! : motion.failed!
+      end
     end
-  end
-
-  class Passed < Voting
-    def assert_state(*) end
-    def scheduled_update(*) end
   end
 
   class Closed
