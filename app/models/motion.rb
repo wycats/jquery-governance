@@ -81,7 +81,7 @@ class Motion < ActiveRecord::Base
   #   @param [Member] member The member who wants to perfrom the action
   #   @return [true, false] Whether or not it permits the member to perform the action, respectively
   def permit?(action, member)
-    state.permit?(self, action, member)
+    state.permit?(action, member)
   end
 
   # Second this Motion
@@ -196,7 +196,7 @@ class Motion < ActiveRecord::Base
 
   # Sets the motion to passed, if it has met all requirements
   def update_state()
-    state.update(self)
+    state.update
   end
 
   def formatted_state(format = :human)
@@ -208,7 +208,7 @@ class Motion < ActiveRecord::Base
   end
 
   def scheduled_update(time_elapsed)
-    state.scheduled_update(self, time_elapsed)
+    state.scheduled_update(time_elapsed)
   end
 
 private
@@ -219,10 +219,12 @@ private
   end
 
   def schedule_updates
-    state.schedule_updates(self) if state_name_changed?
+    state.schedule_updates if state_name_changed?
   end
 
   def assign_state
-    @state = MotionState.for(state_name)
+    if MOTION_STATES.include?(state_name)
+      @state = MotionState.const_get(state_name.capitalize).new(self)
+    end
   end
 end
