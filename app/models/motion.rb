@@ -1,16 +1,14 @@
 class Motion < ActiveRecord::Base
   include Voting
 
-  validates_inclusion_of :state_name, :in =>
-    %w(waitingsecond discussing
-       voting closed).push(nil)
+  validates_inclusion_of :state_name, :in => %w(waitingsecond discussing voting closed)
 
   belongs_to  :member
   has_many    :events
   has_many    :motion_conflicts
   has_many    :conflicts, :through => :motion_conflicts
 
-  after_create :initialize_state
+  after_create :schedule_updates
 
   after_initialize :assign_state
 
@@ -200,8 +198,8 @@ private
     ActiveMembership.active_at(Time.now).count
   end
 
-  def initialize_state
-    waitingsecond! unless state_name
+  def schedule_updates
+    state.schedule_updates(self)
   end
 
   def assign_state
