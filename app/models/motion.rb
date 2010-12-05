@@ -120,7 +120,7 @@ class Motion < ActiveRecord::Base
     # - if in the waitingsecond state, go into the failed state
     # - otherwise, do nothing
     if update_attributes(:state_name => "waitingsecond")
-      Resque.enqueue_at(48.hours.from_now, Motions::WaitingsecondToFailed, self.id)
+      ScheduledMotionUpdate.in(48.hours, self)
     end
   end
 
@@ -141,8 +141,8 @@ class Motion < ActiveRecord::Base
     # - if in the waitingexpedited state, go to the failed state
     # - otherwise, do nothing
     if update_attributes(:state_name => "waitingexpedited")
-      Resque.enqueue_at(24.hours.from_now, Motions::WaitingexpeditedToWaitingobjection, self.id)
-      Resque.enqueue_at(48.hours.from_now, Motions::WaitingexpeditedToFailed, self.id)
+      ScheduledMotionUpdate.in(24.hours, self)
+      ScheduledMotionUpdate.in(48.hours, self)
     end
   end
 
@@ -158,7 +158,7 @@ class Motion < ActiveRecord::Base
     # - if in the objected state, enqueue a job for 24 hours
     #   - at that time, go to the voting state
     if update_attributes(:state_name => "waitingobjection")
-      Resque.enqueue_at(24.hours.from_now, Motions::WaitingobjectionToVoting, self.id)
+      ScheduledMotionUpdate.in(24.hours, self)
     end
   end
 
@@ -184,7 +184,7 @@ class Motion < ActiveRecord::Base
     #   go to the failed state
     # - otherwise, go into the closed state
     if update_attributes(:state_name => "voting")
-      Resque.enqueue_at(48.hours.from_now, Motions::Voting, self.id)
+      ScheduledMotionUpdate.in(48.hours, self)
     end
   end
 
@@ -240,6 +240,10 @@ class Motion < ActiveRecord::Base
     else
       state_name
     end
+  end
+
+  def scheduled_update(time_elapsed)
+    state.scheduled_update(self, time_elapsed)
   end
 
 private

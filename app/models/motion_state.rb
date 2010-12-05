@@ -24,6 +24,10 @@ module MotionState
       when :second then member.membership_active? && member != motion.member && !member.has_seconded?(motion)
       end
     end
+
+    def scheduled_update(motion, time_elapsed)
+      motion.failed! if time_elapsed >= 48.hours
+    end
   end
 
   class WaitingExpedited
@@ -38,6 +42,10 @@ module MotionState
       when :second then member.membership_active? && member != motion.member && !member.has_seconded?(motion)
       end
     end
+
+    def scheduled_update(motion, time_elapsed)
+      motion.failed! if time_elapsed >= 48.hours
+    end
   end
 
   class WaitingObjection
@@ -50,6 +58,10 @@ module MotionState
       when :second then false
       end
     end
+
+    def scheduled_update(motion, time_elapsed)
+      motion.voting! if time_elapsed >= 24.hours
+    end
   end
 
   class Objected
@@ -61,6 +73,10 @@ module MotionState
       when :see then member.membership_active?
       when :second then false
       end
+    end
+
+    def scheduled_update(motion, time_elapsed)
+      motion.voting! if time_elapsed >= 24.hours
     end
   end
 
@@ -75,6 +91,10 @@ module MotionState
       when :see then true
       when :second then false
       end
+    end
+
+    def scheduled_update(motion, time_elapsed)
+      motion.failed! if !motion.passed? && time_elapsed >= 24.hours
     end
   end
 
