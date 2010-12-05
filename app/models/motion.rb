@@ -23,7 +23,7 @@ class Motion < ActiveRecord::Base
   has_many    :motion_conflicts
   has_many    :conflicts, :through => :motion_conflicts
 
-  after_create :schedule_updates
+  after_save :schedule_updates
 
   after_initialize :assign_state
 
@@ -112,7 +112,7 @@ class Motion < ActiveRecord::Base
 
   # @TODO - Description
   def waitingsecond!
-    update_state("waitingsecond")
+    update_attributes(:state_name => "waitingsecond")
   end
 
   def waitingsecond?
@@ -121,8 +121,7 @@ class Motion < ActiveRecord::Base
 
   # @TODO - Description
   def waitingexpedited!
-    self.expedited = true
-    update_state("waitingsecond")
+    update_attributes(:state_name => "waitingsecond", :expedited => true)
   end
 
   def waitingexpedited?
@@ -131,7 +130,7 @@ class Motion < ActiveRecord::Base
 
   # @TODO - Description
   def waitingobjection!
-    update_state("discussing")
+    update_attributes(:state_name => "discussing")
   end
 
   # @TODO - Description
@@ -142,7 +141,7 @@ class Motion < ActiveRecord::Base
   # @TODO - Description
   def objected!
     # NOTE this isn't doing what is was supposed to do anymore
-    update_state("discussing")
+    update_attributes(:state_name => "discussing")
   end
 
   def objected?
@@ -151,7 +150,7 @@ class Motion < ActiveRecord::Base
 
   # @TODO - Description
   def voting!
-    update_state("voting")
+    update_attributes(:state_name => "voting")
   end
 
   def voting?
@@ -196,12 +195,8 @@ class Motion < ActiveRecord::Base
   end
 
   # Sets the motion to passed, if it has met all requirements
-  def update_state(new_state_name=nil)
-    if new_state_name.nil?
-      state.update(self)
-    else
-      state.schedule_updates(self) if update_attributes(:state_name => new_state_name)
-    end
+  def update_state()
+    state.update(self)
   end
 
   def formatted_state(format = :human)
@@ -224,7 +219,7 @@ private
   end
 
   def schedule_updates
-    state.schedule_updates(self)
+    state.schedule_updates(self) if state_name_changed?
   end
 
   def assign_state
