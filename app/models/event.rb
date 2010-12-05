@@ -1,5 +1,9 @@
 class Event < ActiveRecord::Base
   EVENT_TYPES = ["vote", "second"]
+  HUMAN_READABLE_EVENT_TYPES = {
+    'vote' => 'voted',
+    'second' => 'seconded'
+  }
 
   belongs_to  :member
   belongs_to  :motion

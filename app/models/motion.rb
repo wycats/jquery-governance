@@ -251,6 +251,11 @@ class Motion < ActiveRecord::Base
     end
   end
 
+  # Get history for the motion
+  def history(member)
+    member ? self.events : nil
+  end
+
 private
   # @TODO - Description
   def possible_votes
