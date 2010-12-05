@@ -11,6 +11,7 @@ gem 'haml',         '~>3.0.23'
 gem 'haml-rails'
 gem 'will_paginate', '~>3.0.beta'
 
+gem 'rails3_acts_as_paranoid'
 gem 'resque'
 gem 'resque-scheduler', :require => "resque_scheduler"
 
