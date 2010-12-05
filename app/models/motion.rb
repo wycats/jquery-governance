@@ -2,13 +2,11 @@ class Motion < ActiveRecord::Base
   include Voting
 
   CLOSED_STATES = %w(passed failed approved)
-  OPEN_STATES   = %w(waitingsecond waitingobjection objected voting)
+  OPEN_STATES   = %w(waitingsecond discussing voting)
   MOTION_STATES = OPEN_STATES + CLOSED_STATES
 
   HUMAN_READABLE_MOTION_STATES = {
     'waitingsecond'     => 'Waiting For Seconds',
-    'waitingobjection'  => 'Waiting For Objections',
-    'objected'          => 'Objected',
     'voting'            => 'In Voting',
     'passed'            => 'Passed',
     'failed'            => 'Failed',
@@ -155,23 +153,25 @@ class Motion < ActiveRecord::Base
     # - if in the waitingobjection state, go to the voting state
     # - if in the objected state, enqueue a job for 24 hours
     #   - at that time, go to the voting state
-    if update_attributes(:state_name => "waitingobjection")
+    if update_attributes(:state_name => "discussing")
       ScheduledMotionUpdate.in(24.hours, self)
+      ScheduledMotionUpdate.in(48.hours, self)
     end
   end
 
   # @TODO - Description
   def waitingobjection?
-    state_name == "waitingobjection"
+    state_name == "discussing" && !objected?
   end
 
   # @TODO - Description
   def objected!
-    update_attributes(:state_name => "objected")
+    # NOTE this isn't doing what is was supposed to do anymore
+    update_attributes(:state_name => "discussing")
   end
 
   def objected?
-    state_name == "objected"
+    objections.any?
   end
 
   # @TODO - Description

@@ -2,8 +2,7 @@ module MotionState
   def self.for(state_name)
     case state_name
     when 'waitingsecond' then WaitingSecond.new
-    when 'waitingobjection' then WaitingObjection.new
-    when 'objected' then Objected.new
+    when 'discussing' then Discussing.new
     when 'voting' then Voting.new
     when 'passed' then Passed.new
     when 'failed' then Failed.new
@@ -39,7 +38,7 @@ module MotionState
     end
   end
 
-  class WaitingObjection
+  class Discussing
     def assert_state(*) end
 
     def permit?(motion, action, member)
@@ -51,23 +50,8 @@ module MotionState
     end
 
     def scheduled_update(motion, time_elapsed)
-      motion.voting! if time_elapsed >= 24.hours
-    end
-  end
-
-  class Objected
-    def assert_state(*) end
-
-    def permit?(motion, action, member)
-      case action
-      when :vote then false
-      when :see then member.membership_active?
-      when :second then false
-      end
-    end
-
-    def scheduled_update(motion, time_elapsed)
-      motion.voting! if time_elapsed >= 24.hours
+      motion.voting! if time_elapsed >= 48.hours
+      motion.voting! if !motion.objected? && time_elapsed >= 24.hours
     end
   end
 

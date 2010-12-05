@@ -2,10 +2,12 @@ class Event < ActiveRecord::Base
   # if more types are added, make sure to update app/views/events/_event,
   # which currently assumes the #{event}ed always converts an event to
   # its past tense form
-  EVENT_TYPES = ["vote", "second"]
+  # TODO objection breaks this convention
+  EVENT_TYPES = ["vote", "second", "objection"]
   HUMAN_READABLE_EVENT_TYPES = {
     'vote' => 'Vote',
-    'second' => 'Second'
+    'second' => 'Second',
+    'objection' => 'Objection'
   }
 
   belongs_to  :member
@@ -37,7 +39,8 @@ class Event < ActiveRecord::Base
     end
   end
 
-  scope :seconds, where(:event_type  => "second")
+  scope :seconds,    where(:event_type  => "second")
+  scope :objections, where(:event_type  => "objection")
 
   # @return [true, false] Whether or not this is a Voting Event
   def is_vote?
@@ -50,6 +53,12 @@ class Event < ActiveRecord::Base
     event_type == "second"
   end
   alias :second? :is_second?
+
+  # @return [true, false] Whether or not this is a Objecting Event
+  def is_objection?
+    event_type == "objection"
+  end
+  alias :objection? :is_objection?
 
   def formatted_event_type(format = :human)
     if format == :human
