@@ -9,8 +9,8 @@ module MotionState
   end
 
   class WaitingSecond
-    def assert_state(motion)
-      motion.expedited? ? assert_state_for_expedited(motion) : assert_state_for_non_expedited(motion)
+    def update(motion)
+      motion.expedited? ? update_expedited(motion) : update_non_expedited(motion)
     end
 
     def permit?(motion, action, member)
@@ -27,17 +27,17 @@ module MotionState
 
   private
 
-    def assert_state_for_expedited(motion)
+    def update_expedited(motion)
       motion.voting! if motion.seconds.count >= motion.seconds_for_expedition
     end
 
-    def assert_state_for_non_expedited(motion)
+    def update_non_expedited(motion)
       motion.waitingobjection! if motion.seconds.count >= 2
     end
   end
 
   class Discussing
-    def assert_state(*) end
+    def update(*) end
 
     def permit?(motion, action, member)
       case action
@@ -54,7 +54,7 @@ module MotionState
   end
 
   class Voting
-    def assert_state(motion)
+    def update(motion)
       motion.passed! if motion.has_met_requirement?
     end
 
@@ -74,7 +74,7 @@ module MotionState
   end
 
   class Closed
-    def assert_state(*) end
+    def update(*) end
 
     def permit?(motion, action, member)
       case action

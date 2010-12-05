@@ -228,8 +228,8 @@ class Motion < ActiveRecord::Base
   end
 
   # Sets the motion to passed, if it has met all requirements
-  def assert_state
-    state.assert_state(self)
+  def update_state
+    state.update(self)
   end
 
   def formatted_state(format = :human)

@@ -24,7 +24,7 @@ class Event < ActiveRecord::Base
   validate    :motion_creator_cannot_second,  :if => :is_second?
 
   after_save  do
-    motion.assert_state
+    motion.update_state
   end
 
   scope :votes,   where(:event_type  => "vote") do
