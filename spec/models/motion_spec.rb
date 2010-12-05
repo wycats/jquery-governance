@@ -17,7 +17,7 @@ describe Motion do
   end
 
   describe 'voting requirements' do
-    before do
+    before :all do
       #This reprsents all of the members who currently have the right to vote
       4.times { Factory.create(:active_membership) }
     end
