@@ -172,11 +172,9 @@ class Motion < ActiveRecord::Base
 
   # @TODO - Description
   def approved!
-    votes = yeas + nays
-
     update_attributes(
       :state_name => "closed",
-      :abstains => possible_votes - votes
+      :abstains => possible_votes - votes.count
     )
   end
 
