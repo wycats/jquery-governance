@@ -47,7 +47,7 @@ describe MotionsController do
   describe "#closed with member logged in" do
     before(:each) do
       @motion = Factory.create(:motion)
-      @motion.passed!
+      @motion.failed!
       @member = Factory(:member)
       controller.stub!(:authenticate_member!).and_return true
       controller.stub!(:current_member).and_return @member

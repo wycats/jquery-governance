@@ -1,7 +1,7 @@
 class Motion < ActiveRecord::Base
   include Voting
 
-  CLOSED_STATES = %w(passed failed approved)
+  CLOSED_STATES = %w(passed closed)
   OPEN_STATES   = %w(waitingsecond discussing voting)
   MOTION_STATES = OPEN_STATES + CLOSED_STATES
 
@@ -208,23 +208,23 @@ class Motion < ActiveRecord::Base
     votes = yeas + nays
 
     update_attributes(
-      :state_name => "approved",
+      :state_name => "closed",
       :abstains => possible_votes - votes
     )
   end
 
   # @TODO - Description
   def approved?
-    state_name == "approved"
+    state_name == "closed" && has_met_requirement?
   end
 
   # @TODO - Description
   def failed!
-    update_attributes(:state_name => "failed")
+    update_attributes(:state_name => "closed")
   end
 
   def failed?
-    state_name == "failed"
+    state_name == "closed" && !has_met_requirement?
   end
 
   # Sets the motion to passed, if it has met all requirements

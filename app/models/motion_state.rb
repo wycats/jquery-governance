@@ -4,8 +4,7 @@ module MotionState
     when 'waitingsecond' then WaitingSecond.new
     when 'discussing' then Discussing.new
     when 'voting' then Voting.new
-    when 'failed' then Failed.new
-    when 'approved' then Approved.new
+    when 'closed' then Closed.new
     end
   end
 
@@ -86,11 +85,5 @@ module MotionState
     end
 
     def scheduled_update(*) end
-  end
-
-  class Failed < Closed
-  end
-
-  class Approved < Closed
   end
 end
