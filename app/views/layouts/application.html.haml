@@ -35,9 +35,19 @@
                       %h2
                         Voting Tool
                       %p.large
-                        The
                         %span.jqueryType
                           Members of the jQuery Team vote on issues using this tool. Keep an eye on the official business of jQuery here.
+                    %nav.main
+                      %ul
+                        %li.first=link_to 'Motions', root_path
+                        %li=link_to 'Open Motions', motions_path
+                        %li=link_to 'Closed Motions', closed_motions_path
+                        -if current_member.try(:is_admin?)
+                          %li=link_to 'Manage Members', admin_members_path
+                        -if current_member
+                          %li=link_to 'Sign out', sign_out_path
+                        -else
+                          %li=link_to 'Sign in', sign_in_path
                     %div.inner-content
                       =yield
           %div#jq-footer.jq-clearfix
