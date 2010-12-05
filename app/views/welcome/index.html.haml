@@ -12,3 +12,4 @@
         %p= truncate(motion.description)
     - if @motions.empty?
       %li There are no motions available to review
+  = will_paginate @motions

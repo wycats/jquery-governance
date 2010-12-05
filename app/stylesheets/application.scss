@@ -223,6 +223,14 @@ body {
   margin: .25em 0 0;
 }
 
+.current-motions .pagination {
+  float: right;
+  font-size: 1.2em;
+  color: #7a7;
+}
+#content .current-motions .pagination a {
+  color: #171 !important;
+}
 #motion h1 {
   color: $header_green;
   font-size: 3em;
