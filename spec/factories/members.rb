@@ -8,4 +8,14 @@ FactoryGirl.define do
   factory :john_resig, :parent => :member do
     name "John Resig"
   end
+
+  factory :admin_member, :parent => :member do
+    name "Yehuda"
+    is_admin true
+  end
+
+  factory :non_admin_member, :parent => :member do
+    name "Bernie"
+    is_admin false
+  end
 end
