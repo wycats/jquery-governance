@@ -116,9 +116,7 @@ class Motion < ActiveRecord::Base
     #
     # - if in the waitingsecond state, go into the failed state
     # - otherwise, do nothing
-    if update_attributes(:state_name => "waitingsecond")
-      ScheduledMotionUpdate.in(48.hours, self)
-    end
+    update_state("waitingsecond")
   end
 
   def waitingsecond?
@@ -137,9 +135,8 @@ class Motion < ActiveRecord::Base
     #
     # - if in the waitingexpedited state, go to the failed tate
     # - otherwise, do nothing
-    if update_attributes(:state_name => "waitingsecond", :expedited => true)
-      ScheduledMotionUpdate.in(48.hours, self)
-    end
+    self.expedited = true
+    update_state("waitingsecond")
   end
 
   def waitingexpedited?
@@ -153,10 +150,7 @@ class Motion < ActiveRecord::Base
     # - if in the waitingobjection state, go to the voting state
     # - if in the objected state, enqueue a job for 24 hours
     #   - at that time, go to the voting state
-    if update_attributes(:state_name => "discussing")
-      ScheduledMotionUpdate.in(24.hours, self)
-      ScheduledMotionUpdate.in(48.hours, self)
-    end
+    update_state("discussing")
   end
 
   # @TODO - Description
@@ -167,7 +161,7 @@ class Motion < ActiveRecord::Base
   # @TODO - Description
   def objected!
     # NOTE this isn't doing what is was supposed to do anymore
-    update_attributes(:state_name => "discussing")
+    update_state("discussing")
   end
 
   def objected?
@@ -181,9 +175,7 @@ class Motion < ActiveRecord::Base
     # - if a majority of active members did not vote yes,
     #   go to the failed state
     # - otherwise, go into the closed state
-    if update_attributes(:state_name => "voting")
-      ScheduledMotionUpdate.in(48.hours, self)
-    end
+    update_state("voting")
   end
 
   def voting?
@@ -228,8 +220,12 @@ class Motion < ActiveRecord::Base
   end
 
   # Sets the motion to passed, if it has met all requirements
-  def update_state
-    state.update(self)
+  def update_state(new_state_name=nil)
+    if new_state_name.nil?
+      state.update(self)
+    else
+      state.schedule_updates(self) if update_attributes(:state_name => new_state_name)
+    end
   end
 
   def formatted_state(format = :human)
