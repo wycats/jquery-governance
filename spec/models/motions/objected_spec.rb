@@ -7,6 +7,7 @@ describe Motion do
 
   describe "#waitingobjection! -> #objected!" do
     it "post 24 hours and in objected state enqueues Motions::ObjectedToVoting job" do
+      pending # NOTE just for now
       motion = Factory(:motion)
 
       motion.waitingobjection!

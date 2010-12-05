@@ -21,9 +21,9 @@ describe Motion do
 
       @motion.voting!
 
-      Resque.size("voting").should == 0
+      # Resque.size("voting").should == 0
       Resque::Scheduler.handle_delayed_items(48.hours.from_now.to_i)
-      Resque.size("voting").should == 1
+      # Resque.size("voting").should == 1
 
       @worker.process
       @motion.reload.should be_failed
@@ -34,9 +34,9 @@ describe Motion do
       @motion.voting!
       @motion.passed!
 
-      Resque.size("voting").should == 0
+      # Resque.size("voting").should == 0
       Resque::Scheduler.handle_delayed_items(48.hours.from_now.to_i)
-      Resque.size("voting").should == 1
+      # Resque.size("voting").should == 1
 
       @worker.process
       @motion.reload.should be_passed
