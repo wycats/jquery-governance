@@ -30,21 +30,9 @@ module MotionState
     end
   end
 
-  class WaitingExpedited
+  class WaitingExpedited < WaitingSecond
     def assert_state(motion)
       motion.voting! if motion.seconds.count >= motion.seconds_for_expedition
-    end
-
-    def permit?(motion, action, member)
-      case action
-      when :vote then false
-      when :see then member.membership_active?
-      when :second then member.membership_active? && member != motion.member && !member.has_seconded?(motion)
-      end
-    end
-
-    def scheduled_update(motion, time_elapsed)
-      motion.failed! if time_elapsed >= 48.hours
     end
   end
 
@@ -98,19 +86,12 @@ module MotionState
     end
   end
 
-  class Passed
+  class Passed < Voting
     def assert_state(*) end
-
-    def permit?(motion, action, member)
-      case action
-      when :vote then member.membership_active? && !member.has_voted_on?(motion) && !motion.conflicts_with_member?(member)
-      when :see then true
-      when :second then false
-      end
-    end
+    def scheduled_update(*) end
   end
 
-  class Failed
+  class Closed
     def assert_state(*) end
 
     def permit?(motion, action, member)
@@ -120,17 +101,13 @@ module MotionState
       when :second then false
       end
     end
+
+    def scheduled_update(*) end
   end
 
-  class Approved
-    def assert_state(*) end
+  class Failed < Closed
+  end
 
-    def permit?(motion, action, member)
-      case action
-      when :vote then false
-      when :see then true
-      when :second then false
-      end
-    end
+  class Approved < Closed
   end
 end
