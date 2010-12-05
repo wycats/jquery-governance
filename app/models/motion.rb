@@ -3,7 +3,7 @@ class Motion < ActiveRecord::Base
 
   validates_inclusion_of :state_name, :in =>
     %w(waitingsecond discussing
-       voting passed closed).push(nil)
+       voting closed).push(nil)
 
   belongs_to  :member
   has_many    :events
