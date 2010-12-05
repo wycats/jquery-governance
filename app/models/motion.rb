@@ -2,12 +2,11 @@ class Motion < ActiveRecord::Base
   include Voting
 
   CLOSED_STATES = %w(passed failed approved)
-  OPEN_STATES   = %w(waitingsecond waitingexpedited waitingobjection objected voting)
+  OPEN_STATES   = %w(waitingsecond waitingobjection objected voting)
   MOTION_STATES = OPEN_STATES + CLOSED_STATES
 
   HUMAN_READABLE_MOTION_STATES = {
     'waitingsecond'     => 'Waiting For Seconds',
-    'waitingexpedited'  => 'Waiting To Be Expedited',
     'waitingobjection'  => 'Waiting For Objections',
     'objected'          => 'Objected',
     'voting'            => 'In Voting',
@@ -138,16 +137,15 @@ class Motion < ActiveRecord::Base
     #
     # enqueue a job for 48 hours
     #
-    # - if in the waitingexpedited state, go to the failed state
+    # - if in the waitingexpedited state, go to the failed tate
     # - otherwise, do nothing
-    if update_attributes(:state_name => "waitingexpedited")
-      ScheduledMotionUpdate.in(24.hours, self)
+    if update_attributes(:state_name => "waitingsecond", :expedited => true)
       ScheduledMotionUpdate.in(48.hours, self)
     end
   end
 
   def waitingexpedited?
-    state_name == "waitingexpedited"
+    state_name == "waitingsecond" && expedited?
   end
 
   # @TODO - Description

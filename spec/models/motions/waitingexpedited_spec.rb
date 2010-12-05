@@ -11,7 +11,7 @@ describe Motion do
 
       motion.waitingexpedited!
 
-      Resque.delayed_queue_schedule_size.should == 2
+      Resque.delayed_queue_schedule_size.should == 1
     end
 
     it "post 24 hours and with two seconds moves the motion to waitingobjection state" do

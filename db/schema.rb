@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20101205193144) do
     t.integer  "abstains"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "expedited",   :default => false
   end
 
   add_index "motions", ["member_id"], :name => "index_motions_on_member_id"
