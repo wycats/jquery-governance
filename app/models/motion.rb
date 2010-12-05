@@ -1,7 +1,7 @@
 class Motion < ActiveRecord::Base
   include Voting
 
-  CLOSED_STATES = %w(passed closed)
+  CLOSED_STATES = %w(closed)
   OPEN_STATES   = %w(waitingsecond discussing voting)
   MOTION_STATES = OPEN_STATES + CLOSED_STATES
 
