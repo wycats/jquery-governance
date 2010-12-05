@@ -1,6 +1,6 @@
 class MotionsController < ApplicationController
 
-  before_filter :authenticate_member!
+  before_filter :authenticate_member!, :except => [:show]
 
   # List Motions
   def index
@@ -14,6 +14,10 @@ class MotionsController < ApplicationController
   # Start a new Motion
   def new
     @motion = Motion.new(:member_id => current_member.id)
+  end
+
+  def show
+    @motion = Motion.find(params[:id])
   end
 
   # Create a new Event

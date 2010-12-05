@@ -11,6 +11,8 @@ $input_padding: 5px;
 $input_width: 200px;
 $textarea_width: 320px;
 
+$header_green: #407A27;
+
 /* @end */
 
 /* @group Global */
@@ -178,7 +180,7 @@ body {
 #content .current-motions h1 {
   padding-top: 0;
   font-size: 3em;
-  color: #407A27;
+  color: $header_green;
   text-shadow: 0 1px 1px #ccc;
   font-style: italic;
 }
@@ -220,5 +222,11 @@ body {
   font-size: 1.25em;
   margin: .25em 0 0;
 }
+
+#motion h1 {
+  color: $header_green;
+  font-size: 3em;
+}
+
 /* @end */
 
