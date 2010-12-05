@@ -193,7 +193,7 @@ class Motion < ActiveRecord::Base
   end
 
   # Sets the motion to passed, if it has met all requirements
-  def update_state()
+  def update_state
     state.update
   end
 
