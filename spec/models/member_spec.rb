@@ -187,6 +187,7 @@ describe Member do
       it "can't vote more than once on a motion that is in the 'passed' state" do
         # Since we are not testing Motion#vote, stub it out, to just return a yes vote
         @motion.stub(:vote).and_return(Factory(:yes_vote, :motion => @motion, :member => @member))
+        @motion.stub(:required_votes => 1)
         @motion.passed!
         @motion.vote(@member, true)
         @motion.passed?.should be_true
