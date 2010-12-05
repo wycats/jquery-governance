@@ -6,7 +6,7 @@
     Current Motions
 
   %ul
-    - @motions.each_with_index do |motion, i|
+    -@motions.each_with_index do |motion, i|
       %li{ :class => cycle('even', 'odd') }
         =link_to "More", motion_path(motion), :class => "plus"
         =link_to %Q{"#{motion.title}"}, motion_path(motion)
@@ -14,6 +14,6 @@
           ="by " << motion_creator_display_name(motion)
         %p
           =truncate(motion.description)
-    - if @motions.empty?
+    -if @motions.empty?
       %li
         There are no motions available to review
