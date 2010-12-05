@@ -6,7 +6,7 @@
   %ul
     - @motions.each_with_index do |motion, i|
       %li{ :class => cycle('even', 'odd') }
-        =link_to "More...", motion_path(motion), :class => "plus"
+        =link_to "More", motion_path(motion), :class => "plus"
         =link_to "\"#{motion.title}\"", motion_path(motion)
         %span.meta by Test Username
         %p= truncate(motion.description)
