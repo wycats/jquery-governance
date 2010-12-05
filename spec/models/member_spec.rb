@@ -4,6 +4,8 @@ describe Member do
   before :all do
     @member = Factory.create(:active_membership).member
     @inactive_member = Factory.create(:expired_membership).member
+    @admin_member = Factory.create(:active_admin_membership).member
+    @non_admin_member = Factory.create(:active_non_admin_membership).member
 
     @renewed_member = Factory.create(:active_membership).member
     Factory.create(:expired_membership, :member => @renewed_member)
@@ -299,6 +301,17 @@ describe Member do
         @member_motion.failed!
         @member.can?(:second, @member_motion).should be_false
       end
+
+      context "that is an admin" do
+        it "can destroy other members" do
+          @admin_member.can?(:destroy, @member).should be_true
+        end
+      end
+      context "that is not an admin" do
+        it "cannot destroy other members" do
+          @non_admin_member.can?(:destroy, @member).should be_false
+        end
+      end
     end
 
     describe "an inactive member" do
@@ -438,7 +451,7 @@ describe Member do
     end
   end
 
-  describe "destroy" do
+  describe "#destroy" do
     it "keeps the record around by setting a 'deleted_at' flag" do
       @member.destroy
       Member.only_deleted.first.deleted_at.should be
