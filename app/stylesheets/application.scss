@@ -9,6 +9,7 @@ $form_row_spacing: 10px;
 $label_width: 120px;
 $input_padding: 5px;
 $input_width: 200px;
+$textarea_width: 320px;
 
 /* @end */
 
@@ -102,10 +103,15 @@ body {
 }
 
 .form_row input[type=text],
-.form_row input[type=password] {
+.form_row input[type=password],
+.form_row textarea {
   padding: $input_padding;
   width: $input_width;
   border: 1px solid $border_color;
+}
+.form_row textarea {
+  height: 5em;
+  width: $textarea_width
 }
 
 #user_signin_form {

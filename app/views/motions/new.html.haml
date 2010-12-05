@@ -7,9 +7,9 @@
       = f.text_field :title
     .form_row
       = f.label :description
-      = f.text_field :description
+      = f.text_area :description
     .form_row
       = f.label :rationale
-      = f.text_field :rationale
+      = f.text_area :rationale
     .form_row.centered.submit
       = f.submit "Create Motion", :class => 'button large_button'

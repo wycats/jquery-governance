@@ -70,10 +70,15 @@ body {
   width: 120px; }
 
 .form_row input[type=text],
-.form_row input[type=password] {
+.form_row input[type=password],
+.form_row textarea {
   padding: 5px;
   width: 200px;
   border: 1px solid #cccccc; }
+
+.form_row textarea {
+  height: 5em;
+  width: 320px; }
 
 #user_signin_form {
   width: 400px;
