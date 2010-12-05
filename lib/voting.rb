@@ -12,6 +12,11 @@ module Voting
     events.seconds
   end
 
+  # @return [ActiveRecord::Relation] All of the objections cast in support of this motion
+  def objections
+    events.objections
+  end
+
   # @return [Fixnum] Count of current yea votes
   def yeas
     votes.yeas.count

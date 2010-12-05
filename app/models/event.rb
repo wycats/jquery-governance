@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  EVENT_TYPES = ["vote", "second"]
+  EVENT_TYPES = ["vote", "second", "objection"]
 
   belongs_to  :member
   belongs_to  :motion
@@ -19,8 +19,9 @@ class Event < ActiveRecord::Base
   end
 
 
-  scope :votes,   where(:event_type  => "vote")
-  scope :seconds, where(:event_type  => "second")
+  scope :votes,      where(:event_type  => "vote")
+  scope :seconds,    where(:event_type  => "second")
+  scope :objections, where(:event_type  => "objection")
 
   # @return [true, false] Whether or not this is a Voting Event
   def is_vote?
@@ -33,6 +34,12 @@ class Event < ActiveRecord::Base
     event_type == "second"
   end
   alias :second? :is_second?
+
+  # @return [true, false] Whether or not this is a Objecting Event
+  def is_objection?
+    event_type == "objection"
+  end
+  alias :objection? :is_objection?
 
   # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
   def self.yeas

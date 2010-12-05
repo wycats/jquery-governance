@@ -2,8 +2,8 @@ class Motion < ActiveRecord::Base
   include Voting
 
   validates_inclusion_of :state_name, :in =>
-    %w(waitingsecond waitingobjection
-       objected voting passed failed approved).push(nil)
+    %w(waitingsecond discussing
+       voting passed failed approved).push(nil)
 
   belongs_to  :member
   has_many    :events
@@ -118,23 +118,25 @@ class Motion < ActiveRecord::Base
     # - if in the waitingobjection state, go to the voting state
     # - if in the objected state, enqueue a job for 24 hours
     #   - at that time, go to the voting state
-    if update_attributes(:state_name => "waitingobjection")
+    if update_attributes(:state_name => "discussing")
       ScheduledMotionUpdate.in(24.hours, self)
+      ScheduledMotionUpdate.in(48.hours, self)
     end
   end
 
   # @TODO - Description
   def waitingobjection?
-    state_name == "waitingobjection"
+    state_name == "discussing" && !objected?
   end
 
   # @TODO - Description
   def objected!
-    update_attributes(:state_name => "objected")
+    # NOTE this isn't doing what is was supposed to do anymore
+    update_attributes(:state_name => "discussing")
   end
 
   def objected?
-    state_name == "objected"
+    objections.any?
   end
 
   # @TODO - Description

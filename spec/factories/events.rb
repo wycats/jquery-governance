@@ -19,4 +19,8 @@ FactoryGirl.define do
   factory :second, :parent => :event do
     event_type "second"
   end
+
+  factory :objection, :parent => :event do
+    event_type "objection"
+  end
 end

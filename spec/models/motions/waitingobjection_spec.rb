@@ -31,7 +31,9 @@ describe Motion do
       motion = Factory(:motion)
 
       motion.waitingobjection!
-      motion.objected!
+
+      # motion.objected!
+      Factory.create(:objection, :motion => motion, :member => Factory.create(:member))
 
       # Resque.size("waitingobjection_to_voting").should == 0
       Resque::Scheduler.handle_delayed_items(24.hours.from_now.to_i)
