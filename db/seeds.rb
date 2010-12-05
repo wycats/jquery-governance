@@ -1,7 +1,16 @@
 require 'active_record/fixtures'
 require 'factory_girl'
 def generate(factories)
-  factories.each {|factory| Factory.create(factory) }
+  errors = false
+
+  factories.each do |factory|
+    begin
+      Factory.create(factory)
+    rescue
+      errors = true
+    end
+  end
+  puts "At least one of the factory seeds did not pass validation (probably because it already exists)" if errors
 end
 
 # You may load seeds into all environments, or individual
