@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101202055105) do
+ActiveRecord::Schema.define(:version => 20101205193144) do
 
   create_table "active_memberships", :force => true do |t|
     t.integer  "member_id"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20101202055105) do
     t.string   "remember_token"
     t.datetime "remember_created_at"
     t.boolean  "is_admin"
+    t.datetime "deleted_at"
   end
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true

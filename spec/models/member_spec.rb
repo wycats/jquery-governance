@@ -437,4 +437,11 @@ describe Member do
       @member.has_seconded?(@motion).should be_true
     end
   end
+
+  describe "destroy" do
+    it "keeps the record around by setting a 'deleted_at' flag" do
+      @member.destroy
+      Member.only_deleted.first.deleted_at.should be
+    end
+  end
 end
