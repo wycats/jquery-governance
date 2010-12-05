@@ -131,7 +131,7 @@ describe Motion do
     end
   end
 
-  describe "assert_state" do
+  describe "update_state" do
     it "knows that when the motion is waiting for seconds and there is 1 second that it should continue to wait for another second" do
       @motion.waitingsecond!
       Factory(:second, :motion => @motion)
@@ -161,14 +161,14 @@ describe Motion do
     it "knows that when the motion is open for voting and it has yet to get votes required for passing, it should remain open for voting" do
       @motion.voting!
       @motion.stub(:has_met_requirement?).and_return(false)
-      @motion.assert_state
+      @motion.update_state
       @motion.should be_voting
     end
 
     it "knows that when the motion is open for voting and it has gotten the votes required for passing, it should now be passed" do
       @motion.voting!
       @motion.stub(:has_met_requirement?).and_return(true)
-      @motion.assert_state
+      @motion.update_state
       @motion.should be_passed
     end
   end
