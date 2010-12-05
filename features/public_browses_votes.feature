@@ -15,4 +15,5 @@ Feature: Public browses votes
     Given I am on the homepage
     When I follow "More"
     Then show me the page
-    Then I should see "jQuery should rule the JS World" in the title
+    And I should see "jQuery should rule the JS World" in the title
+    And I should see "Test Member" in the author section

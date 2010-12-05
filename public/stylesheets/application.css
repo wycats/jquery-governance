@@ -183,4 +183,8 @@ body {
   color: #407a27;
   font-size: 3em; }
 
+#motion p.meta {
+  font-size: 1.25em !important;
+  color: #80a080; }
+
 /* @end */
