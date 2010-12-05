@@ -2,7 +2,7 @@ class Motion < ActiveRecord::Base
   include Voting
 
   validates_inclusion_of :state_name, :in =>
-    %w(waitingsecond waitingexpedited waitingobjection
+    %w(waitingsecond waitingobjection
        objected voting passed failed approved).push(nil)
 
   belongs_to  :member
@@ -100,16 +100,15 @@ class Motion < ActiveRecord::Base
     #
     # enqueue a job for 48 hours
     #
-    # - if in the waitingexpedited state, go to the failed state
+    # - if in the waitingexpedited state, go to the failed tate
     # - otherwise, do nothing
-    if update_attributes(:state_name => "waitingexpedited")
-      ScheduledMotionUpdate.in(24.hours, self)
+    if update_attributes(:state_name => "waitingsecond", :expedited => true)
       ScheduledMotionUpdate.in(48.hours, self)
     end
   end
 
   def waitingexpedited?
-    state_name == "waitingexpedited"
+    state_name == "waitingsecond" && expedited?
   end
 
   # @TODO - Description

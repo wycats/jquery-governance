@@ -2,7 +2,6 @@ module MotionState
   def self.for(state_name)
     case state_name
     when 'waitingsecond' then WaitingSecond.new
-    when 'waitingexpedited' then WaitingExpedited.new
     when 'waitingobjection' then WaitingObjection.new
     when 'objected' then Objected.new
     when 'voting' then Voting.new
@@ -14,7 +13,7 @@ module MotionState
 
   class WaitingSecond
     def assert_state(motion)
-      motion.waitingobjection! if motion.seconds.count >= 2
+      motion.expedited? ? assert_state_for_expedited(motion) : assert_state_for_non_expedited(motion)
     end
 
     def permit?(motion, action, member)
@@ -28,11 +27,15 @@ module MotionState
     def scheduled_update(motion, time_elapsed)
       motion.failed! if time_elapsed >= 48.hours
     end
-  end
 
-  class WaitingExpedited < WaitingSecond
-    def assert_state(motion)
+  private
+
+    def assert_state_for_expedited(motion)
       motion.voting! if motion.seconds.count >= motion.seconds_for_expedition
+    end
+
+    def assert_state_for_non_expedited(motion)
+      motion.waitingobjection! if motion.seconds.count >= 2
     end
   end
 

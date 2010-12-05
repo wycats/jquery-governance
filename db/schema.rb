@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101204161130) do
+ActiveRecord::Schema.define(:version => 20101205030938) do
 
   create_table "active_memberships", :force => true do |t|
     t.integer  "member_id"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(:version => 20101204161130) do
     t.integer  "abstains"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "expedited",   :default => false
   end
 
   add_index "motions", ["member_id"], :name => "index_motions_on_member_id"
