@@ -4,6 +4,7 @@ describe Member do
   before :all do
     @member = Factory.create(:active_membership).member
     @inactive_member = Factory.create(:expired_membership).member
+
     @admin_member = Factory.create(:active_admin_membership).member
     @non_admin_member = Factory.create(:active_non_admin_membership).member
 
