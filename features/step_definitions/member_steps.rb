@@ -38,4 +38,4 @@ When /^I follow the edit link for "([^"]*)"$/ do |arg1|
   end
 end
 
-
+semantic_suffixes({ 'in the author section' => '.author' })
