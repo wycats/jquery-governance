@@ -25,6 +25,10 @@ module MotionState
       motion.failed! if time_elapsed >= 48.hours
     end
 
+    def schedule_updates(motion)
+      ScheduledMotionUpdate.in(48.hours, motion)
+    end
+
   private
 
     def update_expedited(motion)
@@ -51,6 +55,11 @@ module MotionState
       motion.voting! if time_elapsed >= 48.hours
       motion.voting! if !motion.objected? && time_elapsed >= 24.hours
     end
+
+    def schedule_updates(motion)
+      ScheduledMotionUpdate.in(24.hours, motion)
+      ScheduledMotionUpdate.in(48.hours, motion)
+    end
   end
 
   class Voting
@@ -71,6 +80,10 @@ module MotionState
         motion.passed? ? motion.approved! : motion.failed!
       end
     end
+
+    def schedule_updates(motion)
+      ScheduledMotionUpdate.in(24.hours, motion)
+    end
   end
 
   class Closed
@@ -85,5 +98,6 @@ module MotionState
     end
 
     def scheduled_update(*) end
+    def schedule_updates(*) end
   end
 end
