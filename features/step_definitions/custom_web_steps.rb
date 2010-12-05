@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # Use semantic sections as a shortcut to add contextual
-=======
-# Use semantic sections as a shortcut to add contextual 
->>>>>>> add nifty semantic_suffixes step definition helper
 # suffix selectors to your steps.
 #
 #Example:
