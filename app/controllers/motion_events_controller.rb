@@ -1,12 +1,13 @@
 class MotionEventsController < ApplicationController
 
-  before_filter :authenticate_member!
+  before_filter :authenticate_member!, :except => [:index, :show]
 
   # Display events for a given Motion
   #   @option params [Fixnum] :motion_id The id of the motion in question
   def index
-    @motion = Motion.find(params[:motion_id])
-    @events = @motion.events if @motion.present?
+    @motion     = Motion.find(params[:motion_id])
+    @events     = @motion.events if @motion.present?
+    @actionable = member_signed_in? and @motion.open?
   end
 
   # Show an Event for a given Motion
