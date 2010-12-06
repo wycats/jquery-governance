@@ -1,8 +1,10 @@
 class Motion < ActiveRecord::Base
   include Voting
 
-  MOTION_STATES = %w(waitingsecond waitingexpedited waitingobjection
-                     objected voting passed failed approved)
+  CLOSED_STATES = %w(passed failed approved)
+  OPEN_STATES   = %w(waitingsecond waitingexpedited waitingobjection objected voting)
+  MOTION_STATES = OPEN_STATES + CLOSED_STATES
+
   HUMAN_READABLE_MOTION_STATES = {
     'waitingsecond'     => 'Waiting For Seconds',
     'waitingexpedited'  => 'Waiting To Be Expedited',
@@ -14,8 +16,8 @@ class Motion < ActiveRecord::Base
     'approved'          => 'Approved'
   }
 
-  scope :open_state, where("state NOT IN ('passed', 'failed', 'approved')")
-  scope :closed_state, where("state IN ('passed', 'failed', 'approved')")
+  scope :open_state,    where(:state => OPEN_STATES)
+  scope :closed_state,  where(:state => CLOSED_STATES)
 
   validates_inclusion_of :state, :in => MOTION_STATES.push(nil)
 
@@ -41,6 +43,28 @@ class Motion < ActiveRecord::Base
     possible_votes / 3 + 1
   end
   alias :seconds_for_expediting :seconds_for_expedition
+
+  # @return [true, false] Whether the required votes to expedite has been received
+  def can_expedite?
+    seconds.count >= seconds_for_expedition
+  end
+
+  # @return [true, false] Whether or not the required secondses have been met, and should wait on objections
+  def can_wait_objection?
+    seconds.count >= 2
+  end
+
+  # @return [true, false] Motion state is open for voting or not
+  def open?
+    OPEN_STATES.include? self.state
+  end
+  alias :is_open? :open?
+
+  # @return [true, false] Motion state is closed for voting or not
+  def closed?
+    CLOSED_STATES.include? self.state
+  end
+  alias :is_cloed? :closed?
 
   # Checks to see if a member has a conflict on a motion
   #   @param [Member] member The member who is voting on this motion
@@ -171,6 +195,11 @@ class Motion < ActiveRecord::Base
     state == "voting"
   end
 
+  def seconding?
+    return false if voting?
+    open?
+  end
+
   # @TODO - Description
   def passed!
     update_attributes(:state => "passed")
@@ -206,14 +235,10 @@ class Motion < ActiveRecord::Base
 
   # Sets the motion to passed, if it has met all requirements
   def assert_state
-    second_count = seconds.count
-
-    if state == "waitingsecond" && second_count >= 2
-      waitingobjection!
-    elsif state == "waitingexpedited" && second_count >= seconds_for_expedition
-      voting!
-    elsif state == "voting" && has_met_requirement?
-      passed!
+    case state
+    when "waitingsecond"    then  waitingobjection! if self.can_wait_objection?
+    when "waitingexpedited" then  voting!           if self.can_expedite?
+    when "voting"           then  passed!           if self.has_met_requirement?
     end
   end
 
