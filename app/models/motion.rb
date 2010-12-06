@@ -242,6 +242,15 @@ class Motion < ActiveRecord::Base
     end
   end
 
+  def state(options = {})
+    case options[:format]
+      when :human
+        HUMAN_READABLE_MOTION_STATES[attributes["state"]]
+      else
+        attributes["state"]
+    end
+  end
+
 private
   # @TODO - Description
   def possible_votes
