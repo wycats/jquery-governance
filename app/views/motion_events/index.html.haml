@@ -1,4 +1,7 @@
 =render :partial => 'motions/motion', :locals => {:motion => @motion}
+-if user_signed_in? and @motion.open?
+  %div#members_only
+    =render :partial => 'member_action', :locals => {:motion => @motion}
 %div#seconds
   %h3
     Seconds to this Motion
