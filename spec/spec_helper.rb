@@ -7,6 +7,7 @@ require 'rspec/rails'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 require "factory_girl"
+require 'database_cleaner'
 
 # Find and load all the factories in "factories" for use across all specs"
 FactoryGirl.find_definitions
@@ -29,7 +30,12 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  config.before(:all) { @worker = Resque::Worker.new("*") }
+  DatabaseCleaner.strategy = :truncation
+
+  config.before(:all) do
+    @worker = Resque::Worker.new("*")
+    DatabaseCleaner.clean
+  end
 
   config.include CustomMatchers
 end
