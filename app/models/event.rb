@@ -19,9 +19,6 @@ class Event < ActiveRecord::Base
   end
 
   scope :votes,   where(:event_type  => "vote") do
-    # Yeas and nays only have meaning within votes, so push
-    # them into the scope 
-
     # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
     def yeas
       where :value => true
@@ -32,6 +29,7 @@ class Event < ActiveRecord::Base
       where :value => false
     end
   end
+
   scope :seconds, where(:event_type  => "second")
 
   # @return [true, false] Whether or not this is a Voting Event
