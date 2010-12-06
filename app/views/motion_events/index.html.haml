@@ -1,0 +1,9 @@
+=render :partial => 'motions/motion', :locals => {:motion => @motion}
+%div#seconds
+  %h3
+    Seconds to this Motion
+  =render :partial => 'event', :collection => {:events => @events.seconds}
+%div#votes
+  %h3
+    Votes Cast
+  =render :partial => 'event', :collection => @events.votes

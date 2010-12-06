@@ -6,7 +6,7 @@ class MotionEventsController < ApplicationController
   #   @option params [Fixnum] :motion_id The id of the motion in question
   def index
     @motion = Motion.find(params[:motion_id])
-    @events = @motion.events unless @motion.empty?
+    @events = @motion.events if @motion.present?
   end
 
   # Show an Event for a given Motion
