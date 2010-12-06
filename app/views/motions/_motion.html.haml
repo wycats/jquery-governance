@@ -1,6 +1,6 @@
 %div.motion{ :id => "motion_#{motion.id}", :class => "motion_state_#{motion.state}" }
   %div.motion_title
-    =link_to motion.title, motion_events_path(motion)
+    =link_to motion.title, motion_events_url(motion)
   %div
     Motion created #{motion.created_at} by #{motion.member.name}
   %div.motion_description

@@ -16,6 +16,7 @@ class MotionsController < ApplicationController
     @motion = Motion.new(:member_id => current_member.id)
   end
 
+  # This should not be used. Should take you to MotionEvents#index
   def show
     @motion = Motion.find(params[:id])
   end
