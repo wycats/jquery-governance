@@ -11,7 +11,7 @@
         =link_to "More", motion_path(motion), :class => "plus"
         =link_to %Q{"#{motion.title}"}, motion_path(motion)
         %span.meta
-          ="by " << motion_creator_display_name(motion)
+          by #{motion_creator_display_name(motion)}
         %p
           =truncate(motion.description)
     -if @motions.empty?
