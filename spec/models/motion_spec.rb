@@ -133,10 +133,10 @@ describe Motion do
       @motion.should be_waitingsecond
     end
 
-    it "knows that when the motion is waiting for seconds and there are 2 seconds that it should now be waiting for objections" do
+    it "knows that when the motion is waiting for seconds and there are 2 seconds that it should now be in discussion" do
       @motion.waitingsecond!
       2.times{Factory(:second, :motion => @motion)}
-      @motion.should be_waitingobjection
+      @motion.should be_discussing
     end
 
     it "knows that when the motion is marked expedited and waiting for second and there are less seconds than required, then it should continue to wait for seconds" do
