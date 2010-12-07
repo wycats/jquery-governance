@@ -10,6 +10,7 @@ $label_width: 120px;
 $input_padding: 5px;
 $input_width: 200px;
 $textarea_width: 320px;
+$header_green: #407A27;
 
 $header_green: #407A27;
 
@@ -230,6 +231,36 @@ body {
 #motion p.meta {
   font-size: 1.25em !important;
   color: #80a080;
+}
+nav.main ul {
+  float: right;
+}
+nav.main ul li {
+  margin-top: 5px;
+  float: left;
+}
+#content nav.main ul li a {
+  font-size: 1.25em;
+  font-family: helvetica, arial, sans-serif;
+  color: #4F3806 !important;
+  border: 0;
+  padding: 5px 10px 6px;
+  text-decoration: none;
+  -moz-box-shadow: 0 0px 1px 0 rgba(0,0,0,0.25);
+  -webkit-box-shadow: 0 0px 1px 0 rgba(0,0,0,0.25);
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.2);
+  border-left: 1px solid #CAB585;
+  border-bottom: 1px solid #CAB585;
+  position: relative;
+  cursor: pointer;
+  background-image: url('http://jquery.org/wp-content/themes/green/green/shadow.png');
+  background-position: bottom left;
+  background-repeat: repeat-x;
+}
+
+nav.main ul li.first a {
+  -moz-border-radius-bottomleft: 3px;
+  -webkit-border-bottom-left-radius: 3px;
 }
 /* @end */
 
