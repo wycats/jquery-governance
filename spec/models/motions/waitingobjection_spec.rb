@@ -9,7 +9,7 @@ describe Motion do
     it "enqueues a Motions::WaitingobjectionToVoting job" do
       motion = Factory(:motion)
 
-      motion.waitingobjection!
+      motion.discussing!
 
       Resque.delayed_queue_schedule_size.should == 2
     end
@@ -17,7 +17,7 @@ describe Motion do
     it "post 24 hours and still in waitingobjection moves motion to voting" do
       motion = Factory(:motion)
 
-      motion.waitingobjection!
+      motion.discussing!
 
       # Resque.size("waitingobjection_to_voting").should == 0
       Resque::Scheduler.handle_delayed_items(24.hours.from_now.to_i)
@@ -30,7 +30,7 @@ describe Motion do
     it "post 24 hours and in objected state enqueues Motions::ObjectedToVoting job" do
       motion = Factory(:motion)
 
-      motion.waitingobjection!
+      motion.discussing!
 
       # motion.objected!
       Factory.create(:objection, :motion => motion, :member => Factory.create(:member))

@@ -101,16 +101,6 @@ class Motion < ActiveRecord::Base
   end
 
   # @TODO - Description
-  def waitingobjection!
-    update_attributes(:state_name => "discussing")
-  end
-
-  # @TODO - Description
-  def waitingobjection?
-    state_name == "discussing" && !objected?
-  end
-
-  # @TODO - Description
   def objected!
     # NOTE this isn't doing what is was supposed to do anymore
     update_attributes(:state_name => "discussing")
