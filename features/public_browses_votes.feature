@@ -13,6 +13,6 @@ Feature: Public browses votes
 
   Scenario: A visitor sees details for one of the motions
     Given I am on the homepage
-    When I follow "More"
+    When I follow "jQuery should rule the JS World"
     And I should see "jQuery should rule the JS World" in the title
     And I should see "Test Member" in the author section
