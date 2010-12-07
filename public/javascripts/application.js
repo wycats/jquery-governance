@@ -3,18 +3,12 @@
 
 $(document).ready(function(){
   $('.more_motions').live('click', function(){
-    var clickedId = $(this).attr('id');
-    var motionState = clickedId.replace('motion_state_', '').replace('_link', '');
-    $('#' + clickedId).remove();
-    var lastDisplayedId = $('.motion_state_' + motionState + ':last').attr('id').replace('motion_', '');
-    $.ajax({
-      type: 'get',
-      data: 'id=' + lastDisplayedId + '&state=' + motionState,
-      url: '/motions/show_more',
-      success: function(html){
-        $('#motion_state_' + motionState + '_section').append(html);
-        // TODO: make the 'More' link reappear if there are even more records
-      }
+    var self = $(this);
+    var data = {state: self.attr('data-state'), id: self.attr('data-last-id')};
+    var section = self.closest("section").find("> div:first-child");
+    self.remove();
+    $.get("/motions/show_more", data, function(html) {
+      $(section).append(html);
     });
   });
 });

@@ -6,4 +6,4 @@
           =Motion::HUMAN_READABLE_MOTION_STATES[state]
         = render :partial => 'motion', :collection => motions_grouped_by_state[state][0..4]
         - if motions_grouped_by_state[state].size > 5
-          = render :partial => 'link_to_more', :locals => { :state => state }
+          = render :partial => 'link_to_more', :locals => { :state => state, :last_id => motions_grouped_by_state[state][4].id }
