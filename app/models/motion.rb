@@ -3,7 +3,7 @@ class Motion < ActiveRecord::Base
 
   include Voting
 
-  validates_inclusion_of :state_name, :in => STATE_NAMES
+  validates :state_name, :inclusion => { :in => STATE_NAMES }
 
   belongs_to  :member
   has_many    :events
