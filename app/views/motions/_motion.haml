@@ -1,9 +1,14 @@
-%div.motion{ :id => "motion_#{motion.id}", :class => "motion_state_#{motion.state}" }
-  %div.motion_title
-    =link_to motion.title, motion_events_url(motion)
-  %div
-    Motion created #{motion.created_at} by #{motion.member.name}
-  %div.motion_description
+#motion
+  %h1
+    =motion.title
+  %p.meta
+    %span.created_at
+      Created on #{motion.created_at.to_date}
+    %span.author
+      by #{motion_creator_display_name(motion)}
+    %span.current_state
+      and currently #{motion.state(:format => :human)}
+  %p.description
     =motion.description
-  %div.motion_rationale
-    Rationale: #{motion.rationale}
+  %p.rationale
+    =motion.rationale

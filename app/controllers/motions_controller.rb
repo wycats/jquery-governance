@@ -1,6 +1,6 @@
 class MotionsController < ApplicationController
 
-  before_filter :authenticate_member!, :except => [:show]
+  before_filter :authenticate_member!, :except => [:show, :index]
 
   # List Motions that are open (NOT passed, failed, approved)
   def index

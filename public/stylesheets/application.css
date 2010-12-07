@@ -1,174 +1,239 @@
 /* @group Variables */
 /* @end */
 /* @group Global */
+/* line 23, ../../app/stylesheets/application.scss */
 body {
-  font-size: 12px; }
+  font-size: 12px;
+}
 
+/* line 27, ../../app/stylesheets/application.scss */
 .centered {
-  text-align: center; }
+  text-align: center;
+}
 
 /* @end */
 /* @group Buttons */
+/* line 36, ../../app/stylesheets/application.scss */
 .button, .button:visited {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) 0;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) 0;
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) 0;
   border: 0;
   background: #222222 url("/images/btn_overlay.png") repeat-x;
   display: inline-block;
   padding: 5px 10px 6px;
   color: #fff;
   text-decoration: none;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
   position: relative;
-  cursor: pointer; }
-
+  cursor: pointer;
+}
+/* line 52, ../../app/stylesheets/application.scss */
 .button:hover {
   background-color: #111;
-  color: #fff; }
-
+  color: #fff;
+}
+/* line 57, ../../app/stylesheets/application.scss */
 .button:active {
-  top: 1px; }
+  top: 1px;
+}
 
+/* line 62, ../../app/stylesheets/application.scss */
 .small_button, .small.button:visited {
   font-size: 11px;
-  padding: 5px; }
+  padding: 5px;
+}
 
+/* line 68, ../../app/stylesheets/application.scss */
 .button, .button:visited,
 .medium_button, .medium_button:visited {
   font-size: 13px;
   font-weight: bold;
   line-height: 1;
-  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25); }
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.25);
+}
 
+/* line 75, ../../app/stylesheets/application.scss */
 .large_button, .large_button:visited {
   font-size: 14px;
-  padding: 8px 14px 9px; }
+  padding: 8px 14px 9px;
+}
 
+/* line 80, ../../app/stylesheets/application.scss */
 .green_button, .green_button:visited {
-  background-color: #91bd09; }
+  background-color: #91bd09;
+}
 
+/* line 84, ../../app/stylesheets/application.scss */
 .green_button:hover {
-  background-color: #749a02; }
+  background-color: #749a02;
+}
 
 /* @end */
 /* @group Forms */
+/* line 94, ../../app/stylesheets/application.scss */
 .form_row {
   margin-bottom: 10px;
-  clear: both; }
-
+  clear: both;
+}
+/* line 98, ../../app/stylesheets/application.scss */
 .form_row.submit {
-  margin-top: 40px; }
-
+  margin-top: 40px;
+}
+/* line 102, ../../app/stylesheets/application.scss */
 .form_row label {
   float: left;
   font-size: 14px;
   line-height: 30px;
   vertical-align: middle;
-  width: 120px; }
-
-.form_row input[type=text],
-.form_row input[type=password],
-.form_row textarea {
+  width: 120px;
+}
+/* line 110, ../../app/stylesheets/application.scss */
+.form_row input[type=text], .form_row input[type=password], .form_row textarea {
   padding: 5px;
-  width: 200px;
-  border: 1px solid #cccccc; }
-
+  width: 550px;
+  border: 1px solid #cccccc;
+}
+/* line 116, ../../app/stylesheets/application.scss */
 .form_row textarea {
-  height: 5em;
-  width: 320px; }
+  height: 10em;
+  width: 550px;
+}
 
+/* line 123, ../../app/stylesheets/application.scss */
 #user_signin_form {
   width: 400px;
-  margin: 20px auto; }
+  margin: 20px auto;
+}
 
+/* line 128, ../../app/stylesheets/application.scss */
 #new_motion_form {
-  width: 400px;
-  margin: 20px auto; }
+  width: 700px;
+  margin: 20px auto;
+}
 
 /* @end */
 /* @group Motions */
+/* line 137, ../../app/stylesheets/application.scss */
 .motion {
   border-left: 3px solid #cccccc;
   border-top: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
   margin-bottom: 5px;
-  padding: 0px 3px 0px 3px; }
+  padding: 0px 3px 0px 3px;
+}
 
+/* line 144, ../../app/stylesheets/application.scss */
 .motion_title {
   font-weight: bold;
-  font-size: 105%; }
+  font-size: 105%;
+}
 
+/* line 148, ../../app/stylesheets/application.scss */
 .motion_date, .motion_member {
-  width: 49%; }
+  width: 49%;
+}
 
+/* line 152, ../../app/stylesheets/application.scss */
 .motion_description, .motion_rationale {
-  margin-top: 2px; }
+  margin-top: 2px;
+}
 
+/* line 156, ../../app/stylesheets/application.scss */
 .motion_state_passed {
-  background-color: #90EE90; }
+  background-color: #90EE90;
+}
 
+/* line 160, ../../app/stylesheets/application.scss */
 .motion_state_failed {
-  background-color: #FAAFBE; }
+  background-color: #FAAFBE;
+}
 
+/* line 164, ../../app/stylesheets/application.scss */
 div.more_motions {
-  width: 25px; }
+  width: 25px;
+}
 
+/* line 167, ../../app/stylesheets/application.scss */
 div.more_motions:hover {
   text-decoration: underline;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 /* @end */
 /* @group Homepage */
+/* line 179, ../../app/stylesheets/application.scss */
 #content .current-motions a.quick-tool {
+  background: #229922;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #44bb44), color-stop(100%, #229922));
+  background-image: -moz-linear-gradient(top, #44bb44 0%, #229922 100%);
+  background-image: linear-gradient(top, #44bb44 0%, #229922 100%);
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
   display: block;
   float: right;
   padding: .25em .5em;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
   text-decoration: none;
   color: #FFFEFE !important;
   font-size: 1.8em !important;
   border: 1px solid #070;
-  background: #292;
-  background: -moz-linear-gradient(top, #44bb44, #229922);
-  background: -webkit-gradient(linear, left top, left bottom, from(#44bb44), to(#229922)); }
-
+}
+/* line 193, ../../app/stylesheets/application.scss */
 #content .current-motions a.quick-tool:hover {
-  background: #4b4;
-  margin: 1px -1px 0 0;
-  background: -moz-linear-gradient(top, #44bb44, #55cc55);
-  background: -webkit-gradient(linear, left top, left bottom, from(#44bb44), to(#55cc55)); }
-
+  background: #3da83d;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #3da83d), color-stop(100%, #1d841d));
+  background-image: -moz-linear-gradient(top, #3da83d 0%, #1d841d 100%);
+  background-image: linear-gradient(top, #3da83d 0%, #1d841d 100%);
+}
+/* line 198, ../../app/stylesheets/application.scss */
+#content .current-motions a.quick-tool:active {
+  background: #57c257;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #57c257), color-stop(100%, #27ae27));
+  background-image: -moz-linear-gradient(top, #57c257 0%, #27ae27 100%);
+  background-image: linear-gradient(top, #57c257 0%, #27ae27 100%);
+}
+/* line 204, ../../app/stylesheets/application.scss */
 #content .current-motions h1 {
   padding-top: 0;
   font-size: 3em;
   color: #407a27;
   text-shadow: 0 1px 1px #ccc;
-  font-style: italic; }
+  font-style: italic;
+}
 
+/* line 215, ../../app/stylesheets/application.scss */
 .current-motions ul {
   border: 1px solid #f0f0f0;
   border-bottom: 0;
-  margin: .5em 0 0; }
-
+  margin: .5em 0 0;
+}
+/* line 221, ../../app/stylesheets/application.scss */
 .current-motions li {
   padding: 1em;
-  border-bottom: 1px solid #f0f0f0; }
-
+  border-bottom: 1px solid #f0f0f0;
+}
+/* line 225, ../../app/stylesheets/application.scss */
 .current-motions li.odd {
-  background: #f0fff0 !important; }
-
+  background: #f0fff0 !important;
+}
+/* line 229, ../../app/stylesheets/application.scss */
 .current-motions li a {
   font-size: 1.75em;
-  text-decoration: none; }
-
-.current-motions li span.meta {
-  font-size: 1.25em !important;
-  color: #80a080; }
-
+  text-decoration: none;
+}
+/* line 233, ../../app/stylesheets/application.scss */
 .current-motions li a.plus {
   float: right;
   height: 18px;
@@ -177,21 +242,71 @@ div.more_motions:hover {
   background-image: url("/images/plus.png");
   background-repeat: no-repeat;
   color: #000;
-  font-size: 1px; }
-
+  font-size: 1px;
+}
+/* line 245, ../../app/stylesheets/application.scss */
+.current-motions li span.meta {
+  font-size: 1.25em !important;
+  color: #80a080;
+}
+/* line 250, ../../app/stylesheets/application.scss */
 .current-motions li p {
   color: #b8b8b8;
   font-style: italic;
   font-weight: normal;
   font-size: 1.25em;
-  margin: .25em 0 0; }
+  margin: .25em 0 0;
+}
 
+/* line 262, ../../app/stylesheets/application.scss */
 #motion h1 {
   color: #407a27;
-  font-size: 3em; }
+  font-size: 3em;
+}
+/* line 267, ../../app/stylesheets/application.scss */
+#motion ul {
+  float: right;
+}
 
-#motion p.meta {
-  font-size: 1.25em !important;
-  color: #80a080; }
+/* line 272, ../../app/stylesheets/application.scss */
+nav.main ul {
+  float: right;
+}
+/* line 275, ../../app/stylesheets/application.scss */
+nav.main ul li {
+  margin-top: 5px;
+  float: left;
+}
+/* line 279, ../../app/stylesheets/application.scss */
+nav.main ul li.first a {
+  -moz-border-radius-bottomleft: 6px;
+  -webkit-border-bottom-left-radius: 6px;
+  -o-border-bottom-left-radius: 6px;
+  -ms-border-bottom-left-radius: 6px;
+  -khtml-border-bottom-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+/* line 283, ../../app/stylesheets/application.scss */
+nav.main ul li a {
+  font-size: 1.25em;
+  font-family: helvetica, arial, sans-serif;
+  color: #4F3806 !important;
+  border: 0;
+  padding: 5px 10px 6px;
+  text-decoration: none;
+  -moz-box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25);
+  -o-box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.25);
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.2);
+  border-left: 1px solid #CAB585;
+  border-bottom: 1px solid #CAB585;
+  cursor: pointer;
+  background: url("http://jquery.org/wp-content/themes/green/green/shadow.png") bottom left repeat-x;
+}
+/* line 296, ../../app/stylesheets/application.scss */
+nav.main ul li a:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
 
 /* @end */

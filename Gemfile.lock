@@ -109,6 +109,8 @@ GEM
     childprocess (0.1.4)
       ffi (~> 0.6.3)
     columnize (0.3.2)
+    compass (0.10.6)
+      haml (>= 3.0.4)
     configuration (1.2.0)
     culerity (0.2.12)
     database_cleaner (0.6.0)
@@ -153,6 +155,8 @@ GEM
       rack (>= 1.0.0)
     rack-test (0.5.6)
       rack (>= 1.0)
+    rails3_acts_as_paranoid (0.0.2)
+      activerecord (>= 3.0)
     rake (0.8.7)
     redis (2.1.1)
     redis-namespace (0.8.0)
@@ -221,6 +225,7 @@ PLATFORMS
 DEPENDENCIES
   arel!
   capybara
+  compass
   cucumber!
   cucumber-rails!
   database_cleaner
@@ -234,6 +239,7 @@ DEPENDENCIES
   rack!
   rack-cache!
   rails!
+  rails3_acts_as_paranoid
   resque
   resque-scheduler
   rspec-rails
