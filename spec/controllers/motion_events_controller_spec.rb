@@ -8,6 +8,7 @@ describe MotionEventsController do
   describe "#show" do
   end # describe #show
 
+=begin
   describe "#new" do
     before(:each) do
       @member = Factory(:member)
@@ -30,7 +31,7 @@ describe MotionEventsController do
       assigns(:event).should be_a_new_record
     end
   end # describe #new
-
+=end
   describe "#create" do
   end # describe #create
 end
