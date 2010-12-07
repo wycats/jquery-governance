@@ -99,13 +99,13 @@ body {
 /* line 110, ../../app/stylesheets/application.scss */
 .form_row input[type=text], .form_row input[type=password], .form_row textarea {
   padding: 5px;
-  width: 200px;
+  width: 550px;
   border: 1px solid #cccccc;
 }
 /* line 116, ../../app/stylesheets/application.scss */
 .form_row textarea {
-  height: 5em;
-  width: 320px;
+  height: 10em;
+  width: 550px;
 }
 
 /* line 123, ../../app/stylesheets/application.scss */
@@ -116,7 +116,7 @@ body {
 
 /* line 128, ../../app/stylesheets/application.scss */
 #new_motion_form {
-  width: 400px;
+  width: 700px;
   margin: 20px auto;
 }
 

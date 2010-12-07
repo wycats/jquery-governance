@@ -10,8 +10,8 @@ $font_label_height: 30px;
 $form_row_spacing: 10px;
 $label_width: 120px;
 $input_padding: 5px;
-$input_width: 200px;
-$textarea_width: 320px;
+$input_width: 550px;
+$textarea_width: 550px;
 $header_green: #407A27;
 
 $header_green: #407A27;
@@ -114,7 +114,7 @@ body {
   }
 
   textarea {
-    height: 5em;
+    height: 10em;
     width: $textarea_width;
   }
 }
@@ -126,7 +126,7 @@ body {
 }
 
 #new_motion_form {
-  width: 400px;
+  width: 700px;
   margin: 20px auto;
 }
 
