@@ -15,4 +15,8 @@ module ApplicationHelper
   def member?
     current_member
   end
+  # Wrap a given block in some html tag or don't
+  def conditional_wrap(condition, tag, att = {}, &block)
+    condition ? haml_tag(tag, att, &block) : haml_concat(capture_haml(&block))
+  end
 end
