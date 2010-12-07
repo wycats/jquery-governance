@@ -5,30 +5,31 @@
     =stylesheet_link_tag    "http://jquery.org/wp-content/themes/green/green/additions.css"
     =stylesheet_link_tag    "http://static.jquery.com/org/style.css"
     =stylesheet_link_tag    "application"
+    =javascript_include_tag :defaults
     =javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"
     =javascript_include_tag "http://static.jquery.com/files/rocker/scripts/custom.js"
     %title
       jQuery Voting Tools
   %body
-    %div#access
+    #access
       %div.skip-link
         %a{:href => "#jq-content", :title => "Skip to content"}
-    %div#jq-siteBurst.jq-breakout
-      %div#jq-siteContain
-        %div#jq-header
+    #jq-siteBurst.jq-breakout
+      #jq-siteContain
+        #jq-header
           %a{:id => "jq-siteLogo", :href => "/", :title => "jQuery Home"}
             %img{:src => "http://static.jquery.com/org/images/project/jquery-project-sm.png", :alt => "jQuery: Write Less, Do More."}
-          %div#jq-primaryNavigation.roundbottom.shadow
+          #jq-primaryNavigation.roundbottom.shadow
             =render :partial => "layouts/primary_nav"
 
-          %div#jq-secondaryNavigation
+          #jq-secondaryNavigation
             =render :partial => "layouts/secondary_nav"
 
-        %div#jq-contentContain.rounded.shadow
-          %div#jq-content.jq-clearfix.jq-overvlowContain.roundedTop
+        #jq-contentContain.rounded.shadow
+          #jq-content.jq-clearfix.jq-overvlowContain.roundedTop
             %hr.space
-            %div#container
-              %div#content
+            #container
+              #content
                 %div
                   %div
                     %div.post-header.roundedTop
@@ -50,8 +51,8 @@
                           %li=link_to 'Sign in', sign_in_path
                     %div.inner-content
                       =yield
-          %div#jq-footer.jq-clearfix
-            %div#jq-credits
+          #jq-footer.jq-clearfix
+            #jq-credits
               %p#jq-copyright
                 &copy; 2010
                 %a{:href => "http://jquery.org/"}
@@ -64,5 +65,5 @@
                 %a{:href => "http://jquery.org/sponsors"}
                   others
                 \.
-            %div#jq-footerNavigation
+            #jq-footerNavigation
               =render :partial => "layouts/secondary_nav"

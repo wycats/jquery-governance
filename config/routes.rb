@@ -13,6 +13,7 @@ JqueryVoting::Application.routes.draw do
     resources :events, :controller => :motion_events
     collection do
       get :closed
+      get :show_more
     end
   end
 
