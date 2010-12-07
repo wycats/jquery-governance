@@ -9,6 +9,7 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'haml',         '~>3.0.23'
 gem 'haml-rails'
+gem 'compass'
 gem 'will_paginate', '~>3.0.beta'
 
 gem 'rails3_acts_as_paranoid'
