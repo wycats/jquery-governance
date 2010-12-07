@@ -1,5 +1,5 @@
-Given /^a motion titled "([^"]*)" exists$/ do |title|
-  Factory(:motion, title: title)
+Given /^a motion titled "([^"]*)" exists(?: in the "(.*)" state)?$/ do |title, state|
+  Factory(:motion, title: title, state: state)
 end
 
 Then /^the motion titled "([^"]*)" is in discussion$/ do |title|

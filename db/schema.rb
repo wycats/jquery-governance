@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20101207145753) do
     t.datetime "remember_created_at"
     t.string   "confirmation_token"
     t.boolean  "is_admin"
+    t.datetime "deleted_at"
   end
 
   add_index "members", ["confirmation_token"], :name => "index_members_on_confirmation_token", :unique => true

@@ -1,7 +1,18 @@
-- @motions.each do |motion|
-  %div.motion{ :id => "motion_#{motion.id}", :class => "motion_state_#{motion.state}" }
-    %div{ :class => 'motion_title' }= motion.title
-    %div Motion created #{motion.created_at} by #{motion.member.name}
-    %div{ :class => 'motion_description' }= motion.description
-    %div{ :class => 'motion_rationale' } Rationale: #{motion.rationale}
-    
+%p#notice
+  =notice
+
+.current-motions
+  =link_to "New Motion", new_motion_path, {:class => "quick-tool"}
+
+  %h1
+    Current Motions
+
+  -if @motions.empty?
+    There are no motions availabe to review
+
+  -else
+    =render :partial => 'motion_list', :locals => { :motions => @motions, :motions_grouped_by_state => @motions.group_by(&:state) }
+
+=link_to 'See closed motions', closed_motions_path
+
+/ TODO: show/hide motions you've already acted on

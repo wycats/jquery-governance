@@ -7,7 +7,7 @@ require 'rspec/rails'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 require "factory_girl"
-require 'database_cleaner'
+require "database_cleaner"
 
 # Find and load all the factories in "factories" for use across all specs"
 FactoryGirl.find_definitions

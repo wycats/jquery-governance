@@ -1,0 +1,12 @@
+=render @motion
+-if @actionable
+  %div#members_only
+    =render 'member_action', :motion => @motion
+%div#seconds
+  %h3
+    Seconds to this Motion
+  =render :partial => 'event', :collection => @events.second
+%div#votes
+  %h3
+    Votes Cast
+  =render :partial => 'event', :collection => @events.votes

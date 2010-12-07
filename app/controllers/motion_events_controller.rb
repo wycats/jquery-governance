@@ -1,12 +1,13 @@
 class MotionEventsController < ApplicationController
 
-  before_filter :authenticate_member!
+  before_filter :authenticate_member!, :except => [:index, :show]
 
   # Display events for a given Motion
   #   @option params [Fixnum] :motion_id The id of the motion in question
   def index
-    @motion = Motion.find(params[:motion_id])
-    @events = @motion.events unless @motion.empty?
+    @motion     = Motion.find(params[:motion_id])
+    @events     = @motion.events if @motion.present?
+    @actionable = member_signed_in? and @motion.open?
   end
 
   # Show an Event for a given Motion
@@ -17,33 +18,31 @@ class MotionEventsController < ApplicationController
     @event  = @motion.events.where :event_id => params[:event_id]
   end
 
-  # Start a new Event; event type must be supplied
+  # Create a Seconding Event for a Motion
   #   @option params [Fixnum] :motion_id The id of the motion in question
-  #   @option params [String] :event_type The type of event to be created
-  def new
+  def second
     @motion = Motion.find(params[:motion_id])
-
-    @event  = if @motion
-                @motion.events.new  :event_type => params[:event_type],
-                                    :member_id  => current_member.id
-              end
-  end
-
-  # Create a new Event
-  #   @option params [Fixnum] :motion_id The id of the motion in question
-  #   @option params [String] :event_type The type of event to be created
-  #   @option params [Hash]   :event The new event to create
-  def create
-    @motion = Motion.find(params[:motion_id])
-    @event  = @motion.events.new  :event => params[:event]
+    @event  = @motion.seconds.new :value => true
 
     @event.member = current_member
 
-    if @event.save
-      flash[:notice] = "Your #{@event.event_type.capitalize} has been successfully cast."
-      redirect_to @motion
-    else
-      # @TODO: Inform user
-    end
+    @disp   = "Successfully Seconded Motion" if @event.save
+    @disp ||= "Error Seconding Motion"
+  end
+
+  # Create a Voting Event for a Motion
+  #   @option params [Fixnum] :motion_id The id of the motion in question
+  #   @option params [Fixnum] :vote The vote cast by the member, can be "aye" or "nay"
+  def vote
+    @motion = Motion.find(params[:motion_id])
+    @event  = @motion.votes.new :value  =>  case params[:vote]
+                                            when "aye" then true
+                                            when "nay" then false
+                                            end
+
+    @event.member = current_member
+
+    @disp   = "Successful" if @event.save
+    @disp ||= "Failed"
   end
 end

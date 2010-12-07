@@ -30,15 +30,33 @@ describe MotionsController do
 
   describe "#index with member logged in" do
     before(:each) do
-      5.times { Factory.create(:motion) }
+      11.times { Factory.create(:motion) }
       @member = Factory(:member)
       controller.stub!(:authenticate_member!).and_return true
       controller.stub!(:current_member).and_return @member
     end
 
-    it "should render the index tempate" do
+    it "should render the index tempate with 10 motions" do
       get :index
       response.should render_template('motions/index')
+      assigns(:motions).count.should == 11
+    end
+    it "should render 1 more motion when the user clicks more"
+  end
+
+  describe "#closed with member logged in" do
+    before(:each) do
+      @motion = Factory.create(:motion)
+      @motion.closed!
+      @member = Factory(:member)
+      controller.stub!(:authenticate_member!).and_return true
+      controller.stub!(:current_member).and_return @member
+    end
+
+    it "should render the page page with 1 motion" do
+      get :closed
+      response.should render_template('motions/closed')
+      assigns(:motions).count.should == 1
     end
   end
 end

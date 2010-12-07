@@ -6,27 +6,29 @@ Given /^I am signed in as "([^"]*)"$/ do |email|
 end
 
 Given /^I am signed in as an active member$/ do
-  Given "I am signed in as \"#{active_member.email}\""
+  member = Factory.create(:active_membership).member
+  Given "I am signed in as \"#{member.email}\""
 end
 
 Given /^I am signed in as an inactive member$/ do
-  Given "I am signed in as \"#{inactive_member.email}\""
+  member = Factory.create(:expired_membership).member
+  Given "I am signed in as \"#{member.email}\""
 end
 
 Given /^I am signed in as an active member called "([^"]*)"$/ do |name|
-  active_member.update_attribute(:name, name)
-  Given "I am signed in as \"#{active_member.email}\""
+  member = Factory.create(:member, :name => name)
+  Given "I am signed in as \"#{member.email}\""
 end
 
 Given /^there is an active member with email "([^"]*)" and password "([^"]*)"$/ do |email, password|
-  member = Factory(:member, email: email, password: password)
+  member = Factory.create(:member, email: email, password: password)
   Factory(:active_membership, member: member)
 end
 
 Given /^these (?:other )?members exist:$/ do |table|
   table.rows.each do |name, email|
-    member = Factory(:member, name: name, email: email)
-    Factory(:active_membership, member: member)
+    member = Factory.create(:member, name: name, email: email)
+    Factory.create(:active_membership, member: member)
   end
 end
 
@@ -70,3 +72,5 @@ When /^the following members votes affirmatively the motion titled "([^"]*)"$/ d
     motion.vote(Member.find_by_name!(member_name), true)
   end
 end
+
+semantic_suffixes({ 'in the author section' => '.author' })

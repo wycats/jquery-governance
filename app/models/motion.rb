@@ -1,9 +1,21 @@
 class Motion < ActiveRecord::Base
-  STATE_NAMES = %w(waitingsecond discussing voting closed)
-
   include Voting
 
-  validates :state_name, :inclusion => { :in => STATE_NAMES }
+  CLOSED_STATES = %w(closed)
+  OPEN_STATES   = %w(waitingsecond discussing voting)
+  MOTION_STATES = OPEN_STATES + CLOSED_STATES
+
+  HUMAN_READABLE_MOTION_STATES = {
+    'waitingsecond' => 'Waiting For Seconds',
+    'discussing'    => 'Discussing',
+    'voting'        => 'In Voting',
+    'closed'        => 'Closed'
+  }
+
+  scope :open_state,   where(:state_name => OPEN_STATES)
+  scope :closed_state, where(:state_name => CLOSED_STATES)
+
+  validates :state_name, :inclusion => { :in => MOTION_STATES }
 
   belongs_to  :member
   has_many    :events
@@ -27,15 +39,31 @@ class Motion < ActiveRecord::Base
     yeas >= required_votes
   end
 
+  # @return [true, false] Whether the required votes to expedite has been received
+  def can_expedite?
+    seconds_count >= seconds_for_expedition
+  end
+
+  # @return [true, false] Whether or not the required secondses have been met, and should wait on objections
+  def can_wait_objection?
+    seconds_count >= 2
+  end
+
+  def seconds_count
+    seconds.count
+  end
+
   # @return [Fixnum] The numbers of seconds required to expedite
   def seconds_for_expedition
     possible_votes / 3 + 1
   end
   alias :seconds_for_expediting :seconds_for_expedition
 
-  def seconds_count
-    seconds.count
+  # @return [true, false] Motion state is open for voting or not
+  def open?
+    !closed?
   end
+  alias :is_open? :open?
 
   # Checks to see if a member has a conflict on a motion
   #   @param [Member] member The member who is voting on this motion
@@ -92,6 +120,11 @@ class Motion < ActiveRecord::Base
     state_name == "waitingsecond"
   end
 
+  def seconding?
+    return false if voting?
+    open?
+  end
+
   def discussing!
     update_attributes(:state_name => "discussing")
   end
@@ -120,9 +153,11 @@ class Motion < ActiveRecord::Base
     )
   end
 
+  # @return [true, false] Motion state is closed for voting or not
   def closed?
     state_name == "closed"
   end
+  alias :is_closed? :closed?
 
   # @TODO - Description
   def approved?
@@ -133,13 +168,20 @@ class Motion < ActiveRecord::Base
     closed? && !has_met_requirement?
   end
 
-  # Sets the motion to passed, if it has met all requirements
   def update_state
     state.update
   end
 
   def scheduled_update(time_elapsed)
     state.scheduled_update(time_elapsed)
+  end
+
+  def formatted_state(format = :human)
+    if format == :human
+      HUMAN_READABLE_MOTION_STATES[attributes["state_name"]]
+    else
+      state_name
+    end
   end
 
 private
@@ -154,7 +196,7 @@ private
   end
 
   def assign_state
-    if STATE_NAMES.include?(state_name)
+    if MOTION_STATES.include?(state_name)
       @state = MotionState.const_get(state_name.capitalize).new(self)
     end
   end
