@@ -271,13 +271,14 @@ div.more_motions:hover {
 /* line 272, ../../app/stylesheets/application.scss */
 nav.main ul {
   float: right;
+  height: 40px;
 }
-/* line 275, ../../app/stylesheets/application.scss */
+/* line 276, ../../app/stylesheets/application.scss */
 nav.main ul li {
   margin-top: 5px;
   float: left;
 }
-/* line 279, ../../app/stylesheets/application.scss */
+/* line 280, ../../app/stylesheets/application.scss */
 nav.main ul li.first a {
   -moz-border-radius-bottomleft: 6px;
   -webkit-border-bottom-left-radius: 6px;
@@ -286,7 +287,7 @@ nav.main ul li.first a {
   -khtml-border-bottom-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-/* line 283, ../../app/stylesheets/application.scss */
+/* line 284, ../../app/stylesheets/application.scss */
 nav.main ul li a {
   font-size: 1.25em;
   font-family: helvetica, arial, sans-serif;
@@ -304,9 +305,60 @@ nav.main ul li a {
   cursor: pointer;
   background: url("http://jquery.org/wp-content/themes/green/green/shadow.png") bottom left repeat-x;
 }
-/* line 296, ../../app/stylesheets/application.scss */
+/* line 297, ../../app/stylesheets/application.scss */
 nav.main ul li a:hover {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* @end */
+/* @group Flash alerts & Validation Errors */
+/* line 308, ../../app/stylesheets/application.scss */
+#flash_notice {
+  margin: 10px 20px;
+  clear: both;
+  background: #FFFECF;
+  border: 2px solid #DCDA00;
+  font-size: 14px;
+  text-align: center;
+  padding: 5px 20px;
+  color: #5F5F5F;
+}
+
+/* line 319, ../../app/stylesheets/application.scss */
+#flash_alert {
+  margin: 10px 20px;
+  clear: both;
+  background: #FFEEEE;
+  border: 2px solid red;
+  font-size: 14px;
+  text-align: center;
+  padding: 5px 20px;
+  color: red;
+}
+
+/* line 330, ../../app/stylesheets/application.scss */
+#error_explanation {
+  background: #FBB;
+  border: 2px solid red;
+  color: #585858;
+  padding: 20px;
+  font-size: 12px;
+  margin: 20px;
+}
+
+/* line 339, ../../app/stylesheets/application.scss */
+#error_explanation ul {
+  margin: 0;
+}
+
+/* line 340, ../../app/stylesheets/application.scss */
+#error_explanation h2 {
+  font-size: 14px;
+}
+
+/* line 341, ../../app/stylesheets/application.scss */
+#error_explanation h3 {
+  font-size: 12px;
 }
 
 /* @end */

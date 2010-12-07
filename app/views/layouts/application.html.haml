@@ -49,6 +49,8 @@
                           %li=link_to 'Sign out', sign_out_path
                         -else
                           %li=link_to 'Sign in', sign_in_path
+                    - flash.each do |name, msg|
+                      =content_tag :div, msg, :id => "flash_#{name}"
                     %div.inner-content
                       =yield
           #jq-footer.jq-clearfix

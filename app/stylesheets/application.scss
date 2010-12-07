@@ -271,6 +271,7 @@ div.more_motions:hover {
 
 nav.main ul {
   float: right;
+  height: 40px;
 
   li {
     margin-top: 5px;
@@ -302,3 +303,41 @@ nav.main ul {
 
 /* @end */
 
+/* @group Flash alerts & Validation Errors */
+
+#flash_notice { 
+  margin: 10px 20px;
+  clear: both; 
+  background: #FFFECF;
+  border: 2px solid #DCDA00;
+  font-size: 14px;
+  text-align: center;
+  padding: 5px 20px;
+  color: #5F5F5F;
+}
+
+#flash_alert {
+  margin: 10px 20px;
+  clear: both; 
+  background: #FFEEEE;
+  border: 2px solid red;
+  font-size: 14px;
+  text-align: center;
+  padding: 5px 20px;
+  color: red;
+}
+
+#error_explanation {
+  background: #FBB;
+  border: 2px solid red;
+  color: #585858;
+  padding: 20px;
+  font-size: 12px;
+  margin: 20px;
+}
+
+#error_explanation ul { margin: 0; }
+#error_explanation h2 { font-size: 14px;}
+#error_explanation h3 { font-size: 12px;}
+
+/* @end */
