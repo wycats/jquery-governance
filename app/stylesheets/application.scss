@@ -161,8 +161,13 @@ body {
 
 /* @group Homepage */
 #content .current-motions {
+  $top: #4b4;
+  $bottom: #292;
+
   a.quick-tool {
-    @include linear-gradient(color-stops(#4b4, #292));
+    background: $bottom;
+
+    @include linear-gradient(color-stops($top, $bottom));
     @include border-radius(3px);
 
     display: block;
@@ -172,12 +177,15 @@ body {
     color: #FFFEFE !important;
     font-size: 1.8em !important;
     border: 1px solid #070;
-    background: #292;
 
     &:hover {
-      background: #4b4;
-      margin: 1px -1px 0 0;
-      @include linear-gradient(color-stops(#4b4, #5c5));
+      background: darken($top, 5%);
+      @include linear-gradient(color-stops(darken($top, 5%), darken($bottom, 5%)));
+    }
+
+    &:active {
+      background: lighten($top, 5%);
+      @include linear-gradient(color-stops(lighten($top, 5%), lighten($bottom, 5%)));
     }
   }
 
