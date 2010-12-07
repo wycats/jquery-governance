@@ -1,6 +1,8 @@
 class Member < ActiveRecord::Base
   include Voting
 
+  acts_as_paranoid
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :recoverable, :rememberable
@@ -27,12 +29,23 @@ class Member < ActiveRecord::Base
     active_at?(Time.now)
   end
 
-  # Check if the member has permissions to perform the given action over the given motion
+  # Check if the member has permissions to perform the given action over the given motion or member
   #   @param [Symbol] action The action the member wants to perform
-  #   @param [Motion] motion The motion over which the member wants to perform the action
+  #   @param [permissible_object] motion or member The motion or member over which the member wants to perform the action
   #   @return [true, false] Whether or not the member has permissions to perform the action over the motion, respectively
-  def can?(action, motion)
-    motion.permit?(action, self)
+  def can?(action, permissible_object)
+    permissible_object.permit?(action, self)
+  end
+
+  # Check if the member is allowed to perform the given action
+  #   @param [Symbol] action The action the member wants to perform
+  #   @param [Member] member The member who wants to perfrom the action
+  #   @return [true, false] Whether or not it permits the member to perform the action, respectively
+  def permit?(action, member)
+    case action
+    when :destroy
+      member.membership_active? && member.is_admin?
+    end
   end
 
   # Check if Member has voted on a given motion

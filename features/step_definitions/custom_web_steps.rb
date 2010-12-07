@@ -8,7 +8,6 @@
 #  allows you to use:
 #
 #  Then I should see "some text" in the title
-#
 #  which is effectively:
 #
 #  Then I should see "some text" within "h1"
