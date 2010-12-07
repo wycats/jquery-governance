@@ -152,11 +152,6 @@ class Motion < ActiveRecord::Base
     open? and not voting?
   end
 
-  # @TODO - Description
-  def passed!
-    update_attributes(:state_name => "voting")
-  end
-
   def passed?
     state_name == "voting" && has_met_requirement?
   end
