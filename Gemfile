@@ -9,7 +9,6 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'haml',         '~>3.0.23'
 gem 'haml-rails'
-gem 'will_paginate', '~>3.0.beta'
 
 gem 'resque'
 gem 'resque-scheduler', :require => "resque_scheduler"

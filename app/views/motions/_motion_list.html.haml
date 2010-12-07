@@ -1,7 +1,0 @@
--Motion::MOTION_STATES.each do |state|
-  -if motions_grouped_by_state[state]
-    %h3
-      =Motion::HUMAN_READABLE_MOTION_STATES[state]
-    =render :partial => 'motion', :collection => motions_grouped_by_state[state]
-
-=will_paginate @motions

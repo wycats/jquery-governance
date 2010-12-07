@@ -113,6 +113,13 @@ body {
 .motion_state_failed {
   background-color: #FAAFBE; }
 
+div.more_motions {
+  width: 25px; }
+
+div.more_motions:hover {
+  text-decoration: underline;
+  cursor: pointer; }
+
 /* @end */
 /* @group Homepage */
 #content .current-motions a.quick-tool {

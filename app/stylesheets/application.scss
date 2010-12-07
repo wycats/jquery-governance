@@ -142,16 +142,28 @@ body {
   font-size: 105%; }
 
 .motion_date, .motion_member {
-  width: 49%; }
+  width: 49%;
+}
 
 .motion_description, .motion_rationale {
-  margin-top: 2px; }
+  margin-top: 2px;
+}
 
 .motion_state_passed {
-  background-color: #90EE90; }
+  background-color: #90EE90;
+}
 
 .motion_state_failed {
-  background-color: #FAAFBE; }
+  background-color: #FAAFBE;
+}
+
+div.more_motions {
+  width: 25px;
+}
+div.more_motions:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 
 /* @end */
 

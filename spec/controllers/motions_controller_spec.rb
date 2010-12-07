@@ -39,13 +39,9 @@ describe MotionsController do
     it "should render the index tempate with 10 motions" do
       get :index
       response.should render_template('motions/index')
-      assigns(:motions).count.should == 10
+      assigns(:motions).count.should == 11
     end
-    it "should render the second page with 1 motion" do
-      get :index, :page => 2
-      response.should render_template('motions/index')
-      assigns(:motions).count.should == 1
-    end
+    it "should render 1 more motion when the user clicks more"
   end
 
   describe "#closed with member logged in" do
