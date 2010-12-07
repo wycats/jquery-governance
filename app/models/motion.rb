@@ -113,11 +113,6 @@ class Motion < ActiveRecord::Base
     state_name == "voting"
   end
 
-  # @TODO - Description
-  def passed!
-    update_attributes(:state_name => "voting")
-  end
-
   def passed?
     state_name == "voting" && has_met_requirement?
   end
