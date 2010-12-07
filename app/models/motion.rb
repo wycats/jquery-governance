@@ -65,6 +65,10 @@ class Motion < ActiveRecord::Base
     objections.create(:member => member)
   end
 
+  def objected?
+    objections.any?
+  end
+
   # Cast a Member's Vote
   #   @param [Member] member An active member
   #   @param [true, false] value An aye or nay vote
@@ -98,16 +102,6 @@ class Motion < ActiveRecord::Base
 
   def discussing?
     state_name == "discussing"
-  end
-
-  # @TODO - Description
-  def objected!
-    # NOTE this isn't doing what is was supposed to do anymore
-    update_attributes(:state_name => "discussing")
-  end
-
-  def objected?
-    objections.any?
   end
 
   # @TODO - Description
