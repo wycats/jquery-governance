@@ -196,8 +196,7 @@ class Motion < ActiveRecord::Base
   end
 
   def seconding?
-    return false if voting?
-    open?
+    open? and not voting?
   end
 
   # @TODO - Description
