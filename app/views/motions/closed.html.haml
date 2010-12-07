@@ -1,0 +1,2 @@
+= render :partial => 'motion_list', :locals => { :motions => @motions, :motions_grouped_by_state => @motions.group_by(&:state) }
+= link_to 'See open motions', motions_path

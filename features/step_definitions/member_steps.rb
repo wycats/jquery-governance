@@ -1,45 +1,34 @@
-Given /^I am signed in as an active member$/ do
+Given /^I am signed in as "([^"]*)"$/ do |email|
   visit new_member_session_path
-  fill_in 'Email', with: active_member.email
+  fill_in 'Email', with: email
   fill_in 'Password', with: 'secret'
   click_button 'Sign in'
 end
 
+Given /^I am signed in as an active member$/ do
+  member = Factory.create(:active_membership).member
+  Given "I am signed in as \"#{member.email}\""
+end
+
+Given /^I am signed in as an inactive member$/ do
+  member = Factory.create(:expired_membership).member
+  Given "I am signed in as \"#{member.email}\""
+end
+
+Given /^I am signed in as an active member called "([^"]*)"$/ do |name|
+  member = Factory.create(:member, :name => name)
+  Given "I am signed in as \"#{member.email}\""
+end
+
 Given /^there is an active member with email "([^"]*)" and password "([^"]*)"$/ do |email, password|
-  member = Factory(:member, email: email, password: password)
+  member = Factory.create(:member, email: email, password: password)
   Factory(:active_membership, member: member)
-end
-
-Given "a member exists named \"$name\" with email \"$email\"" do |name, email|
-  Factory.create(:member, :email => email, :name => name)
-  Factory.create(:active_membership, :member => @member)
-end
-
-Given "I am an active member with the email \"$email\"" do |email|
-  @member = Factory.create(:member, :email => email)
-  Factory.create(:active_membership, :member => @member)
-end
-
-# Allows setting name and email
-Given "I am an active member named \"$name\"" do |name|
-  @member = Factory.create(:member, :name => name)
-  Factory.create(:active_membership, :member => @member)
-end
-
-Given "I log in" do
-  Given "I am on the sign in page"
-  And "I fill in \"#{@member.email}\" for \"Email\""
-  And "I fill in \"#{@member.password}\" for \"Password\""
-  And "I press \"Sign in\""
-end
-
-Given  /^(?:|I )am logged in$/ do
-  Given "I log in"
 end
 
 Given /^these (?:other )members exist:$/ do |table|
   table.rows.each do |name, email|
-    Given %{a member exists named "#{name}" with email "#{email}"}
+    member = Factory.create(:member, name: name, email: email)
+    Factory.create(:active_membership, member: member)
   end
 end
 
@@ -49,4 +38,4 @@ When /^I follow the edit link for "([^"]*)"$/ do |arg1|
   end
 end
 
-
+semantic_suffixes({ 'in the author section' => '.author' })

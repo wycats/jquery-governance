@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Motion do
-  before :all do
+  before do
     @motion = Factory(:motion)
   end
 

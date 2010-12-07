@@ -1,9 +1,25 @@
 class Motion < ActiveRecord::Base
   include Voting
 
-  validates_inclusion_of :state, :in =>
-    %w(waitingsecond waitingexpedited waitingobjection
-       objected voting passed failed approved).push(nil)
+  CLOSED_STATES = %w(passed failed approved)
+  OPEN_STATES   = %w(waitingsecond waitingexpedited waitingobjection objected voting)
+  MOTION_STATES = OPEN_STATES + CLOSED_STATES
+
+  HUMAN_READABLE_MOTION_STATES = {
+    'waitingsecond'     => 'Waiting For Seconds',
+    'waitingexpedited'  => 'Waiting To Be Expedited',
+    'waitingobjection'  => 'Waiting For Objections',
+    'objected'          => 'Objected',
+    'voting'            => 'In Voting',
+    'passed'            => 'Passed',
+    'failed'            => 'Failed',
+    'approved'          => 'Approved'
+  }
+
+  scope :open_state,    where(:state => OPEN_STATES)
+  scope :closed_state,  where(:state => CLOSED_STATES)
+
+  validates_inclusion_of :state, :in => MOTION_STATES.push(nil)
 
   belongs_to  :member
   has_many    :events
@@ -11,27 +27,6 @@ class Motion < ActiveRecord::Base
   has_many    :conflicts, :through => :motion_conflicts
 
   after_create :initialize_state
-
-  # # @return [ActiveRecord::Relation] All of the votes cast on this motion
-  # def votes
-  #   events.votes
-  # end
-
-  # # @return [ActiveRecord::Relation] All of the seconds cast in support of this motion
-  # def seconds
-  #   events.seconds
-  # end
-
-  # # @return [Fixnum] Count of current yea votes
-  # def yeas
-  #   votes.yeas.count
-  # end
-  # alias :ayes :yeas
-
-  # # @return [Fixnum] Count of current nay votes
-  # def nays
-  #   votes.nays.count
-  # end
 
   # @return [Fixnum] The number of votes required to pass this Motion
   def required_votes
@@ -48,6 +43,28 @@ class Motion < ActiveRecord::Base
     possible_votes / 3 + 1
   end
   alias :seconds_for_expediting :seconds_for_expedition
+
+  # @return [true, false] Whether the required votes to expedite has been received
+  def can_expedite?
+    seconds.count >= seconds_for_expedition
+  end
+
+  # @return [true, false] Whether or not the required secondses have been met, and should wait on objections
+  def can_wait_objection?
+    seconds.count >= 2
+  end
+
+  # @return [true, false] Motion state is open for voting or not
+  def open?
+    OPEN_STATES.include? self.state
+  end
+  alias :is_open? :open?
+
+  # @return [true, false] Motion state is closed for voting or not
+  def closed?
+    CLOSED_STATES.include? self.state
+  end
+  alias :is_cloed? :closed?
 
   # Checks to see if a member has a conflict on a motion
   #   @param [Member] member The member who is voting on this motion
@@ -79,14 +96,6 @@ class Motion < ActiveRecord::Base
   # @TODO @return
   def second(member)
     seconds.create(:member => member)
-
-    second_count = seconds.count
-
-    if state == "waitingsecond" && second_count >= 2
-      waitingobjection!
-    elsif state == "waitingexpedited" && second_count >= seconds_for_expedition
-      voting!
-    end
   end
 
   # Cast a Member's Vote
@@ -96,7 +105,6 @@ class Motion < ActiveRecord::Base
   # @TODO @return
   def vote(member, value)
     votes.create(:member => member, :value => value)
-    passed! if ayes >= required_votes
   end
 
   ##
@@ -187,6 +195,11 @@ class Motion < ActiveRecord::Base
     state == "voting"
   end
 
+  def seconding?
+    return false if voting?
+    open?
+  end
+
   # @TODO - Description
   def passed!
     update_attributes(:state => "passed")
@@ -218,6 +231,23 @@ class Motion < ActiveRecord::Base
 
   def failed?
     state == "failed"
+  end
+
+  # Sets the motion to passed, if it has met all requirements
+  def assert_state
+    case state
+    when "waitingsecond"    then  waitingobjection! if self.can_wait_objection?
+    when "waitingexpedited" then  voting!           if self.can_expedite?
+    when "voting"           then  passed!           if self.has_met_requirement?
+    end
+  end
+
+  def formatted_state(format = :human)
+    if format == :humand
+      HUMAN_READABLE_MOTION_STATES[attributes["state"]]
+    else
+      state
+    end
   end
 
 private

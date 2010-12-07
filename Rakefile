@@ -7,3 +7,10 @@ require 'rake'
 require 'resque/tasks'
 
 JqueryVoting::Application.load_tasks
+
+namespace :doc do
+  desc "Generate YARD docs"
+  YARD::Rake::YardocTask.new(:app) do |t|
+    t.files += ['app/**/*.rb']
+  end
+end

@@ -7,5 +7,12 @@ Feature: Active member creates motion
     Given I am signed in as an active member
     When I follow "New Motion"
     And I fill in "Title" with "jQuery should take over the JS world."
+    And I fill in "Description" with "Replace all websites' JS with jQuery."
+    And I fill in "Rationale" with "Because it's just that cool."
     And I press "Create Motion"
     Then I should see "New motion was created successfully"
+
+  @wip
+  Scenario: I am an inactive member
+    Given I am signed in as an inactive member
+    Then I should not see "New Motion"

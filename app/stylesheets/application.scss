@@ -1,0 +1,292 @@
+@import "compass/css3";
+
+/* @group Variables */
+
+$border_color: #ccc;
+$font_base: 12px;
+$font_label: $font_base + 2px;
+$font_label_height: 30px;
+
+$form_row_spacing: 10px;
+$label_width: 120px;
+$input_padding: 5px;
+$input_width: 550px;
+$textarea_width: 550px;
+$header_green: #407A27;
+
+$header_green: #407A27;
+
+/* @end */
+
+/* @group Global */
+
+body {
+  font-size: $font_base;
+}
+
+.centered {
+  text-align: center;
+}
+
+/* @end */
+
+/* @group Buttons */
+
+.button {
+  &, &:visited {
+    @include border-radius(5px);
+    @include box-shadow(0, 1px, 3px, rgba(0,0,0,0.5));
+
+    border: 0;
+    background: #222 url("/images/btn_overlay.png") repeat-x;
+    display: inline-block;
+    padding: 5px 10px 6px;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px rgba(#000,0.25);
+    border-bottom: 1px solid rgba(#000,0.25);
+    position: relative;
+    cursor: pointer;
+  }
+
+  &:hover {
+    background-color: #111;
+    color: #fff;
+  }
+
+  &:active {
+    top: 1px;
+  }
+}
+
+.small_button, .small.button:visited {
+  font-size: 11px;
+  padding: 5px;
+}
+
+.button, .button:visited,
+.medium_button, .medium_button:visited {
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1;
+  text-shadow: 0 -1px 1px rgba(#000,0.25);
+}
+
+.large_button, .large_button:visited {
+  font-size: 14px;
+  padding: 8px 14px 9px;
+}
+
+.green_button, .green_button:visited {
+  background-color: #91bd09;
+}
+
+.green_button:hover {
+  background-color: #749a02;
+}
+
+
+/* @end */
+
+
+/* @group Forms */
+
+.form_row {
+  margin-bottom: $form_row_spacing;
+  clear: both;
+
+  &.submit {
+    margin-top: $form_row_spacing * 4;
+  }
+
+  label {
+    float: left;
+    font-size: $font_label;
+    line-height: $font_label_height;
+    vertical-align: middle;
+    width: $label_width;
+  }
+
+  input[type=text], input[type=password], textarea {
+    padding: $input_padding;
+    width: $input_width;
+    border: 1px solid $border_color;
+  }
+
+  textarea {
+    height: 10em;
+    width: $textarea_width;
+  }
+}
+
+
+#user_signin_form {
+  width: 400px;
+  margin: 20px auto;
+}
+
+#new_motion_form {
+  width: 700px;
+  margin: 20px auto;
+}
+
+/* @end */
+
+/* @group Motions */
+
+.motion {
+  border-left: 3px solid $border_color;
+  border-top: 1px solid $border_color;
+  border-bottom: 1px solid $border_color;
+  margin-bottom: 5px;
+  padding: 0px 3px 0px 3px; }
+
+.motion_title {
+  font-weight: bold;
+  font-size: 105%; }
+
+.motion_date, .motion_member {
+  width: 49%; }
+
+.motion_description, .motion_rationale {
+  margin-top: 2px; }
+
+.motion_state_passed {
+  background-color: #90EE90; }
+
+.motion_state_failed {
+  background-color: #FAAFBE; }
+
+/* @end */
+
+/* @group Homepage */
+#content .current-motions {
+  $top: #4b4;
+  $bottom: #292;
+
+  a.quick-tool {
+    background: $bottom;
+
+    @include linear-gradient(color-stops($top, $bottom));
+    @include border-radius(3px);
+
+    display: block;
+    float: right;
+    padding: .25em .5em;
+    text-decoration: none;
+    color: #FFFEFE !important;
+    font-size: 1.8em !important;
+    border: 1px solid #070;
+
+    &:hover {
+      background: darken($top, 5%);
+      @include linear-gradient(color-stops(darken($top, 5%), darken($bottom, 5%)));
+    }
+
+    &:active {
+      background: lighten($top, 5%);
+      @include linear-gradient(color-stops(lighten($top, 5%), lighten($bottom, 5%)));
+    }
+  }
+
+  h1 {
+    padding-top: 0;
+    font-size: 3em;
+    color: $header_green;
+    text-shadow: 0 1px 1px #ccc;
+    font-style: italic;
+  }
+}
+
+
+.current-motions {
+  ul {
+    border: 1px solid #f0f0f0;
+    border-bottom: 0;
+    margin: .5em 0 0;
+  }
+
+  li {
+    padding: 1em;
+    border-bottom: 1px solid #f0f0f0;
+
+    &.odd {
+      background: #f0fff0 !important;
+    }
+
+    a {
+      font-size: 1.75em;
+      text-decoration: none;
+
+      &.plus {
+        float: right;
+        height: 18px;
+        width: 20px;
+        display: block;
+        background-image: url('/images/plus.png');
+        background-repeat: no-repeat;
+        color: #000;
+        font-size: 1px;
+      }
+    }
+
+    span.meta {
+      font-size: 1.25em !important;
+      color: #80a080;
+    }
+
+    p {
+      color: #b8b8b8;
+      font-style: italic;
+      font-weight: normal;
+      font-size: 1.25em;
+      margin: .25em 0 0;
+    }
+  }
+}
+
+
+#motion {
+  h1 {
+    color: $header_green;
+    font-size: 3em;
+  }
+
+  ul {
+    float: right;
+  }
+}
+
+nav.main ul {
+  float: right;
+
+  li {
+    margin-top: 5px;
+    float: left;
+
+    &.first a {
+      @include border-bottom-left-radius(6px);
+    }
+
+    a {
+      font-size: 1.25em;
+      font-family: helvetica, arial, sans-serif;
+      color: #4F3806 !important;
+      border: 0;
+      padding: 5px 10px 6px;
+      text-decoration: none;
+      @include box-shadow(0, 0, 1px, 0, rgba(#000, 0.25));
+      text-shadow: 0 -1px 1px rgba(#000,0.2);
+      border-left: 1px solid #CAB585;
+      border-bottom: 1px solid #CAB585;
+      cursor: pointer;
+      background: url('http://jquery.org/wp-content/themes/green/green/shadow.png') bottom left repeat-x;
+      &:hover {
+        background-color: rgba(#000, 0.1);
+      }
+    }
+  }
+}
+
+/* @end */
+
