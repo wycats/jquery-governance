@@ -8,6 +8,8 @@ tmp/**/*
 .yardoc
 *.swp
 public/stylesheets/.sass-cache/*
-doc
-!doc/README_FOR_APP
+doc/*.html
+doc/**/*.html
+doc/css
+doc/js
 .sass-cache/*
