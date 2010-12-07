@@ -11,25 +11,25 @@
     %title
       jQuery Voting Tools
   %body
-    %div#access
+    #access
       %div.skip-link
         %a{:href => "#jq-content", :title => "Skip to content"}
-    %div#jq-siteBurst.jq-breakout
-      %div#jq-siteContain
-        %div#jq-header
+    #jq-siteBurst.jq-breakout
+      #jq-siteContain
+        #jq-header
           %a{:id => "jq-siteLogo", :href => "/", :title => "jQuery Home"}
             %img{:src => "http://static.jquery.com/org/images/project/jquery-project-sm.png", :alt => "jQuery: Write Less, Do More."}
-          %div#jq-primaryNavigation.roundbottom.shadow
+          #jq-primaryNavigation.roundbottom.shadow
             =render :partial => "layouts/primary_nav"
 
-          %div#jq-secondaryNavigation
+          #jq-secondaryNavigation
             =render :partial => "layouts/secondary_nav"
 
-        %div#jq-contentContain.rounded.shadow
-          %div#jq-content.jq-clearfix.jq-overvlowContain.roundedTop
+        #jq-contentContain.rounded.shadow
+          #jq-content.jq-clearfix.jq-overvlowContain.roundedTop
             %hr.space
-            %div#container
-              %div#content
+            #container
+              #content
                 %div
                   %div
                     %div.post-header.roundedTop
@@ -41,8 +41,8 @@
                           Members of the jQuery Team vote on issues using this tool. Keep an eye on the official business of jQuery here.
                     %div.inner-content
                       =yield
-          %div#jq-footer.jq-clearfix
-            %div#jq-credits
+          #jq-footer.jq-clearfix
+            #jq-credits
               %p#jq-copyright
                 &copy; 2010
                 %a{:href => "http://jquery.org/"}
@@ -55,5 +55,5 @@
                 %a{:href => "http://jquery.org/sponsors"}
                   others
                 \.
-            %div#jq-footerNavigation
+            #jq-footerNavigation
               =render :partial => "layouts/secondary_nav"
