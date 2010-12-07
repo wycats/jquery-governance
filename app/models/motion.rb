@@ -16,7 +16,7 @@ class Motion < ActiveRecord::Base
   scope :open_state,    where(:state_name => OPEN_STATES)
   scope :closed_state,  where(:state_name => CLOSED_STATES)
 
-  validates_inclusion_of :state_name, :in => MOTION_STATES
+  validates :state_name, :inclusion => { :in => MOTION_STATES }
 
   belongs_to  :member
   has_many    :events
