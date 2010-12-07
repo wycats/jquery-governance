@@ -12,21 +12,21 @@ module MotionState
     end
 
     def update
-      @motion.expedited? ? update_expedited : update_non_expedited
+      if @motion.expedited?
+        @motion.voting! if @motion.seconds_count >= @motion.seconds_for_expedition
+      else
+        @motion.discussing! if @motion.seconds_count >= 2
+      end
     end
 
     def scheduled_update(time_elapsed)
-      @motion.failed! if time_elapsed >= 48.hours
-    end
+      return if time_elapsed < 48.hours
 
-  private
-
-    def update_expedited
-      @motion.voting! if @motion.seconds.count >= @motion.seconds_for_expedition
-    end
-
-    def update_non_expedited
-      @motion.waitingobjection! if @motion.seconds.count >= 2
+      if @motion.expedited? && @motion.seconds_count >= 2
+        @motion.discussing!
+      else
+        @motion.closed!
+      end
     end
   end
 end

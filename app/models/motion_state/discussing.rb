@@ -9,8 +9,11 @@ module MotionState
     end
 
     def scheduled_update(time_elapsed)
-      @motion.voting! if time_elapsed >= 48.hours
-      @motion.voting! if !@motion.objected? && time_elapsed >= 24.hours
+      if time_elapsed >= 48.hours
+        @motion.voting!
+      elsif !@motion.objected? && time_elapsed >= 24.hours
+        @motion.voting!
+      end
     end
   end
 end

@@ -67,6 +67,10 @@ class Motion < ActiveRecord::Base
   end
   alias :is_cloed? :closed?
 
+  def seconds_count
+    seconds.count
+  end
+
   # Checks to see if a member has a conflict on a motion
   #   @param [Member] member The member who is voting on this motion
   #   @return [true, false] Whether or not member has a conflict
@@ -90,6 +94,10 @@ class Motion < ActiveRecord::Base
   # @TODO @return
   def second(member)
     seconds.create(:member => member)
+  end
+
+  def object(member)
+    objections.create(:member => member)
   end
 
   # Cast a Member's Vote
@@ -126,6 +134,14 @@ class Motion < ActiveRecord::Base
 
   def waitingexpedited?
     state_name == "waitingsecond" && expedited?
+  end
+
+  def discussing!
+    update_attributes(:state_name => "discussing")
+  end
+
+  def discussing?
+    state_name == "discussing"
   end
 
   # @TODO - Description
@@ -168,6 +184,14 @@ class Motion < ActiveRecord::Base
 
   def passed?
     state_name == "voting" && has_met_requirement?
+  end
+
+  def closed!
+    update_attributes(:state_name => "closed")
+  end
+
+  def closed?
+    state_name == "closed"
   end
 
   # @TODO - Description

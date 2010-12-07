@@ -8,17 +8,11 @@ module MotionState
     end
 
     def schedule_updates
-      schedule_update_in(24.hours)
-    end
-
-    def update
-      @motion.passed! if @motion.has_met_requirement?
+      schedule_update_in(48.hours)
     end
 
     def scheduled_update(time_elapsed)
-      if time_elapsed >= 24.hours
-        @motion.passed? ? @motion.approved! : @motion.failed!
-      end
+      @motion.closed! if time_elapsed >= 48.hours
     end
   end
 end
