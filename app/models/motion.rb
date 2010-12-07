@@ -148,7 +148,7 @@ class Motion < ActiveRecord::Base
   end
 
   def passed?
-    state_name == "voting" && has_met_requirement?
+    voting? && has_met_requirement?
   end
 
   def closed!
@@ -164,11 +164,11 @@ class Motion < ActiveRecord::Base
 
   # @TODO - Description
   def approved?
-    state_name == "closed" && has_met_requirement?
+    closed? && has_met_requirement?
   end
 
   def failed?
-    state_name == "closed" && !has_met_requirement?
+    closed? && !has_met_requirement?
   end
 
   # Sets the motion to passed, if it has met all requirements
