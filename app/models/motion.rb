@@ -172,11 +172,6 @@ class Motion < ActiveRecord::Base
     state_name == "closed" && has_met_requirement?
   end
 
-  # @TODO - Description
-  def failed!
-    update_attributes(:state_name => "closed")
-  end
-
   def failed?
     state_name == "closed" && !has_met_requirement?
   end
