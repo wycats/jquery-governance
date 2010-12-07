@@ -52,7 +52,12 @@ module MotionState
     end
 
     describe "schedule_updates" do
-      it "should schedule an update in 48 hours"
+      it "should schedule an update in 48 hours" do
+        @motion = Factory(:voting_motion)
+        @motion_state = @motion.state
+        ScheduledMotionUpdate.should_receive(:in).with(48.hours, @motion)
+        @motion_state.schedule_updates
+      end
     end
 
     it "responds to update" do
