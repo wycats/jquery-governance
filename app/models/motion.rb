@@ -23,7 +23,8 @@ class Motion < ActiveRecord::Base
   has_many    :motion_conflicts
   has_many    :conflicts, :through => :motion_conflicts
 
-  after_save :schedule_updates
+  after_save :schedule_updates, :if => :state_name_changed?
+  after_create :schedule_updates
 
   after_initialize :assign_state
 
@@ -196,7 +197,7 @@ private
   end
 
   def schedule_updates
-    state.schedule_updates if state_name_changed?
+    state.schedule_updates
   end
 
   def assign_state
