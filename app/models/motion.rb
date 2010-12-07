@@ -92,15 +92,6 @@ class Motion < ActiveRecord::Base
     state_name == "waitingsecond"
   end
 
-  # @TODO - Description
-  def waitingexpedited!
-    update_attributes(:state_name => "waitingsecond", :expedited => true)
-  end
-
-  def waitingexpedited?
-    state_name == "waitingsecond" && expedited?
-  end
-
   def discussing!
     update_attributes(:state_name => "discussing")
   end

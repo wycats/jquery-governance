@@ -144,15 +144,15 @@ describe Motion do
       @motion.should be_waitingobjection
     end
 
-    it "knows that when the motion is waiting for expedition and there are less seconds than required, then it should continue to wait for expedition" do
-      @motion.waitingexpedited!
+    it "knows that when the motion is marked expedited and waiting for second and there are less seconds than required, then it should continue to wait for seconds" do
+      @motion.update_attributes(:expedited => true)
       @motion.stub(:seconds_for_expedition).and_return(2)
       Factory(:second, :motion => @motion)
-      @motion.should be_waitingexpedited
+      @motion.should be_waitingsecond
     end
 
-    it "knows that when the motion is waiting for expedition and there are at least as many seconds as required, then it should be open for voting" do
-      @motion.waitingexpedited!
+    it "knows that when the motion is marked as expedited and waiting for second and there are at least as many seconds as required, then it should be open for voting" do
+      @motion.update_attributes(:expedited => true)
       @motion.stub(:seconds_for_expedition).and_return(2)
       2.times{Factory(:second, :motion => @motion)}
       @motion.should be_voting
