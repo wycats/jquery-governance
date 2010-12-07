@@ -133,13 +133,11 @@ describe Motion do
 
   describe "update_state" do
     it "knows that when the motion is waiting for seconds and there is 1 second that it should continue to wait for another second" do
-      @motion.waitingsecond!
       Factory(:second, :motion => @motion)
       @motion.should be_waitingsecond
     end
 
     it "knows that when the motion is waiting for seconds and there are 2 seconds that it should now be in discussion" do
-      @motion.waitingsecond!
       2.times{Factory(:second, :motion => @motion)}
       @motion.should be_discussing
     end

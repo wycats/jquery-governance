@@ -87,11 +87,6 @@ class Motion < ActiveRecord::Base
     assign_state
   end
 
-  # @TODO - Description
-  def waitingsecond!
-    update_attributes(:state_name => "waitingsecond")
-  end
-
   def waitingsecond?
     state_name == "waitingsecond"
   end
