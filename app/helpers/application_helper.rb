@@ -11,4 +11,8 @@ module ApplicationHelper
       "Member"
     end
   end # motion_creator_display_name
+
+  def member?
+    current_member
+  end
 end

@@ -15,7 +15,7 @@ class Member < ActiveRecord::Base
   has_many :events
   has_many :member_conflicts
   has_many :conflicts, :through => :member_conflicts
-    
+
   # Checks membership status at a given Date/Time
   #   @param [Date, Time, DateTime] time The time for which membership status should be checked
   #   @return [true, false] Whether or not member was active as true or false, respectively
@@ -61,10 +61,10 @@ class Member < ActiveRecord::Base
   def has_seconded?(motion)
     seconds.where(:motion_id => motion.id).present?
   end
-  
+
   # Return name if present, email if not
   def name_or_email
     self.name || self.email
   end
-  
+
 end

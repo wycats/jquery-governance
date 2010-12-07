@@ -40,7 +40,7 @@ class MotionEventsController < ApplicationController
     @event.member = current_member
 
     if @event.save
-      flash[:notice] = "Your #{@event.event_type.capitalize} has been successfully cast."
+      flash[:notice] = "Your #{@event.formatted_event_type} has been successfully cast."
       redirect_to @motion
     else
       # @TODO: Inform user

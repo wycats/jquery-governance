@@ -242,18 +242,12 @@ class Motion < ActiveRecord::Base
     end
   end
 
-  def state(options = {})
-    case options[:format]
-      when :human
-        HUMAN_READABLE_MOTION_STATES[attributes["state"]]
-      else
-        attributes["state"]
+  def formatted_state(format = :human)
+    if format == :humand
+      HUMAN_READABLE_MOTION_STATES[attributes["state"]]
+    else
+      state
     end
-  end
-
-  # Get history for the motion
-  def history(member)
-    member ? self.events : nil
   end
 
 private

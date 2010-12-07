@@ -154,18 +154,4 @@ describe Motion do
       @motion.should be_passed
     end
   end
-  describe "history" do
-    describe "when a member visits its page" do
-      it "knows that member should see history" do
-        member = @member
-        @motion.history(member).should == @motion.events
-      end
-    end
-    describe "when a non members visits its page" do
-      it "knows that non member shouldn't see history" do
-        member = nil
-        @motion.history(member).should == nil
-      end
-    end
-  end
 end

@@ -1,8 +1,11 @@
 class Event < ActiveRecord::Base
+  # if more types are added, make sure to update app/views/events/_event,
+  # which currently assumes the #{event}ed always converts an event to
+  # its past tense form
   EVENT_TYPES = ["vote", "second"]
   HUMAN_READABLE_EVENT_TYPES = {
-    'vote' => 'voted',
-    'second' => 'seconded'
+    'vote' => 'Vote',
+    'second' => 'Second'
   }
 
   belongs_to  :member
@@ -48,6 +51,13 @@ class Event < ActiveRecord::Base
   end
   alias :second? :is_second?
 
+  def formatted_event_type(format = :human)
+    if format == :human
+      HUMAN_READABLE_EVENT_TYPES[event_type]
+    else
+      event_type
+    end
+  end
 
 private
   # Will error if the motion creator attempts to second their motion

@@ -1,11 +1,11 @@
-=render :partial => 'motions/motion', :locals => {:motion => @motion}
+=render @motion
 -if @actionable
   %div#members_only
-    =render :partial => 'member_action', :locals => {:motion => @motion}
+    =render 'member_action', :motion => @motion
 %div#seconds
   %h3
     Seconds to this Motion
-  =render :partial => 'event', :collection => {:events => @events.seconds}
+  =render :partial => 'event', :collection => @events.second
 %div#votes
   %h3
     Votes Cast
