@@ -7,22 +7,18 @@ describe Motion do
 
   describe "#waitingexpedited!" do
     it "enqueues a Motions::WaitingexpededToFailed and Motions::WaitingexpeditedToWaitingobjection job" do
-      motion = Factory(:motion)
-
-      motion.waitingexpedited!
+      motion = Factory(:motion, :expedited => true)
 
       Resque.delayed_queue_schedule_size.should == 1
     end
 
     it "post 24 hours and with two seconds moves the motion to waitingobjection state" do
       pending # NOTE this fails, but I don't think it is what the rules say
-      motion = Factory.create(:motion)
+      motion = Factory(:motion, :expedited => true)
 
       2.times do
         Factory.create(:second, :motion => motion)
       end
-
-      motion.waitingexpedited!
 
       Resque.size("waitingexpedited_to_waitingobjection").should == 0
       Resque::Scheduler.handle_delayed_items(24.hours.from_now.to_i)
@@ -33,9 +29,7 @@ describe Motion do
     end
 
     it "post 48 hours moves the motion to failed state" do
-      motion = Factory(:motion)
-
-      motion.waitingexpedited!
+      motion = Factory(:motion, :expedited => true)
 
       # Resque.size("waitingexpedited_to_failed").should == 0
       Resque::Scheduler.handle_delayed_items(48.hours.from_now.to_i)
