@@ -30,9 +30,7 @@ module MotionState
   private
 
     def schedule_updates_in(*times)
-      times.each do |time|
-        Resque.enqueue_at(time.from_now, ScheduledMotionUpdate, @motion.id, @motion.state_name, time)
-      end
+      times.each { |time| ScheduledMotionUpdate.in(time, @motion) }
     end
     alias :schedule_update_in :schedule_updates_in
   end
