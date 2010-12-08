@@ -173,7 +173,7 @@ class Motion < ActiveRecord::Base
   end
 
   def formatted_state(format = :human)
-    if format == :humand
+    if format == :human
       HUMAN_READABLE_MOTION_STATES[attributes["state_name"]]
     else
       state_name
