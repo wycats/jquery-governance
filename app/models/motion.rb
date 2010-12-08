@@ -55,18 +55,6 @@ class Motion < ActiveRecord::Base
     seconds.count >= 2
   end
 
-  # @return [true, false] Motion state is open for voting or not
-  def open?
-    OPEN_STATES.include? self.state_name
-  end
-  alias :is_open? :open?
-
-  # @return [true, false] Motion state is closed for voting or not
-  def closed?
-    CLOSED_STATES.include? self.state_name
-  end
-  alias :is_cloed? :closed?
-
   def seconds_count
     seconds.count
   end
@@ -161,6 +149,14 @@ class Motion < ActiveRecord::Base
   def closed?
     state_name == "closed"
   end
+  alias :is_closed? :closed?
+
+  # @return [true, false] Motion state is open for voting or not
+  def open?
+    !closed?
+  end
+  alias :is_open? :open?
+
 
   # @TODO - Description
   def approved?
