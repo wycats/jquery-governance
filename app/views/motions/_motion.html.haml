@@ -1,5 +1,5 @@
-#motion
-  %h1
+%div{ :id => "motion_#{motion.id}", :class => "motion_state_#{motion.state_name}" }
+  %h4
     =link_to motion.title, motion_events_path(motion)
   %p.meta
     %span.created_at== Created on #{motion.created_at.to_date}
