@@ -2,7 +2,8 @@
   =notice
 
 .current-motions
-  =link_to "New Motion", new_motion_path, {:class => "quick-tool"}
+  - if active_member?
+    =link_to "New Motion", new_motion_path, {:class => "quick-tool"}
 
   %h1
     Current Motions

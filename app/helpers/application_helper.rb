@@ -15,4 +15,8 @@ module ApplicationHelper
   def member?
     current_member
   end
+
+  def active_member?
+    current_member && current_member.membership_active?
+  end
 end
