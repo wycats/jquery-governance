@@ -1,5 +1,6 @@
-Given /^a motion titled "([^"]*)" exists(?: in the "(.*)" state)?$/ do |title, state|
-  Factory(:motion, title: title, state: state)
+Given /^a motion titled "([^"]*)" exists(?: in the "(.*)" state)?$/ do |title, state_name|
+  state_name = 'waitingsecond' if state_name.blank?
+  Factory(:motion, title: title, state_name: state_name)
 end
 
 Then /^the motion titled "([^"]*)" is in discussion$/ do |title|

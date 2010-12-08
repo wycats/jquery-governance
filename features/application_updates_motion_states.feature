@@ -12,6 +12,7 @@ Feature: Application updates motion states
       | Paul Irish    | paul@jquery.com    |
       | Brandon Aaron | brandon@jquery.com |
       | Mike Alsup    | mike@jquery.com    |
+      | Richard Worth | richard@jquery.com |
 
   Scenario: A motion isn't seconded
     When the member "John Resig" creates a motion titled "jQuery should be even more awesome"

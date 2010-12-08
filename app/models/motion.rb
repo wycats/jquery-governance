@@ -6,11 +6,10 @@ class Motion < ActiveRecord::Base
   MOTION_STATES = OPEN_STATES + CLOSED_STATES
 
   HUMAN_READABLE_MOTION_STATES = {
-    'waitingsecond'     => 'Waiting For Seconds',
-    'voting'            => 'In Voting',
-    'passed'            => 'Passed',
-    'failed'            => 'Failed',
-    'approved'          => 'Approved'
+    'waitingsecond' => 'Waiting For Seconds',
+    'voting'        => 'In Voting',
+    'discussing'    => 'Discussing',
+    'closed'        => 'Closed'
   }
 
   scope :open_state,    where(:state_name => OPEN_STATES)
