@@ -8,15 +8,15 @@
   %h1
     Current Motions
 
-  %section
-    %h2 Waiting For Seconds
-    - render_motion_list(@motions.waitingsecond) do
-      %p There are no motions available to review
-
-  %section
-    %h2 Discussing
-    - render_motion_list(@motions.discussing) do
-      %p There are no motions available to review
+  - if active_member?
+    %section
+      %h2 Waiting For Seconds
+      - render_motion_list(@motions.waitingsecond) do
+        %p There are no motions available to review
+    %section
+      %h2 Discussing
+      - render_motion_list(@motions.discussing) do
+        %p There are no motions available to review
 
   %section
     %h2 Voting
