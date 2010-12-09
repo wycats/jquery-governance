@@ -1,12 +1,12 @@
 %header
   %h1= t("admin.members.titles.edit")
 
-- if flash[:notice].present? || flash[:alert].present?
-  %p.notice{:class => ('alert' if flash[:alert])}
-    = flash[:notice] || flash[:alert]
+=render 'shared/flashes'
 
 %section#main
   = form_for [:admin, @member] do |form|
     = render form
+    -if admin?
+      =link_to t("admin.members.actions.delete_member"), [:admin, @member], :method => 'delete', :confirm => 'Are you sure you want to delete the user?'
     .buttons
       = form.submit t("admin.members.actions.update_member")

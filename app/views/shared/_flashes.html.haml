@@ -1,0 +1,3 @@
+- if flash[:notice].present? || flash[:alert].present?
+  %p.notice{:class => ('alert' if flash[:alert])}
+    = flash[:notice] || flash[:alert]

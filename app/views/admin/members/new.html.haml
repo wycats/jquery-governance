@@ -1,9 +1,7 @@
 %header
   %h1= t("admin.members.titles.new")
 
-- if flash[:notice].present? || flash[:alert].present?
-  %p.notice{:class => ('alert' if flash[:alert])}
-    = flash[:notice] || flash[:alert]
+=render 'shared/flashes'
 
 %section#main
   = form_for [:admin, @member] do |form|
