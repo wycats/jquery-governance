@@ -4,7 +4,7 @@ class MotionsController < ApplicationController
 
   # List Motions that are open (NOT passed, failed, approved)
   def index
-    @motions = Motion.open_state.where('id >= ?', params[:id] || 1).order('created_at DESC').limit(6)
+    @motions = Motion.open_state.order('created_at DESC').limit(6)
   end
 
   # List Motions that are closed (passed, failed, approved)

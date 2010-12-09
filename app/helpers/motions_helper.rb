@@ -1,8 +1,10 @@
 module MotionsHelper
   def html_attrs_for_motion(motion)
+    classes = [dom_class(motion), state_class_for_motion(motion)]
+    classes << 'seconded' if member? && current_member.seconded_motions.open_state.include?(motion)
     {
       :id    => dom_id(motion),
-      :class => "#{dom_class(motion)} #{state_class_for_motion(motion)}".strip
+      :class => classes.compact.join(' ')
     }
   end
 
