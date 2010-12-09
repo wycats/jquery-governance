@@ -29,7 +29,11 @@ module MotionsHelper
 
   def link_to_more_motions(motions)
     if motions.count > motions.size
-      render(:partial => 'motions/link_to_more', :locals => { :state => motions.last.state_name, :last_id => motions.last.id })
+      content_tag(
+        :div,
+        link_to('More', show_more_motions_path, :class => 'more_motions quick-tool', :'data-last-id' => motions.last.id),
+        :class => 'more_motions'
+      )
     end
   end
 end

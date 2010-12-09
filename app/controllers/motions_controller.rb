@@ -24,7 +24,7 @@ class MotionsController < ApplicationController
 
   # Show more records for the motion state section
   def show_more
-    @motions = Motion.where(:state_name => params[:state]).where('id < ?', params[:id]).order('created_at DESC').limit(6)
+    @motions = Motion.prev_with_same_state(params[:id]).order('created_at DESC').limit(6)
   end
 
   # Create a new Event

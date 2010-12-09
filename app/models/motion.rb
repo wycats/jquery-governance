@@ -18,6 +18,8 @@ class Motion < ActiveRecord::Base
   scope :discussing,    where(:state_name => 'discussing')
   scope :voting,        where(:state_name => 'voting')
 
+  scope :prev_with_same_state, lambda { |id| where('id < ?', id).where(:state_name => Motion.find(id).state_name) }
+
   validates :state_name, :inclusion => { :in => MOTION_STATES }
 
   belongs_to  :member
