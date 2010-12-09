@@ -14,6 +14,9 @@ class Motion < ActiveRecord::Base
 
   scope :open_state,    where(:state_name => OPEN_STATES)
   scope :closed_state,  where(:state_name => CLOSED_STATES)
+  scope :waitingsecond, where(:state_name => 'waitingsecond')
+  scope :discussing,    where(:state_name => 'discussing')
+  scope :voting,        where(:state_name => 'voting')
 
   validates :state_name, :inclusion => { :in => MOTION_STATES }
 

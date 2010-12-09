@@ -5,10 +5,10 @@ $(document).ready(function(){
   $('.more_motions').live('click', function(){
     var self = $(this);
     var data = {state: self.attr('data-state'), id: self.attr('data-last-id')};
-    var section = self.closest("section").find("> div:first-child");
+    var ul = self.closest("section").find("ul");
     self.remove();
     $.get("/motions/show_more", data, function(html) {
-      $(section).append(html);
+      $(ul).append(html);
     });
   });
 });

@@ -8,18 +8,20 @@
   %h1
     Current Motions
 
-  -if @motions.empty?
-    There are no motions availabe to review
+  %section
+    %h2 Waiting For Second
+    - render_motion_list(@motions.waitingsecond) do
+      %p There are no motions availabe to review
 
-  -else
-    %ul
-      -@motions.each_with_index do |motion, i|
-        %li{ html_attrs_for_motion(motion) }
-          =link_to %Q{"#{motion.title}"}, motion_events_url(motion)
-          %span.meta
-            by #{motion_creator_display_name(motion)}
-          %p
-            =truncate(motion.description)
+  %section
+    %h2 Discussing
+    - render_motion_list(@motions.discussing) do
+      %p There are no motions availabe to review
+
+  %section
+    %h2 Voting
+    - render_motion_list(@motions.voting) do
+      %p There are no motions availabe to review
 
 =link_to 'See closed motions', closed_motions_path
 

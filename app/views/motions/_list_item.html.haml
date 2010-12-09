@@ -1,0 +1,6 @@
+%li{ html_attrs_for_motion(motion) }
+  =link_to %Q{"#{motion.title}"}, motion_events_url(motion)
+  %span.meta
+    by #{motion_creator_display_name(motion)}
+  %p
+    =truncate(motion.description)
