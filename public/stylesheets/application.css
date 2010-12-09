@@ -123,7 +123,7 @@ body {
 /* @end */
 /* @group Motions */
 /* line 137, ../../app/stylesheets/application.scss */
-.motion {
+div.motion {
   border-left: 3px solid #cccccc;
   border-top: 1px solid #cccccc;
   border-bottom: 1px solid #cccccc;
@@ -229,11 +229,19 @@ div.more_motions:hover {
   background: #f0fff0 !important;
 }
 /* line 229, ../../app/stylesheets/application.scss */
+.current-motions li.passed {
+  background-color: #90EE90 !important;
+}
+/* line 233, ../../app/stylesheets/application.scss */
+.current-motions li.failed {
+  background-color: #FAAFBE !important;
+}
+/* line 237, ../../app/stylesheets/application.scss */
 .current-motions li a {
   font-size: 1.75em;
   text-decoration: none;
 }
-/* line 233, ../../app/stylesheets/application.scss */
+/* line 241, ../../app/stylesheets/application.scss */
 .current-motions li a.plus {
   float: right;
   height: 18px;
@@ -244,12 +252,12 @@ div.more_motions:hover {
   color: #000;
   font-size: 1px;
 }
-/* line 245, ../../app/stylesheets/application.scss */
+/* line 253, ../../app/stylesheets/application.scss */
 .current-motions li span.meta {
   font-size: 1.25em !important;
   color: #80a080;
 }
-/* line 250, ../../app/stylesheets/application.scss */
+/* line 258, ../../app/stylesheets/application.scss */
 .current-motions li p {
   color: #b8b8b8;
   font-style: italic;
@@ -258,26 +266,26 @@ div.more_motions:hover {
   margin: .25em 0 0;
 }
 
-/* line 262, ../../app/stylesheets/application.scss */
+/* line 270, ../../app/stylesheets/application.scss */
 #motion h1 {
   color: #407a27;
   font-size: 3em;
 }
-/* line 267, ../../app/stylesheets/application.scss */
+/* line 275, ../../app/stylesheets/application.scss */
 #motion ul {
   float: right;
 }
 
-/* line 272, ../../app/stylesheets/application.scss */
+/* line 280, ../../app/stylesheets/application.scss */
 nav.main ul {
   float: right;
 }
-/* line 275, ../../app/stylesheets/application.scss */
+/* line 283, ../../app/stylesheets/application.scss */
 nav.main ul li {
   margin-top: 5px;
   float: left;
 }
-/* line 279, ../../app/stylesheets/application.scss */
+/* line 287, ../../app/stylesheets/application.scss */
 nav.main ul li.first a {
   -moz-border-radius-bottomleft: 6px;
   -webkit-border-bottom-left-radius: 6px;
@@ -286,7 +294,7 @@ nav.main ul li.first a {
   -khtml-border-bottom-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-/* line 283, ../../app/stylesheets/application.scss */
+/* line 291, ../../app/stylesheets/application.scss */
 nav.main ul li a {
   font-size: 1.25em;
   font-family: helvetica, arial, sans-serif;
@@ -304,7 +312,7 @@ nav.main ul li a {
   cursor: pointer;
   background: url("http://jquery.org/wp-content/themes/green/green/shadow.png") bottom left repeat-x;
 }
-/* line 296, ../../app/stylesheets/application.scss */
+/* line 304, ../../app/stylesheets/application.scss */
 nav.main ul li a:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }

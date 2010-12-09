@@ -14,7 +14,7 @@
   -else
     %ul
       -@motions.each_with_index do |motion, i|
-        %li{ :class => cycle('even', 'odd') }
+        %li{ html_attrs_for_motion(motion) }
           =link_to %Q{"#{motion.title}"}, motion_events_url(motion)
           %span.meta
             by #{motion_creator_display_name(motion)}

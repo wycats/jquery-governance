@@ -134,7 +134,7 @@ body {
 
 /* @group Motions */
 
-.motion {
+div.motion {
   border-left: 3px solid $border_color;
   border-top: 1px solid $border_color;
   border-bottom: 1px solid $border_color;
@@ -224,6 +224,14 @@ div.more_motions:hover {
 
     &.odd {
       background: #f0fff0 !important;
+    }
+
+    &.passed {
+      background-color: #90EE90 !important;
+    }
+
+    &.failed {
+      background-color: #FAAFBE !important;
     }
 
     a {
