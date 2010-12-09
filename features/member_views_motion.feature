@@ -1,4 +1,4 @@
-Feature: Member views the Motions
+Feature: Member views motion
 
   Scenario: I am an active member viewing the motions
     Given I am signed in as an active member
