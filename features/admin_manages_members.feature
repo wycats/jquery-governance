@@ -4,16 +4,16 @@ Feature: Admin manages members
   Must manage user accounts for the governance tool
 
   Background:
-    Given I am signed in as an active member called "Yehuda Katz"
+    Given I am signed in as an admin member
 
   Scenario: View all users
     Given these other members exist:
-      | name       | email              |
-      | John Resig | jresig@example.org |
-      | Paul Irish | paul@example.com   |
+      | name       | email              | is_admin |
+      | John Resig | jresig@example.org | false    |
+      | Paul Irish | paul@example.com   | false    |
     When I go to the members admin page
     Then I should see "Manage members"
-    And I should see "Yehuda Katz"
+    And I should see "Admin member"
     And I should see "John Resig"
     And I should see "Paul Irish"
 
@@ -40,9 +40,9 @@ Feature: Admin manages members
 
   Scenario: Update existing member
     Given these other members exist:
-      | name       | email              |
-      | John Resig | jresig@example.org |
-      | Paul Irish | paul@example.com   |
+      | name       | email              | is_admin |
+      | John Resig | jresig@example.org | false    |
+      | Paul Irish | paul@example.com   | false    |
     When I go to the members admin page
     And I follow the edit link for "Paul Irish"
     Then the "Name" field should contain "Paul Irish"
@@ -56,9 +56,9 @@ Feature: Admin manages members
   @wip
   Scenario: Delete member
     Given these other members exist:
-      | name              | email              |
-      | John Resig        | jresig@example.org |
-      | Grandmaster Flash | gmflash@adobe.com  |
+      | name              | email              | is_admin |
+      | John Resig        | jresig@example.org | false    |
+      | Grandmaster Flash | gmflash@adobe.com  | false    |
     When I go to the members admin page
     And I follow the edit link for "Grandmaster Flash"
     And I follow "Delete this member"

@@ -10,6 +10,11 @@ Given /^I am signed in as an active member$/ do
   Given "I am signed in as \"#{member.email}\""
 end
 
+Given /^I am signed in as an admin member$/ do
+  member = Factory.create(:active_admin_membership).member
+  Given "I am signed in as \"#{member.email}\""
+end
+
 Given /^I am signed in as an inactive member$/ do
   member = Factory.create(:expired_membership).member
   Given "I am signed in as \"#{member.email}\""
@@ -26,8 +31,8 @@ Given /^there is an active member with email "([^"]*)" and password "([^"]*)"$/ 
 end
 
 Given /^these (?:other )?members exist:$/ do |table|
-  table.rows.each do |name, email|
-    member = Factory.create(:member, name: name, email: email)
+  table.rows.each do |name, email, is_admin|
+    member = Factory.create(:member, name: name, email: email, is_admin: is_admin)
     Factory.create(:active_membership, member: member)
   end
 end
