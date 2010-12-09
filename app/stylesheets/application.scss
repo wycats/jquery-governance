@@ -6,7 +6,7 @@ $border_color: #ccc;
 $font_base: 12px;
 $font_label: $font_base + 2px;
 $font_label_height: 30px;
-
+$font_color: #4F3806;
 $form_row_spacing: 10px;
 $label_width: 120px;
 $input_padding: 5px;
@@ -23,6 +23,7 @@ $header_green: #407A27;
 body {
   font-size: $font_base;
 }
+
 
 .centered {
   text-align: center;
@@ -135,11 +136,11 @@ body {
 /* @group Motions */
 
 .motion {
-  border-left: 3px solid $border_color;
-  border-top: 1px solid $border_color;
-  border-bottom: 1px solid $border_color;
+  border: 1px solid $border_color;
   margin-bottom: 5px;
-  padding: 0px 3px 0px 3px; }
+  padding: 0px 3px 0px 3px;
+  @include border-radius(6px);
+  }
 
 .motion_title {
   font-weight: bold;
@@ -258,10 +259,10 @@ div.more_motions:hover {
 }
 
 
-#motion {
+#content .current-motions .motion {
   h1 {
     color: $header_green;
-    font-size: 3em;
+    font-size: 2em;
   }
 
   ul {
