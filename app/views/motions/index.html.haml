@@ -9,19 +9,19 @@
     Current Motions
 
   %section
-    %h2 Waiting For Second
+    %h2 Waiting For Seconds
     - render_motion_list(@motions.waitingsecond) do
-      %p There are no motions availabe to review
+      %p There are no motions available to review
 
   %section
     %h2 Discussing
     - render_motion_list(@motions.discussing) do
-      %p There are no motions availabe to review
+      %p There are no motions available to review
 
   %section
     %h2 Voting
     - render_motion_list(@motions.voting) do
-      %p There are no motions availabe to review
+      %p There are no motions available to review
 
 =link_to 'See closed motions', closed_motions_path
 
