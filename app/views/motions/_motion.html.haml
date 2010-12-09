@@ -1,6 +1,5 @@
 .motion
-  %h1
-    =link_to motion.title, motion_events_path(motion)
+  %h1=link_to motion.title, motion_events_path(motion)
   %p.meta
     %span.created_at== Created on #{motion.created_at.to_date}
     %span.author== by #{motion.member.name}

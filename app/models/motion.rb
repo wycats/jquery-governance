@@ -197,7 +197,7 @@ private
 
   def assign_state
     if MOTION_STATES.include?(state_name)
-      @state = MotionState.const_get(state_name.capitalize).new(self)
+      @state = "MotionState::#{state_name.capitalize}".constantize.new(self)
     end
   end
 end

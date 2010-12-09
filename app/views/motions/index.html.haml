@@ -1,7 +1,8 @@
 =render 'shared/flashes'
 
 .current-motions
-  =link_to "New Motion", new_motion_path, {:class => "quick-tool"}
+  - if active_member?
+    =link_to "New Motion", new_motion_path, {:class => "quick-tool"}
 
   %h1
     Current Motions
@@ -10,7 +11,15 @@
     There are no motions availabe to review
 
   -else
-    =render :partial => 'motion_list', :locals => { :motions => @motions, :motions_grouped_by_state => @motions.group_by(&:state_name) }
+    %ul
+      -@motions.each_with_index do |motion, i|
+        %li{ :class => cycle('even', 'odd') }
+          =link_to "More", motion_events_url(motion), :class => "plus"
+          =link_to %Q{"#{motion.title}"}, motion_events_url(motion)
+          %span.meta
+            by #{motion_creator_display_name(motion)}
+          %p
+            =truncate(motion.description)
 
 =link_to 'See closed motions', closed_motions_path
 
