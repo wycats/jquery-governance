@@ -9,7 +9,7 @@ class MotionsController < ApplicationController
 
   # List Motions that are closed (passed, failed, approved)
   def closed
-    @motions = Motion.closed_state.where('id >= ?', params[:id] || 1).order('created_at DESC')
+    @motions = Motion.closed_state.where('id >= ?', params[:id] || 1).order('created_at DESC').limit(6)
   end
 
   # Start a new Motion
