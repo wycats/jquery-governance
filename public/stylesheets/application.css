@@ -231,52 +231,67 @@ div.more_motions {
 }
 
 /* line 222, ../../app/stylesheets/application.scss */
-.current-motions h2 {
-  margin-top: 18px;
-  padding: 4px 10px 1px;
-  font-size: 1.7em;
-  color: #333;
-  background-color: #f0f0f0;
+.current-motions section {
+  margin: 10px 0 20px;
+  padding: 8px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #f8f8f8;
 }
-/* line 230, ../../app/stylesheets/application.scss */
-.current-motions div.empty {
-  padding: 10px;
-  border: 1px solid #f0f0f0;
-  font-size: 1.7em;
+/* line 229, ../../app/stylesheets/application.scss */
+.current-motions h2 {
+  margin: 10px;
+  font-size: 2.2em;
+  font-weight: normal;
+  color: #555;
 }
 /* line 236, ../../app/stylesheets/application.scss */
-.current-motions ul {
-  border: 1px solid #f0f0f0;
-  border-bottom: 0;
-  margin: 0 0 5px;
+.current-motions ul, .current-motions div.empty {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  border: 2px solid #e9e9e9;
+  background-color: #fff;
+  font-size: 1.7em;
 }
-/* line 242, ../../app/stylesheets/application.scss */
+/* line 243, ../../app/stylesheets/application.scss */
+.current-motions div.empty {
+  padding: 20px;
+}
+/* line 248, ../../app/stylesheets/application.scss */
 .current-motions li {
-  padding: 1em;
+  padding: 20px;
   border-bottom: 1px solid #f0f0f0;
 }
-/* line 246, ../../app/stylesheets/application.scss */
+/* line 252, ../../app/stylesheets/application.scss */
 .current-motions li.odd {
   background: #f0fff0 !important;
 }
-/* line 250, ../../app/stylesheets/application.scss */
+/* line 256, ../../app/stylesheets/application.scss */
 .current-motions li.passed {
   background-color: #90EE90 !important;
 }
-/* line 254, ../../app/stylesheets/application.scss */
+/* line 260, ../../app/stylesheets/application.scss */
 .current-motions li.failed {
   background-color: #FAAFBE !important;
 }
-/* line 258, ../../app/stylesheets/application.scss */
+/* line 264, ../../app/stylesheets/application.scss */
 .current-motions li.seconded {
   background-color: #FFC !important;
 }
-/* line 262, ../../app/stylesheets/application.scss */
+/* line 268, ../../app/stylesheets/application.scss */
 .current-motions li a {
-  font-size: 1.75em;
+  font-size: 1.2em;
   text-decoration: none;
 }
-/* line 266, ../../app/stylesheets/application.scss */
+/* line 272, ../../app/stylesheets/application.scss */
 .current-motions li a.plus {
   float: right;
   height: 18px;
@@ -287,40 +302,46 @@ div.more_motions {
   color: #000;
   font-size: 1px;
 }
-/* line 278, ../../app/stylesheets/application.scss */
-.current-motions li span.meta {
-  font-size: 1.25em !important;
+/* line 284, ../../app/stylesheets/application.scss */
+.current-motions li a.more_motions {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+/* line 290, ../../app/stylesheets/application.scss */
+.current-motions li p.author {
+  font-size: 1.1em;
   color: #80a080;
 }
-/* line 283, ../../app/stylesheets/application.scss */
-.current-motions li p {
+/* line 294, ../../app/stylesheets/application.scss */
+.current-motions li p.author strong {
+  font-weight: bold;
+}
+/* line 297, ../../app/stylesheets/application.scss */
+.current-motions li p.description {
   color: #b8b8b8;
-  font-style: italic;
-  font-weight: normal;
-  font-size: 1.25em;
-  margin: .25em 0 0;
 }
 
-/* line 295, ../../app/stylesheets/application.scss */
+/* line 305, ../../app/stylesheets/application.scss */
 #motion h1 {
   color: #407a27;
   font-size: 3em;
 }
-/* line 300, ../../app/stylesheets/application.scss */
+/* line 310, ../../app/stylesheets/application.scss */
 #motion ul {
   float: right;
 }
 
-/* line 305, ../../app/stylesheets/application.scss */
+/* line 315, ../../app/stylesheets/application.scss */
 nav.main ul {
   float: right;
 }
-/* line 308, ../../app/stylesheets/application.scss */
+/* line 318, ../../app/stylesheets/application.scss */
 nav.main ul li {
   margin-top: 5px;
   float: left;
 }
-/* line 312, ../../app/stylesheets/application.scss */
+/* line 322, ../../app/stylesheets/application.scss */
 nav.main ul li.first a {
   -moz-border-radius-bottomleft: 6px;
   -webkit-border-bottom-left-radius: 6px;
@@ -329,7 +350,7 @@ nav.main ul li.first a {
   -khtml-border-bottom-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-/* line 316, ../../app/stylesheets/application.scss */
+/* line 326, ../../app/stylesheets/application.scss */
 nav.main ul li a {
   font-size: 1.25em;
   font-family: helvetica, arial, sans-serif;
@@ -347,7 +368,7 @@ nav.main ul li a {
   cursor: pointer;
   background: url("http://jquery.org/wp-content/themes/green/green/shadow.png") bottom left repeat-x;
 }
-/* line 329, ../../app/stylesheets/application.scss */
+/* line 339, ../../app/stylesheets/application.scss */
 nav.main ul li a:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }

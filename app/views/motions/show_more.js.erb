@@ -1,5 +1,6 @@
 <% @motions.each do |motion| %>
   <%= render(:partial => 'motions/list_item', :locals => { :motion => motion }) %>
 <% end %>
-<%# FIXME: This link should be rendered outside the UL container %>
-<%= link_to_more_motions(@motions) %>
+<% if link = link_to_more_motions(@motions) %>
+    <li><%= link %></li>
+<% end %>

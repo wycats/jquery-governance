@@ -6,7 +6,7 @@ $(document).ready(function(){
     var self = $(this);
     var data = {id: self.attr('data-last-id')};
     var ul = self.closest("section").find("ul");
-    self.remove();
+    self.parent().remove();
     $.get("/motions/show_more", data, function(html) {
       $(ul).append(html);
     });
