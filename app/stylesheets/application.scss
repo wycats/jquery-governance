@@ -135,8 +135,10 @@ body {
 
 /* @group Motions */
 
-.motion {
-  border: 1px solid $border_color;
+div.motion {
+  border-left: 3px solid $border_color;
+  border-top: 1px solid $border_color;
+  border-bottom: 1px solid $border_color;
   margin-bottom: 5px;
   padding: 0px 3px 0px 3px;
   @include border-radius(6px);
@@ -163,8 +165,11 @@ body {
 }
 
 div.more_motions {
-  width: 25px;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 10px;
 }
+
 div.more_motions:hover {
   text-decoration: underline;
   cursor: pointer;
@@ -203,6 +208,7 @@ div.more_motions:hover {
   }
 
   h1 {
+    margin-bottom: 10px;
     padding-top: 0;
     font-size: 3em;
     color: $header_green;
@@ -213,10 +219,24 @@ div.more_motions:hover {
 
 
 .current-motions {
+  h2 {
+    margin-top: 18px;
+    padding: 4px 10px 1px;
+    font-size: 1.7em;
+    color: #333;
+    background-color: #f0f0f0;
+  }
+
+  div.empty {
+    padding: 10px;
+    border: 1px solid #f0f0f0;
+    font-size: 1.7em;
+  }
+
   ul {
     border: 1px solid #f0f0f0;
     border-bottom: 0;
-    margin: .5em 0 0;
+    margin: 0 0 5px;
   }
 
   li {
@@ -225,6 +245,18 @@ div.more_motions:hover {
 
     &.odd {
       background: #f0fff0 !important;
+    }
+
+    &.passed {
+      background-color: #90EE90 !important;
+    }
+
+    &.failed {
+      background-color: #FAAFBE !important;
+    }
+
+    &.seconded {
+      background-color: #FFC !important;
     }
 
     a {

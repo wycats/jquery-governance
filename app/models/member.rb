@@ -15,6 +15,7 @@ class Member < ActiveRecord::Base
   has_many :events
   has_many :member_conflicts
   has_many :conflicts, :through => :member_conflicts
+  has_many :seconded_motions, :through => :events, :source => :motion, :conditions => { :events => { :event_type => 'second' } }
 
   # Checks membership status at a given Date/Time
   #   @param [Date, Time, DateTime] time The time for which membership status should be checked

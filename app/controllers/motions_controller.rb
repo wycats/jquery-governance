@@ -4,7 +4,7 @@ class MotionsController < ApplicationController
 
   # List Motions that are open (NOT passed, failed, approved)
   def index
-    @motions = Motion.open_state.where('id >= ?', params[:id] || 1).order('created_at DESC')
+    @motions = Motion.open_state.order('created_at DESC').limit(6)
   end
 
   # List Motions that are closed (passed, failed, approved)
@@ -24,8 +24,7 @@ class MotionsController < ApplicationController
 
   # Show more records for the motion state section
   def show_more
-    @state = params[:state]
-    @motions = Motion.where('state = ? AND id < ?', @state, params[:id]).order('created_at DESC').limit(6)
+    @motions = Motion.prev_with_same_state(params[:id]).order('created_at DESC').limit(6)
   end
 
   # Create a new Event

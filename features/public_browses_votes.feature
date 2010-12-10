@@ -5,7 +5,7 @@ Feature: Public browses votes
 
   Background:
     Given I am an anonymous visitor
-    And a motion titled "jQuery should rule the JS World" exists
+    And a motion titled "jQuery should rule the JS World" exists in the "voting" state
 
   Scenario: A visitor sees the a list of motions
     Given I am on the homepage

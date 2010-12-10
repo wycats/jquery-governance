@@ -1,2 +1,4 @@
-<%= render :partial => 'motion', :collection => @motions[0..4] %>
-<%= render :partial => 'link_to_more', :locals => { :state => @state, :last_id => @motions[4].id } if @motions.count > 5 %>
+<% @motions.each do |motion| %>
+  <%= render(:partial => 'motions/list_item', :locals => { :motion => motion }) %>
+<% end %>
+<%= link_to_more_motions(@motions) %>
