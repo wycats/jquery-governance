@@ -1,12 +1,12 @@
 %div{ :id => "motion_#{motion.id}", :class => "motion_state_#{motion.state_name}" }
-  %h4
+  %h2
     =link_to motion.title, motion_events_path(motion)
   %p.meta
     %span.created_at== Created on #{motion.created_at.to_date}
     %span.author== by #{motion.member.name}
     %span.current_state== and currently #{motion.formatted_state}
   %p.description= motion.description
-  %p.rationale= motion.rationale
+  %p.rationale Rationale: #{motion.rationale}
   / @TODO: the events version of this page needs to put the events between
   / the rationale and history
   - if member? && motion.events.present?

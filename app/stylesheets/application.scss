@@ -167,15 +167,14 @@ div.more_motions {
   margin-top: 10px;
 }
 
-div.more_motions:hover {
-  text-decoration: underline;
-  cursor: pointer;
+#members_only {
+  height: 30px;
 }
 
 /* @end */
 
 /* @group Homepage */
-#content .current-motions {
+#content .current-motions, #second_motion {
   $top: #4b4;
   $bottom: #292;
 
