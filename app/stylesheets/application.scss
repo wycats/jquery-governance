@@ -174,7 +174,7 @@ div.more_motions {
 /* @end */
 
 /* @group Homepage */
-#content .current-motions, #second_motion {
+#content {
   $top: #4b4;
   $bottom: #292;
 
@@ -210,6 +210,10 @@ div.more_motions {
     color: $header_green;
     text-shadow: 0 1px 1px #ccc;
     font-style: italic;
+  }
+
+  h2 {
+    @include border-top-radius(5px);
   }
 }
 
