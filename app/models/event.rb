@@ -41,6 +41,7 @@ class Event < ActiveRecord::Base
 
   scope :seconds,    where(:event_type  => "second")
   scope :objections, where(:event_type  => "objection")
+  scope :for_motion, lambda { |motion_id| where(:motion_id => motion_id) }
 
   # @return [true, false] Whether or not this is a Voting Event
   def is_vote?
