@@ -1,6 +1,6 @@
--if motion.seconding?
+-if motion.member != current_member && motion.seconding?
   %div#second_motion
-    =link_to "Second This Motion", motion_second_path(@motion), :method => :post, :remote => true
+    =link_to "Second This Motion", motion_second_path(@motion), {:class => "quick-tool"}, :method => :post, :remote => true
     / @todo: Allow people to redact their secondses? Shire reference goes here.
 -if motion.voting?
   %div#vote_motion

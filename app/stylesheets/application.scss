@@ -120,7 +120,6 @@ body {
   }
 }
 
-
 #user_signin_form {
   width: 400px;
   margin: 20px auto;
@@ -170,15 +169,14 @@ div.more_motions {
   margin-top: 10px;
 }
 
-div.more_motions:hover {
-  text-decoration: underline;
-  cursor: pointer;
+#members_only {
+  height: 30px;
 }
 
 /* @end */
 
 /* @group Homepage */
-#content .current-motions {
+#content {
   $top: #4b4;
   $bottom: #292;
 
@@ -214,6 +212,10 @@ div.more_motions:hover {
     color: $header_green;
     text-shadow: 0 1px 1px #ccc;
     font-style: italic;
+  }
+
+  h2 {
+    @include border-top-radius(5px);
   }
 }
 

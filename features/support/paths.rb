@@ -19,7 +19,7 @@ module NavigationHelpers
     when /the new member admin page/
       new_admin_member_path
     when /the motions page for "(.*)"/
-      motions_path(Motion.find_by_title($1))
+      motion_events_path(Motion.find_by_title($1))
     when /the home\s?page/
       '/'
     when /the sign in page/

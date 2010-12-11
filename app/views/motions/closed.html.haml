@@ -1,2 +1,14 @@
-= render :partial => 'motion_list', :locals => { :motions_grouped_by_state => @motions.group_by(&:state) }
-= link_to 'See open motions', motions_path
+%p#notice
+  =notice
+
+.current-motions
+  - if active_member?
+    =link_to "New Motion", new_motion_path, {:class => "quick-tool"}
+
+  %h1
+    Closed Motions
+
+  - if active_member?
+    %section
+      - render_motion_list(@motions) do
+        .empty There are no motions available to review
