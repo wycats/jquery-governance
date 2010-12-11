@@ -6,15 +6,8 @@ $(document).ready(function(){
     var self = $(this);
     var data = {id: self.attr('data-last-id')};
     var ul = self.closest("section").find("ul");
-    self.remove();
+    self.parent().remove();
     $.get("/motions/show_more", data, function(html) {
-      var divIndex = html.indexOf('<div');
-      if (divIndex > 0) {
-        // pull out the More link if it exists and append it outside the UL
-        var moreHTML = html.substring(divIndex);
-        html = html.replace(/<div.*<\/div>/, '');
-        $(ul).after(moreHTML);
-      };
       $(ul).append(html);
     });
     e.preventDefault();
