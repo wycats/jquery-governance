@@ -3,8 +3,6 @@
 
 en:
   hello: "Hello world"
-  application:
-    not_authorized: "You are not authorized to access this page."
   admin:
     members:
       titles:
@@ -21,10 +19,10 @@ en:
         update_member: "Update member info"
         delete_member: "Delete this member"
       notices:
-        member_created: "Member added."
-        member_updated: "Member updated."
-        member_destroyed: "Member deleted."
+        member_created: "Member added"
+        member_updated: "Member updated"
+        member_destroyed: "Member deleted"
       alerts:
-        member_not_created: "Member could not be created."
-        member_not_saved:   "Member could not be saved."
-        member_not_destroyed: "Member could not be deleted."
+        member_not_created: "Member could not be created"
+        member_not_saved:   "Member could not be saved"
+        member_not_destroyed: "Member could not be deleted"

@@ -1,8 +1,5 @@
 class Admin::MembersController < ApplicationController
-  before_filter :require_admin
-
   respond_to :html
-
 
   def index
     @members = Member.all
@@ -36,18 +33,6 @@ class Admin::MembersController < ApplicationController
     else
       # TODO: Rails 3 flash.now syntax?
       flash.now[:alert] = I18n.t("admin.members.alerts.member_not_saved")
-      render :action => :edit
-    end
-  end
-
-  def destroy
-    @member = Member.find(params[:id])
-    if current_member.can?(:destroy, @member) && @member.destroy
-      flash[:notice] = I18n.t("admin.members.notices.member_destroyed")
-      redirect_to :action => 'index'
-    else
-      # TODO: Rails 3 flash.now syntax?
-      flash.now[:alert] = I18n.t("admin.members.alerts.member_not_destroyed")
       render :action => :edit
     end
   end
