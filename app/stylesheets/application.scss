@@ -221,28 +221,34 @@ div.more_motions {
 
 
 .current-motions {
+  section {
+    margin: 10px 0 20px;
+    padding: 8px;
+    @include border-radius(5px);
+    background-color: #f8f8f8;
+  }
+
   h2 {
-    margin-top: 18px;
-    padding: 4px 10px 1px;
+    margin: 10px;
+    font-size: 2.2em;
+    font-weight: normal;
+    color: #555;
+  }
+
+  ul, div.empty {
+    @include border-radius(3px);
+    border: 2px solid #e9e9e9;
+    background-color: #fff;
     font-size: 1.7em;
-    color: #333;
-    background-color: #f0f0f0;
   }
 
   div.empty {
-    padding: 10px;
-    border: 1px solid #f0f0f0;
-    font-size: 1.7em;
+    padding: 20px;
   }
 
-  ul {
-    border: 1px solid #f0f0f0;
-    border-bottom: 0;
-    margin: 0 0 5px;
-  }
 
   li {
-    padding: 1em;
+    padding: 20px;
     border-bottom: 1px solid #f0f0f0;
 
     &.odd {
@@ -262,7 +268,7 @@ div.more_motions {
     }
 
     a {
-      font-size: 1.75em;
+      font-size: 1.2em;
       text-decoration: none;
 
       &.plus {
@@ -277,17 +283,21 @@ div.more_motions {
       }
     }
 
-    span.meta {
-      font-size: 1.25em !important;
-      color: #80a080;
+    a.more_motions {
+      display: block;
+      width: 100%;
+      text-align: center;
     }
 
-    p {
+    p.author {
+      font-size: 1.1em;
+      color: #80a080;
+
+      strong { font-weight: bold }
+    }
+
+    p.description {
       color: #b8b8b8;
-      font-style: italic;
-      font-weight: normal;
-      font-size: 1.25em;
-      margin: .25em 0 0;
     }
   }
 }
@@ -306,6 +316,7 @@ div.more_motions {
 
 nav.main ul {
   float: right;
+  height: 40px;
 
   li {
     margin-top: 5px;
@@ -337,3 +348,41 @@ nav.main ul {
 
 /* @end */
 
+/* @group Flash alerts & Validation Errors */
+
+#flash_notice {
+  margin: 10px 20px;
+  clear: both;
+  background: #FFFECF;
+  border: 2px solid #DCDA00;
+  font-size: 14px;
+  text-align: center;
+  padding: 5px 20px;
+  color: #5F5F5F;
+}
+
+#flash_alert {
+  margin: 10px 20px;
+  clear: both;
+  background: #FFEEEE;
+  border: 2px solid red;
+  font-size: 14px;
+  text-align: center;
+  padding: 5px 20px;
+  color: red;
+}
+
+#error_explanation {
+  background: #FBB;
+  border: 2px solid red;
+  color: #585858;
+  padding: 20px;
+  font-size: 12px;
+  margin: 20px;
+}
+
+#error_explanation ul { margin: 0; }
+#error_explanation h2 { font-size: 14px;}
+#error_explanation h3 { font-size: 12px;}
+
+/* @end */
