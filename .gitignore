@@ -13,3 +13,4 @@ doc/**/*.html
 doc/css
 doc/js
 .sass-cache/*
+config/database.yml
