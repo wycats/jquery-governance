@@ -171,12 +171,8 @@ describe Motion do
       end
 
       it "should send a notification to all members" do
-        mock_mail = mock('mock mail', :deliver => true)
-
-        Notifications.should_receive(:motion_created).with(@motion, @member_1).and_return(mock_mail)
-        Notifications.should_receive(:motion_created).with(@motion, @member_2).and_return(mock_mail)
-
         @motion.save
+        ActionMailer::Base.deliveries.should have(2).emails
       end
     end
     
