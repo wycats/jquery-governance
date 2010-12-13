@@ -3,6 +3,9 @@
 
 en:
   hello: "Hello world"
+  notifications:
+    motion_created:
+      subject: "NEW MOTION"
   admin:
     members:
       titles:
