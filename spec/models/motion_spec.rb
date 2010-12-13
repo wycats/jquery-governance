@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe Motion do
   before do
-    @motion = Factory.create(:motion)
-    @member = Factory.create(:active_membership).member
+    @motion = Factory.build(:motion)
   end
 
   it "knows how many yea votes have been cast for the motion" do
@@ -82,24 +81,31 @@ describe Motion do
 
     describe "vote" do
       it "creates a new vote with the given member and value" do
-        @motion.vote(@member, true)
-        Event.votes.last.member.should eql @member
+        current_motion = Factory.create(:motion)
+        voting_member  = Factory.create(:active_membership).member
+        
+        current_motion.vote(voting_member, true)
+        Event.votes.last.member.should eql voting_member
         Event.votes.last.value.should be_true
       end
     end
 
     describe 'second(member)' do
       it "creates a new second for the member" do
+        current_motion   = Factory.create(:motion)
+        seconding_member = Factory.create(:active_membership).member
+        
         lambda do
-          @motion.second(@member)
-        end.should change { @motion.seconds.count }
+          current_motion.second(seconding_member)
+        end.should change { current_motion.seconds.count }
       end
     end
   end
 
   describe 'conflicts_with_member?' do
     before :each do
-      @conflict = Factory(:conflict)
+      @member   = Factory.build(:active_membership).member
+      @conflict = Factory.build(:conflict)
     end
 
     describe "when a member has a conflict unrelated to this motion" do
