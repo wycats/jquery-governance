@@ -179,6 +179,31 @@ describe Motion do
         @motion.save
       end
     end
+    
+    describe "when a motion enters the discussion state" do
+      # state_name == voting
+      it "should send a notification to all members"
+    end
+    
+    describe "when a motion enters the voting state" do
+      # state_name == voting
+      it "should send a notification to all members"
+    end
+    
+    describe "when a motion fails to reach the voting state" do
+      # state_name == closed && failed?
+      it "should send a notification to all members"
+    end
+    
+    describe "when a motion passes" do
+      # state_name == closed && passed?
+      it "should send a notification to all members"
+    end
+    
+    describe "when a motion fails" do
+      # state_name == closed && failed?
+      it "should send a notification to all members"
+    end
   end
 
 end
