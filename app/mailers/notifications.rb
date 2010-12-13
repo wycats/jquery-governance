@@ -9,9 +9,9 @@ class Notifications < ActionMailer::Base
   def motion_created(motion, member)
     @motion = motion
     @member = member
-    
+
     subject_text = "#{I18n.t("notifications.motion_created.subject")}: #{motion.title}"
-    
+
     mail :to      => member.email,
          :subject => subject_text
   end
