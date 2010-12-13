@@ -131,4 +131,26 @@ describe Motion do
       end
     end
   end
+  
+  describe 'schedule_updates' do
+    describe "when a motion is created" do
+      it "should ask the MotionState to schedule updates" do
+        @motion.state.should_receive(:schedule_updates)
+        @motion.save
+      end
+    end
+    
+    describe "when a motion is saved with a state change" do
+      it "should ask the MotionState to schedule updates" do
+        @motion.state_name = "waitingsecond"
+        @motion.save
+        
+        @motion.state_name = "discussing"
+        
+        @motion.state.should_receive(:schedule_updates)
+        @motion.save
+      end
+    end
+  end
+  
 end
