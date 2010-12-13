@@ -1,14 +1,20 @@
 desc "Sets up the application for development"
 task :setup =>  [
-                  "setup:bundle", # Bundler, keep this first
-                  "doc:app",      # YARD docs
-                  "setup:intro"   # tl;dr, keep this last
+                  "setup:bundle",              # Bundler, keep this first
+                  "setup:copy_default_config", # Create database.yml
+                  "doc:app",                   # YARD docs
+                  "setup:intro"                # tl;dr, keep this last
                 ]
 
 namespace :setup do
   desc "Installs required gems"
   task :bundle do
     system %{bundle}
+  end
+
+  desc "Copies default database.yml into place"
+  task :copy_default_config do
+    cp "config/database.yml.example", "config/database.yml"
   end
 
   desc "Hello, my name is ________"
