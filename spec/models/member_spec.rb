@@ -22,6 +22,7 @@ describe Member do
     describe "a currently active member" do
 
       it "knows that it is active today" do
+        debugger
         @member.should be_active_at(Time.now)
         @member.should be_active
       end

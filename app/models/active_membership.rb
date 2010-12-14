@@ -9,9 +9,11 @@ class ActiveMembership < ActiveRecord::Base
 
   validates :qualifying_motion, :presence => true
 
+  attr_accessible :started_at
+
   # Since there needs to be a started_at time for the motion, after an active_membership is created
   # set the started_at time to the current time
-  before_save do
+  after_create do
     self.started_at = self.qualifying_motion.closed_at
   end
 
