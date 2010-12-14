@@ -199,11 +199,12 @@ describe Motion do
         sample_message = ActionMailer::Base.deliveries.first
         sample_message.subject.should include(I18n.t('notifications.motion_state_changed.subjects.discussing'))
       end
-    end
 
-    describe "when a motion enters the voting state" do
-      # state_name == voting
-      it "should send a notification to all members"
+      it "should notify members the motion has entered voting" do
+        @motion.voting!
+        sample_message = ActionMailer::Base.deliveries.first
+        sample_message.subject.should include(I18n.t('notifications.motion_state_changed.subjects.voting'))
+      end
     end
 
     describe "when a motion passes" do
