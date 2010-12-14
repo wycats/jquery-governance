@@ -34,7 +34,7 @@ class Motion < ActiveRecord::Base
 
   after_initialize :assign_state
 
-  attr_reader :state, :closed_at
+  attr_reader :state
 
   # @return [Fixnum] The number of votes required to pass this Motion
   def required_votes

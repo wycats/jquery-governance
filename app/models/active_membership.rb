@@ -9,13 +9,14 @@ class ActiveMembership < ActiveRecord::Base
 
   validates :qualifying_motion, :presence => true
 
-  attr_accessible :started_at
+  attr_accessible :qualifying_motion_id, :disqualifying_motion_id
 
-  # Since there needs to be a started_at time for the motion, after an active_membership is created
-  # set the started_at time to the current time
-  after_create do
+  after_save do
+    debugger
     self.started_at = self.qualifying_motion.closed_at
+    self.ended_at = self.disqualifying_motion.closed_at unless self.disqualifying_motion.nil?
   end
+
 
   # Finds all active memberships for a given time
   #   @param [Date, Time, DateTime] time The Date and Time in which to search for active memberships
@@ -44,11 +45,16 @@ class ActiveMembership < ActiveRecord::Base
   def disqualified_by
     disqualifying_motion
   end
+  
+  # def qualifying_motion_id=(motion_id)
+  #   write_attribute(:qualifying_motion_id, motion_id)
+  #   started_at =  Motion.where(:id => motion_id).first.closed_at
+  #   motion_id
+  # end
 
-  # Sets the ended_at field for the active membership, provided there is a disqualifying motion
-  #   @param [Time] The time at which the membership ended 
-  #   @return [Time] Returns the time if successfull, or nil if disqualifying_motion isn't present. 
-  def ended_at=(time)
-    @ended_at = time unless @disqualifying_motion_id.nil?
-  end
+  # def disqualifying_motion_id=(motion_id)
+  #   write_attribute(:disqualifying_motion_id, motion_id)
+  #   ended_at = Motion.where(:id => motion_id).first.closed_at
+  #   motion_id
+  # end
 end
