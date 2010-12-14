@@ -4,7 +4,7 @@ describe Motion do
   before do
     RSpec::Mocks::setup(self)
 
-    @motion = Factory.build(:motion)
+    @motion = Factory.stub(:motion)
   end
 
   describe "vote counting", :database => true do
@@ -143,6 +143,7 @@ describe Motion do
   describe 'schedule_updates', :database => true do
     describe "when a motion is created" do
       it "should ask the MotionState to schedule updates" do
+        @motion = Factory.build(:motion)
         @motion.state.should_receive(:schedule_updates)
         @motion.save
       end
@@ -150,11 +151,8 @@ describe Motion do
 
     describe "when a motion is saved with a state change" do
       it "should ask the MotionState to schedule updates" do
-        @motion.state_name = "waitingsecond"
-        @motion.save
-
+        @motion = Factory.create(:motion)
         @motion.state_name = "discussing"
-
         @motion.state.should_receive(:schedule_updates)
         @motion.save
       end
