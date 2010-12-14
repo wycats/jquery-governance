@@ -140,7 +140,11 @@ describe Motion do
     end
   end
 
-  describe 'schedule_updates', :database => true do
+  describe 'schedule_updates' do
+    before(:each) do
+      ActiveRecord::Base.connection.stub(:execute)
+    end
+
     describe "when a motion is created" do
       it "should ask the MotionState to schedule updates" do
         @motion = Factory.build(:motion)
@@ -159,11 +163,13 @@ describe Motion do
     end
   end
 
-  describe "email notifications", :database => true do
+  describe "email notifications" do
     before(:each) do
+      # Disable database hits for speed, we're only interested in whether the callbacks fire
+      ActiveRecord::Base.connection.stub(:execute)
+
       @member_1 = Factory.stub(:member, :email => "member1@email.com")
       @member_2 = Factory.stub(:member, :email => "member2@email.com")
-
       ActiveMembership.stub(:members_active_at).and_return([@member_1, @member_2])
     end
 
