@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101207145753) do
+ActiveRecord::Schema.define(:version => 20101214172457) do
 
   create_table "active_memberships", :force => true do |t|
     t.integer  "member_id"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(:version => 20101207145753) do
     t.datetime "ended_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "qualifying_motion_id"
+    t.integer  "disqualifying_motion_id"
   end
 
   add_index "active_memberships", ["ended_at"], :name => "index_active_memberships_on_ended_at"
@@ -61,12 +63,10 @@ ActiveRecord::Schema.define(:version => 20101207145753) do
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.string   "confirmation_token"
     t.boolean  "is_admin"
     t.datetime "deleted_at"
   end
 
-  add_index "members", ["confirmation_token"], :name => "index_members_on_confirmation_token", :unique => true
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
   add_index "members", ["reset_password_token"], :name => "index_members_on_reset_password_token", :unique => true
 
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20101207145753) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "expedited",   :default => false
+    t.datetime "closed_at"
   end
 
   add_index "motions", ["member_id"], :name => "index_motions_on_member_id"

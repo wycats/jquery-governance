@@ -34,7 +34,7 @@ class Motion < ActiveRecord::Base
 
   after_initialize :assign_state
 
-  attr_reader :state
+  attr_reader :state, :closed_at
 
   # @return [Fixnum] The number of votes required to pass this Motion
   def required_votes
@@ -149,8 +149,13 @@ class Motion < ActiveRecord::Base
   def closed!
     update_attributes(
       :state_name => "closed",
-      :abstains => possible_votes - votes.count
+      :abstains => possible_votes - votes.count,
+      :closed_at => Time.now
     )
+  end
+
+  def approved_at
+    :closed_at if approved?
   end
 
   def closed?
