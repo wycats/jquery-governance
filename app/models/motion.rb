@@ -30,6 +30,8 @@ class Motion < ActiveRecord::Base
   after_save :schedule_updates, :if => :state_name_changed?
   after_create :schedule_updates
 
+  after_create :send_email_on_create
+
   after_initialize :assign_state
 
   attr_reader :state
@@ -198,6 +200,13 @@ private
 
   def schedule_updates
     state.schedule_updates
+  end
+
+  # @TODO - Refactor to send e-mail via queue
+  def send_email_on_create
+    ActiveMembership.members_active_at(Time.now).each do |member|
+      Notifications.motion_created(self, member).deliver
+    end
   end
 
   def assign_state

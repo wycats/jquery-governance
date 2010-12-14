@@ -2,18 +2,21 @@ require 'spec_helper'
 
 describe Motion do
   before do
-    @motion = Factory.create(:motion)
-    @member = Factory.create(:active_membership).member
+    RSpec::Mocks::setup(self)
+
+    @motion = Factory.build(:motion)
   end
 
-  it "knows how many yea votes have been cast for the motion" do
-    2.times { Factory.create(:yes_vote, :motion => @motion) }
-    @motion.yeas.should == 2
-  end
+  describe "vote counting", :database => true do
+    it "knows how many yea votes have been cast for the motion" do
+      2.times { Factory.create(:yes_vote, :motion => @motion) }
+      @motion.yeas.should == 2
+    end
 
-  it "knows how many nea votes have been cast for the motion" do
-    1.times { Factory.create(:no_vote, :motion => @motion) }
-    @motion.nays.should == 1
+    it "knows how many nea votes have been cast for the motion" do
+      1.times { Factory.create(:no_vote, :motion => @motion) }
+      @motion.nays.should == 1
+    end
   end
 
   describe "state_name=" do
@@ -30,14 +33,15 @@ describe Motion do
   end
 
   describe 'voting requirements' do
-    before :all do
-      #This reprsents all of the members who currently have the right to vote
-      4.times { Factory.create(:active_membership) }
+    before do
+      # This represents all of the members who currently have the right to vote
+      active_membership_scope = double('active membership scope', :count => 4)
+      ActiveMembership.stub!(:active_at).and_return( active_membership_scope )
     end
 
     describe 'required_votes' do
       it "knows how many votes are required to pass the motion" do
-         @motion.required_votes.should == 3
+        @motion.required_votes.should == 3
       end
     end
 
@@ -45,61 +49,71 @@ describe Motion do
 
       describe "when there more than half of the possible votes are yeas" do
         before do
-          3.times { Factory.create(:yes_vote, :motion => @motion) }
+          @motion.stub(:yeas => 3)
         end
 
         it "knows the requirment for passage has been met" do
-           @motion.should be_has_met_requirement
+          @motion.should be_has_met_requirement
         end
       end
 
       describe "when exactly half of the possible votes are yeas" do
         before do
-          2.times{  Factory.create(:yes_vote, :motion => @motion)}
+          @motion.stub(:yeas => 2)
         end
 
         it "knows that the requirement for passage hasn't been met" do
-           @motion.should_not be_has_met_requirement
+          @motion.should_not be_has_met_requirement
         end
       end
 
       describe "when less than half the possible votes are yeas" do
         before do
-          1.times{  Factory.create(:yes_vote, :motion => @motion)}
+          @motion.stub(:yeas => 1)
         end
 
         it "knows that the requirement for passage hasn't been met" do
-           @motion.should_not be_has_met_requirement
+          @motion.should_not be_has_met_requirement
         end
       end
     end
 
     describe 'seconds_for_expedition' do
-      it "knows how many seconds are needed to expidite the measure" do
+      it "knows how many seconds are needed to expedite the measure" do
         @motion.seconds_for_expedition.should == 2
       end
     end
+  end
 
+  describe "voting actions", :database => true do
     describe "vote" do
       it "creates a new vote with the given member and value" do
-        @motion.vote(@member, true)
-        Event.votes.last.member.should eql @member
+        current_motion = Factory.create(:motion)
+        voting_member  = Factory.create(:active_membership).member
+
+        current_motion.vote(voting_member, true)
+        Event.votes.last.member.should eql voting_member
         Event.votes.last.value.should be_true
       end
     end
 
     describe 'second(member)' do
       it "creates a new second for the member" do
+        current_motion   = Factory.create(:motion)
+        seconding_member = Factory.create(:active_membership).member
+
         lambda do
-          @motion.second(@member)
-        end.should change { @motion.seconds.count }
+          current_motion.second(seconding_member)
+        end.should change { current_motion.seconds.count }
       end
     end
+
   end
 
-  describe 'conflicts_with_member?' do
+  describe 'conflicts_with_member?', :database => true do
     before :each do
-      @conflict = Factory(:conflict)
+      @member   = Factory.build(:active_membership).member
+      @conflict = Factory.build(:conflict)
     end
 
     describe "when a member has a conflict unrelated to this motion" do
@@ -125,4 +139,46 @@ describe Motion do
       end
     end
   end
+
+  describe 'schedule_updates', :database => true do
+    describe "when a motion is created" do
+      it "should ask the MotionState to schedule updates" do
+        @motion.state.should_receive(:schedule_updates)
+        @motion.save
+      end
+    end
+
+    describe "when a motion is saved with a state change" do
+      it "should ask the MotionState to schedule updates" do
+        @motion.state_name = "waitingsecond"
+        @motion.save
+
+        @motion.state_name = "discussing"
+
+        @motion.state.should_receive(:schedule_updates)
+        @motion.save
+      end
+    end
+  end
+
+  describe "email notifications" do
+    describe "when a motion is created" do
+      before(:each) do
+        @member_1 = Factory.stub(:member, :email => "member1@email.com")
+        @member_2 = Factory.stub(:member, :email => "member2@email.com")
+
+        ActiveMembership.stub(:members_active_at).and_return([@member_1, @member_2])
+      end
+
+      it "should send a notification to all members" do
+        mock_mail = mock('mock mail', :deliver => true)
+
+        Notifications.should_receive(:motion_created).with(@motion, @member_1).and_return(mock_mail)
+        Notifications.should_receive(:motion_created).with(@motion, @member_2).and_return(mock_mail)
+
+        @motion.save
+      end
+    end
+  end
+
 end
