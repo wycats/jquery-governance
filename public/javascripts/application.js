@@ -1,7 +1,6 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
-
-$(document).ready(function(){
+function moreMotionsInitializer() {
   $('a.more_motions').live('click', function(e){
     var self = $(this);
     var data = {id: self.attr('data-last-id')};
@@ -12,4 +11,13 @@ $(document).ready(function(){
     });
     e.preventDefault();
   });
+}
+
+function highlightFade() {
+  $('.highlight_fade').animate({backgroundColor : '#ffffff'}, 3000);
+}
+
+$(document).ready(function(){
+    moreMotionsInitializer();
+    highlightFade();
 });
