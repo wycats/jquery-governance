@@ -2,6 +2,7 @@ JqueryVoting::Application.routes.draw do
 
   namespace "admin" do
     resources :members
+    resources :tags
   end
 
   devise_for :members do

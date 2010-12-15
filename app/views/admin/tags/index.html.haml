@@ -1,0 +1,10 @@
+%h1 Showing all tags
+#flash
+=form_for @tag, :url => {:action => 'create'} do |f|
+  #tags
+    = render 'tags', :tags => @tags
+
+  .form_row
+    =f.label :name, 'Tag name', :class => 'hidden'
+    =f.text_field :name
+    =f.submit t("admin.tags.actions.add_new_tag"), :class => 'button large_button'

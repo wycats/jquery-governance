@@ -1,5 +1,7 @@
 @import "compass/css3";
+@import "blueprint";
 
+@include blueprint-grid;
 /* @group Variables */
 
 $border_color: #ccc;
@@ -13,9 +15,8 @@ $input_padding: 5px;
 $input_width: 550px;
 $textarea_width: 550px;
 $header_green: #407A27;
-
-$header_green: #407A27;
-
+$flash_notice_border: #DCDA00;
+$flash_notice_background: #FFFECF;
 /* @end */
 
 /* @group Global */
@@ -204,6 +205,18 @@ div.more_motions {
       @include linear-gradient(color-stops(lighten($top, 5%), lighten($bottom, 5%)));
     }
   }
+  a.remove {
+    background-image: url('/images/remove.png');
+    background-repeat: no-repeat;
+    background-position: top right;
+    text-decoration: none;
+    font-size: 1px;
+    height: 16px;
+    width: 16px;
+    color: #fff;
+    display: inline-block;
+    span { display: none; }
+  }
 
   h1 {
     margin-bottom: 10px;
@@ -353,8 +366,8 @@ nav.main ul {
 #flash_notice {
   margin: 10px 20px;
   clear: both;
-  background: #FFFECF;
-  border: 2px solid #DCDA00;
+  background: $flash_notice_background;
+  border: 2px solid $flash_notice_border;
   font-size: 14px;
   text-align: center;
   padding: 5px 20px;
@@ -386,3 +399,17 @@ nav.main ul {
 #error_explanation h3 { font-size: 12px;}
 
 /* @end */
+
+#tags li{
+  font-size: 16px;
+  margin: 0.25em 0;
+  span {
+    padding: 4px;
+    @include border-radius(4px);
+  }
+}
+
+.highlight_fade {
+  background-color: $flash_notice_background;
+}
+

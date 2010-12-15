@@ -1,0 +1,10 @@
+-tags.in_groups(3).each do |tags_in_group|
+  .span-7
+    %ul
+      -tags_in_group.each do |tag_name|
+        -if tag_name
+          %li{'data-tags-id' => tag_name.id}
+            %span{:class => highlight_new_tag(tag_name)}
+              -unless tag_name.count > 0
+                =link_to raw("<span>Remove</span>"), admin_tag_path(tag_name), :method => 'delete', :confirm => "Are you sure?", :class => 'remove'
+              =tag_name.name

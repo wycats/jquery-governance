@@ -7,7 +7,9 @@
     =stylesheet_link_tag    "application"
     =javascript_include_tag :defaults
     =javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"
+    =javascript_include_tag "jquery-ui.js"
     =javascript_include_tag "http://static.jquery.com/files/rocker/scripts/custom.js"
+    =csrf_meta_tag
     %title
       jQuery Voting Tools
   %body
@@ -43,9 +45,10 @@
                         %li.first=link_to 'Motions', root_path
                         %li=link_to 'Open Motions', motions_path
                         %li=link_to 'Closed Motions', closed_motions_path
-                        -if current_member.try(:is_admin?)
+                        -if admin?
                           %li=link_to 'Manage Members', admin_members_path
                         -if current_member
+                          %li=link_to 'Tags', admin_tags_path
                           %li=link_to 'Sign out', sign_out_path
                         -else
                           %li=link_to 'Sign in', sign_in_path

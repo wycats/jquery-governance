@@ -29,3 +29,25 @@ en:
         member_not_created: "Member could not be created"
         member_not_saved:   "Member could not be saved"
         member_not_destroyed: "Member could not be deleted"
+    tags:
+      titles:
+        index: "Manage tags"
+        new:   "New tag"
+        edit:  "Edit tag info"
+      headings:
+        name: "Name"
+        email: "E-mail address"
+        actions: "Actions"
+      actions:
+        add_new_tag: "Add"
+        edit_tag: "Edit tag"
+        update_tag: "Update tag info"
+        delete_tag: "Delete this tag"
+      notices:
+        tag_created: "Tag added."
+        tag_updated: "Tag updated."
+        tag_destroyed: "Tag deleted."
+      alerts:
+        tag_not_created: "Tag could not be created."
+        tag_not_saved:   "Tag could not be saved."
+        tag_not_destroyed: "Tag could not be deleted."
