@@ -14,7 +14,7 @@ class MotionsController < ApplicationController
 
   # Start a new Motion
   def new
-    @motion = Motion.new(:member_id => current_member.id)
+    @motion = current_member.motions.build
   end
 
   # Show more records for the motion state section
@@ -25,8 +25,7 @@ class MotionsController < ApplicationController
   # Create a new Event
   #   @option params [Hash] :motion The new motion to create
   def create
-    @motion = Motion.new(params[:motion])
-    @motion.member = current_member
+    @motion = current_member.motions.build(params[:motion])
 
     if @motion.save
       flash[:notice] = "New motion was created successfully"
