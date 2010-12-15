@@ -18,6 +18,8 @@ module NavigationHelpers
       edit_admin_member_path( Member.find_by_name($1) )
     when /the new member admin page/
       new_admin_member_path
+    when /the admin tags page/
+      admin_tags_path
     when /the motions page for "(.*)"/
       motion_events_path(Motion.find_by_title($1))
     when /the home\s?page/
