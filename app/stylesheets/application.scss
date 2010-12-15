@@ -135,11 +135,52 @@ body {
 /* @group Motions */
 
 div.motion {
-  border-left: 3px solid $border_color;
-  border-top: 1px solid $border_color;
-  border-bottom: 1px solid $border_color;
-  margin-bottom: 5px;
-  padding: 0px 3px 0px 3px; }
+  h2 {
+    clear: both;
+    text-align: center;
+
+    .author {
+      display: block;
+      color: #80a080;
+    }
+  }
+
+  .meta {
+    font-style: italic;
+    text-align: center;
+    color: #666;
+  }
+
+  #motion-actions {
+    margin: 30px 0;
+    text-align: center;
+
+    .quick-tool {
+      display: inline;
+      float: none;
+    }
+  }
+
+  h3 {
+    margin: 30px 0 10px;
+    padding: 5px;
+    background-color: #f3efe4;
+    font-size: 1.7em;
+  }
+
+  p.description, p.rationale {
+    padding: 5px;
+    font-size: 1.6em;
+    color: #666;
+  }
+
+  #motion-events li {
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+    font-size: 1.5em;
+    color: #666;
+  }
+}
 
 .motion_title {
   font-weight: bold;
@@ -317,7 +358,6 @@ div.more_motions {
     color: #333;
   }
 }
-
 
 #motion {
   h1 {
