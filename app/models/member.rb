@@ -1,8 +1,6 @@
 class Member < ActiveRecord::Base
   include Voting
 
-  acts_as_paranoid
-
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :recoverable, :rememberable
