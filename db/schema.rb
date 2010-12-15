@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101207145753) do
+ActiveRecord::Schema.define(:version => 20101215025612) do
 
   create_table "active_memberships", :force => true do |t|
     t.integer  "member_id"
@@ -61,12 +61,9 @@ ActiveRecord::Schema.define(:version => 20101207145753) do
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.string   "confirmation_token"
     t.boolean  "is_admin"
-    t.datetime "deleted_at"
   end
 
-  add_index "members", ["confirmation_token"], :name => "index_members_on_confirmation_token", :unique => true
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
   add_index "members", ["reset_password_token"], :name => "index_members_on_reset_password_token", :unique => true
 
@@ -90,5 +87,18 @@ ActiveRecord::Schema.define(:version => 20101207145753) do
   end
 
   add_index "motions", ["member_id"], :name => "index_motions_on_member_id"
+
+  create_table "taggings", :id => false, :force => true do |t|
+    t.integer "tag_id"
+    t.integer "motion_id"
+  end
+
+  add_index "taggings", ["tag_id", "motion_id"], :name => "index_taggings_on_tag_id_and_motion_id"
+
+  create_table "tags", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

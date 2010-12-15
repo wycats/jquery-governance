@@ -1,6 +1,7 @@
 class Motion < ActiveRecord::Base
   include Voting
 
+
   CLOSED_STATES = %w(closed)
   OPEN_STATES   = %w(waitingsecond discussing voting)
   MOTION_STATES = OPEN_STATES + CLOSED_STATES
@@ -26,6 +27,7 @@ class Motion < ActiveRecord::Base
   has_many    :events
   has_many    :motion_conflicts
   has_many    :conflicts, :through => :motion_conflicts
+  has_and_belongs_to_many :tags, :join_table => "taggings"
 
   after_save :schedule_updates, :if => :state_name_changed?
   after_create :schedule_updates
