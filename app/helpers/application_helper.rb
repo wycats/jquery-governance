@@ -12,11 +12,4 @@ module ApplicationHelper
     end
   end # motion_creator_display_name
 
-  def member?
-    current_member
-  end
-
-  def active_member?
-    current_member && current_member.membership_active?
-  end
 end
