@@ -9,7 +9,7 @@ FactoryGirl.define do
   end
 
   factory :future_membership, :parent => :active_membership do
-    association :qualifying_motion, :factory => :closed_motion, :closed_at => 2.days.from_now 
+    association :qualifying_motion, :factory => :closed_motion, :closed_at => 2.days.from_now
   end
 
   factory :active_admin_membership, :parent => :active_membership do

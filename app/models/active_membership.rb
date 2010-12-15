@@ -11,12 +11,7 @@ class ActiveMembership < ActiveRecord::Base
 
   attr_accessible :qualifying_motion_id, :disqualifying_motion_id
 
-  after_save do
-    debugger
-    self.started_at = self.qualifying_motion.closed_at
-    self.ended_at = self.disqualifying_motion.closed_at unless self.disqualifying_motion.nil?
-  end
-
+  before_save :set_membership_timestamps
 
   # Finds all active memberships for a given time
   #   @param [Date, Time, DateTime] time The Date and Time in which to search for active memberships
@@ -45,16 +40,11 @@ class ActiveMembership < ActiveRecord::Base
   def disqualified_by
     disqualifying_motion
   end
-  
-  # def qualifying_motion_id=(motion_id)
-  #   write_attribute(:qualifying_motion_id, motion_id)
-  #   started_at =  Motion.where(:id => motion_id).first.closed_at
-  #   motion_id
-  # end
 
-  # def disqualifying_motion_id=(motion_id)
-  #   write_attribute(:disqualifying_motion_id, motion_id)
-  #   ended_at = Motion.where(:id => motion_id).first.closed_at
-  #   motion_id
-  # end
+  private
+
+  def set_membership_timestamps
+    self.started_at ||= self.qualifying_motion.closed_at
+    self.ended_at ||= self.disqualifying_motion.closed_at unless self.disqualifying_motion.nil?
+  end
 end

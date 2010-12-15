@@ -28,6 +28,23 @@ describe ActiveMembership do
     end
   end
 
+  describe "setting start timestamp on create" do
+    before do
+      @motion = Factory.create(:motion, :closed_at => 2.days.ago)
+    end
+
+    context "when the started_at has been not set explicitly" do
+      it 'sets started_at to the closed_at time of the qualifying motion' do
+        attrs_for_active_membership = Factory.attributes_for(:active_membership)
+        attrs_for_active_membership[:qualifying_motion_id] = @motion.id
+
+        active_membership = ActiveMembership.new( attrs_for_active_membership )
+        active_membership.save
+
+        active_membership.started_at.should == @motion.closed_at
+      end
+    end
+  end
 
   describe "self.active_at" do
     describe "when there active memberships and expried memberships" do
