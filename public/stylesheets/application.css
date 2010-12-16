@@ -102,19 +102,23 @@ body {
   width: 550px;
   border: 1px solid #cccccc;
 }
-/* line 116, ../../app/stylesheets/application.scss */
+/* line 115, ../../app/stylesheets/application.scss */
+.form_row input[type=checkbox] {
+  margin-top: 5px;
+}
+/* line 119, ../../app/stylesheets/application.scss */
 .form_row textarea {
   height: 10em;
   width: 550px;
 }
 
-/* line 123, ../../app/stylesheets/application.scss */
+/* line 126, ../../app/stylesheets/application.scss */
 #user_signin_form {
   width: 400px;
   margin: 20px auto;
 }
 
-/* line 128, ../../app/stylesheets/application.scss */
+/* line 131, ../../app/stylesheets/application.scss */
 #new_motion_form {
   width: 700px;
   margin: 20px auto;
@@ -122,46 +126,46 @@ body {
 
 /* @end */
 /* @group Motions */
-/* line 138, ../../app/stylesheets/application.scss */
+/* line 141, ../../app/stylesheets/application.scss */
 div.motion h2 {
   clear: both;
   text-align: center;
 }
-/* line 142, ../../app/stylesheets/application.scss */
+/* line 145, ../../app/stylesheets/application.scss */
 div.motion h2 .author {
   display: block;
   color: #80a080;
 }
-/* line 148, ../../app/stylesheets/application.scss */
+/* line 151, ../../app/stylesheets/application.scss */
 div.motion .meta {
   font-style: italic;
   text-align: center;
   color: #666;
 }
-/* line 154, ../../app/stylesheets/application.scss */
+/* line 157, ../../app/stylesheets/application.scss */
 div.motion #motion-actions {
   margin: 30px 0;
   text-align: center;
 }
-/* line 158, ../../app/stylesheets/application.scss */
+/* line 161, ../../app/stylesheets/application.scss */
 div.motion #motion-actions .quick-tool {
   display: inline;
   float: none;
 }
-/* line 164, ../../app/stylesheets/application.scss */
+/* line 167, ../../app/stylesheets/application.scss */
 div.motion h3 {
   margin: 30px 0 10px;
   padding: 5px;
   background-color: #f3efe4;
   font-size: 1.7em;
 }
-/* line 171, ../../app/stylesheets/application.scss */
-div.motion p.description, div.motion p.rationale {
+/* line 174, ../../app/stylesheets/application.scss */
+div.motion p.description, div.motion p.rationale, div.motion p.expedited {
   padding: 5px;
   font-size: 1.6em;
   color: #666;
 }
-/* line 177, ../../app/stylesheets/application.scss */
+/* line 180, ../../app/stylesheets/application.scss */
 div.motion #motion-events li {
   padding: 5px;
   border-bottom: 1px solid #eee;
@@ -169,47 +173,14 @@ div.motion #motion-events li {
   color: #666;
 }
 
-/* line 185, ../../app/stylesheets/application.scss */
-.motion_title {
-  font-weight: bold;
-  font-size: 105%;
-}
-
-/* line 189, ../../app/stylesheets/application.scss */
-.motion_date, .motion_member {
-  width: 49%;
-}
-
-/* line 193, ../../app/stylesheets/application.scss */
-.motion_description, .motion_rationale {
-  margin-top: 2px;
-}
-
-/* line 197, ../../app/stylesheets/application.scss */
-.motion_state_passed {
-  background-color: #90EE90;
-}
-
-/* line 201, ../../app/stylesheets/application.scss */
-.motion_state_failed {
-  background-color: #FAAFBE;
-}
-
-/* line 205, ../../app/stylesheets/application.scss */
-div.more_motions {
-  width: 100%;
-  overflow: hidden;
-  margin-top: 10px;
-}
-
-/* line 211, ../../app/stylesheets/application.scss */
+/* line 188, ../../app/stylesheets/application.scss */
 #members_only {
   height: 30px;
 }
 
 /* @end */
 /* @group Homepage */
-/* line 222, ../../app/stylesheets/application.scss */
+/* line 199, ../../app/stylesheets/application.scss */
 #content a.quick-tool {
   background: #229922;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #44bb44), color-stop(100%, #229922));
@@ -229,21 +200,52 @@ div.more_motions {
   font-size: 1.8em !important;
   border: 1px solid #070;
 }
-/* line 236, ../../app/stylesheets/application.scss */
+/* line 213, ../../app/stylesheets/application.scss */
 #content a.quick-tool:hover {
   background: #3da83d;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #3da83d), color-stop(100%, #1d841d));
   background-image: -moz-linear-gradient(top, #3da83d 0%, #1d841d 100%);
   background-image: linear-gradient(top, #3da83d 0%, #1d841d 100%);
 }
-/* line 241, ../../app/stylesheets/application.scss */
+/* line 218, ../../app/stylesheets/application.scss */
 #content a.quick-tool:active {
   background: #57c257;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #57c257), color-stop(100%, #27ae27));
   background-image: -moz-linear-gradient(top, #57c257 0%, #27ae27 100%);
   background-image: linear-gradient(top, #57c257 0%, #27ae27 100%);
 }
-/* line 247, ../../app/stylesheets/application.scss */
+/* line 224, ../../app/stylesheets/application.scss */
+#content a.more-button {
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #c0c0c0), color-stop(100%, #808080));
+  background-image: -moz-linear-gradient(top, #c0c0c0 0%, #808080 100%);
+  background-image: linear-gradient(top, #c0c0c0 0%, #808080 100%);
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  width: 100px;
+  margin-left: 350px;
+  color: #FFFEFE !important;
+  font-size: 1.2em !important;
+  border: 1px solid #070;
+}
+/* line 237, ../../app/stylesheets/application.scss */
+#content a.more-button:hover {
+  background: #b3b3b3;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #b3b3b3), color-stop(100%, #737373));
+  background-image: -moz-linear-gradient(top, #b3b3b3 0%, #737373 100%);
+  background-image: linear-gradient(top, #b3b3b3 0%, #737373 100%);
+}
+/* line 242, ../../app/stylesheets/application.scss */
+#content a.more-button:active {
+  background: #cdcdcd;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #cdcdcd), color-stop(100%, #8d8d8d));
+  background-image: -moz-linear-gradient(top, #cdcdcd 0%, #8d8d8d 100%);
+  background-image: linear-gradient(top, #cdcdcd 0%, #8d8d8d 100%);
+}
+/* line 248, ../../app/stylesheets/application.scss */
 #content h1 {
   margin-bottom: 10px;
   padding-top: 0;
@@ -252,7 +254,7 @@ div.more_motions {
   text-shadow: 0 1px 1px #ccc;
   font-style: italic;
 }
-/* line 256, ../../app/stylesheets/application.scss */
+/* line 257, ../../app/stylesheets/application.scss */
 #content h2 {
   -moz-border-radius-topleft: 5px;
   -webkit-border-top-left-radius: 5px;
@@ -268,11 +270,11 @@ div.more_motions {
   border-top-right-radius: 5px;
 }
 
-/* line 262, ../../app/stylesheets/application.scss */
+/* line 263, ../../app/stylesheets/application.scss */
 .current-motions {
   margin-top: 10px;
 }
-/* line 265, ../../app/stylesheets/application.scss */
+/* line 266, ../../app/stylesheets/application.scss */
 .current-motions h2 {
   margin: 20px 0 10px;
   padding-left: 200px;
@@ -280,7 +282,7 @@ div.more_motions {
   font-style: italic;
   color: #cab585;
 }
-/* line 273, ../../app/stylesheets/application.scss */
+/* line 274, ../../app/stylesheets/application.scss */
 .current-motions li {
   width: 100%;
   overflow: hidden;
@@ -292,8 +294,9 @@ div.more_motions {
   -ms-border-radius: 5px;
   -khtml-border-radius: 5px;
   border-radius: 5px;
+  border: 1px solid #EFEFEF;
 }
-/* line 280, ../../app/stylesheets/application.scss */
+/* line 282, ../../app/stylesheets/application.scss */
 .current-motions li .date {
   float: left;
   width: 180px;
@@ -302,48 +305,48 @@ div.more_motions {
   text-align: right;
   color: #666;
 }
-/* line 289, ../../app/stylesheets/application.scss */
+/* line 291, ../../app/stylesheets/application.scss */
 .current-motions li .summary {
   float: right;
   width: 640px;
   margin-right: 10px;
 }
-/* line 295, ../../app/stylesheets/application.scss */
+/* line 297, ../../app/stylesheets/application.scss */
 .current-motions li .summary p.meta .author {
   color: #80a080;
 }
-/* line 298, ../../app/stylesheets/application.scss */
+/* line 300, ../../app/stylesheets/application.scss */
 .current-motions li .summary p.meta .author strong {
   font-weight: normal;
   font-style: italic;
 }
-/* line 305, ../../app/stylesheets/application.scss */
+/* line 307, ../../app/stylesheets/application.scss */
 .current-motions li .summary p.description {
   font-size: 1.5em;
   color: #666;
 }
-/* line 311, ../../app/stylesheets/application.scss */
+/* line 313, ../../app/stylesheets/application.scss */
 .current-motions li.odd {
   background: #f0fff0 !important;
 }
-/* line 315, ../../app/stylesheets/application.scss */
+/* line 317, ../../app/stylesheets/application.scss */
 .current-motions li.passed {
   background-color: #90EE90 !important;
 }
-/* line 319, ../../app/stylesheets/application.scss */
+/* line 321, ../../app/stylesheets/application.scss */
 .current-motions li.failed {
   background-color: #FAAFBE !important;
 }
-/* line 323, ../../app/stylesheets/application.scss */
+/* line 325, ../../app/stylesheets/application.scss */
 .current-motions li.seconded {
   background-color: #FFC !important;
 }
-/* line 327, ../../app/stylesheets/application.scss */
+/* line 329, ../../app/stylesheets/application.scss */
 .current-motions li a {
   text-decoration: none;
   font-size: 1.2em;
 }
-/* line 331, ../../app/stylesheets/application.scss */
+/* line 333, ../../app/stylesheets/application.scss */
 .current-motions li a.plus {
   float: right;
   height: 18px;
@@ -354,7 +357,7 @@ div.more_motions {
   color: #000;
   font-size: 1px;
 }
-/* line 342, ../../app/stylesheets/application.scss */
+/* line 344, ../../app/stylesheets/application.scss */
 .current-motions li a.more_motions {
   display: block;
   width: 640px;
@@ -369,7 +372,11 @@ div.more_motions {
   border-radius: 3px;
   text-align: center;
 }
-/* line 355, ../../app/stylesheets/application.scss */
+/* line 356, ../../app/stylesheets/application.scss */
+.current-motions li.no-border {
+  border: 0px;
+}
+/* line 360, ../../app/stylesheets/application.scss */
 .current-motions div.empty {
   margin: 10px 0 40px;
   padding-left: 200px;
@@ -378,27 +385,27 @@ div.more_motions {
   color: #333;
 }
 
-/* line 365, ../../app/stylesheets/application.scss */
+/* line 370, ../../app/stylesheets/application.scss */
 #motion h1 {
   color: #407a27;
   font-size: 3em;
 }
-/* line 370, ../../app/stylesheets/application.scss */
+/* line 375, ../../app/stylesheets/application.scss */
 #motion ul {
   float: right;
 }
 
-/* line 375, ../../app/stylesheets/application.scss */
+/* line 380, ../../app/stylesheets/application.scss */
 nav.main ul {
   float: right;
   height: 40px;
 }
-/* line 379, ../../app/stylesheets/application.scss */
+/* line 384, ../../app/stylesheets/application.scss */
 nav.main ul li {
   margin-top: 5px;
   float: left;
 }
-/* line 383, ../../app/stylesheets/application.scss */
+/* line 388, ../../app/stylesheets/application.scss */
 nav.main ul li.first a {
   -moz-border-radius-bottomleft: 6px;
   -webkit-border-bottom-left-radius: 6px;
@@ -407,7 +414,7 @@ nav.main ul li.first a {
   -khtml-border-bottom-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-/* line 387, ../../app/stylesheets/application.scss */
+/* line 392, ../../app/stylesheets/application.scss */
 nav.main ul li a {
   font-size: 1.25em;
   font-family: helvetica, arial, sans-serif;
@@ -425,14 +432,14 @@ nav.main ul li a {
   cursor: pointer;
   background: url("http://jquery.org/wp-content/themes/green/green/shadow.png") bottom left repeat-x;
 }
-/* line 400, ../../app/stylesheets/application.scss */
+/* line 405, ../../app/stylesheets/application.scss */
 nav.main ul li a:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
 /* @end */
 /* @group Flash alerts & Validation Errors */
-/* line 411, ../../app/stylesheets/application.scss */
+/* line 416, ../../app/stylesheets/application.scss */
 #flash_notice {
   margin: 10px 20px;
   clear: both;
@@ -444,7 +451,7 @@ nav.main ul li a:hover {
   color: #5F5F5F;
 }
 
-/* line 422, ../../app/stylesheets/application.scss */
+/* line 427, ../../app/stylesheets/application.scss */
 #flash_alert {
   margin: 10px 20px;
   clear: both;
@@ -456,7 +463,7 @@ nav.main ul li a:hover {
   color: red;
 }
 
-/* line 433, ../../app/stylesheets/application.scss */
+/* line 438, ../../app/stylesheets/application.scss */
 #error_explanation {
   background: #FBB;
   border: 2px solid red;
@@ -466,17 +473,17 @@ nav.main ul li a:hover {
   margin: 20px;
 }
 
-/* line 442, ../../app/stylesheets/application.scss */
+/* line 447, ../../app/stylesheets/application.scss */
 #error_explanation ul {
   margin: 0;
 }
 
-/* line 443, ../../app/stylesheets/application.scss */
+/* line 448, ../../app/stylesheets/application.scss */
 #error_explanation h2 {
   font-size: 14px;
 }
 
-/* line 444, ../../app/stylesheets/application.scss */
+/* line 449, ../../app/stylesheets/application.scss */
 #error_explanation h3 {
   font-size: 12px;
 }

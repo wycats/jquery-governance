@@ -112,6 +112,9 @@ body {
     width: $input_width;
     border: 1px solid $border_color;
   }
+  input[type=checkbox] {
+    margin-top: $form_row_spacing / 2;
+  }
 
   textarea {
     height: 10em;
@@ -168,7 +171,7 @@ div.motion {
     font-size: 1.7em;
   }
 
-  p.description, p.rationale {
+  p.description, p.rationale, p.expedited {
     padding: 5px;
     font-size: 1.6em;
     color: #666;
@@ -180,32 +183,6 @@ div.motion {
     font-size: 1.5em;
     color: #666;
   }
-}
-
-.motion_title {
-  font-weight: bold;
-  font-size: 105%; }
-
-.motion_date, .motion_member {
-  width: 49%;
-}
-
-.motion_description, .motion_rationale {
-  margin-top: 2px;
-}
-
-.motion_state_passed {
-  background-color: #90EE90;
-}
-
-.motion_state_failed {
-  background-color: #FAAFBE;
-}
-
-div.more_motions {
-  width: 100%;
-  overflow: hidden;
-  margin-top: 10px;
 }
 
 #members_only {
@@ -231,6 +208,30 @@ div.more_motions {
     text-decoration: none;
     color: #FFFEFE !important;
     font-size: 1.8em !important;
+    border: 1px solid #070;
+
+    &:hover {
+      background: darken($top, 5%);
+      @include linear-gradient(color-stops(darken($top, 5%), darken($bottom, 5%)));
+    }
+
+    &:active {
+      background: lighten($top, 5%);
+      @include linear-gradient(color-stops(lighten($top, 5%), lighten($bottom, 5%)));
+    }
+  }
+
+  a.more-button {
+    $top: #C0C0C0;
+    $bottom: #808080;
+
+    @include linear-gradient(color-stops($top, $bottom));
+    @include border-radius(3px);
+
+    width: 100px;
+    margin-left: 350px;
+    color: #FFFEFE !important;
+    font-size: 1.2em !important;
     border: 1px solid #070;
 
     &:hover {
@@ -276,6 +277,7 @@ div.more_motions {
     margin: 10px 0;
     padding-top: 10px;
     @include border-radius(5px);
+    border: 1px solid #EFEFEF;
 
     .date {
       float: left;
@@ -350,6 +352,9 @@ div.more_motions {
       }
     }
 
+  }
+  li.no-border {
+    border: 0px;
   }
 
   div.empty {

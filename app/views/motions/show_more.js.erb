@@ -2,5 +2,5 @@
   <%= render(:partial => 'motions/list_item', :locals => { :motion => motion }) %>
 <% end %>
 <% if link = link_to_more_motions(@motions) %>
-    <li><%= link %></li>
+    <li class='no-border'><%= link %></li>
 <% end %>
