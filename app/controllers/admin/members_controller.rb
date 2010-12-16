@@ -1,5 +1,4 @@
-class Admin::MembersController < ApplicationController
-  respond_to :html
+class Admin::MembersController < Admin::BaseController
 
   def index
     @members = Member.all

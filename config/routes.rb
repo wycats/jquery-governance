@@ -1,8 +1,10 @@
 JqueryVoting::Application.routes.draw do
 
   namespace "admin" do
+    resources :base
     resources :members
   end
+  get "/admin", :to => "admin/base#index"
 
   devise_for :members do
     get "sign_in", :to => "devise/sessions#new"
