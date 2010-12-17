@@ -1,6 +1,6 @@
 class MotionsController < ApplicationController
 
-  before_filter :authenticate_member!, :except => [:show, :index]
+  before_filter :authenticate_member!, :except => [:index, :closed, :show_more]
 
   # List Motions that are open (NOT passed, failed, approved)
   def index
@@ -9,17 +9,12 @@ class MotionsController < ApplicationController
 
   # List Motions that are closed (passed, failed, approved)
   def closed
-    @motions = Motion.closed_state.where('id >= ?', params[:id] || 1).order('created_at DESC').limit(6)
+    @motions = Motion.closed_state.order('created_at DESC').limit(6)
   end
 
   # Start a new Motion
   def new
-    @motion = Motion.new(:member_id => current_member.id)
-  end
-
-  # This should not be used. Should take you to MotionEvents#index
-  def show
-    @motion = Motion.find(params[:id])
+    @motion = current_member.motions.build
   end
 
   # Show more records for the motion state section
@@ -30,8 +25,7 @@ class MotionsController < ApplicationController
   # Create a new Event
   #   @option params [Hash] :motion The new motion to create
   def create
-    @motion = Motion.new(params[:motion])
-    @motion.member = current_member
+    @motion = current_member.motions.build(params[:motion])
 
     if @motion.save
       flash[:notice] = "New motion was created successfully"

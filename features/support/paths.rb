@@ -12,6 +12,8 @@ module NavigationHelpers
     when /^[a-z0-9\-_\/]+$/
       page_name
 
+    when /the admin page/
+      admin_path
     when /the members admin page/
       admin_members_path
     when /the edit member admin page for "([^"]*)"/
