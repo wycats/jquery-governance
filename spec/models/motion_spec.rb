@@ -4,7 +4,7 @@ describe Motion do
   before do
     RSpec::Mocks::setup(self)
 
-    @motion = Factory.build(:motion)
+    @motion = Factory.stub(:motion)
   end
 
   describe "vote counting", :database => true do
@@ -140,9 +140,14 @@ describe Motion do
     end
   end
 
-  describe 'schedule_updates', :database => true do
+  describe 'schedule_updates' do
+    before(:each) do
+      ActiveRecord::Base.connection.stub(:execute)
+    end
+
     describe "when a motion is created" do
       it "should ask the MotionState to schedule updates" do
+        @motion = Factory.build(:motion)
         @motion.state.should_receive(:schedule_updates)
         @motion.save
       end
@@ -150,11 +155,8 @@ describe Motion do
 
     describe "when a motion is saved with a state change" do
       it "should ask the MotionState to schedule updates" do
-        @motion.state_name = "waitingsecond"
-        @motion.save
-
+        @motion = Factory.create(:motion)
         @motion.state_name = "discussing"
-
         @motion.state.should_receive(:schedule_updates)
         @motion.save
       end
@@ -162,22 +164,68 @@ describe Motion do
   end
 
   describe "email notifications" do
+    before(:each) do
+      # Disable database hits for speed, we're only interested in whether the callbacks fire
+      ActiveRecord::Base.connection.stub(:execute)
+
+      @member_1 = Factory.stub(:member, :email => "member1@email.com")
+      @member_2 = Factory.stub(:member, :email => "member2@email.com")
+      ActiveMembership.stub(:members_active_at).and_return([@member_1, @member_2])
+
+      ActionMailer::Base.deliveries = []
+    end
+
     describe "when a motion is created" do
-      before(:each) do
-        @member_1 = Factory.stub(:member, :email => "member1@email.com")
-        @member_2 = Factory.stub(:member, :email => "member2@email.com")
-
-        ActiveMembership.stub(:members_active_at).and_return([@member_1, @member_2])
-      end
-
       it "should send a notification to all members" do
-        mock_mail = mock('mock mail', :deliver => true)
-
-        Notifications.should_receive(:motion_created).with(@motion, @member_1).and_return(mock_mail)
-        Notifications.should_receive(:motion_created).with(@motion, @member_2).and_return(mock_mail)
-
-        @motion.save
+        Factory.create(:motion)
+        ActionMailer::Base.deliveries.should have(2).emails
       end
+
+      it "should notify members the motion was created" do
+        Factory.create(:motion)
+        sample_message = ActionMailer::Base.deliveries.first
+        sample_message.subject.should include(I18n.t('notifications.motion_created.subject'))
+      end
+    end
+
+    describe "when a motion's state changes" do
+      before do
+        @motion = Factory.create(:motion)
+        ActionMailer::Base.deliveries = []
+      end
+
+      # state_name == discussing
+      it "should send a notification to all members" do
+        @motion.discussing!
+        ActionMailer::Base.deliveries.should have(2).emails
+      end
+
+      it "should notify members the motion has been seconded" do
+        @motion.discussing!
+        sample_message = ActionMailer::Base.deliveries.first
+        sample_message.subject.should include(I18n.t('notifications.motion_state_changed.subjects.discussing'))
+      end
+
+      it "should notify members the motion has entered voting" do
+        @motion.voting!
+        sample_message = ActionMailer::Base.deliveries.first
+        sample_message.subject.should include(I18n.t('notifications.motion_state_changed.subjects.voting'))
+      end
+    end
+
+    describe "when a motion passes" do
+      # state_name == closed && passed?
+      it "should send a notification to all members"
+    end
+
+    describe "when a motion fails" do
+      # state_name == closed && !passed?
+      it "should send a notification to all members"
+    end
+
+    describe "when a motion fails to reach the voting state" do
+      # state_name == closed && failed?
+      it "should send a notification to all members"
     end
   end
 
