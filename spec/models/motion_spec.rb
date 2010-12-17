@@ -171,6 +171,8 @@ describe Motion do
       @member_1 = Factory.stub(:member, :email => "member1@email.com")
       @member_2 = Factory.stub(:member, :email => "member2@email.com")
       ActiveMembership.stub(:members_active_at).and_return([@member_1, @member_2])
+
+      ActionMailer::Base.deliveries = []
     end
 
     describe "when a motion is created" do
