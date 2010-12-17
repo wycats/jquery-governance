@@ -5,7 +5,11 @@ en:
   hello: "Hello world"
   notifications:
     motion_created:
-      subject: "NEW MOTION"
+      subject: "New motion"
+    motion_state_changed:
+      subjects:
+        discussing: "Motion seconded"
+        voting: "Motion now voting"
   admin:
     members:
       titles:

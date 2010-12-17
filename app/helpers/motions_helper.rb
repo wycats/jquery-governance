@@ -26,7 +26,7 @@ module MotionsHelper
         end
 
         if link = link_to_more_motions(motions)
-          haml_tag(:li, link)
+          haml_tag(:li, link, :class => 'no-border')
         end
       end
     end
@@ -34,7 +34,7 @@ module MotionsHelper
 
   def link_to_more_motions(motions)
     if motions.count > motions.size
-      link_to('More', show_more_motions_path, :class => 'more_motions quick-tooling', :'data-last-id' => motions.last.id)
+      link_to('More', show_more_motions_path, :class => 'more_motions more-button', :'data-last-id' => motions.last.id)
     end
   end
 end

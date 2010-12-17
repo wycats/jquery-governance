@@ -1,8 +1,6 @@
 %header
   %h1= t("admin.members.titles.new")
 
-=render 'shared/flashes'
-
 %section#main
   = form_for [:admin, @member] do |form|
     = render form

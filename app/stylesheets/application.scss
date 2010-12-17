@@ -25,7 +25,6 @@ body {
   font-size: $font_base;
 }
 
-
 .centered {
   text-align: center;
 }
@@ -114,6 +113,9 @@ body {
     width: $input_width;
     border: 1px solid $border_color;
   }
+  input[type=checkbox] {
+    margin-top: $form_row_spacing / 2;
+  }
 
   textarea {
     height: 10em;
@@ -142,32 +144,51 @@ div.motion {
   margin-bottom: 5px;
   padding: 0px 3px 0px 3px;
   @include border-radius(6px);
+  h2 {
+    clear: both;
+    text-align: center;
+
+    .author {
+      display: block;
+      color: #80a080;
+    }
   }
 
-.motion_title {
-  font-weight: bold;
-  font-size: 105%; }
+  .meta {
+    font-style: italic;
+    text-align: center;
+    color: #666;
+  }
 
-.motion_date, .motion_member {
-  width: 49%;
-}
+  #motion-actions {
+    margin: 30px 0;
+    text-align: center;
 
-.motion_description, .motion_rationale {
-  margin-top: 2px;
-}
+    .quick-tool {
+      display: inline;
+      float: none;
+    }
+  }
 
-.motion_state_passed {
-  background-color: #90EE90;
-}
+  h3 {
+    margin: 30px 0 10px;
+    padding: 5px;
+    background-color: #f3efe4;
+    font-size: 1.7em;
+  }
 
-.motion_state_failed {
-  background-color: #FAAFBE;
-}
+  p.description, p.rationale, p.expedited {
+    padding: 5px;
+    font-size: 1.6em;
+    color: #666;
+  }
 
-div.more_motions {
-  width: 100%;
-  overflow: hidden;
-  margin-top: 10px;
+  #motion-events li {
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+    font-size: 1.5em;
+    color: #666;
+  }
 }
 
 #members_only {
@@ -218,6 +239,30 @@ div.more_motions {
     span { display: none; }
   }
 
+  a.more-button {
+    $top: #C0C0C0;
+    $bottom: #808080;
+
+    @include linear-gradient(color-stops($top, $bottom));
+    @include border-radius(3px);
+
+    width: 100px;
+    margin-left: 350px;
+    color: #FFFEFE !important;
+    font-size: 1.2em !important;
+    border: 1px solid #070;
+
+    &:hover {
+      background: darken($top, 5%);
+      @include linear-gradient(color-stops(darken($top, 5%), darken($bottom, 5%)));
+    }
+
+    &:active {
+      background: lighten($top, 5%);
+      @include linear-gradient(color-stops(lighten($top, 5%), lighten($bottom, 5%)));
+    }
+  }
+
   h1 {
     margin-bottom: 10px;
     padding-top: 0;
@@ -234,35 +279,54 @@ div.more_motions {
 
 
 .current-motions {
-  section {
-    margin: 10px 0 20px;
-    padding: 8px;
-    @include border-radius(5px);
-    background-color: #f8f8f8;
-  }
+  margin-top: 10px;
 
   h2 {
-    margin: 10px;
+    margin: 20px 0 10px;
+    padding-left: 200px;
     font-size: 2.2em;
-    font-weight: normal;
-    color: #555;
+    font-style: italic;
+    color: #cab585;
   }
-
-  ul, div.empty {
-    @include border-radius(3px);
-    border: 2px solid #e9e9e9;
-    background-color: #fff;
-    font-size: 1.7em;
-  }
-
-  div.empty {
-    padding: 20px;
-  }
-
 
   li {
-    padding: 20px;
-    border-bottom: 1px solid #f0f0f0;
+    width: 100%;
+    overflow: hidden;
+    margin: 10px 0;
+    padding-top: 10px;
+    @include border-radius(5px);
+    border: 1px solid #EFEFEF;
+
+    .date {
+      float: left;
+      width: 180px;
+      font-size: 1.4em;
+      line-height: 1.7;
+      text-align: right;
+      color: #666;
+    }
+
+    .summary {
+      float: right;
+      width: 640px;
+      margin-right: 10px;
+
+      p.meta {
+        .author {
+          color: #80a080;
+
+          strong {
+            font-weight: normal;
+            font-style: italic;
+          }
+        }
+      }
+
+      p.description {
+        font-size: 1.5em;
+        color: #666;
+      }
+    }
 
     &.odd {
       background: #f0fff0 !important;
@@ -281,8 +345,8 @@ div.more_motions {
     }
 
     a {
-      font-size: 1.2em;
       text-decoration: none;
+      font-size: 1.2em;
 
       &.plus {
         float: right;
@@ -294,32 +358,36 @@ div.more_motions {
         color: #000;
         font-size: 1px;
       }
+
+      &.more_motions {
+        display: block;
+        width: 640px;
+        margin: 0 0 10px 200px;
+        padding: 5px 0 3px;
+        border: 1px solid #666;
+        @include border-radius(3px);
+        text-align: center;
+      }
     }
 
-    a.more_motions {
-      display: block;
-      width: 100%;
-      text-align: center;
-    }
+  }
+  li.no-border {
+    border: 0px;
+  }
 
-    p.author {
-      font-size: 1.1em;
-      color: #80a080;
-
-      strong { font-weight: bold }
-    }
-
-    p.description {
-      color: #b8b8b8;
-    }
+  div.empty {
+    margin: 10px 0 40px;
+    padding-left: 200px;
+    font-size: 1.5em;
+    font-style: italic;
+    color: #333;
   }
 }
 
-
-#content .current-motions .motion {
+#motion {
   h1 {
     color: $header_green;
-    font-size: 2em;
+    font-size: 3em;
   }
 
   ul {

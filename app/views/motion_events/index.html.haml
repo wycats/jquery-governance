@@ -1,12 +1,23 @@
-=render @motion
--if @actionable
-  %div#members_only
-    =render 'member_action', :motion => @motion
-%div#seconds
-  %h3
-    Seconds to this Motion
-  =render :partial => 'event', :collection => @events.second
-%div#votes
-  %h3
-    Votes Cast
-  =render :partial => 'event', :collection => @events.votes
+=div_for(@motion) do
+  %h2
+    = @motion.title
+    %span.author by #{@motion.member.name_or_email}
+  %p.meta
+    %span.created_at Created on #{@motion.created_at.to_date}
+    %span.current_state and currently #{@motion.formatted_state}
+  #motion-actions
+    - if member? && current_member.can?(:second, @motion)
+      =link_to "Second This Motion", motion_second_path(@motion), :class => "quick-tool", :method => :post, :remote => true
+    - elsif member? && current_member.can?(:vote, @motion)
+      =link_to "Aye", motion_vote_path(@motion, :vote => :aye), :class => "quick-tool", :method => :post, :remote => true
+      =link_to "Nay", motion_vote_path(@motion, :vote => :nay), :class => "quick-tool", :method => :post, :remote => true
+  %h3 Description
+  %p.description= @motion.description
+  %h3 Rationale
+  %p.rationale= @motion.rationale
+  %h3 Expedited
+  %p.expedited= @motion.expedited == true ? 'Yes' : 'No'
+  %h3 Events
+  %ul#motion-events
+    - @motion.events.each do |event|
+      %li= render event

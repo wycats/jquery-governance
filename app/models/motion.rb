@@ -33,6 +33,7 @@ class Motion < ActiveRecord::Base
   after_create :schedule_updates
 
   after_create :send_email_on_create
+  after_save :send_email_on_state_change, :if => :state_name_changed?
 
   after_initialize :assign_state
 
@@ -208,6 +209,12 @@ private
   def send_email_on_create
     ActiveMembership.members_active_at(Time.now).each do |member|
       Notifications.motion_created(self, member).deliver
+    end
+  end
+
+  def send_email_on_state_change
+    ActiveMembership.members_active_at(Time.now).each do |member|
+      Notifications.motion_state_changed(self, member).deliver
     end
   end
 
