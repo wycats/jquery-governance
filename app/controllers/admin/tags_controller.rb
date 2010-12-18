@@ -3,11 +3,7 @@ class Admin::TagsController < ApplicationController
   before_filter :require_active_member, :only => [:create, :destroy]
 
   def index
-    @tags = Tag.
-      select("tags.id, tags.name, count(taggings.tag_id) as count").
-      joins("left outer join taggings on taggings.tag_id = tags.id").
-      group("tags.name, taggings.tag_id").
-      order(:name)
+    @tags = Tag.motion_counts
     @tag = Tag.new
     @new_tag_id = params[:new_tag_id]
     @old_tag_id = params[:old_tag_id]
