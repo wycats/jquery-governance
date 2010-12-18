@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe Member do
   before :all do
-    @member = Factory.create(:active_membership).member
+    @motion = Factory.create(:closed_motion)
+    @member = Factory.create(:active_membership, :qualifying_motion => @motion).member
     @inactive_member = Factory.create(:expired_membership).member
 
     @admin_member = Factory.create(:active_admin_membership).member

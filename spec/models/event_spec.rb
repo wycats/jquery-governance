@@ -4,6 +4,7 @@ describe Event do
 
   before :all do
       @motion  = Factory.create(:motion)
+      debugger
       @member  = Factory.create(:active_membership).member
       @vote = Factory.create(:yes_vote)
       @second_vote = Factory.create(:yes_vote)

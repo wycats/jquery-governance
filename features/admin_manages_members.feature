@@ -28,7 +28,6 @@ Feature: Admin manages members
     And I should see "Sam Spade"
     And I should see "Member added"
 
-  @wip
   Scenario: Validation failure on create
     Given I am on the members admin page
     When I follow "Add new member"
@@ -36,7 +35,7 @@ Feature: Admin manages members
     And I fill in "Email" with ""
     And I press "Add new member"
     Then I should see "Member could not be created"
-    And the "Name" field should contain ""
+    And I should see "can't be blank"
 
   Scenario: Update existing member
     Given these other members exist:

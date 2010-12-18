@@ -10,11 +10,10 @@ class Admin::MembersController < Admin::BaseController
 
   def create
     @member = Member.new( params[:member] )
-    if @member.save!
+    if @member.save
       flash[:notice] = I18n.t("admin.members.notices.member_created")
       redirect_to :action => 'index'
     else
-      # TODO: Add Cuke coverage for validation errors
       flash.now[:alert] = I18n.t("admin.members.alerts.member_not_created")
       render :action => :new
     end
