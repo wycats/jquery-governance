@@ -1,16 +1,15 @@
 FactoryGirl.define do
   factory :active_membership do
     association :member, :factory => :john_resig
-    started_at 4.days.ago
-    ended_at nil
+    association :qualifying_motion, :factory => :closed_motion, :closed_at => 4.days.ago
   end
 
   factory :expired_membership, :parent => :active_membership do
-    ended_at 2.days.ago
+    association :disqualifying_motion, :factory => :closed_motion, :closed_at => 2.days.ago
   end
 
   factory :future_membership, :parent => :active_membership do
-    started_at 2.days.from_now
+    association :qualifying_motion, :factory => :closed_motion, :closed_at => 2.days.from_now
   end
 
   factory :active_admin_membership, :parent => :active_membership do

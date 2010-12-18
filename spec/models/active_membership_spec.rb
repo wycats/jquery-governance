@@ -1,6 +1,51 @@
 require 'spec_helper'
 
 describe ActiveMembership do
+
+  describe "qualifying and disqualifying memberships with motions" do
+    before do
+      @motion = Factory.create(:motion)
+      @active_membership = Factory.create(:active_membership)
+    end
+
+    it "requires that a qualifying motion be specified when creating a new membership" do
+      @active_membership.qualifying_motion = nil
+      @active_membership.should_not be_valid
+    end
+
+    describe "qualified_by" do
+      it "returns the motion that qualified the current active membership" do
+        @active_membership.qualifying_motion = @motion
+        @active_membership.qualified_by.should == @motion
+      end
+    end
+
+    describe "disqualified_by" do
+      it "returns the motion that disqualified the current active membership" do
+        @active_membership.disqualifying_motion = @motion
+        @active_membership.disqualified_by.should == @motion
+      end
+    end
+  end
+
+  describe "setting start timestamp on create" do
+    before do
+      @motion = Factory.create(:motion, :closed_at => 2.days.ago)
+    end
+
+    context "when the started_at has been not set explicitly" do
+      it 'sets started_at to the closed_at time of the qualifying motion' do
+        attrs_for_active_membership = Factory.attributes_for(:active_membership)
+        attrs_for_active_membership[:qualifying_motion_id] = @motion.id
+
+        active_membership = ActiveMembership.new( attrs_for_active_membership )
+        active_membership.save
+
+        active_membership.started_at.should == @motion.closed_at
+      end
+    end
+  end
+
   describe "self.active_at" do
     describe "when there active memberships and expried memberships" do
       before do

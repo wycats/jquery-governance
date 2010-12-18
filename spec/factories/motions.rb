@@ -15,5 +15,6 @@ FactoryGirl.define do
 
   factory :closed_motion, :parent => :motion do
     state_name "closed"
+    closed_at  Time.now
   end
 end

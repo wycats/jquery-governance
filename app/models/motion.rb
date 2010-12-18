@@ -152,8 +152,13 @@ class Motion < ActiveRecord::Base
   def closed!
     update_attributes(
       :state_name => "closed",
-      :abstains => possible_votes - votes.count
+      :abstains => possible_votes - votes.count,
+      :closed_at => Time.now
     )
+  end
+
+  def approved_at
+    :closed_at if approved?
   end
 
   def closed?

@@ -11,7 +11,7 @@ describe Member do
     @renewed_member = Factory.create(:active_membership).member
     Factory.create(:expired_membership, :member => @renewed_member)
 
-    @expired_member = Factory.create(:expired_membership, :started_at => 2.years.ago, :ended_at => 8.months.ago).member
+    @expired_member = Factory.create(:expired_membership).member
     Factory.create(:expired_membership, :member => @expired_member, :started_at => 5.months.ago, :ended_at => 4.days.ago)
 
     @motion = Factory.create(:motion)

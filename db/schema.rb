@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(:version => 20101215025612) do
     t.datetime "ended_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "qualifying_motion_id"
+    t.integer  "disqualifying_motion_id"
   end
 
   add_index "active_memberships", ["ended_at"], :name => "index_active_memberships_on_ended_at"
@@ -84,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20101215025612) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "expedited",   :default => false
+    t.datetime "closed_at"
   end
 
   add_index "motions", ["member_id"], :name => "index_motions_on_member_id"
