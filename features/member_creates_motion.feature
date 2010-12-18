@@ -12,7 +12,6 @@ Feature: Active member creates motion
     And I press "Create Motion"
     Then I should see "New motion was created successfully"
 
-  @wip
   Scenario: I am an inactive member
     Given I am signed in as an inactive member
     Then I should not see "New Motion"
