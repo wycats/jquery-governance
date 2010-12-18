@@ -22,12 +22,14 @@ class MotionEventsController < ApplicationController
   #   @option params [Fixnum] :motion_id The id of the motion in question
   def second
     @motion = Motion.find(params[:motion_id])
-    @event  = @motion.seconds.new :value => true
 
-    @event.member = current_member
+    if @motion.second(current_member)
+      flash[:notice] = "You have successfully seconded the motion."
+    else
+      flash[:alert] =  "Something went wrong when seconding the motion"
+    end
 
-    @disp   = "Successfully Seconded Motion" if @event.save
-    @disp ||= "Error Seconding Motion"
+    redirect_to motion_events_url(@motion)
   end
 
   # Create a Voting Event for a Motion

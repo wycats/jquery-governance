@@ -8,6 +8,15 @@ module MotionsHelper
     }
   end
 
+  def state_description_for_motion(motion)
+    case motion.state_name
+    when 'waitingsecond' then 'waiting for seconds'
+    when 'discussing'    then 'being discussed'
+    when 'voting'        then 'being voted'
+    when 'clossed'       then 'closed'
+    end
+  end
+
   def state_class_for_motion(motion)
     if motion.has_met_requirement?
       'passed'
