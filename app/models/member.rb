@@ -19,7 +19,7 @@ class Member < ActiveRecord::Base
 
   # Checks membership status at a given Date/Time
   #   @param [Date, Time, DateTime] time The time for which membership status should be checked
-  #   @return [true, false] Whether or not member was active as true or false, respectively
+  #   @return [ActiveMemberhsip] The membership that is found to be active at the specified time 
   def active_at?(time)
     active_memberships.active_at(time).first
   end
@@ -27,7 +27,7 @@ class Member < ActiveRecord::Base
   # Returns the active membership status, of this member
   #   @return [true, false] Whether or not member is currently active as true or false, respectively
   def membership_active?
-    active_at?(Time.now)
+    true unless active_at?(Time.now).nil?
   end
 
   # Check if the member has permissions to perform the given action over the given motion or member
@@ -67,5 +67,4 @@ class Member < ActiveRecord::Base
   def name_or_email
     self.name || self.email
   end
-
 end

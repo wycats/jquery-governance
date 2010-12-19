@@ -110,4 +110,29 @@ describe Member do
       @member.has_seconded?(@motion).should be_true
     end
   end
+
+  describe "membership_active?" do
+    it "returns true if the member has an active membership" do
+      @member.membership_active?.should be_true
+    end
+
+    it "return false if the member has no active memberships" do
+      @expired_member.membership_active?.should be_false
+    end
+  end
+
+  describe "name_or_email" do
+    context "when the name of the member is known" do
+      it "reutrns the name of the member" do
+        @member.name_or_email.should == @member.name
+      end
+    end
+
+    context "when the name of the member isn't known" do
+      it "returns the email address of the member" do
+        @member.name = nil
+        @member.name_or_email.should == @member.email
+      end
+    end
+  end
 end
