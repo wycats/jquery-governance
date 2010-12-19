@@ -2,6 +2,7 @@ module MotionState
   class Voting < Base
     include PubliclyViewable
     include NoSecondable
+    include NoObjetionable
 
     def permit_vote?(member)
       member.membership_active? && !member.has_voted_on?(@motion) && !@motion.conflicts_with_member?(member)

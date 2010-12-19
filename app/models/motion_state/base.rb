@@ -15,6 +15,9 @@ module MotionState
     def permit_second?(member)
     end
 
+    def permit_object?(member)
+    end
+
     def permit_vote?(member)
     end
 

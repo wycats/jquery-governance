@@ -6,7 +6,8 @@ module MotionState
       before(:all) do
         @active_member = Factory(:active_membership).member
         @inactive_member = Factory(:expired_membership).member
-        @motion_state = Factory(:discussing_motion).state
+        @motion = Factory(:discussing_motion)
+        @motion_state = @motion.state
       end
 
       it "allows an active member to see the motion" do
@@ -15,6 +16,19 @@ module MotionState
 
       it "doesn't allow an inactive member to see the motion" do
         @motion_state.permit?(:see, @inactive_member).should be_false
+      end
+
+      it "allows an active member to object the motion" do
+        @motion_state.permit?(:object, @active_member).should be_true
+      end
+
+      it "doesn't allow a member to object the motion more than once" do
+        @motion.object(@active_member)
+        @motion_state.permit?(:object, @active_member).should be_false
+      end
+
+      it "doesn't allow an inactive member to object the motion" do
+        @motion_state.permit?(:object, @inactive_member).should be_false
       end
 
       it "doesn't allow an active member to vote the motion" do

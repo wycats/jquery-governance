@@ -18,6 +18,14 @@ module MotionState
         @motion_state.permit?(:see, @inactive_member).should be_true
       end
 
+      it "doesn't allow an active member to object the motion" do
+        @motion_state.permit?(:object, @active_member).should be_false
+      end
+
+      it "doesn't allow an inactive member to object the motion" do
+        @motion_state.permit?(:object, @inactive_member).should be_false
+      end
+
       it "allows an active member to vote the motion" do
         @motion_state.permit?(:vote, @active_member).should be_true
       end

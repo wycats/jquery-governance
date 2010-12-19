@@ -4,6 +4,10 @@ module MotionState
     include ActiveMemberViewable
     include NoSecondable
 
+    def permit_object?(member)
+      member.membership_active? && @motion.objections.where(:member_id => member.id).blank?
+    end
+
     def schedule_updates
       schedule_updates_in(24.hours, 48.hours)
     end

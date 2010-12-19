@@ -17,6 +17,12 @@ module MotionState
     end
   end
 
+  module NoObjetionable
+    def permit_object?(member)
+      false
+    end
+  end
+
   module NoVotable
     def permit_vote?(member)
       false

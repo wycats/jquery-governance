@@ -1,6 +1,7 @@
 module MotionState
   class Waitingsecond < Base
     include ActiveMemberViewable
+    include NoObjetionable
     include NoVotable
 
     def permit_second?(member)

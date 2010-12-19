@@ -8,9 +8,11 @@
   #motion-actions
     - if member? && current_member.can?(:second, @motion)
       =link_to "Second This Motion", motion_second_path(@motion), :class => "quick-tool", :method => :post, :remote => true
-    - elsif member? && current_member.can?(:vote, @motion)
+    - if member? && current_member.can?(:vote, @motion)
       =link_to "Aye", motion_vote_path(@motion, :vote => :aye), :class => "quick-tool", :method => :post, :remote => true
       =link_to "Nay", motion_vote_path(@motion, :vote => :nay), :class => "quick-tool", :method => :post, :remote => true
+    - if member? && current_member.can?(:object, @motion)
+      =link_to "Object This Motion", motion_object_path(@motion), :class => "quick-tool", :method => :post, :remote => true
   %h3 Description
   %p.description= @motion.description
   %h3 Rationale
