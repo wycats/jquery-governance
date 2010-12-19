@@ -1,9 +1,11 @@
 .current-motions
   - if active_member?
     =link_to "New Motion", new_motion_path, {:class => "quick-tool"}
-
-  %h1
-    Current Motions
+    %h1
+      Current Motions
+  - else
+    %h1
+      Motions
 
   - if active_member?
     %section
@@ -19,5 +21,12 @@
     %h2 Voting
     - render_motion_list(@motions.voting) do
       .empty There are no motions available to review
+
+
+  - unless active_member?
+    %section
+      %h2 Closed
+      - render_motion_list(@motions.closed_state) do
+        .empty There are no motions available to review
 
 / TODO: show/hide motions you've already acted on

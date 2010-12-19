@@ -1,10 +1,10 @@
 class MotionsController < ApplicationController
 
-  before_filter :authenticate_member!, :except => [:index, :closed, :show_more]
+  before_filter :authenticate_member!, :except => [:index, :show_more]
 
   # List Motions that are open (NOT passed, failed, approved)
   def index
-    @motions = Motion.open_state.order('created_at DESC').limit(6)
+    @motions = Motion.order('created_at DESC').limit(6)
   end
 
   # List Motions that are closed (passed, failed, approved)
