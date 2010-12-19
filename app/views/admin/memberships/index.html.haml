@@ -13,10 +13,10 @@
       %tr.active_membership[@active_membership]{:class => cycle("", "alt")}
         %td= l @active_membership.started_at, :format => :short
         %td= link_to "Motion ##{@active_membership.qualifying_motion.id}", @active_membership.qualifying_motion
-        %td= link_to t("admin.active_memberhips.actions.end_membership"), edit_admin_member_active_membership_path(@member, @active_membership)
+        %td= link_to t("admin.active_memberhips.actions.end_membership"), edit_admin_member_membership_path(@member, @active_membership)
   - else
     %h3= t("admin.active_memberships.headings.no_active_membership")
-    %td= link_to t("admin.active_memberhips.actions.new_membership"), new_admin_member_active_membership_path(@member)
+    %td= link_to t("admin.active_memberhips.actions.new_membership"), new_admin_member_membership_path(@member)
 
   - if @expired_memberships
     %h3= t("admin.active_memberships.headings.expired_membership")

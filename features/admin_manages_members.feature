@@ -53,6 +53,16 @@ Feature: Admin manages members
     And the "Name" field should contain "Donald Duck"
     And I should see "Member updated"
 
+  Scenario: View a member's membership history
+    Given these other members exist:
+      | name       | email              |
+      | John Resig | jresig@example.org |
+      | Paul Irish | paul@example.com   |
+    When I go to the members admin page
+    And I follow the edit link for "Paul Irish"
+    When I follow "Edit memberships for member"
+    Then I should be on the membership history page for "Paul Irish"
+
   @wip
   Scenario: Delete member
     Given these other members exist:
