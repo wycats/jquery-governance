@@ -1,4 +1,4 @@
-class Admin::ActiveMembershipsController < Admin::BaseController
+class Admin::MembershipsController < Admin::BaseController
   before_filter :load_member
   def index
     @active_membership = @member.active_at?(Time.now)

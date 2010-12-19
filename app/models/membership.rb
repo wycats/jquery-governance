@@ -1,4 +1,4 @@
-class ActiveMembership < ActiveRecord::Base
+class Membership < ActiveRecord::Base
   belongs_to :member
 
   belongs_to :qualifying_motion, :class_name => "Motion",

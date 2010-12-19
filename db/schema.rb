@@ -10,21 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101215025612) do
-
-  create_table "active_memberships", :force => true do |t|
-    t.integer  "member_id"
-    t.datetime "started_at"
-    t.datetime "ended_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "qualifying_motion_id"
-    t.integer  "disqualifying_motion_id"
-  end
-
-  add_index "active_memberships", ["ended_at"], :name => "index_active_memberships_on_ended_at"
-  add_index "active_memberships", ["member_id"], :name => "index_active_memberships_on_member_id"
-  add_index "active_memberships", ["started_at"], :name => "index_active_memberships_on_started_at"
+ActiveRecord::Schema.define(:version => 20101219222124) do
 
   create_table "conflicts", :force => true do |t|
     t.string   "title"
@@ -69,6 +55,20 @@ ActiveRecord::Schema.define(:version => 20101215025612) do
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
   add_index "members", ["reset_password_token"], :name => "index_members_on_reset_password_token", :unique => true
+
+  create_table "memberships", :force => true do |t|
+    t.integer  "member_id"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "qualifying_motion_id"
+    t.integer  "disqualifying_motion_id"
+  end
+
+  add_index "memberships", ["ended_at"], :name => "index_memberships_on_ended_at"
+  add_index "memberships", ["member_id"], :name => "index_memberships_on_member_id"
+  add_index "memberships", ["started_at"], :name => "index_memberships_on_started_at"
 
   create_table "motion_conflicts", :force => true do |t|
     t.integer  "motion_id"

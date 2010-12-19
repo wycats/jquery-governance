@@ -35,8 +35,8 @@ describe Motion do
   describe 'voting requirements' do
     before do
       # This represents all of the members who currently have the right to vote
-      active_membership_scope = double('active membership scope', :count => 4)
-      ActiveMembership.stub!(:active_at).and_return( active_membership_scope )
+      membership_scope = double('active membership scope', :count => 4)
+      Membership.stub!(:active_at).and_return( membership_scope )
     end
 
     describe 'required_votes' do
@@ -89,7 +89,7 @@ describe Motion do
     describe "vote" do
       it "creates a new vote with the given member and value" do
         current_motion = Factory.create(:motion)
-        voting_member  = Factory.create(:active_membership).member
+        voting_member  = Factory.create(:membership).member
 
         current_motion.vote(voting_member, true)
         Event.votes.last.member.should eql voting_member
@@ -100,7 +100,7 @@ describe Motion do
     describe 'second(member)' do
       it "creates a new second for the member" do
         current_motion   = Factory.create(:motion)
-        seconding_member = Factory.create(:active_membership).member
+        seconding_member = Factory.create(:membership).member
 
         lambda do
           current_motion.second(seconding_member)
@@ -112,7 +112,7 @@ describe Motion do
 
   describe 'conflicts_with_member?', :database => true do
     before :each do
-      @member   = Factory.build(:active_membership).member
+      @member   = Factory.build(:membership).member
       @conflict = Factory.build(:conflict)
     end
 
@@ -170,7 +170,7 @@ describe Motion do
 
       @member_1 = Factory.stub(:member, :email => "member1@email.com")
       @member_2 = Factory.stub(:member, :email => "member2@email.com")
-      ActiveMembership.stub(:members_active_at).and_return([@member_1, @member_2])
+      Membership.stub(:members_active_at).and_return([@member_1, @member_2])
 
       ActionMailer::Base.deliveries = []
     end

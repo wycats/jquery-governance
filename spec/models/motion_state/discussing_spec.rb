@@ -4,7 +4,7 @@ module MotionState
   describe Discussing do
     describe "permit?" do
       before(:all) do
-        @active_member = Factory(:active_membership).member
+        @active_member = Factory(:membership).member
         @inactive_member = Factory(:expired_membership).member
         @motion = Factory(:discussing_motion)
         @motion_state = @motion.state
@@ -89,7 +89,7 @@ module MotionState
         before do
           @motion = Factory(:discussing_motion)
           @motion_state = @motion.state
-          @motion.object(Factory(:active_membership).member)
+          @motion.object(Factory(:membership).member)
         end
 
         it "doesn't update the motion state before 48 hours" do
