@@ -18,6 +18,7 @@ end
 
 Given /^I am signed in as an active(:? admin)? member called "([^"]*)"$/ do |admin, name|
   member = Factory.create(:member, :name => name, :is_admin => admin.present?)
+  Factory.create(:active_membership, :member => member)
   Given "I am signed in as \"#{member.email}\""
 end
 

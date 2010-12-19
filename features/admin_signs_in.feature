@@ -1,6 +1,6 @@
 Feature: Admin Member signs in
   As an active admin member
-  I want to sign in 
+  I want to sign in
   So that I can do things normal active members are not allowed to
 
   Background:
