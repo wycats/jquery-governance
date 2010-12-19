@@ -23,7 +23,6 @@ class MotionsController < ApplicationController
   end
 
   # Create a new Event
-  #   @option params [Hash] :motion The new motion to create
   def create
     @motion = current_member.motions.build(params[:motion])
 

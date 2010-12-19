@@ -18,30 +18,30 @@ class Member < ActiveRecord::Base
   accepts_nested_attributes_for :memberships
 
   # Checks membership status at a given Date/Time
-  #   @param [Date, Time, DateTime] time The time for which membership status should be checked
-  #   @return [Memberhsip] The membership that is found to be active at the specified time 
+  # @param [Date, Time, DateTime] time The time for which membership status should be checked
+  # @return [ActiveMemberhsip] The membership that is found to be active at the specified time
   def active_at?(time)
     memberships.active_at(time).first
   end
 
   # Returns the active membership status, of this member
-  #   @return [true, false] Whether or not member is currently active as true or false, respectively
+  # @return [true, false] Whether or not member is currently active as true or false, respectively
   def membership_active?
     true unless active_at?(Time.now).nil?
   end
 
   # Check if the member has permissions to perform the given action over the given motion or member
-  #   @param [Symbol] action The action the member wants to perform
-  #   @param [Member, Motion] motion or member The motion or member over which the member wants to perform the action
-  #   @return [true, false] Whether or not the member has permissions to perform the action over the motion, respectively
+  # @param [Symbol] action The action the member wants to perform
+  # @param [Member, Motion] motion or member The motion or member over which the member wants to perform the action
+  # @return [true, false] Whether or not the member has permissions to perform the action over the motion, respectively
   def can?(action, permissible_object)
     permissible_object.permit?(action, self)
   end
 
   # Check if the member is allowed to perform the given action
-  #   @param [Symbol] action The action the member wants to perform
-  #   @param [Member] member The member who wants to perfrom the action
-  #   @return [true, false] Whether or not it permits the member to perform the action, respectively
+  # @param [Symbol] action The action the member wants to perform
+  # @param [Member] member The member who wants to perfrom the action
+  # @return [true, false] Whether or not it permits the member to perform the action, respectively
   def permit?(action, member)
     case action
     when :destroy
@@ -50,15 +50,15 @@ class Member < ActiveRecord::Base
   end
 
   # Check if Member has voted on a given motion
-  #   @param [Motion] motion The motion in question
-  #   @return [true, false] If Member has voted on a given motion
+  # @param [Motion] motion The motion in question
+  # @return [true, false] If Member has voted on a given motion
   def has_voted_on?(motion)
     votes.where(:motion_id => motion.id).present?
   end
 
   # Check if Member has seconded a given motion
-  #   @param [Motion] motion The motion in question
-  #   @return [true, false] If Member has seconded a given motion
+  # @param [Motion] motion The motion in question
+  # @return [true, false] If Member has seconded a given motion
   def has_seconded?(motion)
     seconds.where(:motion_id => motion.id).present?
   end

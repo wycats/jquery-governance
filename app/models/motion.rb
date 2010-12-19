@@ -89,7 +89,7 @@ class Motion < ActiveRecord::Base
   # Second this Motion
   #   @param [Member] member The member who is seconding this motion
   #   @return [true, false] Whether or not the second was accepted
-  # @TODO @return
+  # @todo @return
   def second(member)
     seconds.create(:member => member)
   end
@@ -106,7 +106,7 @@ class Motion < ActiveRecord::Base
   #   @param [Member] member An active member
   #   @param [true, false] value An aye or nay vote
   #   @return [true, false] Whether or not the vote was accepted
-  # @TODO @return
+  # @todo @return
   def vote(member, value)
     votes.create(:member => member, :value => value)
   end
@@ -132,7 +132,7 @@ class Motion < ActiveRecord::Base
     state_name == "discussing"
   end
 
-  # @TODO - Description
+  # @todo Description
   def voting!
     update_attributes(:state_name => "voting")
   end
@@ -173,7 +173,7 @@ class Motion < ActiveRecord::Base
   alias :is_open? :open?
 
 
-  # @TODO - Description
+  # @todo Description
   def approved?
     closed? && has_met_requirement?
   end
@@ -200,9 +200,9 @@ class Motion < ActiveRecord::Base
   end
 
 private
-  # @TODO - Description
+  # @todo Description
   def possible_votes
-    # TODO: Deal with conflicts of interest
+    # @todo Deal with conflicts of interest
     Membership.active_at(Time.now).count
   end
 
@@ -210,7 +210,7 @@ private
     state.schedule_updates
   end
 
-  # @TODO - Refactor to send e-mail via queue
+  # @todo Refactor to send e-mail via queue
   def send_email_on_create
     Membership.members_active_at(Time.now).each do |member|
       Notifications.motion_created(self, member).deliver

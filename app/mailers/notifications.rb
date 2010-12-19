@@ -17,10 +17,10 @@ class Notifications < ActionMailer::Base
   end
 
   # Notifies a member via e-mail when a motion's state changes
-  #   @param [Symbol] to_state The state change being performed
-  #   @param [Motion] motion The motion being changed
-  #   @param [Member] member The member receiving the e-mail notification
-  #   @return [Mail::Message] The generated e-mail object
+  # @param [Symbol] to_state The state change being performed
+  # @param [Motion] motion The motion being changed
+  # @param [Member] member The member receiving the e-mail notification
+  # @return [Mail::Message] The generated e-mail object
   def motion_state_changed(motion, member)
     @motion = motion
     @member = member

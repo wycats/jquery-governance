@@ -6,9 +6,7 @@
 # this file is here to facilitate running it.
 #
 
-require 'pathname'
-ENV['BUNDLE_GEMFILE'] ||= File.expand_path("../../Gemfile",
-  Pathname.new(__FILE__).realpath)
+ENV['BUNDLE_GEMFILE'] ||= File.expand_path("../../Gemfile", __FILE__)
 
 require 'rubygems'
 require 'bundler/setup'

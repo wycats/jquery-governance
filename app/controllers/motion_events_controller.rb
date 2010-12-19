@@ -3,7 +3,7 @@ class MotionEventsController < ApplicationController
   before_filter :authenticate_member!, :except => [:index, :show]
 
   # Display events for a given Motion
-  #   @option params [Fixnum] :motion_id The id of the motion in question
+  # @option params [Fixnum] :motion_id The id of the motion in question
   def index
     @motion     = Motion.find(params[:motion_id])
     @events     = @motion.events if @motion.present?
@@ -11,15 +11,15 @@ class MotionEventsController < ApplicationController
   end
 
   # Show an Event for a given Motion
-  #   @option params [Fixnum] :motion_id The id of the motion in question
-  #   @option params [String] :event_id The id of the event to be viewed
+  # @option params [Fixnum] :motion_id The id of the motion in question
+  # @option params [String] :event_id The id of the event to be viewed
   def show
     @motion = Motion.find(params[:motion_id])
     @event  = @motion.events.where :event_id => params[:event_id]
   end
 
   # Create a Seconding Event for a Motion
-  #   @option params [Fixnum] :motion_id The id of the motion in question
+  # @option params [Fixnum] :motion_id The id of the motion in question
   def second
     @motion = Motion.find(params[:motion_id])
 
@@ -33,7 +33,7 @@ class MotionEventsController < ApplicationController
   end
 
   # Create an Objection Event for a Motion
-  #   @option params [Fixnum] :motion_id The id of the motion in question
+  # @option params [Fixnum] :motion_id The id of the motion in question
   def object
     @motion = Motion.find(params[:motion_id])
 
@@ -46,8 +46,8 @@ class MotionEventsController < ApplicationController
     redirect_to motion_events_url(@motion)
   end
   # Create a Voting Event for a Motion
-  #   @option params [Fixnum] :motion_id The id of the motion in question
-  #   @option params [Fixnum] :vote The vote cast by the member, can be "aye" or "nay"
+  # @option params [Fixnum] :motion_id The id of the motion in question
+  # @option params [Fixnum] :vote The vote cast by the member, can be "aye" or "nay"
   def vote
     @motion = Motion.find(params[:motion_id])
 
