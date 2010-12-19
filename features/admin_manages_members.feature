@@ -8,9 +8,9 @@ Feature: Admin manages members
 
   Scenario: View all users
     Given these other members exist:
-      | name       | email              |
-      | John Resig | jresig@example.org |
-      | Paul Irish | paul@example.com   |
+      | name       | email              | qualifying_motion |
+      | John Resig | jresig@example.org | 1234              |
+      | Paul Irish | paul@example.com   | 5678              |
     When I go to the members admin page
     Then I should see "Manage members"
     And I should see "Yehuda Katz"
@@ -18,15 +18,17 @@ Feature: Admin manages members
     And I should see "Paul Irish"
 
   Scenario: Create new member
-    Given I am on the members admin page
+   Given I am on the members admin page
+     And a qualifying motion exists with the reference number "1234"
     When I follow "Add new member"
-    And I fill in "Name" with "Sam Spade"
-    And I fill in "Email" with "sspade@gumshoes.com"
-    And I check "Is admin"
-    And I press "Add new member"
+     And I fill in "Name" with "Sam Spade"
+     And I fill in "Email" with "sspade@gumshoes.com"
+     And I fill in "Motion Reference #" with "1234"
+     And I check "Is admin"
+     And I press "Add new member"
     Then I should be on the members admin page
-    And I should see "Sam Spade"
-    And I should see "Member added"
+     And I should see "Sam Spade"
+     And I should see "Member added"
 
   Scenario: Validation failure on create
     Given I am on the members admin page
@@ -39,9 +41,9 @@ Feature: Admin manages members
 
   Scenario: Update existing member
     Given these other members exist:
-      | name       | email              |
-      | John Resig | jresig@example.org |
-      | Paul Irish | paul@example.com   |
+      | name       | email              | qualifying_motion |
+      | John Resig | jresig@example.org | 1234              |
+      | Paul Irish | paul@example.com   | 5678              |
     When I go to the members admin page
     And I follow the edit link for "Paul Irish"
     Then the "Name" field should contain "Paul Irish"

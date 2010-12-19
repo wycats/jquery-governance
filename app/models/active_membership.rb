@@ -7,7 +7,7 @@ class ActiveMembership < ActiveRecord::Base
   belongs_to :disqualifying_motion, :class_name => "Motion",
                                     :foreign_key => :disqualifying_motion_id
 
-  validates :qualifying_motion, :presence => true
+  validates :qualifying_motion_id, :presence => true, :existence => true
 
   attr_accessible :qualifying_motion_id, :disqualifying_motion_id
 
