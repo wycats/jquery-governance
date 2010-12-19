@@ -4,7 +4,7 @@ Feature: Admin has a dashboard
   Must have a dashboard
 
   Background:
-    Given I am signed in as an active member called "Yehuda Katz"
+    Given I am signed in as an active admin member called "Yehuda Katz"
 
   Scenario: See available actions
     Given I am on the admin page

@@ -16,13 +16,14 @@ Given /^I am signed in as an inactive member$/ do
   Given "I am signed in as \"#{member.email}\""
 end
 
-Given /^I am signed in as an active member called "([^"]*)"$/ do |name|
-  member = Factory.create(:member, :name => name)
+Given /^I am signed in as an active(:? admin)? member called "([^"]*)"$/ do |admin, name|
+  member = Factory.create(:member, :name => name, :is_admin => admin.present?)
+  Factory.create(:active_membership, :member => member)
   Given "I am signed in as \"#{member.email}\""
 end
 
-Given /^there is an active member with email "([^"]*)" and password "([^"]*)"$/ do |email, password|
-  member = Factory.create(:member, email: email, password: password)
+Given /^there is an active(:? admin)? member with email "([^"]*)" and password "([^"]*)"$/ do |admin, email, password|
+  member = Factory.create(:member, email: email, password: password, is_admin: admin.present?)
   Factory(:active_membership, member: member)
 end
 
