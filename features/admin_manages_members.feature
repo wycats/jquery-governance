@@ -8,9 +8,9 @@ Feature: Admin manages members
 
   Scenario: View all users
     Given these other members exist:
-      | name       | email              | 
-      | John Resig | jresig@example.org | 
-      | Paul Irish | paul@example.com   | 
+      | name       | email              |
+      | John Resig | jresig@example.org |
+      | Paul Irish | paul@example.com   |
     When I go to the members admin page
     Then I should see "Manage members"
     And I should see "Yehuda Katz"

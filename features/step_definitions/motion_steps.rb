@@ -18,7 +18,7 @@ end
 Then /^the motion titled "([^"]*)" fails$/ do |title|
   Motion.find_by_title!(title).should be_failed
 end
-     
+
 And /^a qualifying motion exists with the reference number "([^"]*)"$/ do |id|
   Factory.create(:closed_motion, :id => id)
 end
