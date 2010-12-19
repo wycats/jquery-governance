@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20101215025612) do
     t.string   "remember_token"
     t.datetime "remember_created_at"
     t.boolean  "is_admin"
+    t.datetime "deleted_at"
   end
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
