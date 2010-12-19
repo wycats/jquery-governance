@@ -1,7 +1,14 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
+pirate:
+  time:
+    formats:
+      short: "arrrround %H'ish"
 en:
+  time:
+    formats:
+      short: "%a, %b %d, %Y"
   hello: "Hello world"
   notifications:
     motion_created:
@@ -11,6 +18,18 @@ en:
         discussing: "Motion seconded"
         voting: "Motion now voting"
   admin:
+    active_memberships:
+      titles:
+        index: "Manage user's memberships"
+      headings:
+        no_active_membership: "You have no active memberships"
+        active_membership: "Current membership"
+        expired_membership: "Past expired memberships"
+        start_date:  "Start date of membership"
+        end_date: "Ending date of membership"
+      actions:
+        end_membership: "End this membership"
+        new_membership: "Renew this member's membership"
     members:
       titles:
         index: "Manage members"
@@ -21,6 +40,7 @@ en:
         email: "E-mail address"
         actions: "Actions"
       actions:
+        edit_memberships_for_member: "Edit memberships for member"
         add_new_member: "Add new member"
         edit_member: "Edit member"
         update_member: "Update member info"
