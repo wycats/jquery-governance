@@ -55,3 +55,18 @@ Feature: Member seconds motion
     And I follow "Second This Motion"
     Then I should see "You have successfully seconded the motion."
     And I should see "currently being voted"
+
+  Scenario: A motion can't be seconded by it's creator
+    Given the member "John Resig" has created an expedited motion titled "jQuery is cool"
+    And I am signed in as "John Resig"
+    When I go to the motions page
+    And I follow "jQuery is cool"
+    And I should not see "Second This Motion"
+
+  Scenario: A motion can't be seconded more than once by the same member
+    Given the member "John Resig" has created a motion titled "jQuery is cool"
+    And I am signed in as "Yehuda Katz"
+    When I go to the motions page
+    And I follow "jQuery is cool"
+    And I follow "Second This Motion"
+    Then I should not see "Second This Motion"

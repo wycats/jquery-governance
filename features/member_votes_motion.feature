@@ -33,3 +33,11 @@ Feature: Member votes motion
     And I follow "jQuery is cool"
     And I follow "Nay"
     Then I should see "You have successfully voted the motion"
+
+  Scenario: A motion can't be voted more than once by the same member
+    Given I am signed in as "Yehuda Katz"
+    When I go to the motions page
+    And I follow "jQuery is cool"
+    And I follow "Aye"
+    Then I should not see "Aye"
+    And I should not see "Nay"
