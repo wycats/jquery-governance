@@ -3,6 +3,22 @@
 
 %section#main
   = form_for [:admin, @member] do |form|
-    = render form
+    %fieldset
+      = form.label  :name
+      = form.text_field :name, :placeholder => "John Resig"
+      = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => :name}
+    %fieldset
+      = form.label :email
+      = form.text_field :email, :placeholder => "jresig@example.com"
+      = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => :email}
+      = form.fields_for :active_memberships, @member.active_memberships.build  do |membership|
+        %fieldset
+          = membership.label :qualifying_motion_id, "Motion Reference #"
+          = membership.text_field :qualifying_motion_id, :placeholder => "1234"
+          = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => "active_memberships.qualifying_motion_id"}
+          = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => "active_memberships.qualifying_motion"}
+    %fieldset
+      = form.label :is_admin
+      = form.check_box :is_admin
     .buttons
       = form.submit t("admin.members.actions.add_new_member")

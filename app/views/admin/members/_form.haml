@@ -6,7 +6,7 @@
   = form.label :email
   = form.text_field :email, :placeholder => "jresig@example.com"
   = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => :email}
-  = form.fields_for :active_memberships  do |membership|
+  = form.fields_for :active_memberships, @member.active_memberships.build  do |membership|
     %fieldset
       = membership.label :qualifying_motion_id, "Motion Reference #"
       = membership.text_field :qualifying_motion_id, :placeholder => "1234"

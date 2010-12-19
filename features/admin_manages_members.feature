@@ -8,9 +8,9 @@ Feature: Admin manages members
 
   Scenario: View all users
     Given these other members exist:
-      | name       | email              | qualifying_motion |
-      | John Resig | jresig@example.org | 1234              |
-      | Paul Irish | paul@example.com   | 5678              |
+      | name       | email              | 
+      | John Resig | jresig@example.org | 
+      | Paul Irish | paul@example.com   | 
     When I go to the members admin page
     Then I should see "Manage members"
     And I should see "Yehuda Katz"
@@ -41,13 +41,12 @@ Feature: Admin manages members
 
   Scenario: Update existing member
     Given these other members exist:
-      | name       | email              | qualifying_motion |
-      | John Resig | jresig@example.org | 1234              |
-      | Paul Irish | paul@example.com   | 5678              |
+      | name       | email              |
+      | John Resig | jresig@example.org |
+      | Paul Irish | paul@example.com   |
     When I go to the members admin page
     And I follow the edit link for "Paul Irish"
     Then the "Name" field should contain "Paul Irish"
-    And the "Email" field should contain "paul@example.com"
     When I fill in "Name" with "Donald Duck"
     And I press "Update member info"
     Then I should be on the edit member admin page for "Donald Duck"

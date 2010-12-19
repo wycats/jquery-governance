@@ -1,8 +1,10 @@
 JqueryVoting::Application.routes.draw do
 
   namespace "admin" do
-    resources :base
-    resources :members
+    resources :base, :only => :index
+    resources :members do
+      resources :active_memberships
+    end
     resources :tags
   end
   get "/admin", :to => "admin/base#index"

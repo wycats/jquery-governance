@@ -46,6 +46,57 @@ describe ActiveMembership do
     end
   end
 
+  describe "self.expired" do
+    describe "when there active memberships and expried memberships" do
+      before do
+        @active_membership = Factory.create(:active_membership)
+        @expired_membership = Factory.create(:expired_membership)
+      end
+
+      it "knows that one of the memberships is expired" do
+        ActiveMembership.expired.should_not be_empty
+      end
+
+      it "returns the membership that is expired" do
+        ActiveMembership.expired.should include(@expired_membership)
+      end
+
+      it "excludes the active membership" do
+        ActiveMembership.expired.should_not include(@active_membership)
+      end
+    end
+
+    describe "when all memberships are active" do
+      before do
+        @active_membership = Factory.create(:active_membership)
+      end
+
+      it "knows there are no expired memberships" do
+        ActiveMembership.expired.should be_empty
+      end
+    end
+
+    describe "when a there is a membership that has no end time" do
+      before do
+        @infinite_membership = Factory.create(:active_membership)
+      end
+
+      it "knows that it is not expired" do
+        ActiveMembership.expired.should_not include(@infinite_membership)
+      end
+    end
+
+    describe "when there is a membership that has yet to start" do
+      before do
+        @future_membership = Factory.create(:future_membership)
+      end
+
+      it "knows that it isn't expired" do
+        ActiveMembership.expired.should_not include(@future_membership)
+      end
+    end
+  end
+
   describe "self.active_at" do
     describe "when there active memberships and expried memberships" do
       before do

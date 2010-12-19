@@ -21,6 +21,11 @@ class ActiveMembership < ActiveRecord::Base
       where("ended_at >= ? OR ended_at IS NULL", time)
   end
 
+  def self.expired
+    where("started_at < ?", Time.now).
+      where("ended_at < ?", Time.now)
+  end
+
   # Finds all members active at a given date or date+time
   #   @param [Date, Time, DateTime] time The Date and Time in which to search for active members
   #   @return [Array] A unique list of members, active at the given time
