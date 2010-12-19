@@ -37,14 +37,13 @@ class MotionEventsController < ApplicationController
   #   @option params [Fixnum] :vote The vote cast by the member, can be "aye" or "nay"
   def vote
     @motion = Motion.find(params[:motion_id])
-    @event  = @motion.votes.new :value  =>  case params[:vote]
-                                            when "aye" then true
-                                            when "nay" then false
-                                            end
 
-    @event.member = current_member
+    if @motion.vote(current_member, params[:vote] == "aye")
+      flash[:notice] = "You have successfully voted the motion."
+    else
+      flash[:alert] =  "Something went wrong when voting the motion"
+    end
 
-    @disp   = "Successful" if @event.save
-    @disp ||= "Failed"
+    redirect_to motion_events_url(@motion)
   end
 end
