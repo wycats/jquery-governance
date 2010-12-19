@@ -4,7 +4,7 @@ Feature: Admin manages members
   Must manage user accounts for the governance tool
 
   Background:
-    Given I am signed in as an active member called "Yehuda Katz"
+    Given I am signed in as an active admin member called "Yehuda Katz"
 
   Scenario: View all users
     Given these other members exist:

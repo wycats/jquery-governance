@@ -8,6 +8,9 @@ class Admin::BaseController < ApplicationController
   private
 
   def admin_required
-    current_member.is_admin?
+    unless current_member.is_admin?
+      flash[:notice] = "Can not access that area."
+      redirect_to motions_path
+    end
   end
 end
