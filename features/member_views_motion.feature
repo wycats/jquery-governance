@@ -14,7 +14,7 @@ Feature: Member views motion
     And a motion titled "jQuery is cool" exists in the "discussing" state
 
     When I go to the motions page for "jQuery is cool"
-    Then I should see "Discussing"
+    Then I should see "being discussed"
 
   Scenario: I am an active member viewing a motion I created
     Given I am signed in as an active member called "Member"
