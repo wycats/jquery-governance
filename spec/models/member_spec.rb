@@ -3,13 +3,13 @@ require 'spec_helper'
 describe Member do
   before :all do
     @motion = Factory.create(:closed_motion)
-    @member = Factory.create(:active_membership, :qualifying_motion => @motion).member
+    @member = Factory.create(:membership, :qualifying_motion => @motion).member
     @inactive_member = Factory.create(:expired_membership).member
 
     @admin_member = Factory.create(:active_admin_membership).member
     @non_admin_member = Factory.create(:active_non_admin_membership).member
 
-    @renewed_member = Factory.create(:active_membership).member
+    @renewed_member = Factory.create(:membership).member
     Factory.create(:expired_membership, :member => @renewed_member)
 
     @expired_member = Factory.create(:expired_membership).member

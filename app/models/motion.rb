@@ -203,7 +203,7 @@ private
   # @TODO - Description
   def possible_votes
     # TODO: Deal with conflicts of interest
-    ActiveMembership.active_at(Time.now).count
+    Membership.active_at(Time.now).count
   end
 
   def schedule_updates
@@ -212,13 +212,13 @@ private
 
   # @TODO - Refactor to send e-mail via queue
   def send_email_on_create
-    ActiveMembership.members_active_at(Time.now).each do |member|
+    Membership.members_active_at(Time.now).each do |member|
       Notifications.motion_created(self, member).deliver
     end
   end
 
   def send_email_on_state_change
-    ActiveMembership.members_active_at(Time.now).each do |member|
+    Membership.members_active_at(Time.now).each do |member|
       Notifications.motion_state_changed(self, member).deliver
     end
   end

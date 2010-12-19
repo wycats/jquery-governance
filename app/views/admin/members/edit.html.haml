@@ -16,6 +16,6 @@
       = form.check_box :is_admin
     -if admin?
       =link_to t("admin.members.actions.delete_member"), [:admin, @member], :method => 'delete', :confirm => 'Are you sure you want to delete the user?'
-      =link_to t("admin.members.actions.edit_memberships_for_member"), admin_member_active_memberships_path(@member)
+      =link_to t("admin.members.actions.edit_memberships_for_member"), admin_member_memberships_path(@member)
     .buttons
       = form.submit t("admin.members.actions.update_member")

@@ -3,7 +3,7 @@ require 'spec_helper'
 module MotionState
   describe Closed do
     before(:all) do
-      @active_member = Factory(:active_membership).member
+      @active_member = Factory(:membership).member
       @inactive_member = Factory(:expired_membership).member
       @motion_state = Factory(:closed_motion).state
     end

@@ -6,22 +6,22 @@ class Member < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :active_memberships_attributes
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :memberships_attributes
 
-  has_many :active_memberships
+  has_many :memberships
   has_many :motions
   has_many :events
   has_many :member_conflicts
   has_many :conflicts, :through => :member_conflicts
   has_many :seconded_motions, :through => :events, :source => :motion, :conditions => { :events => { :event_type => 'second' } }
 
-  accepts_nested_attributes_for :active_memberships
+  accepts_nested_attributes_for :memberships
 
   # Checks membership status at a given Date/Time
   #   @param [Date, Time, DateTime] time The time for which membership status should be checked
-  #   @return [ActiveMemberhsip] The membership that is found to be active at the specified time 
+  #   @return [Memberhsip] The membership that is found to be active at the specified time 
   def active_at?(time)
-    active_memberships.active_at(time).first
+    memberships.active_at(time).first
   end
 
   # Returns the active membership status, of this member

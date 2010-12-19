@@ -7,7 +7,7 @@ Given /^I am signed in as "([^"]*)"$/ do |email_or_name|
 end
 
 Given /^I am signed in as an active member$/ do
-  member = Factory.create(:active_membership).member
+  member = Factory.create(:membership).member
   Given "I am signed in as \"#{member.email}\""
 end
 
@@ -22,16 +22,16 @@ Given /^I am signed in as an active(:? admin)? member called "([^"]*)"$/ do |adm
   Given "I am signed in as \"#{member.email}\""
 end
 
-Given /^there is an active(:? admin)? member with email "([^"]*)" and password "([^"]*)"$/ do |admin, email, password|
-  member = Factory.create(:member, email: email, password: password, is_admin: admin.present?)
-  Factory(:active_membership, member: member)
+Given /^there is an active member with email "([^"]*)" and password "([^"]*)"$/ do |email, password|
+  member = Factory.create(:member, email: email, password: password)
+  Factory(:membership, member: member)
 end
 
 Given /^these (?:other )?members exist:$/ do |table|
   table.rows.each do |name, email, id|
     member = Factory.create(:member, name: name, email: email)
     motion = Factory.create(:closed_motion, id: id)
-    Factory.create(:active_membership, member: member, qualifying_motion: motion)
+    Factory.create(:membership, member: member, qualifying_motion: motion)
   end
 end
 

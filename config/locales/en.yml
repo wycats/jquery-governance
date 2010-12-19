@@ -1,10 +1,5 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
-pirate:
-  time:
-    formats:
-      short: "arrrround %H'ish"
 en:
   time:
     formats:
@@ -18,7 +13,7 @@ en:
         discussing: "Motion seconded"
         voting: "Motion now voting"
   admin:
-    active_memberships:
+    memberships:
       titles:
         index: "Manage user's memberships"
       headings:

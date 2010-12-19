@@ -4,7 +4,7 @@ module MotionState
   describe Waitingsecond do
     describe "permit?" do
       before(:all) do
-        @active_member = Factory(:active_membership).member
+        @active_member = Factory(:membership).member
         @inactive_member = Factory(:expired_membership).member
         @motion = Factory(:motion)
         @motion_state = @motion.state
