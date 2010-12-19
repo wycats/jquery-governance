@@ -2,7 +2,7 @@ Feature: Member seconds motion
 
   In order to bring a motion to a vote
   As an active member
-  I want to seond a motion
+  I want to second a motion
 
   Background:
     Given these members exist:
