@@ -16,15 +16,25 @@ en:
     memberships:
       titles:
         index: "Manage user's memberships"
+        terminate: "Please specify the motion that terminates this member's membership"
+        renew: "Pleae specify the motion that re-instated this member"
       headings:
-        no_active_membership: "You have no active memberships"
+        no_active_membership: "No active memberships"
         active_membership: "Current membership"
         expired_membership: "Past expired memberships"
         start_date:  "Start date of membership"
         end_date: "Ending date of membership"
       actions:
+        renew_membership: "Renew membership"
+        update_membership: "Terminate membership"
         end_membership: "End this membership"
         new_membership: "Renew this member's membership"
+      notices:
+        membership_terminated: "This member's membership was successfully terminated"
+        membership_renewed: "Membership successfully renewed"
+      alerts:
+        membership_not_terminated: "There was a problem terminating the membership"
+        membership_not_renewed: "There was a problem renewing the membership"
     members:
       titles:
         index: "Manage members"

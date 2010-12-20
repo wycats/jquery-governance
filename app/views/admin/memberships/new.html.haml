@@ -1,0 +1,12 @@
+%header
+  %h1= t("admin.memberships.titles.renew")
+
+%section#main
+  = form_for [:admin, @member, @membership] do |membership|
+    %fieldset
+      = membership.label :qualifying_motion_id, "Motion Reference #"
+      = membership.text_field :qualifying_motion_id, :placeholder => "1234"
+      = render :partial => "shared/error_on_field", :locals => {:resource => @membership, :field => "qualifying_motion_id"}
+      = render :partial => "shared/error_on_field", :locals => {:resource => @membership, :field => "qualifying_motion"}
+    .buttons
+      = membership.submit t("admin.memberships.actions.renew_membership")

@@ -76,4 +76,8 @@ When /^the following members votes affirmatively the motion titled "([^"]*)"$/ d
   end
 end
 
+Given /^the expired member "([^"]*)" exists$/ do |name|
+  Factory.create(:expired_membership, :member => Factory.create(:member, :name => name))
+end
+
 semantic_suffixes({ 'in the author section' => '.author' })
