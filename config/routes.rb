@@ -3,7 +3,11 @@ JqueryVoting::Application.routes.draw do
   namespace "admin" do
     resources :base, :only => :index
     resources :members do
-      resources :memberships
+      resources :memberships do
+        member do
+          get :terminate
+        end
+      end
     end
     resources :tags
   end
