@@ -5,7 +5,6 @@ module Admin
 
     respond_to :html
 
-
     private
 
     def admin_required
@@ -14,4 +13,5 @@ module Admin
         redirect_to motions_path
       end
     end
+  end
 end
