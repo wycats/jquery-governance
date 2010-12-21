@@ -30,5 +30,8 @@ JqueryVoting::Application.routes.draw do
     end
   end
 
+  post "/taggings/:tag_id/:motion_id"   => 'taggings#create',  :as => 'add_tag'
+  delete "/taggings/:tag_id/:motion_id" => 'taggings#destroy', :as => 'remove_tag'
+
   root :to => "motions#index"
 end

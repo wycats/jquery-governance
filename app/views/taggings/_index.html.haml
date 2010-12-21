@@ -1,0 +1,11 @@
+%h3 Tags
+%p.small Click to select and deselect tags.
+-if remote_flash
+  %span=remote_flash
+%ul
+  -@tags.each do |tagging|
+    %li{:class => add_remove(tagging)}
+      -if tagging.selectable?
+        =link_to  tagging.name, add_tag_path(tagging.id, @motion.id, :format => 'js'), :remote => true, :method => 'post'
+      -else
+        =link_to  tagging.name, remove_tag_path(tagging.id, @motion.id, :format => 'js'), :remote => true, :method => 'delete'

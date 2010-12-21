@@ -2,9 +2,10 @@
 #flash
 =form_for @tag, :url => {:action => 'create'} do |f|
   #tags
-    = render 'tags', :tags => @tags
+    = render 'tags', :tags => @tags, :removable => active_member?
 
-  .form_row
-    =f.label :name, 'Tag name', :class => 'hidden'
-    =f.text_field :name
-    =f.submit t("admin.tags.actions.add_new_tag"), :class => 'button large_button'
+  -if active_member?
+    .form_row
+      =f.label :name, 'Tag name', :class => 'hidden'
+      =f.text_field :name
+      =f.submit t("admin.tags.actions.add_new_tag"), :class => 'button large_button'

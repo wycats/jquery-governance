@@ -1,0 +1,4 @@
+%ul
+  -@tags.each do |tagging|
+    %li
+      =link_to  tagging.name, add_tag_path(tagging.id, @motion.id), :remote => true, :if => tagging.selectable?

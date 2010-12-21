@@ -13,13 +13,16 @@
       =link_to "Nay", motion_vote_path(@motion, :vote => :nay), :class => "quick-tool", :method => :post, :remote => true
     - if member? && current_member.can?(:object, @motion)
       =link_to "Object This Motion", motion_object_path(@motion), :class => "quick-tool", :method => :post, :remote => true
-  %h3 Description
-  %p.description= @motion.description
-  %h3 Rationale
-  %p.rationale= @motion.rationale
-  %h3 Expedited
-  %p.expedited= @motion.expedited == true ? 'Yes' : 'No'
-  %h3 Events
-  %ul#motion-events
-    - @motion.events.each do |event|
-      %li= render event
+  .span-16
+    %h3 Description
+    %p.description= @motion.description
+    %h3 Rationale
+    %p.rationale= @motion.rationale
+    %h3 Expedited
+    %p.expedited= @motion.expedited == true ? 'Yes' : 'No'
+    %h3 Events
+    %ul#motion-events
+      - @motion.events.each do |event|
+        %li= render event
+  #tags.span-5.last
+    = render 'taggings/index', :tags => @tags, :remote_flash => nil

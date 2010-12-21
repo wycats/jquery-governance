@@ -469,14 +469,36 @@ nav.main ul {
 /* @end */
 
 #tags li{
-  font-size: 16px;
-  margin: 0.25em 0;
-  span {
+  $top: #4b4;
+  $bottom: #292;
+  font-size: 14px;
+  margin: 1em 0;
+  a {
     padding: 4px;
-    @include border-radius(4px);
+    @include border-radius(3px);
+    text-decoration: none;
+    }
+  &.remove a {
+    background: $bottom;
+
+    @include linear-gradient(color-stops($top, $bottom));
+
+    text-decoration: none;
+    color: #FFFEFE !important;
+    border: 1px solid #070;
+
+    &:hover {
+      background: darken($top, 5%);
+      @include linear-gradient(color-stops(darken($top, 5%), darken($bottom, 5%)));
+    }
+
+    &:active {
+      background: lighten($top, 5%);
+      @include linear-gradient(color-stops(lighten($top, 5%), lighten($bottom, 5%)));
+    }
   }
 }
-
+p.small { font-size: 1em; }
 .highlight_fade {
   background-color: $flash_notice_background;
 }

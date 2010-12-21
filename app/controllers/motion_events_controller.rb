@@ -8,6 +8,7 @@ class MotionEventsController < ApplicationController
     @motion     = Motion.find(params[:motion_id])
     @events     = @motion.events if @motion.present?
     @actionable = member_signed_in? and @motion.open?
+    @tags       = Tag.selectable(params[:motion_id])
   end
 
   # Show an Event for a given Motion
