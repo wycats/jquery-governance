@@ -138,11 +138,6 @@ body {
 /* @group Motions */
 
 div.motion {
-  border-left: 3px solid $border_color;
-  border-top: 1px solid $border_color;
-  border-bottom: 1px solid $border_color;
-  margin-bottom: 5px;
-  padding: 0px 3px 0px 3px;
   @include border-radius(6px);
   h2 {
     clear: both;
