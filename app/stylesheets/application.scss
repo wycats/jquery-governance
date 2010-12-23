@@ -138,7 +138,10 @@ body {
 /* @group Motions */
 
 div.motion {
+  width: 100%;
+  overflow: hidden;
   @include border-radius(6px);
+
   h2 {
     clear: both;
     text-align: center;
@@ -155,8 +158,14 @@ div.motion {
     color: #666;
   }
 
+  #motion-details {
+    width: 535px;
+    float: left;
+  }
+
   #motion-actions {
-    margin: 30px 0;
+    width: 290px;
+    float: right;
     text-align: center;
 
     .quick-tool {
