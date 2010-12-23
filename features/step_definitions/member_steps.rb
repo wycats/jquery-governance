@@ -22,8 +22,8 @@ Given /^I am signed in as an active(:? admin)? member called "([^"]*)"$/ do |adm
   Given "I am signed in as \"#{member.email}\""
 end
 
-Given /^there is an active member with email "([^"]*)" and password "([^"]*)"$/ do |email, password|
-  member = Factory.create(:member, email: email, password: password)
+Given /^there is an active(:? admin)? member with email "([^"]*)" and password "([^"]*)"$/ do |is_admin, email, password|
+  member = Factory.create(:member, email: email, password: password, is_admin: is_admin.present?)
   Factory(:membership, member: member)
 end
 
