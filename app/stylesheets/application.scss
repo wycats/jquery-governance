@@ -143,19 +143,31 @@ div.motion {
   @include border-radius(6px);
 
   h2 {
-    clear: both;
-    text-align: center;
+    line-height: 1;
 
     .author {
       display: block;
+      font-size: 0.7em;
+      font-weight: normal;
+      font-style: italic;
       color: #80a080;
     }
   }
 
-  .meta {
-    font-style: italic;
-    text-align: center;
-    color: #666;
+  .description {
+    margin: 15px 0 25px;
+  }
+
+  .rationale {
+    h4 {
+      font-size: 1.5em;
+    }
+
+    p {
+      margin: 5px 0;
+      font-size: 1.5em;
+      color: #666;
+    }
   }
 
   #motion-details {
@@ -179,12 +191,6 @@ div.motion {
     padding: 5px;
     background-color: #f3efe4;
     font-size: 1.7em;
-  }
-
-  p.description, p.rationale, p.expedited {
-    padding: 5px;
-    font-size: 1.6em;
-    color: #666;
   }
 
   #motion-events li {
