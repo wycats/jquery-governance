@@ -49,11 +49,11 @@ describe Event do
   end
 
   it "should not allow a member to vote twice on a motion" do
-    Factory.create(:yes_vote, :motion => @motion, :member => @member).should raise_exception
+    proc { Factory.create!(:yes_vote, :motion => @motion, :member => @member) }.should raise_exception
   end
 
   it "should prevent a motion's author from seconding that motion" do
-    Factory.create(:second, :motion => @motion, :member => @member).should raise_exception
+    proc { Factory.create!(:second, :motion => @motion, :member => @member) }.should raise_exception
   end
 
   describe "Objecting" do
