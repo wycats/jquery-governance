@@ -399,33 +399,38 @@ div.motion {
   }
 }
 
-nav.main ul {
-  float: right;
-  height: 40px;
+nav.main {
+  width: 100%;
+  overflow: hidden;
 
-  li {
-    margin-top: 5px;
-    float: left;
+  ul {
+    float: right;
+    height: 40px;
 
-    &.first a {
-      @include border-bottom-left-radius(6px);
-    }
+    li {
+      margin-top: 5px;
+      float: left;
 
-    a {
-      font-size: 1.25em;
-      font-family: helvetica, arial, sans-serif;
-      color: #4F3806 !important;
-      border: 0;
-      padding: 5px 10px 6px;
-      text-decoration: none;
-      @include box-shadow(0, 0, 1px, 0, rgba(#000, 0.25));
-      text-shadow: 0 -1px 1px rgba(#000,0.2);
-      border-left: 1px solid #CAB585;
-      border-bottom: 1px solid #CAB585;
-      cursor: pointer;
-      background: url('http://jquery.org/wp-content/themes/green/green/shadow.png') bottom left repeat-x;
-      &:hover {
-        background-color: rgba(#000, 0.1);
+      &.first a {
+        @include border-bottom-left-radius(6px);
+      }
+
+      a {
+        font-size: 1.25em;
+        font-family: helvetica, arial, sans-serif;
+        color: #4F3806 !important;
+        border: 0;
+        padding: 5px 10px 6px;
+        text-decoration: none;
+        @include box-shadow(0, 0, 1px, 0, rgba(#000, 0.25));
+        text-shadow: 0 -1px 1px rgba(#000,0.2);
+        border-left: 1px solid #CAB585;
+        border-bottom: 1px solid #CAB585;
+        cursor: pointer;
+        background: url('http://jquery.org/wp-content/themes/green/green/shadow.png') bottom left repeat-x;
+        &:hover {
+          background-color: rgba(#000, 0.1);
+        }
       }
     }
   }
