@@ -3,13 +3,13 @@ require 'spec_helper'
 describe Event do
 
   before :all do
-      @motion  = Factory.create(:motion)
-      @member  = Factory.create(:membership).member
-      @vote = Factory.create(:yes_vote)
-      @second_vote = Factory.create(:yes_vote)
-      @no_vote = Factory.create(:no_vote)
-      @second = Factory.create(:second)
-      @second_second = Factory.create(:second)
+    @motion  = Factory.create(:motion)
+    @member  = Factory.create(:membership).member
+    @vote = Factory.create(:yes_vote)
+    @second_vote = Factory.create(:yes_vote)
+    @no_vote = Factory.create(:no_vote)
+    @second = Factory.create(:second)
+    @second_second = Factory.create(:second)
   end
 
   it "should know which of the events are votes" do
