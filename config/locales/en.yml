@@ -84,15 +84,19 @@ en:
    waitingsecond:
      heading: "Waiting For Seconds"
      empty: "There are no motions waiting for seconds."
+     description: "waiting for seconds"
    discussing:
      heading: "Discussing"
      empty: "There are no motions being discussed."
+     description: "being discussed"
    voting:
      heading: "Voting"
      empty: "There are no motions being voted."
+     description: "being voted"
    closed:
      heading: "Closed"
      empty: "There are no closed motions."
+     description: "closed"
    titles:
      index:
        public: "Motions"
