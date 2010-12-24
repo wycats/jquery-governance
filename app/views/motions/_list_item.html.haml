@@ -1,10 +1,12 @@
 %li{ html_attrs_for_motion(motion) }
-  .date
-    = motion.created_at.strftime("%B #{motion.created_at.day.ordinalize}, %Y")
+  .actions
+    .created_at= motion.created_at.strftime("%B #{motion.created_at.day.ordinalize}, %Y")
   .summary
-    %p.meta
-      =link_to motion.title, motion_events_url(motion)
-      %span.author
-        by
-        %strong #{motion_creator_display_name(motion)}
+    %p.title= link_to motion.title, motion_events_url(motion)
+    %p.author
+      by
+      %strong #{motion_creator_display_name(motion)}
     %p.description= truncate(motion.description, :length => 200)
+  .tags
+    - motion.tags.each do |tag|
+      %span= tag.name
