@@ -82,32 +82,10 @@ body {
   }
 }
 
-.small_button, .small.button:visited {
-  font-size: 11px;
-  padding: 5px;
-}
-
-.button, .button:visited,
-.medium_button, .medium_button:visited {
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 1;
-  text-shadow: 0 -1px 1px rgba(#000,0.25);
-}
-
 .large_button, .large_button:visited {
   font-size: 14px;
   padding: 8px 14px 9px;
 }
-
-.green_button, .green_button:visited {
-  background-color: #91bd09;
-}
-
-.green_button:hover {
-  background-color: #749a02;
-}
-
 
 /* @end */
 
@@ -228,11 +206,6 @@ div.motion {
     .button {
       margin: 6px 0;
     }
-
-    .quick-tool {
-      display: inline;
-      float: none;
-    }
   }
 
   #motion-events {
@@ -255,9 +228,6 @@ div.motion {
 
 /* @group Homepage */
 #content {
-  $top: #6e914d;
-  $bottom: #57763b;
-
   a.remove {
     background-image: url('/images/remove.png');
     background-repeat: no-repeat;
@@ -346,10 +316,6 @@ div.motion {
       }
     }
 
-    &.odd {
-      background: #f0fff0 !important;
-    }
-
     &.passed {
       background-color: #90EE90 !important;
     }
@@ -365,17 +331,6 @@ div.motion {
     a {
       text-decoration: none;
       font-size: 1.2em;
-
-      &.plus {
-        float: right;
-        height: 18px;
-        width: 20px;
-        display: block;
-        background-image: url('/images/plus.png');
-        background-repeat: no-repeat;
-        color: #000;
-        font-size: 1px;
-      }
 
       &.more_motions {
         display: block;
