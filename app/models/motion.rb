@@ -203,6 +203,14 @@ class Motion < ActiveRecord::Base
     order('created_at DESC').limit(size)
   end
 
+  def self.public_groups(scope=scoped)
+    { :voting => scope.voting, :closed => scope.closed_state }
+  end
+
+  def self.active_member_groups(scope=scoped)
+    { :waitingsecond => scope.waitingsecond, :discussing => scope.discussing, :voting => scope.voting }
+  end
+
 private
   # @todo Description
   def possible_votes

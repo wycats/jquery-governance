@@ -10,23 +10,23 @@
   - if active_member?
     %section
       %h2 Waiting For Seconds
-      - render_motion_list(@motions.waitingsecond) do
+      - render_motion_list(@motion_groups[:waitingsecond]) do
         .empty There are no motions available to review
     %section
       %h2 Discussing
-      - render_motion_list(@motions.discussing) do
+      - render_motion_list(@motion_groups[:discussing]) do
         .empty There are no motions available to review
 
   %section
     %h2 Voting
-    - render_motion_list(@motions.voting) do
+    - render_motion_list(@motion_groups[:voting]) do
       .empty There are no motions available to review
 
 
   - unless active_member?
     %section
       %h2 Closed
-      - render_motion_list(@motions.closed_state) do
+      - render_motion_list(@motion_groups[:closed]) do
         .empty There are no motions available to review
 
 / TODO: show/hide motions you've already acted on
