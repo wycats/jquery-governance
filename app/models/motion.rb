@@ -199,6 +199,10 @@ class Motion < ActiveRecord::Base
     state.scheduled_update(time_elapsed)
   end
 
+  def self.paginate(size=5)
+    order('created_at DESC').limit(size)
+  end
+
 private
   # @todo Description
   def possible_votes
