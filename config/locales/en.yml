@@ -93,3 +93,7 @@ en:
    closed:
      heading: "Closed"
      empty: "There are no closed motions."
+   titles:
+     index:
+       public: "Motions"
+       open: "Open Motions"
