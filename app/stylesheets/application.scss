@@ -140,7 +140,6 @@ body {
 div.motion {
   width: 100%;
   overflow: hidden;
-  @include border-radius(6px);
 
   h2 {
     line-height: 1;
@@ -179,6 +178,28 @@ div.motion {
     width: 290px;
     float: right;
     text-align: center;
+
+    dl {
+      text-align: left;
+
+      dt, dd {
+        background-color: #F3EFE4;
+        font-size: 1.2em;
+      }
+
+      dt {
+        padding: 10px 15px 1px;
+        @include border-top-radius(5px);
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      dd {
+        margin-bottom: 10px;
+        padding: 0 15px 8px;
+        @include border-bottom-radius(5px);
+      }
+    }
 
     .quick-tool {
       display: inline;

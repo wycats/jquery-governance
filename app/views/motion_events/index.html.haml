@@ -15,6 +15,13 @@
     #tags
       = render 'taggings/index', :tags => @tags, :remote_flash => nil
   #motion-actions
+    %dl
+      %dt State
+      %dd
+        Currently
+        %span.current_state= state_description_for_motion(@motion)
+      %dt Expedited
+      %dd= @motion.expedited? ? 'Yes' : 'No'
     - if member? && current_member.can?(:second, @motion)
       =link_to "Second This Motion", motion_second_path(@motion), :class => "quick-tool", :method => :post, :remote => true
     - if member? && current_member.can?(:vote, @motion)
