@@ -19,7 +19,7 @@ Feature: Member seconds motion
     And I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I follow "Second This Motion"
+    And I press "Second This Motion"
     Then I should see "You have successfully seconded the motion."
     And I should see "Currently waiting for seconds"
 
@@ -29,7 +29,7 @@ Feature: Member seconds motion
     And I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I follow "Second This Motion"
+    And I press "Second This Motion"
     Then I should see "You have successfully seconded the motion."
     And I should see "Currently being discussed"
 
@@ -39,7 +39,7 @@ Feature: Member seconds motion
     And I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I follow "Second This Motion"
+    And I press "Second This Motion"
     Then I should see "You have successfully seconded the motion."
     And I should see "Currently waiting for seconds"
 
@@ -52,7 +52,7 @@ Feature: Member seconds motion
     And I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I follow "Second This Motion"
+    And I press "Second This Motion"
     Then I should see "You have successfully seconded the motion."
     And I should see "Currently being voted"
 
@@ -68,5 +68,5 @@ Feature: Member seconds motion
     And I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I follow "Second This Motion"
+    And I press "Second This Motion"
     Then I should not see "Second This Motion"

@@ -21,12 +21,12 @@ Feature: Member objects motion
     Given I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I follow "Object This Motion"
+    And I press "Object This Motion"
     Then I should see "You have successfully objected the motion"
 
   Scenario: A motion can't be objected more than once by the same member
     Given I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I follow "Object This Motion"
+    And I press "Object This Motion"
     Then I should not see "Object This Motion"

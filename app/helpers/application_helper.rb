@@ -12,4 +12,15 @@ module ApplicationHelper
     end
   end
 
+  def positive_button_to(name, options = {}, html_options = {})
+    html_options[:class] ||= ''
+    html_options[:class] << 'button positive'
+    button_to(name, options, html_options)
+  end
+
+  def negative_button_to(name, options = {}, html_options = {})
+    html_options[:class] ||= ''
+    html_options[:class] << 'button negative'
+    button_to(name, options, html_options)
+  end
 end

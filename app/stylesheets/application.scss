@@ -72,6 +72,14 @@ body {
   &, &:visited {
     display: inline-block;
   }
+
+  &.positive {
+    @include gradient-button(#6e914d, #57763b);
+  }
+
+  &.negative {
+    @include gradient-button(#a75144, #893a36);
+  }
 }
 
 .small_button, .small.button:visited {
@@ -191,10 +199,9 @@ div.motion {
   #motion-actions {
     width: 290px;
     float: right;
-    text-align: center;
 
     dl {
-      text-align: left;
+      margin-bottom: 15px;
 
       dt, dd {
         background-color: #F3EFE4;
