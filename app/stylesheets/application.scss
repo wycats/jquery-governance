@@ -230,8 +230,8 @@ div.motion {
 
 /* @group Homepage */
 #content {
-  $top: #4b4;
-  $bottom: #292;
+  $top: #6e914d;
+  $bottom: #57763b;
 
   a.quick-tool {
     background: $bottom;
@@ -245,7 +245,7 @@ div.motion {
     text-decoration: none;
     color: #FFFEFE !important;
     font-size: 1.8em !important;
-    border: 1px solid #070;
+    border: 1px solid #4e6642;
 
     &:hover {
       background: darken($top, 5%);
