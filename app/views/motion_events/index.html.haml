@@ -5,9 +5,8 @@
       %span.author by #{@motion.member.name_or_email}
     .description
       %p= @motion.description
-    .rationale
-      %h4 Rationale
-      %p= @motion.rationale
+    %h3 Rationale
+    %p= @motion.rationale
     %h3 Events
     %ul#motion-events
       - @motion.events.each do |event|

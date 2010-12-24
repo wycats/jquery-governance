@@ -990,36 +990,41 @@ div.motion h2 .author {
 div.motion .description {
   margin: 15px 0 25px;
 }
-/* line 183, ../../app/stylesheets/application.scss */
-div.motion .rationale h4 {
-  font-size: 1.5em;
+/* line 181, ../../app/stylesheets/application.scss */
+div.motion .description p {
+  color: #333;
 }
-/* line 187, ../../app/stylesheets/application.scss */
-div.motion .rationale p {
-  margin: 5px 0;
+/* line 186, ../../app/stylesheets/application.scss */
+div.motion h3 {
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+/* line 191, ../../app/stylesheets/application.scss */
+div.motion p {
+  margin: 8px 0;
   font-size: 1.5em;
   color: #666;
 }
-/* line 194, ../../app/stylesheets/application.scss */
+/* line 197, ../../app/stylesheets/application.scss */
 div.motion #motion-details {
   width: 535px;
   float: left;
 }
-/* line 199, ../../app/stylesheets/application.scss */
+/* line 202, ../../app/stylesheets/application.scss */
 div.motion #motion-actions {
   width: 290px;
   float: right;
 }
-/* line 203, ../../app/stylesheets/application.scss */
+/* line 206, ../../app/stylesheets/application.scss */
 div.motion #motion-actions dl {
   margin-bottom: 15px;
 }
-/* line 206, ../../app/stylesheets/application.scss */
+/* line 209, ../../app/stylesheets/application.scss */
 div.motion #motion-actions dl dt, div.motion #motion-actions dl dd {
   background-color: #F3EFE4;
   font-size: 1.2em;
 }
-/* line 211, ../../app/stylesheets/application.scss */
+/* line 214, ../../app/stylesheets/application.scss */
 div.motion #motion-actions dl dt {
   padding: 10px 15px 1px;
   -moz-border-radius-topleft: 5px;
@@ -1037,7 +1042,7 @@ div.motion #motion-actions dl dt {
   font-weight: bold;
   text-transform: uppercase;
 }
-/* line 218, ../../app/stylesheets/application.scss */
+/* line 221, ../../app/stylesheets/application.scss */
 div.motion #motion-actions dl dd {
   margin-bottom: 10px;
   padding: 0 15px 8px;
@@ -1054,21 +1059,18 @@ div.motion #motion-actions dl dd {
   -khtml-border-bottom-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-/* line 225, ../../app/stylesheets/application.scss */
+/* line 228, ../../app/stylesheets/application.scss */
 div.motion #motion-actions .quick-tool {
   display: inline;
   float: none;
 }
-/* line 231, ../../app/stylesheets/application.scss */
-div.motion h3 {
-  margin: 30px 0 10px;
-  padding: 5px;
-  background-color: #f3efe4;
-  font-size: 1.7em;
+/* line 234, ../../app/stylesheets/application.scss */
+div.motion #motion-events {
+  border-top: 1px solid #eee;
 }
-/* line 238, ../../app/stylesheets/application.scss */
+/* line 237, ../../app/stylesheets/application.scss */
 div.motion #motion-events li {
-  padding: 5px;
+  padding: 5px 0;
   border-bottom: 1px solid #eee;
   font-size: 1.5em;
   color: #666;

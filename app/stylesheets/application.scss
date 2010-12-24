@@ -177,18 +177,21 @@ div.motion {
 
   .description {
     margin: 15px 0 25px;
-  }
-
-  .rationale {
-    h4 {
-      font-size: 1.5em;
-    }
 
     p {
-      margin: 5px 0;
-      font-size: 1.5em;
-      color: #666;
+      color: #333;
     }
+  }
+
+  h3 {
+    font-size: 1.5em;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin: 8px 0;
+    font-size: 1.5em;
+    color: #666;
   }
 
   #motion-details {
@@ -228,18 +231,15 @@ div.motion {
     }
   }
 
-  h3 {
-    margin: 30px 0 10px;
-    padding: 5px;
-    background-color: #f3efe4;
-    font-size: 1.7em;
-  }
+  #motion-events {
+    border-top: 1px solid #eee;
 
-  #motion-events li {
-    padding: 5px;
-    border-bottom: 1px solid #eee;
-    font-size: 1.5em;
-    color: #666;
+    li {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 1.5em;
+      color: #666;
+    }
   }
 }
 
