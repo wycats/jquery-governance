@@ -21,7 +21,7 @@ Feature: Member seconds motion
     And I follow "jQuery is cool"
     And I follow "Second This Motion"
     Then I should see "You have successfully seconded the motion."
-    And I should see "currently waiting for seconds"
+    And I should see "Currently waiting for seconds"
 
   Scenario: A motion is seconded enough times to been brough to discussion
     Given the member "John Resig" has created a motion titled "jQuery is cool"
@@ -31,7 +31,7 @@ Feature: Member seconds motion
     And I follow "jQuery is cool"
     And I follow "Second This Motion"
     Then I should see "You have successfully seconded the motion."
-    And I should see "currently being discussed"
+    And I should see "Currently being discussed"
 
   Scenario: An expedited motion is seconded but still needs more seconds to been brough to a vote
     Given the member "John Resig" has created an expedited motion titled "jQuery is cool"
@@ -41,7 +41,7 @@ Feature: Member seconds motion
     And I follow "jQuery is cool"
     And I follow "Second This Motion"
     Then I should see "You have successfully seconded the motion."
-    And I should see "currently waiting for seconds"
+    And I should see "Currently waiting for seconds"
 
   Scenario: An expedited motion is seconded enough times to been brough to a vote
     Given the member "John Resig" has created an expedited motion titled "jQuery is cool"
@@ -54,7 +54,7 @@ Feature: Member seconds motion
     And I follow "jQuery is cool"
     And I follow "Second This Motion"
     Then I should see "You have successfully seconded the motion."
-    And I should see "currently being voted"
+    And I should see "Currently being voted"
 
   Scenario: A motion can't be seconded by it's creator
     Given the member "John Resig" has created an expedited motion titled "jQuery is cool"
