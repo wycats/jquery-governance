@@ -1228,11 +1228,11 @@ div.motion #motion-events li {
 }
 
 /* line 300, ../../app/stylesheets/application.scss */
-.current-motions {
+.motions {
   margin-top: 10px;
 }
 /* line 303, ../../app/stylesheets/application.scss */
-.current-motions h2 {
+.motions h2 {
   margin: 20px 0 10px;
   padding-left: 200px;
   font-size: 2.2em;
@@ -1240,7 +1240,7 @@ div.motion #motion-events li {
   color: #cab585;
 }
 /* line 311, ../../app/stylesheets/application.scss */
-.current-motions li {
+.motions li {
   width: 100%;
   overflow: hidden;
   margin: 10px 0;
@@ -1254,7 +1254,7 @@ div.motion #motion-events li {
   border: 1px solid #EFEFEF;
 }
 /* line 319, ../../app/stylesheets/application.scss */
-.current-motions li .date {
+.motions li .date {
   float: left;
   width: 180px;
   font-size: 1.4em;
@@ -1263,48 +1263,48 @@ div.motion #motion-events li {
   color: #666;
 }
 /* line 328, ../../app/stylesheets/application.scss */
-.current-motions li .summary {
+.motions li .summary {
   float: right;
   width: 640px;
   margin-right: 10px;
 }
 /* line 334, ../../app/stylesheets/application.scss */
-.current-motions li .summary p.meta .author {
+.motions li .summary p.meta .author {
   color: #80a080;
 }
 /* line 337, ../../app/stylesheets/application.scss */
-.current-motions li .summary p.meta .author strong {
+.motions li .summary p.meta .author strong {
   font-weight: normal;
   font-style: italic;
 }
 /* line 344, ../../app/stylesheets/application.scss */
-.current-motions li .summary p.description {
+.motions li .summary p.description {
   font-size: 1.5em;
   color: #666;
 }
 /* line 350, ../../app/stylesheets/application.scss */
-.current-motions li.odd {
+.motions li.odd {
   background: #f0fff0 !important;
 }
 /* line 354, ../../app/stylesheets/application.scss */
-.current-motions li.passed {
+.motions li.passed {
   background-color: #90EE90 !important;
 }
 /* line 358, ../../app/stylesheets/application.scss */
-.current-motions li.failed {
+.motions li.failed {
   background-color: #FAAFBE !important;
 }
 /* line 362, ../../app/stylesheets/application.scss */
-.current-motions li.seconded {
+.motions li.seconded {
   background-color: #FFC !important;
 }
 /* line 366, ../../app/stylesheets/application.scss */
-.current-motions li a {
+.motions li a {
   text-decoration: none;
   font-size: 1.2em;
 }
 /* line 370, ../../app/stylesheets/application.scss */
-.current-motions li a.plus {
+.motions li a.plus {
   float: right;
   height: 18px;
   width: 20px;
@@ -1315,7 +1315,7 @@ div.motion #motion-events li {
   font-size: 1px;
 }
 /* line 381, ../../app/stylesheets/application.scss */
-.current-motions li a.more_motions {
+.motions li a.more_motions {
   display: block;
   width: 640px;
   margin: 0 0 10px 200px;
@@ -1330,11 +1330,11 @@ div.motion #motion-events li {
   text-align: center;
 }
 /* line 393, ../../app/stylesheets/application.scss */
-.current-motions li.no-border {
+.motions li.no-border {
   border: 0px;
 }
 /* line 397, ../../app/stylesheets/application.scss */
-.current-motions div.empty {
+.motions div.empty {
   margin: 10px 0 40px;
   padding-left: 200px;
   font-size: 1.5em;

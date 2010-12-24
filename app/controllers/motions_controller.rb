@@ -7,7 +7,7 @@ class MotionsController < ApplicationController
     scope = Motion.paginate
 
     if active_member?
-      @motion_groups      = Motion.active_member_groups(scope)
+      @motion_groups      = Motion.open_groups(scope)
       @motion_groups_name = :open
     else
       @motion_groups      = Motion.public_groups(scope)
@@ -17,7 +17,9 @@ class MotionsController < ApplicationController
 
   # List Motions that are closed (passed, failed, approved)
   def closed
-    @motions = Motion.closed_state.paginate
+    @motion_groups      = Motion.closed_groups(Motion.paginate)
+    @motion_groups_name = :closed
+    render :index
   end
 
   # Start a new Motion

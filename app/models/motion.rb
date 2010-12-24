@@ -207,8 +207,12 @@ class Motion < ActiveRecord::Base
     { :voting => scope.voting, :closed => scope.closed_state }
   end
 
-  def self.active_member_groups(scope=scoped)
+  def self.open_groups(scope=scoped)
     { :waitingsecond => scope.waitingsecond, :discussing => scope.discussing, :voting => scope.voting }
+  end
+
+  def self.closed_groups(scope=scoped)
+    { :closed => scope.closed_state }
   end
 
 private

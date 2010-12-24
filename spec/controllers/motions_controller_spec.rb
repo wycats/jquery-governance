@@ -53,10 +53,10 @@ describe MotionsController do
       controller.stub!(:current_member).and_return @member
     end
 
-    it "should render the page page with 1 motion" do
+    it "should render the index template with motion groups" do
       get :closed
-      response.should render_template('motions/closed')
-      assigns(:motions).count.should == 1
+      response.should render_template('motions/index')
+      assigns(:motion_groups).should_not be_nil
     end
   end
 end

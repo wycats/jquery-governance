@@ -1,4 +1,4 @@
-.current-motions
+%div{ :class => "motions #{@motions_groups_name}" }
   - if active_member?
     = link_to "New Motion", new_motion_path, {:class => "quick-tool"}
   %h1= t("motions.titles.index.#{@motion_groups_name}")
