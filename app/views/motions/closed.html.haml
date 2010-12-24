@@ -1,11 +1,7 @@
 .current-motions
-  - if active_member?
-    =link_to "New Motion", new_motion_path, {:class => "quick-tool"}
+  =link_to "New Motion", new_motion_path, {:class => "quick-tool"}
 
   %h1
     Closed Motions
 
-  - if active_member?
-    %section
-      - render_motion_list(@motions) do
-        .empty There are no motions available to review
+  =render_motion_group(:closed, @motions)

@@ -25,17 +25,22 @@ module MotionsHelper
     end
   end
 
-  def render_motion_list(motions, &block)
-    if motions.empty?
-      haml_concat(capture_haml(&block))
-    else
-      haml_tag(:ul) do
-        motions.each do |motion|
-          haml_concat(render(:partial => 'motions/list_item', :locals => { :motion => motion }))
-        end
+  def render_motion_group(name, motion_group)
+    capture_haml do
+      haml_tag(:section) do
+        haml_tag(:h2, t("motions.#{name}.heading"))
+        if motion_group.empty?
+          haml_tag('.empty', t("motions.#{name}.empty"))
+        else
+          haml_tag(:ul) do
+            motion_group.each do |motion|
+              haml_concat(render(:partial => 'motions/list_item', :locals => { :motion => motion }))
+            end
 
-        if link = link_to_more_motions(motions)
-          haml_tag(:li, link, :class => 'no-border')
+            if link = link_to_more_motions(motion_group)
+              haml_tag(:li, link, :class => 'no-border')
+            end
+          end
         end
       end
     end

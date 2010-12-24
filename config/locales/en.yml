@@ -80,3 +80,16 @@ en:
         tag_not_created: "Tag could not be created."
         tag_not_saved:   "Tag could not be saved."
         tag_not_destroyed: "Tag could not be deleted."
+  motions:
+   waitingsecond:
+     heading: "Waiting For Seconds"
+     empty: "There are no motions waiting for seconds."
+   discussing:
+     heading: "Discussing"
+     empty: "There are no motions being discussed."
+   voting:
+     heading: "Voting"
+     empty: "There are no motions being voted."
+   closed:
+     heading: "Closed"
+     empty: "There are no closed motions."
