@@ -66,7 +66,7 @@ body {
 /* @end */
 
 /* @group Buttons */
-.button {
+#content .button {
   @include gradient-button(#595959, #363636);
 
   &, &:visited {
@@ -258,11 +258,6 @@ div.motion {
   $top: #6e914d;
   $bottom: #57763b;
 
-  a.quick-tool {
-    @include gradient-button(#6e914d, #57763b);
-    float: right;
-  }
-
   a.remove {
     background-image: url('/images/remove.png');
     background-repeat: no-repeat;
@@ -306,6 +301,10 @@ div.motion {
     font-size: 2.2em;
     font-style: italic;
     color: #cab585;
+  }
+
+  .button {
+    float: right;
   }
 
   li {
