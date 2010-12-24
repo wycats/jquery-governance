@@ -13,7 +13,7 @@ module MotionsHelper
     when 'waitingsecond' then 'waiting for seconds'
     when 'discussing'    then 'being discussed'
     when 'voting'        then 'being voted'
-    when 'clossed'       then 'closed'
+    when 'closed'        then 'closed'
     end
   end
 
