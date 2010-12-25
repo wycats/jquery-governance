@@ -290,7 +290,7 @@ div.motion {
         color: #bbb;
       }
 
-      .expedited, .passed {
+      .expedited, .passed, .approved {
         display: block;
         float: right;
         clear: both;
@@ -307,7 +307,7 @@ div.motion {
         background-color: #7cafd2;
       }
 
-      .passed {
+      .passed, .approved {
         background-color: #aeda4b;
       }
     }

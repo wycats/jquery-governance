@@ -5,6 +5,8 @@
       %span.expedited Expedited
     - if motion.passed?
       %span.passed Passed
+    - if motion.approved?
+      %span.approved Approved
   .summary
     %p.title= link_to motion.title, motion_events_url(motion)
     %p.author
