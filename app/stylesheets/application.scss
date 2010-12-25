@@ -295,17 +295,18 @@ div.motion {
         clear: both;
         margin: 2px 0 0;
         color: #fff;
+        text-transform: uppercase;
 
         &.expedited {
-          background-color: #7cafd2;
+          background-color: #a1bee6;
         }
 
         &.passed, &.approved {
-          background-color: #aeda4b;
+          background-color: #94ca3d;
         }
 
         &.failed {
-          background-color: #e78d3e;
+          background-color: #ff8080;
         }
       }
 
