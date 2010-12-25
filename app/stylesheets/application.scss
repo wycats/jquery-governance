@@ -290,6 +290,20 @@ div.motion {
         color: #bbb;
       }
 
+      .expedited {
+        display: block;
+        float: right;
+        clear: both;
+        margin: 2px 0 0;
+        padding: 2px 5px;
+        @include border-radius(3px);
+        background-color: #7cafd2;
+        font-size: 11px;
+        font-weight: bold;
+        text-transform: lowercase;
+        color: #fff;
+      }
+
     }
 
     .summary {

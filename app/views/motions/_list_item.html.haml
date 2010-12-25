@@ -1,6 +1,8 @@
 %li{ html_attrs_for_motion(motion) }
   .actions
     .created_at= motion.created_at.strftime("%B #{motion.created_at.day.ordinalize}, %Y")
+    - if motion.expedited?
+      %span.expedited Expedited
   .summary
     %p.title= link_to motion.title, motion_events_url(motion)
     %p.author
