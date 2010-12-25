@@ -290,30 +290,25 @@ div.motion {
         color: #bbb;
       }
 
-      .expedited, .passed, .approved, .failed {
-        display: block;
+      .badge.status {
         float: right;
         clear: both;
         margin: 2px 0 0;
-        padding: 2px 5px;
-        @include border-radius(3px);
-        font-size: 11px;
-        font-weight: bold;
-        text-transform: lowercase;
         color: #fff;
+
+        &.expedited {
+          background-color: #7cafd2;
+        }
+
+        &.passed, &.approved {
+          background-color: #aeda4b;
+        }
+
+        &.failed {
+          background-color: #e78d3e;
+        }
       }
 
-      .expedited {
-        background-color: #7cafd2;
-      }
-
-      .passed, .approved {
-        background-color: #aeda4b;
-      }
-
-      .failed {
-        background-color: #e78d3e;
-      }
     }
 
     .summary {
@@ -356,15 +351,10 @@ div.motion {
       float: left;
       width: 170px;
 
-      span {
-        display: block;
+      .badge.tag {
         float: left;
         margin: 3px 3px 0 0;
-        padding: 2px 5px;
-        @include border-radius(3px);
         background-color: #eee;
-        font-size: 11px;
-        font-weight: bold;
         color: #999;
       }
     }
@@ -525,3 +515,11 @@ p.small { font-size: 1em; }
   background-color: $flash_notice_background;
 }
 
+#content .badge {
+  display: block;
+  padding: 2px 5px;
+  @include border-radius(3px);
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: lowercase;
+}

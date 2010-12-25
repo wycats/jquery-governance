@@ -1,14 +1,7 @@
 %li{ html_attrs_for_motion(motion) }
   .actions
     .created_at= motion.created_at.strftime("%B #{motion.created_at.day.ordinalize}, %Y")
-    - if motion.waitingsecond? && motion.expedited?
-      %span.expedited Expedited
-    - if motion.passed?
-      %span.passed Passed
-    - if motion.approved?
-      %span.approved Approved
-    - if motion.failed?
-      %span.failed Failed
+    = motion_status_badge(motion)
   .summary
     %p.title= link_to motion.title, motion_events_url(motion)
     %p.author
@@ -17,4 +10,4 @@
     %p.description= truncate(motion.description, :length => 200)
   .tags
     - motion.tags.each do |tag|
-      %span= tag.name
+      = tag_badge(tag)

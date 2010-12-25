@@ -23,4 +23,10 @@ module ApplicationHelper
     html_options[:class] << 'button negative'
     button_to(name, options, html_options)
   end
+
+  def badge(text, html_options={})
+    html_options[:class] ||= ''
+    html_options[:class] << ' badge'
+    content_tag(:span, html_options) { text }
+  end
 end

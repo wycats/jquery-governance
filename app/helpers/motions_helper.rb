@@ -42,4 +42,18 @@ module MotionsHelper
       link_to('More', show_more_motions_path, :class => 'more_motions more-button', :'data-last-id' => motions.last.id)
     end
   end
+
+  def motion_status_badge(motion)
+    status = if motion.waitingsecond? && motion.expedited?
+      'expedited'
+    elsif motion.passed?
+      'passed'
+    elsif motion.approved?
+      'approved'
+    elsif motion.failed?
+      'failed'
+    end
+
+    badge(status, :class => "status #{status}") unless status.blank?
+  end
 end
