@@ -8,6 +8,3 @@
       by
       %strong #{motion_creator_display_name(motion)}
     %p.description= truncate(motion.description, :length => 200)
-  .tags
-    - motion.tags.each do |tag|
-      = tag_badge(tag)

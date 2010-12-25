@@ -348,18 +348,6 @@ div.motion {
       }
     }
 
-    .tags {
-      float: left;
-      width: 170px;
-
-      .badge.tag {
-        float: left;
-        margin: 3px 3px 0 0;
-        background-color: #eee;
-        color: #999;
-      }
-    }
-
     &.passed {
       background-color: #90EE90 !important;
     }
