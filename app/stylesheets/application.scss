@@ -357,9 +357,16 @@ div.motion {
     }
 
     &.seconded {
-      background-color: #fffecf !important;
-    }
+      .created_at, .summary p {
+        color: #999;
 
+        &.title {
+          a:link, a:visited {
+            color: #999 !important;
+          }
+        }
+      }
+    }
 
     a.more_motions {
       text-align: center;
