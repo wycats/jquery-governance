@@ -440,26 +440,24 @@ nav.main {
 /* @end */
 
 /* @group Flash alerts & Validation Errors */
-
-#flash_notice {
-  margin: 10px 20px;
+#flash_notice, #flash_alert {
   clear: both;
-  background: $flash_notice_background;
-  border: 2px solid $flash_notice_border;
+  margin: 10px 20px;
+  padding: 5px 20px;
+  border: 2px solid;
   font-size: 14px;
   text-align: center;
-  padding: 5px 20px;
+}
+
+#flash_notice {
+  background-color: $flash_notice_background;
+  border-color: $flash_notice_border;
   color: #5F5F5F;
 }
 
 #flash_alert {
-  margin: 10px 20px;
-  clear: both;
-  background: #FFEEEE;
-  border: 2px solid red;
-  font-size: 14px;
-  text-align: center;
-  padding: 5px 20px;
+  background-color: #FFEEEE;
+  border-color: red;
   color: red;
 }
 
@@ -470,12 +468,19 @@ nav.main {
   padding: 20px;
   font-size: 12px;
   margin: 20px;
+
+  ul {
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 14px;
+  }
+
+  h3 {
+    font-size: 12px;
+  }
 }
-
-#error_explanation ul { margin: 0; }
-#error_explanation h2 { font-size: 14px;}
-#error_explanation h3 { font-size: 12px;}
-
 /* @end */
 
 #tags li{
