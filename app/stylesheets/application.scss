@@ -78,6 +78,11 @@ body {
     display: inline-block;
   }
 
+  &.large {
+    padding: 8px 14px 9px;
+    font-size: 14px;
+  }
+
   &.positive {
     @include gradient-button(#6e914d, #57763b);
   }
@@ -86,12 +91,6 @@ body {
     @include gradient-button(#a75144, #893a36);
   }
 }
-
-.large_button, .large_button:visited {
-  font-size: 14px;
-  padding: 8px 14px 9px;
-}
-
 /* @end */
 
 
