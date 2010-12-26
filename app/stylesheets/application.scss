@@ -348,14 +348,6 @@ div.motion {
       }
     }
 
-    &.passed {
-      background-color: #90EE90 !important;
-    }
-
-    &.failed {
-      background-color: #FAAFBE !important;
-    }
-
     &.seconded {
       .created_at, .summary p {
         color: #999;
