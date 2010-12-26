@@ -14,6 +14,8 @@ class Member < ActiveRecord::Base
   has_many :member_conflicts
   has_many :conflicts, :through => :member_conflicts
   has_many :seconded_motions, :through => :events, :source => :motion, :conditions => { :events => { :event_type => 'second' } }
+  has_many :objected_motions, :through => :events, :source => :motion, :conditions => { :events => { :event_type => 'objection' } }
+  has_many :voted_motions,    :through => :events, :source => :motion, :conditions => { :events => { :event_type => 'vote' } }
 
   accepts_nested_attributes_for :memberships
 
@@ -61,6 +63,15 @@ class Member < ActiveRecord::Base
   # @return [true, false] If Member has seconded a given motion
   def has_seconded?(motion)
     seconds.where(:motion_id => motion.id).present?
+  end
+
+  # Check if Member has acted on a given motion in its current state
+  # @param [Motion] motion The motion in question
+  # @return [true, false] If Member has seconded a given motion
+  def has_acted_on?(motion)
+    motion.waitingsecond? && seconded_motions.scoped.include?(motion) ||
+      motion.discussing? && objected_motions.scoped.include?(motion) ||
+      motion.voting? && voted_motions.scoped.include?(motion)
   end
 
   # Return name if present, email if not
