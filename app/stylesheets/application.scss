@@ -36,6 +36,11 @@
   }
 }
 
+@mixin float-container {
+  width: 100%;
+  overflow: hidden;
+}
+
 /* @group Variables */
 
 $border_color: #ccc;
@@ -138,8 +143,7 @@ body {
 /* @group Motions */
 
 div.motion {
-  width: 100%;
-  overflow: hidden;
+  @include float-container;
 
   h2 {
     line-height: 1;
@@ -162,8 +166,7 @@ div.motion {
   }
 
   .tags {
-    width: 100%;
-    overflow: hidden;
+    @include float-container;
   }
 
   h3 {
@@ -273,8 +276,7 @@ div.motion {
   }
 
   li {
-    width: 100%;
-    overflow: hidden;
+    @include float-container;
     margin-bottom: 30px;
     padding-top: 10px;
     border-top: 1px solid #eee;
@@ -381,8 +383,7 @@ div.motion {
 }
 
 nav.main {
-  width: 100%;
-  overflow: hidden;
+  @include float-container;
 
   ul {
     float: right;
