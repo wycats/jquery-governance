@@ -1,19 +1,9 @@
 module MotionsHelper
   def html_attrs_for_motion(motion)
-    classes = [dom_class(motion), state_class_for_motion(motion)]
+    classes = [dom_class(motion)]
     classes << 'acted_on' if member? && current_member.has_acted_on?(motion)
-    {
-      :id    => dom_id(motion),
-      :class => classes.compact.join(' ')
-    }
-  end
 
-  def state_class_for_motion(motion)
-    if motion.has_met_requirement?
-      'passed'
-    elsif motion.failed?
-      'failed'
-    end
+    { :id    => dom_id(motion), :class => classes.compact.join(' ') }
   end
 
   def render_motion_group(name, motion_group)
