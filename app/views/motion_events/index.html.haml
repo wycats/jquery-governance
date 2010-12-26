@@ -7,12 +7,14 @@
       %p= @motion.description
     %h3 Rationale
     %p= @motion.rationale
+    %h3 Tags
+    .tags
+      - @motion.tags.each do |tag|
+        = tag_badge(tag)
     %h3 Events
     %ul#motion-events
       - @motion.events.each do |event|
         %li= render event
-    #tags
-      = render 'taggings/index', :tags => @tags, :remote_flash => nil
   #motion-actions
     %dl
       %dt State
