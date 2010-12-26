@@ -1164,7 +1164,7 @@ div.motion #motion-events li {
 /* line 288, ../../app/stylesheets/application.scss */
 #content .motions li .actions .created_at {
   padding-top: 5px;
-  color: #bbb;
+  color: #666;
 }
 /* line 293, ../../app/stylesheets/application.scss */
 #content .motions li .actions .badge.status {
@@ -1172,31 +1172,32 @@ div.motion #motion-events li {
   clear: both;
   margin: 2px 0 0;
   color: #fff;
+  text-transform: uppercase;
 }
-/* line 299, ../../app/stylesheets/application.scss */
+/* line 300, ../../app/stylesheets/application.scss */
 #content .motions li .actions .badge.status.expedited {
-  background-color: #7cafd2;
+  background-color: #a1bee6;
 }
-/* line 303, ../../app/stylesheets/application.scss */
+/* line 304, ../../app/stylesheets/application.scss */
 #content .motions li .actions .badge.status.passed, #content .motions li .actions .badge.status.approved {
-  background-color: #aeda4b;
+  background-color: #94ca3d;
 }
-/* line 307, ../../app/stylesheets/application.scss */
+/* line 308, ../../app/stylesheets/application.scss */
 #content .motions li .actions .badge.status.failed {
-  background-color: #e78d3e;
+  background-color: #ff8080;
 }
-/* line 314, ../../app/stylesheets/application.scss */
+/* line 315, ../../app/stylesheets/application.scss */
 #content .motions li .summary {
   float: left;
   width: 480px;
   margin-right: 30px;
 }
-/* line 319, ../../app/stylesheets/application.scss */
+/* line 320, ../../app/stylesheets/application.scss */
 #content .motions li .summary p {
   margin: 0;
   font-size: 13px;
 }
-/* line 324, ../../app/stylesheets/application.scss */
+/* line 325, ../../app/stylesheets/application.scss */
 #content .motions li .summary p.title a:link, #content .motions li .summary p.title a:visited {
   font-size: 18px;
   font-weight: bold;
@@ -1204,54 +1205,38 @@ div.motion #motion-events li {
   text-decoration: none;
   color: #333 !important;
 }
-/* line 333, ../../app/stylesheets/application.scss */
+/* line 334, ../../app/stylesheets/application.scss */
 #content .motions li .summary p.author {
   color: #80a080;
   line-height: 1.5;
 }
-/* line 337, ../../app/stylesheets/application.scss */
+/* line 338, ../../app/stylesheets/application.scss */
 #content .motions li .summary p.author strong {
   font-weight: normal;
   font-style: italic;
 }
-/* line 343, ../../app/stylesheets/application.scss */
+/* line 344, ../../app/stylesheets/application.scss */
 #content .motions li .summary p.description {
   margin-top: 10px;
   color: #666;
 }
-/* line 350, ../../app/stylesheets/application.scss */
-#content .motions li .tags {
-  float: left;
-  width: 170px;
-}
-/* line 354, ../../app/stylesheets/application.scss */
-#content .motions li .tags .badge.tag {
-  float: left;
-  margin: 3px 3px 0 0;
-  background-color: #eee;
+/* line 352, ../../app/stylesheets/application.scss */
+#content .motions li.seconded .created_at, #content .motions li.seconded .summary p {
   color: #999;
 }
-/* line 362, ../../app/stylesheets/application.scss */
-#content .motions li.passed {
-  background-color: #90EE90 !important;
+/* line 356, ../../app/stylesheets/application.scss */
+#content .motions li.seconded .created_at.title a:link, #content .motions li.seconded .created_at.title a:visited, #content .motions li.seconded .summary p.title a:link, #content .motions li.seconded .summary p.title a:visited {
+  color: #999 !important;
 }
-/* line 366, ../../app/stylesheets/application.scss */
-#content .motions li.failed {
-  background-color: #FAAFBE !important;
-}
-/* line 370, ../../app/stylesheets/application.scss */
-#content .motions li.seconded {
-  background-color: #fffecf !important;
-}
-/* line 375, ../../app/stylesheets/application.scss */
+/* line 363, ../../app/stylesheets/application.scss */
 #content .motions li a.more_motions {
   text-align: center;
 }
-/* line 381, ../../app/stylesheets/application.scss */
+/* line 369, ../../app/stylesheets/application.scss */
 #content .motions li.no-border {
   border: 0px;
 }
-/* line 385, ../../app/stylesheets/application.scss */
+/* line 373, ../../app/stylesheets/application.scss */
 #content .motions div.empty {
   margin: 10px 0 40px;
   padding-left: 170px;
@@ -1260,32 +1245,32 @@ div.motion #motion-events li {
   color: #333;
 }
 
-/* line 395, ../../app/stylesheets/application.scss */
+/* line 383, ../../app/stylesheets/application.scss */
 #motion h1 {
   color: #407a27;
   font-size: 3em;
 }
-/* line 400, ../../app/stylesheets/application.scss */
+/* line 388, ../../app/stylesheets/application.scss */
 #motion ul {
   float: right;
 }
 
-/* line 405, ../../app/stylesheets/application.scss */
+/* line 393, ../../app/stylesheets/application.scss */
 nav.main {
   width: 100%;
   overflow: hidden;
 }
-/* line 409, ../../app/stylesheets/application.scss */
+/* line 397, ../../app/stylesheets/application.scss */
 nav.main ul {
   float: right;
   height: 40px;
 }
-/* line 413, ../../app/stylesheets/application.scss */
+/* line 401, ../../app/stylesheets/application.scss */
 nav.main ul li {
   margin-top: 5px;
   float: left;
 }
-/* line 417, ../../app/stylesheets/application.scss */
+/* line 405, ../../app/stylesheets/application.scss */
 nav.main ul li.first a {
   -moz-border-radius-bottomleft: 6px;
   -webkit-border-bottom-left-radius: 6px;
@@ -1294,7 +1279,7 @@ nav.main ul li.first a {
   -khtml-border-bottom-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-/* line 421, ../../app/stylesheets/application.scss */
+/* line 409, ../../app/stylesheets/application.scss */
 nav.main ul li a {
   font-size: 1.25em;
   font-family: helvetica, arial, sans-serif;
@@ -1312,14 +1297,14 @@ nav.main ul li a {
   cursor: pointer;
   background: url("http://jquery.org/wp-content/themes/green/green/shadow.png") bottom left repeat-x;
 }
-/* line 434, ../../app/stylesheets/application.scss */
+/* line 422, ../../app/stylesheets/application.scss */
 nav.main ul li a:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
 /* @end */
 /* @group Flash alerts & Validation Errors */
-/* line 446, ../../app/stylesheets/application.scss */
+/* line 434, ../../app/stylesheets/application.scss */
 #flash_notice {
   margin: 10px 20px;
   clear: both;
@@ -1331,7 +1316,7 @@ nav.main ul li a:hover {
   color: #5F5F5F;
 }
 
-/* line 457, ../../app/stylesheets/application.scss */
+/* line 445, ../../app/stylesheets/application.scss */
 #flash_alert {
   margin: 10px 20px;
   clear: both;
@@ -1343,7 +1328,7 @@ nav.main ul li a:hover {
   color: red;
 }
 
-/* line 468, ../../app/stylesheets/application.scss */
+/* line 456, ../../app/stylesheets/application.scss */
 #error_explanation {
   background: #FBB;
   border: 2px solid red;
@@ -1353,28 +1338,28 @@ nav.main ul li a:hover {
   margin: 20px;
 }
 
-/* line 477, ../../app/stylesheets/application.scss */
+/* line 465, ../../app/stylesheets/application.scss */
 #error_explanation ul {
   margin: 0;
 }
 
-/* line 478, ../../app/stylesheets/application.scss */
+/* line 466, ../../app/stylesheets/application.scss */
 #error_explanation h2 {
   font-size: 14px;
 }
 
-/* line 479, ../../app/stylesheets/application.scss */
+/* line 467, ../../app/stylesheets/application.scss */
 #error_explanation h3 {
   font-size: 12px;
 }
 
 /* @end */
-/* line 483, ../../app/stylesheets/application.scss */
+/* line 471, ../../app/stylesheets/application.scss */
 #tags li {
   font-size: 14px;
   margin: 1em 0;
 }
-/* line 488, ../../app/stylesheets/application.scss */
+/* line 476, ../../app/stylesheets/application.scss */
 #tags li a {
   padding: 4px;
   -moz-border-radius: 3px;
@@ -1385,7 +1370,7 @@ nav.main ul li a:hover {
   border-radius: 3px;
   text-decoration: none;
 }
-/* line 493, ../../app/stylesheets/application.scss */
+/* line 481, ../../app/stylesheets/application.scss */
 #tags li.remove a {
   background: #229922;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #44bb44), color-stop(100%, #229922));
@@ -1395,14 +1380,14 @@ nav.main ul li a:hover {
   color: #FFFEFE !important;
   border: 1px solid #070;
 }
-/* line 502, ../../app/stylesheets/application.scss */
+/* line 490, ../../app/stylesheets/application.scss */
 #tags li.remove a:hover {
   background: #3da83d;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #3da83d), color-stop(100%, #1d841d));
   background-image: -moz-linear-gradient(top, #3da83d 0%, #1d841d 100%);
   background-image: linear-gradient(top, #3da83d 0%, #1d841d 100%);
 }
-/* line 507, ../../app/stylesheets/application.scss */
+/* line 495, ../../app/stylesheets/application.scss */
 #tags li.remove a:active {
   background: #57c257;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #57c257), color-stop(100%, #27ae27));
@@ -1410,17 +1395,17 @@ nav.main ul li a:hover {
   background-image: linear-gradient(top, #57c257 0%, #27ae27 100%);
 }
 
-/* line 513, ../../app/stylesheets/application.scss */
+/* line 501, ../../app/stylesheets/application.scss */
 p.small {
   font-size: 1em;
 }
 
-/* line 514, ../../app/stylesheets/application.scss */
+/* line 502, ../../app/stylesheets/application.scss */
 .highlight_fade {
   background-color: #fffecf;
 }
 
-/* line 518, ../../app/stylesheets/application.scss */
+/* line 506, ../../app/stylesheets/application.scss */
 #content .badge {
   display: block;
   padding: 2px 5px;
