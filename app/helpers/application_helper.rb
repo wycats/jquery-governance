@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def positive_button_to(name, options = {}, html_options = {})
-    append_html_classes(html_options, 'button', 'possitive')
+    append_html_classes(html_options, 'button', 'positive')
     button_to(name, options, html_options)
   end
 
