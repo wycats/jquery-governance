@@ -158,7 +158,7 @@ class Motion < ActiveRecord::Base
   end
 
   def approved_at
-    :closed_at if approved?
+    closed_at if approved?
   end
 
   def closed?
