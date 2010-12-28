@@ -6,13 +6,6 @@ class Motion < ActiveRecord::Base
   OPEN_STATES   = %w(waitingsecond discussing voting)
   MOTION_STATES = OPEN_STATES + CLOSED_STATES
 
-  HUMAN_READABLE_MOTION_STATES = {
-    'waitingsecond' => 'Waiting For Seconds',
-    'voting'        => 'In Voting',
-    'discussing'    => 'Discussing',
-    'closed'        => 'Closed'
-  }
-
   scope :open_state,    where(:state_name => OPEN_STATES)
   scope :closed_state,  where(:state_name => CLOSED_STATES)
   scope :waitingsecond, where(:state_name => 'waitingsecond')
@@ -141,10 +134,6 @@ class Motion < ActiveRecord::Base
     state_name == "voting"
   end
 
-  def seconding?
-    open? and not voting?
-  end
-
   def passed?
     voting? && has_met_requirement?
   end
@@ -185,14 +174,6 @@ class Motion < ActiveRecord::Base
   # Sets the motion to passed, if it has met all requirements
   def update_state
     state.update
-  end
-
-  def formatted_state(format = :human)
-    if format == :human
-      HUMAN_READABLE_MOTION_STATES[attributes["state_name"]]
-    else
-      state_name
-    end
   end
 
   def scheduled_update(time_elapsed)
