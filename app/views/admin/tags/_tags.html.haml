@@ -5,6 +5,6 @@
         -if tag_name
           %li{'data-tags-id' => tag_name.id}
             %span{:class => highlight_new_tag(tag_name)}
-              -unless tag_name.count > 0 || !removable
+              -unless tag_name.motions.count > 0 || !removable
                 =link_to raw("<span>Remove</span>"), admin_tag_path(tag_name), :method => 'delete', :confirm => "Are you sure you want to delete the tag \"#{tag_name.name}\"?", :class => 'remove'
               =tag_name.name

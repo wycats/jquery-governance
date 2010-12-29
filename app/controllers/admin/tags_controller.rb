@@ -4,7 +4,7 @@ module Admin
     before_filter :require_active_member, :only => [:create, :destroy]
 
     def index
-      @tags = Tag.motion_counts
+      @tags = Tag.all
       @tag = Tag.new
       @new_tag_id = params[:new_tag_id]
       @old_tag_id = params[:old_tag_id]
