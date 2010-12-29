@@ -11,6 +11,9 @@ gem 'haml',         '~>3.0.23'
 gem 'haml-rails'
 gem 'compass'
 
+gem 'pg'
+gem 'texticle', :git => "https://github.com/tenderlove/texticle.git"
+
 gem 'resque'
 gem 'resque-scheduler', :require => "resque_scheduler"
 
