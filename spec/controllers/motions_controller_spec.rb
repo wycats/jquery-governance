@@ -3,20 +3,22 @@ require 'spec_helper'
 describe MotionsController do
 
   describe "#new with member logged in" do
-    before(:each) do
+    before(:all) do
       @member = Factory(:member)
-      controller.stub!(:authenticate_member!).and_return true
-      controller.stub!(:current_member).and_return @member
+    end
+
+    before(:each) do
+      sign_in @member
     end
 
     it "should set memeber id" do
-      get :new, :member_id => @member.id
+      get :new
       assigns(:motion).member_id.should_not be_nil
     end
 
     it "should render the new motion tempate" do
       get :new
-      response.should render_template('motions/new')
+      response.should render_template(:new)
       assigns(:motion).should be_a_new_record
     end
   end
@@ -38,7 +40,7 @@ describe MotionsController do
 
     it "should render the index template with motion groups" do
       get :index
-      response.should render_template('motions/index')
+      response.should render_template(:index)
       assigns(:motion_groups).should_not be_nil
     end
     it "should render 1 more motion when the user clicks more"
@@ -55,7 +57,7 @@ describe MotionsController do
 
     it "should render the index template with motion groups" do
       get :closed
-      response.should render_template('motions/index')
+      response.should render_template(:index)
       assigns(:motion_groups).should_not be_nil
     end
   end
