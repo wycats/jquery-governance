@@ -40,7 +40,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl', '~>2.0.0.beta1'
   gem 'factory_girl_rails', :git => 'https://github.com/thoughtbot/factory_girl_rails.git', :tag => 'v1.1.beta1'
-  gem 'cucumber', :git => 'git://github.com/dtrasbo/cucumber.git'
   gem 'cucumber-rails', :git => 'git://github.com/aslakhellesoy/cucumber-rails.git'
   gem 'capybara'
   gem 'database_cleaner'
