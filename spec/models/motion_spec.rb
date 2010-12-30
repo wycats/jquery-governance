@@ -4,7 +4,7 @@ describe Motion do
   before do
     RSpec::Mocks::setup(self)
 
-    @motion = Factory.stub(:motion)
+    @motion = Factory.create(:motion)
   end
 
   describe "vote counting", :database => true do
@@ -141,9 +141,11 @@ describe Motion do
   end
 
   describe 'schedule_updates' do
-    before(:each) do
-      ActiveRecord::Base.connection.stub(:execute)
-    end
+    # Joseph DelCioppio - Using PG this breaks the specs, most likely because motions are being created.
+    # In the interest of getting the project done first and foremost I'm removing it.
+    # before(:each) do
+    #   ActiveRecord::Base.connection.stub(:execute)
+    # end
 
     describe "when a motion is created" do
       it "should ask the MotionState to schedule updates" do
@@ -166,7 +168,9 @@ describe Motion do
   describe "email notifications" do
     before(:each) do
       # Disable database hits for speed, we're only interested in whether the callbacks fire
-      ActiveRecord::Base.connection.stub(:execute)
+      # Joseph DelCioppio - Using PG this breaks the specs, most likely because motions are being created.
+      # In the interest of getting the project done first and foremost I'm removing it.
+      # ActiveRecord::Base.connection.stub(:execute)
 
       @member_1 = Factory.stub(:member, :email => "member1@email.com")
       @member_2 = Factory.stub(:member, :email => "member2@email.com")
