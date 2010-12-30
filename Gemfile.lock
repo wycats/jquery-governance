@@ -8,6 +8,17 @@ GIT
       rack-test (~> 0.5.6)
 
 GIT
+  remote: git://github.com/aslakhellesoy/cucumber.git
+  revision: e2df150cc4fdd4ca6e6a4db8da47fff4eea97df8
+  specs:
+    cucumber (0.10.0)
+      builder (>= 2.1.2)
+      diff-lcs (~> 1.1.2)
+      gherkin (~> 2.3.3)
+      json (~> 1.4.6)
+      term-ansicolor (~> 1.0.5)
+
+GIT
   remote: https://github.com/rack/rack.git
   revision: 59f22ee20163a40021ee2d0f63fba068ddc91e9e
   specs:
@@ -21,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/rails/rails.git
-  revision: eb1e727544d9719cf0aa4d914c484a83e707b601
+  revision: 573fd39e22b3d278457fa764c107095808b361fe
   specs:
     actionmailer (3.1.0.beta)
       actionpack (= 3.1.0.beta)
@@ -110,12 +121,6 @@ GEM
     compass (0.10.6)
       haml (>= 3.0.4)
     configuration (1.2.0)
-    cucumber (0.10.0)
-      builder (>= 2.1.2)
-      diff-lcs (~> 1.1.2)
-      gherkin (~> 2.3.2)
-      json (~> 1.4.6)
-      term-ansicolor (~> 1.0.5)
     culerity (0.2.13)
     database_cleaner (0.6.0)
     devise (1.1.5)
@@ -172,19 +177,19 @@ GEM
       redis (>= 2.0.1)
       resque (>= 1.8.0)
       rufus-scheduler
-    rspec (2.2.0)
-      rspec-core (~> 2.2)
-      rspec-expectations (~> 2.2)
-      rspec-mocks (~> 2.2)
+    rspec (2.3.0)
+      rspec-core (~> 2.3.0)
+      rspec-expectations (~> 2.3.0)
+      rspec-mocks (~> 2.3.0)
     rspec-core (2.3.1)
     rspec-expectations (2.3.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.3.0)
-    rspec-rails (2.2.1)
+    rspec-rails (2.3.1)
       actionpack (~> 3.0)
       activesupport (~> 3.0)
       railties (~> 3.0)
-      rspec (~> 2.2.0)
+      rspec (~> 2.3.0)
     ruby-debug-base19 (0.11.24)
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)
@@ -228,7 +233,7 @@ DEPENDENCIES
   arel!
   capybara
   compass
-  cucumber (~> 0.10.0)
+  cucumber!
   cucumber-rails!
   database_cleaner
   devise
@@ -244,7 +249,7 @@ DEPENDENCIES
   rails!
   resque
   resque-scheduler
-  rspec-rails (= 2.2.1)
+  rspec-rails
   ruby-debug19
   sqlite3-ruby
   texticle!
