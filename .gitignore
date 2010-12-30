@@ -7,6 +7,7 @@ tmp/**/*
 *.tmproj
 .yardoc
 *.swp
+public/stylesheets/*.css
 public/stylesheets/.sass-cache/*
 doc/app
 doc/*.html
