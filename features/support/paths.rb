@@ -26,6 +26,10 @@ module NavigationHelpers
       motion_events_path(Motion.find_by_title($1))
     when /the membership history page for "([^"]*)"/
       admin_member_memberships_path( Member.find_by_name($1) )
+    when /the search page/
+      new_motion_search_path
+    when /the search results page/
+      results_of_motion_search_path
     when /the home\s?page/
       '/'
     when /the sign in page/
