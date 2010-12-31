@@ -1,9 +1,9 @@
 module MotionsHelper
-  def html_attrs_for_motion(motion)
-    classes = [dom_class(motion)]
+  def html_classes_for_motion_list_item(motion, last=false)
+    classes = []
     classes << 'acted_on' if member? && current_member.has_acted_on?(motion)
-
-    { :id    => dom_id(motion), :class => classes.compact.join(' ') }
+    classes << 'last' if last
+    classes.join(' ')
   end
 
   def render_motion_group(name, motion_group)
@@ -22,7 +22,13 @@ module MotionsHelper
     content = ''
 
     motions.each do |motion|
-      content << render(:partial => 'motions/list_item', :locals => { :motion => motion })
+      content << render(
+        :partial => 'motions/list_item',
+        :locals  => {
+          :motion => motion,
+          :last   => motion == motions.last && motions.size >= motions.count
+        }
+      )
     end
 
     if link = link_to_more_motions(motions)
