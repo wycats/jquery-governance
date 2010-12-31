@@ -58,7 +58,7 @@ describe MotionsController do
     it "should render the index template with motion groups" do
       get :closed
       response.should render_template(:index)
-      assigns(:motion_groups).should_not be_nil
+      assigns(:motions).should_not be_nil
     end
   end
 end

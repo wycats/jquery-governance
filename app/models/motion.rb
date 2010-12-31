@@ -332,7 +332,7 @@ class Motion < ActiveRecord::Base
   # @param [ActiveRecord::Relation] scope The scope for the group.
   # @return [Hash] The key is the state name and the value are the motions.
   def self.closed_groups(scope=scoped)
-    { :closed => scope.closed_state }
+    { :groups => { :closed => scope.closed_state }, :name => :closed }
   end
 
   # Return the motion groups based on the user who is requesting them
