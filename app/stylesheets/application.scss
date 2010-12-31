@@ -310,8 +310,7 @@ div.motion {
 
   li {
     @include float-container;
-    margin-bottom: 30px;
-    padding-top: 10px;
+    padding: 10px 0 30px;
     border-top: 1px solid #eee;
 
     .actions {
@@ -371,15 +370,7 @@ div.motion {
     }
 
     &.acted_on {
-      .created_at, .summary p {
-        color: #999;
-
-        &.title {
-          a:link, a:visited {
-            color: #999 !important;
-          }
-        }
-      }
+      background-color: #f8f8f8 !important;
     }
 
     a.more_motions {
