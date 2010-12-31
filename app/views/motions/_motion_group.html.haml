@@ -6,5 +6,3 @@
     %ul
       - motion_group.each do |motion|
         = render :partial => "motions/list_item", :locals => {:motion => motion}
-      %li.no-border
-        = link_to_more_motions(motion_group)

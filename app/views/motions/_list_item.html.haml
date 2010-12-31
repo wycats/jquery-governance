@@ -1,4 +1,4 @@
-= content_tag_for(:li, motion, :class => html_classes_for_motion_list_item(motion, last)) do
+= content_tag_for(:li, motion, :class => html_classes_for_motion_list_item(motion)) do
   .actions
     .created_at= motion.created_at.strftime("%B #{motion.created_at.day.ordinalize}, %Y")
     = motion_status_badge(motion)
