@@ -1,8 +1,8 @@
-%div{ :class => "motions #{@motions_groups_name}" }
+%div{ :class => "motions #{@motions[:name]}" }
   - if active_member?
     = link_to "New Motion", new_motion_path, { :class => 'button positive' }
-  %h1= t("motions.titles.index.#{@motion_groups_name}")
-  - @motion_groups.each do |name, motions|
+  %h1= t("motions.titles.index.#{@motions[:name]}")
+  - @motions[:groups].each do |name, motions|
     = render_motion_group(name, motions)
 
 / TODO: show/hide motions you've already acted on

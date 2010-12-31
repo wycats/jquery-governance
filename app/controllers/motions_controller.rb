@@ -4,15 +4,7 @@ class MotionsController < ApplicationController
 
   # List Motions that are open (NOT passed, failed, approved)
   def index
-    scope = Motion.paginate
-
-    if active_member?
-      @motion_groups      = Motion.open_groups(scope)
-      @motion_groups_name = :open
-    else
-      @motion_groups      = Motion.public_groups(scope)
-      @motion_groups_name = :public
-    end
+    @motions = Motion.motion_groups_for_user(current_member, Motion.paginate)
   end
 
   # List Motions that are closed (passed, failed, approved)
@@ -42,5 +34,9 @@ class MotionsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def search
+
   end
 end

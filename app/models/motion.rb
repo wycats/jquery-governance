@@ -59,6 +59,9 @@
 class Motion < ActiveRecord::Base
   include Voting
 
+  # This is the texticle sugar that sets up the fields that can be searched
+  # by texticle
+  index { title description rationale}
 
   CLOSED_STATES = %w(closed)
   OPEN_STATES   = %w(waitingsecond discussing voting)
@@ -327,7 +330,22 @@ class Motion < ActiveRecord::Base
   def self.closed_groups(scope=scoped)
     { :closed => scope.closed_state }
   end
+  
+  # Return the motion groups based on the user who is requesting them
+  # @param [Member] user The user who is requesting the motion groups 
+  # @param [ActiveRecord::Relation] scope The scope for the group.
+  # @return [Hash] :groups returns the actual groups, and :name returns the name of the group
+  def self.motion_groups_for_user(user, scope=nil)
+    # If there is no current user then that means that a guest is searching
+    # the motions, this is an easy way to handle a guest.
+    user ||= Member.new
 
+    if user.membership_active?
+      {:groups => Motion.open_groups(scope), :name => :open}
+    else
+      {:groups => Motion.public_groups(scope),:name => :public}
+    end
+  end
 private
   # @todo Description
   def possible_votes
