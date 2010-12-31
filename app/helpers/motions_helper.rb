@@ -7,24 +7,27 @@ module MotionsHelper
   end
 
   def render_motion_group(name, motion_group)
-    capture_haml do
-      haml_tag(:section) do
-        haml_tag(:h2, t("motions.#{name}.heading"))
+      content_tag(:section) do
+        content = ''
+        content << content_tag(:h2, t("motions.#{name}.heading"))
         if motion_group.empty?
-          haml_tag('.empty', t("motions.#{name}.empty"))
+          content << content_tag(:div, t("motions.#{name}.empty"), :class => 'empty')
         else
-          haml_tag(:ul) do
+          content << content_tag(:ul) do
+            ul_content = ''
             motion_group.each do |motion|
-              haml_concat(render(:partial => 'motions/list_item', :locals => { :motion => motion }))
+              ul_content << render(:partial => 'motions/list_item', :locals => { :motion => motion })
             end
 
             if link = link_to_more_motions(motion_group)
-              haml_tag(:li, link, :class => 'no-border')
+              ul_content << content_tag(:li, link.html_safe, :class => 'no-border')
             end
+
+            ul_content.html_safe
           end
         end
+        content.html_safe
       end
-    end
   end
 
   def link_to_more_motions(motions)
