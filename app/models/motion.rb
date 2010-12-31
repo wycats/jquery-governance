@@ -332,7 +332,7 @@ class Motion < ActiveRecord::Base
   # @param [ActiveRecord::Relation] scope The scope for the group.
   # @return [Hash] The key is the state name and the value are the motions.
   def self.closed_groups(scope=scoped)
-    { :closed => scope.closed_state }
+    { :groups => { :closed => scope.closed_state }, :name => :closed }
   end
 
   # Return the motion groups based on the user who is requesting them
@@ -361,17 +361,16 @@ private
     state.schedule_updates
   end
 
-  # @todo Refactor to send e-mail via queue
   def send_email_on_create
-    Membership.members_active_at(Time.now).each do |member|
-      Notifications.motion_created(self, member).deliver
-    end
+    send_email :motion_created
   end
 
   def send_email_on_state_change
-    Membership.members_active_at(Time.now).each do |member|
-      Notifications.motion_state_changed(self, member).deliver
-    end
+    send_email :motion_state_changed
+  end
+
+  def send_email(notification)
+    ActiveMemberNotifier.deliver(notification, self)
   end
 
   def assign_state

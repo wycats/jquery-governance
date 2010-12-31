@@ -1,3 +1,4 @@
+# NOTE the password for all members is 'secret'.
 DEFAULTS: &DEFAULTS
   encrypted_password: $2a$10$Kgt47TRUxHgy7y4R/TQSpeG54XmKv0ikvqY.e09x5JGOKZk5XeOhO
   password_salt: $2a$10$Kgt47TRUxHgy7y4R/TQSpe

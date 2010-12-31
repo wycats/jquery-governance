@@ -1,6 +1,1 @@
-<% @motions.each do |motion| %>
-  <%= render(:partial => 'motions/list_item', :locals => { :motion => motion }) %>
-<% end %>
-<% if link = link_to_more_motions(@motions) %>
-    <li class='no-border'><%= link %></li>
-<% end %>
+<%= render_motions_list_items(@motions) %>

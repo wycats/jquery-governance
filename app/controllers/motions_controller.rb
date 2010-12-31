@@ -9,8 +9,7 @@ class MotionsController < ApplicationController
 
   # List Motions that are closed (passed, failed, approved)
   def closed
-    @motion_groups      = Motion.closed_groups(Motion.paginate)
-    @motion_groups_name = :closed
+    @motions = Motion.closed_groups(Motion.paginate)
     render :index
   end
 

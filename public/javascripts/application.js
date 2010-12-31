@@ -11,6 +11,34 @@ function moreMotionsInitializer() {
     });
     e.preventDefault();
   });
+
+  $('ul.motions:not(:has(li.last))').after(
+    '<div class="show_more">' +
+      '<a class="button more" href="/motions/show_more">More</a>' +
+    '</div>'
+  );
+
+  $('ul.motions + .show_more a').live('click', function(e) {
+    var link = $(this);
+    if (link.hasClass('disabled')) return;
+
+    link.text('Loading...').addClass('disabled');
+
+    var container = link.parent();
+    var ul        = container.prev('ul');
+    var id        = ul.find('li:not(.no-border)').last().attr('id').replace(/[^0-9]+/, '');
+
+    $.get(this.href, { id: id }, function(html) {
+      ul.append(html);
+      link.text('More').removeClass('disabled');
+
+      if (ul.children('li.last').length > 0) {
+         container.remove();
+       }
+    });
+
+    e.preventDefault();
+  });
 }
 
 function highlightFade() {

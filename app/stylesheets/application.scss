@@ -90,6 +90,12 @@ body {
   &.negative {
     @include gradient-button(#a75144, #893a36);
   }
+
+  &.disabled {
+    &, &:hover, &:active {
+      @include linear-gradient(color-stops(lighten(#595959, 30%), lighten(#363636, 30%)));
+    }
+  }
 }
 /* @end */
 
@@ -278,12 +284,6 @@ div.motion {
     span { display: none; }
   }
 
-  a.more-button {
-    width: 100px;
-    margin-left: 350px;
-    @include gradient-button(#C0C0C0, #808080);
-  }
-
   h1 {
     margin-bottom: 10px;
     padding-top: 0;
@@ -295,7 +295,7 @@ div.motion {
 }
 
 
-#content .motions {
+#content div.motions {
   h2 {
     margin: 20px 0 3px;
     padding-left: 170px;
@@ -310,8 +310,7 @@ div.motion {
 
   li {
     @include float-container;
-    margin-bottom: 30px;
-    padding-top: 10px;
+    padding: 10px 0 30px;
     border-top: 1px solid #eee;
 
     .actions {
@@ -371,25 +370,8 @@ div.motion {
     }
 
     &.acted_on {
-      .created_at, .summary p {
-        color: #999;
-
-        &.title {
-          a:link, a:visited {
-            color: #999 !important;
-          }
-        }
-      }
+      background-color: #f8f8f8 !important;
     }
-
-    a.more_motions {
-      text-align: center;
-    }
-
-  }
-
-  li.no-border {
-    border: 0px;
   }
 
   div.empty {
@@ -398,6 +380,15 @@ div.motion {
     font-size: 1.5em;
     font-style: italic;
     color: #333;
+  }
+
+  div.show_more {
+    @include float-container;
+    margin: 10px 0;
+
+    .button {
+      margin: 3px;
+    }
   }
 }
 

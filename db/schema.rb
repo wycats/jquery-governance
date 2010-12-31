@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101231011732) do
+ActiveRecord::Schema.define(:version => 20101231011731) do
 
   create_table "conflicts", :force => true do |t|
     t.string   "title"
