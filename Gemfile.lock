@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: https://github.com/rails/rails.git
-  revision: 573fd39e22b3d278457fa764c107095808b361fe
+  revision: e5b84fd72358deddd29c515aacab7edf2643908e
   specs:
     actionmailer (3.1.0.beta)
       actionpack (= 3.1.0.beta)
@@ -201,8 +201,8 @@ GEM
     ruby_core_source (0.1.4)
       archive-tar-minitar (>= 0.5.2)
     rubyzip (0.9.4)
-    rufus-scheduler (2.0.7)
-      tzinfo
+    rufus-scheduler (2.0.8)
+      tzinfo (>= 0.3.23)
     selenium-webdriver (0.1.2)
       childprocess (~> 0.1.5)
       ffi (~> 0.6.3)
