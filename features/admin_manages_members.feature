@@ -89,15 +89,3 @@ Feature: Admin manages members
     And I press "Renew membership"
     Then I should be on the membership history page for "Paul Irish"
     And I should see "Membership successfully renewed"
-
-  @wip
-  Scenario: Delete member
-    Given these other members exist:
-      | name              | email              |
-      | John Resig        | jresig@example.org |
-      | Grandmaster Flash | gmflash@adobe.com  |
-    When I go to the members admin page
-    And I follow the edit link for "Grandmaster Flash"
-    And I follow "Delete this member"
-    Then I should not see "Grandmaster Flash"
-    And I should see "Member deleted"
