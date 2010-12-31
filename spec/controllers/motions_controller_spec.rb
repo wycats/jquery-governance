@@ -38,10 +38,10 @@ describe MotionsController do
       controller.stub!(:current_member).and_return @member
     end
 
-    it "should render the index template with motion groups" do
+    it "should render the index template with motions" do
       get :index
       response.should render_template(:index)
-      assigns(:motion_groups).should_not be_nil
+      assigns(:motions).should_not be_nil
     end
     it "should render 1 more motion when the user clicks more"
   end
