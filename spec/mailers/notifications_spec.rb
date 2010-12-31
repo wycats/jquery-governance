@@ -26,7 +26,7 @@ describe Notifications do
     end
   end
 
-  describe "motion state changed" do
+  describe "motion_state_changed" do
     before do
       @motion = Factory.stub(:motion, :state_name => "discussing")
       @member = Factory.stub(:member, :email => "member@email.com")
