@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ActiveMemberNotificator do
+describe ActiveMemberNotifier do
   describe ".perform" do
     before(:each) do
       @mock_mail = mock('mock mail', :deliver => true)
@@ -18,7 +18,7 @@ describe ActiveMemberNotificator do
       Notifications.should_receive(:motion_created).with(@motion, @member_1).and_return(@mock_mail)
       Notifications.should_receive(:motion_created).with(@motion, @member_2).and_return(@mock_mail)
 
-      ActiveMemberNotificator.perform(:motion_created, 1)
+      ActiveMemberNotifier.perform(:motion_created, 1)
     end
 
     it "knows how to notify each member when a motion chages its state" do
@@ -27,7 +27,7 @@ describe ActiveMemberNotificator do
       Notifications.should_receive(:motion_state_changed).with(@motion, @member_1).and_return(@mock_mail)
       Notifications.should_receive(:motion_state_changed).with(@motion, @member_2).and_return(@mock_mail)
 
-      ActiveMemberNotificator.perform(:motion_state_changed, 1)
+      ActiveMemberNotifier.perform(:motion_state_changed, 1)
     end
   end
 end

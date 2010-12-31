@@ -370,7 +370,7 @@ private
   end
 
   def send_email(notification)
-    ActiveMemberNotificator.deliver(notification, self)
+    ActiveMemberNotifier.deliver(notification, self)
   end
 
   def assign_state

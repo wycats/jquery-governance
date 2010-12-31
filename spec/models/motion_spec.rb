@@ -162,13 +162,13 @@ describe Motion do
   describe "email notifications" do
     it "should send a notification to all active members when a motion is created" do
       motion = Factory.build(:motion)
-      ActiveMemberNotificator.should_receive(:deliver).with(:motion_created, motion)
+      ActiveMemberNotifier.should_receive(:deliver).with(:motion_created, motion)
       motion.save
     end
 
     it "should send a notification to all active members when a motion enters the discussing state" do
       motion = Factory.create(:motion)
-      ActiveMemberNotificator.should_receive(:deliver).with(:motion_state_changed, motion)
+      ActiveMemberNotifier.should_receive(:deliver).with(:motion_state_changed, motion)
       motion.discussing!
     end
 

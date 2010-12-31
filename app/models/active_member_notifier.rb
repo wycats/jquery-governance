@@ -1,7 +1,7 @@
 # This class is a Resque job to send email notifications to the active members.
 # Also it provides a helper to create and enqueue it.
-class ActiveMemberNotificator
-  @queue = :active_member_notificator
+class ActiveMemberNotifier
+  @queue = :active_member_notifier
 
   # This will be called by a worker when a job needs to be processed.  It will
   # send the given notification to all the current active members.
