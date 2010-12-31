@@ -19,29 +19,15 @@ module MotionsHelper
   end
 
   def render_motions_list_items(motions)
-    content = ''
-
-    motions.each do |motion|
-      content << render(
+    motions.map do |motion|
+      render(
         :partial => 'motions/list_item',
         :locals  => {
           :motion => motion,
           :last   => motion == motions.last && motions.size >= motions.count
         }
       )
-    end
-
-    if link = link_to_more_motions(motions)
-      content << content_tag(:li, link.html_safe, :class => 'no-border')
-    end
-
-    content.html_safe
-  end
-
-  def link_to_more_motions(motions)
-    if motions.count > motions.size
-      link_to('More', show_more_motions_path, :class => 'more_motions more-button', :'data-last-id' => motions.last.id)
-    end
+    end.join.html_safe
   end
 
   def motion_status_badge(motion)

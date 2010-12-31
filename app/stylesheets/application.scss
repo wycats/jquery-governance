@@ -284,12 +284,6 @@ div.motion {
     span { display: none; }
   }
 
-  a.more-button {
-    width: 100px;
-    margin-left: 350px;
-    @include gradient-button(#C0C0C0, #808080);
-  }
-
   h1 {
     margin-bottom: 10px;
     padding-top: 0;
@@ -378,15 +372,6 @@ div.motion {
     &.acted_on {
       background-color: #f8f8f8 !important;
     }
-
-    a.more_motions {
-      text-align: center;
-    }
-
-  }
-
-  li.no-border {
-    border: 0px;
   }
 
   div.empty {
