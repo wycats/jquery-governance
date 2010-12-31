@@ -7,16 +7,16 @@ module MotionsHelper
   end
 
   def render_motion_group(name, motion_group)
-      content_tag(:section) do
-        content = ''
-        content << content_tag(:h2, t("motions.#{name}.heading"))
-        if motion_group.empty?
-          content << content_tag(:div, t("motions.#{name}.empty"), :class => 'empty')
-        else
-          content << content_tag(:ul, render_motions_list_items(motion_group))
-        end
-        content.html_safe
+    content_tag(:section) do
+      content = ''
+      content << content_tag(:h2, t("motions.#{name}.heading"))
+      if motion_group.empty?
+        content << content_tag(:div, t("motions.#{name}.empty"), :class => 'empty')
+      else
+        content << content_tag(:ul, render_motions_list_items(motion_group))
       end
+      content.html_safe
+    end
   end
 
   def render_motions_list_items(motions)
