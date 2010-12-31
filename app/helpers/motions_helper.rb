@@ -12,7 +12,7 @@ module MotionsHelper
       if motion_group.empty?
         content << content_tag(:div, t("motions.#{name}.empty"), :class => 'empty')
       else
-        content << content_tag(:ul, render_motions_list_items(motion_group))
+        content << content_tag(:ul, render_motions_list_items(motion_group), :class => 'motions')
       end
       content.html_safe
     end

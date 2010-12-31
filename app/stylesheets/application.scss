@@ -90,6 +90,12 @@ body {
   &.negative {
     @include gradient-button(#a75144, #893a36);
   }
+
+  &.disabled {
+    &, &:hover, &:active {
+      @include linear-gradient(color-stops(lighten(#595959, 30%), lighten(#363636, 30%)));
+    }
+  }
 }
 /* @end */
 
@@ -295,7 +301,7 @@ div.motion {
 }
 
 
-#content .motions {
+#content div.motions {
   h2 {
     margin: 20px 0 3px;
     padding-left: 170px;
@@ -389,6 +395,11 @@ div.motion {
     font-size: 1.5em;
     font-style: italic;
     color: #333;
+  }
+
+  div.show_more {
+    @include float-container;
+    padding: 4px;
   }
 }
 
