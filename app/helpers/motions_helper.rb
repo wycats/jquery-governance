@@ -13,21 +13,24 @@ module MotionsHelper
         if motion_group.empty?
           content << content_tag(:div, t("motions.#{name}.empty"), :class => 'empty')
         else
-          content << content_tag(:ul) do
-            ul_content = ''
-            motion_group.each do |motion|
-              ul_content << render(:partial => 'motions/list_item', :locals => { :motion => motion })
-            end
-
-            if link = link_to_more_motions(motion_group)
-              ul_content << content_tag(:li, link.html_safe, :class => 'no-border')
-            end
-
-            ul_content.html_safe
-          end
+          content << content_tag(:ul, render_motions_list_items(motion_group))
         end
         content.html_safe
       end
+  end
+
+  def render_motions_list_items(motions)
+    content = ''
+
+    motions.each do |motion|
+      content << render(:partial => 'motions/list_item', :locals => { :motion => motion })
+    end
+
+    if link = link_to_more_motions(motions)
+      content << content_tag(:li, link.html_safe, :class => 'no-border')
+    end
+
+    content.html_safe
   end
 
   def link_to_more_motions(motions)
