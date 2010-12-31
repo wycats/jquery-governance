@@ -384,7 +384,11 @@ div.motion {
 
   div.show_more {
     @include float-container;
-    padding: 4px;
+    margin: 10px 0;
+
+    .button {
+      margin: 3px;
+    }
   }
 }
 

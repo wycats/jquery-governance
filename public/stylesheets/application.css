@@ -1217,25 +1217,29 @@ div.motion #motion-events li {
 #content div.motions div.show_more {
   width: 100%;
   overflow: hidden;
-  padding: 4px;
+  margin: 10px 0;
+}
+/* line 389, ../../app/stylesheets/application.scss */
+#content div.motions div.show_more .button {
+  margin: 3px;
 }
 
-/* line 391, ../../app/stylesheets/application.scss */
+/* line 395, ../../app/stylesheets/application.scss */
 nav.main {
   width: 100%;
   overflow: hidden;
 }
-/* line 394, ../../app/stylesheets/application.scss */
+/* line 398, ../../app/stylesheets/application.scss */
 nav.main ul {
   float: right;
   height: 40px;
 }
-/* line 398, ../../app/stylesheets/application.scss */
+/* line 402, ../../app/stylesheets/application.scss */
 nav.main ul li {
   margin-top: 5px;
   float: left;
 }
-/* line 402, ../../app/stylesheets/application.scss */
+/* line 406, ../../app/stylesheets/application.scss */
 nav.main ul li.first a {
   -moz-border-radius-bottomleft: 6px;
   -webkit-border-bottom-left-radius: 6px;
@@ -1244,7 +1248,7 @@ nav.main ul li.first a {
   -khtml-border-bottom-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-/* line 406, ../../app/stylesheets/application.scss */
+/* line 410, ../../app/stylesheets/application.scss */
 nav.main ul li a {
   font-size: 1.25em;
   font-family: helvetica, arial, sans-serif;
@@ -1262,14 +1266,14 @@ nav.main ul li a {
   cursor: pointer;
   background: url("http://jquery.org/wp-content/themes/green/green/shadow.png") bottom left repeat-x;
 }
-/* line 419, ../../app/stylesheets/application.scss */
+/* line 423, ../../app/stylesheets/application.scss */
 nav.main ul li a:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
 /* @end */
 /* @group Flash alerts & Validation Errors */
-/* line 430, ../../app/stylesheets/application.scss */
+/* line 434, ../../app/stylesheets/application.scss */
 #flash_notice, #flash_alert {
   clear: both;
   margin: 10px 20px;
@@ -1279,21 +1283,21 @@ nav.main ul li a:hover {
   text-align: center;
 }
 
-/* line 439, ../../app/stylesheets/application.scss */
+/* line 443, ../../app/stylesheets/application.scss */
 #flash_notice {
   background-color: #fffecf;
   border-color: #dcda00;
   color: #5F5F5F;
 }
 
-/* line 445, ../../app/stylesheets/application.scss */
+/* line 449, ../../app/stylesheets/application.scss */
 #flash_alert {
   background-color: #FFEEEE;
   border-color: red;
   color: red;
 }
 
-/* line 451, ../../app/stylesheets/application.scss */
+/* line 455, ../../app/stylesheets/application.scss */
 #error_explanation {
   background: #FBB;
   border: 2px solid red;
@@ -1302,26 +1306,26 @@ nav.main ul li a:hover {
   font-size: 12px;
   margin: 20px;
 }
-/* line 459, ../../app/stylesheets/application.scss */
+/* line 463, ../../app/stylesheets/application.scss */
 #error_explanation ul {
   margin: 0;
 }
-/* line 463, ../../app/stylesheets/application.scss */
+/* line 467, ../../app/stylesheets/application.scss */
 #error_explanation h2 {
   font-size: 14px;
 }
-/* line 467, ../../app/stylesheets/application.scss */
+/* line 471, ../../app/stylesheets/application.scss */
 #error_explanation h3 {
   font-size: 12px;
 }
 
 /* @end */
-/* line 473, ../../app/stylesheets/application.scss */
+/* line 477, ../../app/stylesheets/application.scss */
 #tags li {
   font-size: 14px;
   margin: 1em 0;
 }
-/* line 478, ../../app/stylesheets/application.scss */
+/* line 482, ../../app/stylesheets/application.scss */
 #tags li a {
   padding: 4px;
   -moz-border-radius: 3px;
@@ -1332,7 +1336,7 @@ nav.main ul li a:hover {
   border-radius: 3px;
   text-decoration: none;
 }
-/* line 483, ../../app/stylesheets/application.scss */
+/* line 487, ../../app/stylesheets/application.scss */
 #tags li.remove a {
   background: #229922;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #44bb44), color-stop(100%, #229922));
@@ -1342,14 +1346,14 @@ nav.main ul li a:hover {
   color: #FFFEFE !important;
   border: 1px solid #070;
 }
-/* line 492, ../../app/stylesheets/application.scss */
+/* line 496, ../../app/stylesheets/application.scss */
 #tags li.remove a:hover {
   background: #3da83d;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #3da83d), color-stop(100%, #1d841d));
   background-image: -moz-linear-gradient(top, #3da83d 0%, #1d841d 100%);
   background-image: linear-gradient(top, #3da83d 0%, #1d841d 100%);
 }
-/* line 497, ../../app/stylesheets/application.scss */
+/* line 501, ../../app/stylesheets/application.scss */
 #tags li.remove a:active {
   background: #57c257;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #57c257), color-stop(100%, #27ae27));
@@ -1357,12 +1361,12 @@ nav.main ul li a:hover {
   background-image: linear-gradient(top, #57c257 0%, #27ae27 100%);
 }
 
-/* line 503, ../../app/stylesheets/application.scss */
+/* line 507, ../../app/stylesheets/application.scss */
 p.small {
   font-size: 1em;
 }
 
-/* line 504, ../../app/stylesheets/application.scss */
+/* line 508, ../../app/stylesheets/application.scss */
 .highlight_fade {
   background-color: #fffecf;
 }
