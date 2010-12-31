@@ -361,17 +361,16 @@ private
     state.schedule_updates
   end
 
-  # @todo Refactor to send e-mail via queue
   def send_email_on_create
-    Membership.members_active_at(Time.now).each do |member|
-      Notifications.motion_created(self, member).deliver
-    end
+    send_email :motion_created
   end
 
   def send_email_on_state_change
-    Membership.members_active_at(Time.now).each do |member|
-      Notifications.motion_state_changed(self, member).deliver
-    end
+    send_email :motion_state_changed
+  end
+
+  def send_email(notification)
+    ActiveMemberNotificator.deliver(notification, self)
   end
 
   def assign_state

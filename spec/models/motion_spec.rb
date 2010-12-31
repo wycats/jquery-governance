@@ -160,32 +160,16 @@ describe Motion do
   end
 
   describe "email notifications" do
-    before(:each) do
-      @member_1 = Factory.stub(:member, :email => "member1@email.com")
-      @member_2 = Factory.stub(:member, :email => "member2@email.com")
-      Membership.stub(:members_active_at).and_return([@member_1, @member_2])
-
-      ActionMailer::Base.deliveries = []
+    it "should send a notification to all active members when a motion is created" do
+      motion = Factory.build(:motion)
+      ActiveMemberNotificator.should_receive(:deliver).with(:motion_created, motion)
+      motion.save
     end
 
-    describe "when a motion is created" do
-      it "should send a notification to all members" do
-        Factory.create(:motion)
-        ActionMailer::Base.deliveries.should have(2).emails
-      end
-    end
-
-    describe "when a motion's state changes" do
-      before do
-        @motion = Factory.create(:motion)
-        ActionMailer::Base.deliveries = []
-      end
-
-      # state_name == discussing
-      it "should send a notification to all members" do
-        @motion.discussing!
-        ActionMailer::Base.deliveries.should have(2).emails
-      end
+    it "should send a notification to all active members when a motion enters the discussing state" do
+      motion = Factory.create(:motion)
+      ActiveMemberNotificator.should_receive(:deliver).with(:motion_state_changed, motion)
+      motion.discussing!
     end
 
     describe "when a motion passes" do
