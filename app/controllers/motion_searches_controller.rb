@@ -3,6 +3,11 @@ class MotionSearchesController < ApplicationController
   end
 
   def results
-    @results = Motion.tsearch(params[:search][:keywords])
+    # Here are the search results
+    results = Motion.search(params[:search][:keywords])
+
+    # Scope them so that user's can't see motions they lack
+    # the permissons to view
+    @motions = Motion.motion_groups_for_user(current_member, results)
   end
 end
