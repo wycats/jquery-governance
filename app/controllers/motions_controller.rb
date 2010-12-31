@@ -35,8 +35,4 @@ class MotionsController < ApplicationController
       render :new
     end
   end
-
-  def search
-
-  end
 end
