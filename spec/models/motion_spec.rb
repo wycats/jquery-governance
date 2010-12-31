@@ -173,12 +173,6 @@ describe Motion do
         Factory.create(:motion)
         ActionMailer::Base.deliveries.should have(2).emails
       end
-
-      it "should notify members the motion was created" do
-        Factory.create(:motion)
-        sample_message = ActionMailer::Base.deliveries.first
-        sample_message.subject.should include(I18n.t('notifications.motion_created.subject'))
-      end
     end
 
     describe "when a motion's state changes" do
@@ -191,18 +185,6 @@ describe Motion do
       it "should send a notification to all members" do
         @motion.discussing!
         ActionMailer::Base.deliveries.should have(2).emails
-      end
-
-      it "should notify members the motion has been seconded" do
-        @motion.discussing!
-        sample_message = ActionMailer::Base.deliveries.first
-        sample_message.subject.should include(I18n.t('notifications.motion_state_changed.subjects.discussing'))
-      end
-
-      it "should notify members the motion has entered voting" do
-        @motion.voting!
-        sample_message = ActionMailer::Base.deliveries.first
-        sample_message.subject.should include(I18n.t('notifications.motion_state_changed.subjects.voting'))
       end
     end
 
