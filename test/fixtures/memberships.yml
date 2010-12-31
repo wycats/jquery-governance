@@ -1,0 +1,35 @@
+DEFAULTS: &DEFAULTS
+  started_at: 2010-12-01 18:00:00
+  created_at: 2010-12-01 18:00:00
+  updated_at: 2010-12-01 18:00:00
+  member: $LABEL
+
+cody_lindley:
+  <<: *DEFAULTS
+
+dave_methvin:
+  <<: *DEFAULTS
+
+john_resig:
+  <<: *DEFAULTS
+
+jonathan_sharp:
+  <<: *DEFAULTS
+
+leah_silber:
+  <<: *DEFAULTS
+
+mike_hostetler:
+  <<: *DEFAULTS
+
+paul_irish:
+  <<: *DEFAULTS
+
+ralph_whitbeck:
+  <<: *DEFAULTS
+
+todd_parker:
+  <<: *DEFAULTS
+
+yehuda_katz:
+  <<: *DEFAULTS

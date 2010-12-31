@@ -1,0 +1,56 @@
+DEFAULTS: &DEFAULTS
+  encrypted_password: $2a$10$Kgt47TRUxHgy7y4R/TQSpeG54XmKv0ikvqY.e09x5JGOKZk5XeOhO
+  password_salt: $2a$10$Kgt47TRUxHgy7y4R/TQSpe
+  created_at: 2010-12-01 18:00:00
+  updated_at: 2010-12-01 18:00:00
+
+cody_lindley:
+  <<: *DEFAULTS
+  name: Cody Lindley
+  email: cody_lindley@jquery.com
+
+dave_methvin:
+  <<: *DEFAULTS
+  name: Dave Methvin
+  email: dave_methvin@jquery.com
+
+john_resig:
+  <<: *DEFAULTS
+  name: John Resig
+  email: john_resig@jquery.com
+
+jonathan_sharp:
+  <<: *DEFAULTS
+  name: Jonathan Sharp
+  email: jonathan_sharp@jquery.com
+
+leah_silber:
+  <<: *DEFAULTS
+  name: Leah Silber
+  email: leah_silber@jquery.com
+
+mike_hostetler:
+  <<: *DEFAULTS
+  name: Mike Hostetler
+  email: mike_hostetler@jquery.com
+
+paul_irish:
+  <<: *DEFAULTS
+  name: Paul Irish
+  email: paul_irish@jquery.com
+
+ralph_whitbeck:
+  <<: *DEFAULTS
+  name: Ralph Whitbeck
+  email: ralph_whitbeck@jquery.com
+
+todd_parker:
+  <<: *DEFAULTS
+  name: Todd Parker
+  email: todd_parker@jquery.com
+
+yehuda_katz:
+  <<: *DEFAULTS
+  name: Yehuda Katz
+  email: yehuda_katz@jquery.com
+  is_admin: true
