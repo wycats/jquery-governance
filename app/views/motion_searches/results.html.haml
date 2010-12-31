@@ -1,0 +1,10 @@
+%h2 Search results:
+
+%h3 Your search returned #{@results.count} Motions
+
+%div.motions
+  %ul
+    - @results.each do |motion|
+      = render :partial => "motions/list_item", :locals => {:motion => motion}
+
+

@@ -61,7 +61,11 @@ class Motion < ActiveRecord::Base
 
   # This is the texticle sugar that sets up the fields that can be searched
   # by texticle
-  index { title description rationale}
+  index do
+    description
+    title
+    rationale
+  end
 
   CLOSED_STATES = %w(closed)
   OPEN_STATES   = %w(waitingsecond discussing voting)
@@ -330,7 +334,7 @@ class Motion < ActiveRecord::Base
   def self.closed_groups(scope=scoped)
     { :closed => scope.closed_state }
   end
-  
+
   # Return the motion groups based on the user who is requesting them
   # @param [Member] user The user who is requesting the motion groups 
   # @param [ActiveRecord::Relation] scope The scope for the group.

@@ -1,0 +1,5 @@
+%h2 Motion search
+= form_for :search, :url => results_of_motion_search_path do |search|
+  = search.label :keywords
+  = search.text_field :keywords, :placeholder => "Enter your search terms here..."
+  = search.submit "Search for motions", :class => "button large"

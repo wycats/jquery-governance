@@ -18,6 +18,10 @@ JqueryVoting::Application.routes.draw do
     get "sign_out", :to => "devise/sessions#destroy"
   end
 
+  resource :search, :controller => :motion_searches, :only => [:new, :create], :as => "motion_search" do
+    post "results", :as => "results_of"
+  end
+
   resources :motions do
     resources :events, :controller => :motion_events
     post 'second',  :to => 'motion_events#second'
