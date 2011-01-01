@@ -160,6 +160,10 @@ describe Motion do
   end
 
   describe "email notifications" do
+    before :all do
+      @motion = Factory.create(:motion)
+    end
+
     it "should send a notification to all active members when a motion is created" do
       motion = Factory.build(:motion)
       ActiveMemberNotifier.should_receive(:deliver).with(:motion_created, motion)
@@ -167,9 +171,8 @@ describe Motion do
     end
 
     it "should send a notification to all active members when a motion enters the discussing state" do
-      motion = Factory.create(:motion)
-      ActiveMemberNotifier.should_receive(:deliver).with(:motion_state_changed, motion)
-      motion.discussing!
+      ActiveMemberNotifier.should_receive(:deliver).with(:motion_state_changed, @motion)
+      @motion.discussing!
     end
 
     describe "when a motion passes" do
@@ -186,6 +189,13 @@ describe Motion do
       # state_name == closed && failed?
       it "should send a notification to all members"
     end
-  end
 
+    describe "notify_members_of_outcome_of_voting" do
+      it "should send an email to all members that the motion has closed" do
+       @motion.should_receive(:send_email_after_closing)
+       @motion.notify_members_of_outcome_of_voting
+      end
+    end
+
+  end
 end

@@ -238,7 +238,8 @@ class Motion < ActiveRecord::Base
   end
 
   # Move a motion to the closed state.  Also calculates the number of members
-  # who abstained from voting and record the time when the motion was closed.
+  # who abstained from voting and record the time when the motion was closed. Also notify
+  # members on the outcome of the vote. 
   # @return [true, false] Whether or not the motion has been moved to the closed state.
   def closed!
     update_attributes(
@@ -350,6 +351,13 @@ class Motion < ActiveRecord::Base
       {:groups => Motion.public_groups(scope),:name => :public}
     end
   end
+
+  def notify_members_of_outcome_of_voting
+    # When a motion transitions in the closed state, ensure that
+    # members are notified of the outcome of the vote.
+    send_email_after_closing
+  end
+
 private
   # @todo Description
   def possible_votes
@@ -367,6 +375,10 @@ private
 
   def send_email_if_failure_to_reach_voting
     send_email :motion_failed_to_reach_voting
+  end
+
+  def send_email_after_closing
+    send_email :motion_is_now_closed
   end
 
   def send_email_on_state_change

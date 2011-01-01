@@ -26,6 +26,7 @@ module MotionState
     # Updates the state of a motion to closed when 47 hours has been passed.
     def scheduled_update(time_elapsed)
       @motion.closed! if time_elapsed >= 48.hours
+      @motion.notify_members_of_outcome_of_voting
     end
   end
 end

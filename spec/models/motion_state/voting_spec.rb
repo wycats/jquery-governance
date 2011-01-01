@@ -78,31 +78,20 @@ module MotionState
         @motion_state = @motion.state
       end
 
-      describe "a motion that has the mayority of the votes" do
-        before { @motion.stub(:has_met_requirement? => true) }
-
-        it "doesn't update the motion state before 48 hours" do
-          @motion_state.scheduled_update(47.hours)
-          @motion.should be_voting
-        end
-
-        it "updates the motion state to 'closed' after 48 hours" do
-          @motion_state.scheduled_update(48.hours)
-          @motion.should be_closed
-        end
+      it "doesn't update the motion state before 48 hours" do
+        @motion_state.scheduled_update(47.hours)
+        @motion.should be_voting
       end
 
-      describe "a motion that doesn't have the mayority of the votes" do
-        before { @motion.stub(:has_met_requirement? => false) }
-
-        it "doesn't update the motion state before 48 hours" do
-          @motion_state.scheduled_update(47.hours)
-          @motion.should be_voting
-        end
-
-        it "updates the motion state to 'closed' after 48 hours" do
+      context "after voting has been underway for 48 hours" do
+        it "updates the motion state to 'closed'" do
           @motion_state.scheduled_update(48.hours)
           @motion.should be_closed
+        end
+
+        it "notifies the members that the motion has closed" do
+          @motion.should_receive(:notify_members_of_outcome_of_voting)
+          @motion_state.scheduled_update(48.hours)
         end
       end
     end
