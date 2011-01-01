@@ -40,11 +40,13 @@ module MotionState
     #
     # Otherwise updates its state to closed when the 48 hours pass.
     def scheduled_update(time_elapsed)
+
       return if time_elapsed < 48.hours
 
       if @motion.expedited? && @motion.seconds_count >= 2
         @motion.discussing!
       else
+        @motion.send(:send_email_if_failure_to_reach_voting)
         @motion.closed!
       end
     end

@@ -104,9 +104,10 @@ module MotionState
 
     describe "scheduled_update" do
       describe "for a non expedited motion" do
-        before do
+        before :all do
           @motion = Factory(:motion)
           @motion_state = @motion.state
+          @member = Factory(:membership).member
         end
 
         it "doesn't update the motion state before 48 hours" do
@@ -114,11 +115,23 @@ module MotionState
           @motion.should be_waitingsecond
         end
 
-        it "updates the motion state to 'closed' for a motion with less than 2 seconds after 48 hours" do
-          @motion.stub(:seconds_count => 1)
-          @motion_state.scheduled_update(48.hours)
-          @motion.should be_closed
+        context "when the motion fails to get at least 2 seconds in 48 hours" do
+
+          before :all do
+            @motion.second(@member)
+          end
+
+          it "updates the motion state to 'closed'" do
+            @motion_state.scheduled_update(48.hours)
+            @motion.should be_closed
+          end
+
+          it "enqueues a job to email all members that the motion failed to reach a vote" do
+            @motion.should_receive(:send_email_if_failure_to_reach_voting)
+            @motion_state.scheduled_update(48.hours)
+          end
         end
+
       end
 
       describe "for an expedited motion" do

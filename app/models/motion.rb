@@ -365,6 +365,10 @@ private
     send_email :motion_created
   end
 
+  def send_email_if_failure_to_reach_voting
+    send_email :motion_failed_to_reach_voting
+  end
+
   def send_email_on_state_change
     send_email :motion_state_changed
   end
