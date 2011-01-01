@@ -43,9 +43,33 @@ describe Notifications do
         mail.subject.should include(@motion.title)
       end
 
-      it "should say a motion was created" do
+      it "should say the motion failed to reach a vote" do
         mail = Notifications.motion_failed_to_reach_voting(@motion, @member)
         mail.subject.should include(I18n.t("notifications.motion_failed_to_reach_voting.subject"))
+      end
+    end
+  end
+
+  describe "motion_is_now_closed" do
+    before do
+      @motion = Factory.stub(:motion)
+      @member = Factory.stub(:member, :email => "member@email.com")
+    end
+
+    it "should be sent to the specified member" do
+      mail = Notifications.motion_is_now_closed(@motion, @member)
+      mail.to.should == [@member.email]
+    end
+
+    describe "subject line" do
+      it "should include the motion's title" do
+        mail = Notifications.motion_is_now_closed(@motion, @member)
+        mail.subject.should include(@motion.title)
+      end
+
+      it "should say a motion was closed" do
+        mail = Notifications.motion_is_now_closed(@motion, @member)
+        mail.subject.should include(I18n.t("notifications.motion_is_now_closed.subject"))
       end
     end
   end

@@ -1,0 +1,9 @@
+= "Dear #{@member.name}"
+
+The motion, #{@motion.title},
+-if @motion.passed?
+  is now closed and have been approved.
+-else
+  is now closed and did not receive enough votes for approval
+
+= motion_url(@motion)

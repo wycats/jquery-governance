@@ -9,7 +9,9 @@ en:
     motion_created:
       subject: "New motion"
     motion_failed_to_reach_voting:
-      subject: "Motion failed to reach a vote"
+      subject: "has failed to reach a vote"
+    motion_is_now_closed:
+      subject: "is now closed"
     motion_state_changed:
       subjects:
         discussing: "Motion seconded"

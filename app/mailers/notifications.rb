@@ -20,11 +20,22 @@ class Notifications < ActionMailer::Base
     @motion = motion
     @member = member
 
-    subject_text = "#{I18n.t("notifications.motion_failed_to_reach_voting.subject")}: #{motion.title}"
+    subject_text = "#{motion.title} #{I18n.t("notifications.motion_failed_to_reach_voting.subject")}"
 
     mail :to      => member.email,
          :subject => subject_text
   end
+
+  def motion_is_now_closed(motion, member)
+    @motion = motion
+    @member = member
+
+    subject_text = "#{motion.title} #{I18n.t("notifications.motion_is_now_closed.subject")}"
+
+    mail :to      => member.email,
+         :subject => subject_text
+  end
+
 
   # Notifies a member via e-mail when a motion's state changes
   # @param [Symbol] to_state The state change being performed
