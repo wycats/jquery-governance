@@ -8,6 +8,8 @@ en:
   notifications:
     motion_created:
       subject: "New motion"
+    motion_failed_to_reach_voting:
+      subject: "Motion failed to reach a vote"
     motion_state_changed:
       subjects:
         discussing: "Motion seconded"
