@@ -9,7 +9,7 @@ class Notifications < ActionMailer::Base
   #   en.notifications.motion_created.subject
   #
   def motion_created(motion, member)
-    construct_message(:motion_created, motion, member)  
+    construct_message(:motion_created, motion, member)
   end
 
   def discussion_beginning(motion, member)

@@ -7,7 +7,7 @@ module MotionState
         @motion = Factory.build(:motion)
         ActiveMemberNotifier.should_receive(:deliver).with(:motion_created, @motion)
         @motion.save
-      end  
+      end
     end
 
     describe "permit?" do

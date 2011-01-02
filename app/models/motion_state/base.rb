@@ -68,7 +68,7 @@ module MotionState
       times.each { |time| ScheduledMotionUpdate.in(time, @motion) }
     end
     alias :schedule_update_in :schedule_updates_in
-    
+
     def send_email(notification)
       ActiveMemberNotifier.deliver(notification, @motion)
     end

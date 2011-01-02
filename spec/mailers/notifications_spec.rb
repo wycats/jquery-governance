@@ -63,7 +63,7 @@ describe Notifications do
         mail.subject.should include(@motion.title)
       end
     end
-    
+
     describe "content" do
       it "should say that voting for the motion has begun" do
         mail = Notifications.voting_beginning(@motion, @member)
@@ -87,7 +87,7 @@ describe Notifications do
       mail = Notifications.discussion_beginning(@motion, @member)
       mail.subject.should include(@motion.title)
     end
-    
+
     it "should say that discussion of the motion has begun" do
       mail = Notifications.discussion_beginning(@motion, @member)
       mail.subject.should include(I18n.t("notifications.discussion_beginning.subject"))

@@ -8,14 +8,14 @@ module MotionState
       @motion = Factory(:voting_motion)
       @motion_state = @motion.state
     end
-    
+
     describe "setup" do
       it "should notify members of that voting on the motion has begun" do
         ActiveMemberNotifier.should_receive(:deliver).with(:voting_beginning, @motion)
         @motion_state.setup
-      end  
+      end
     end
-    
+
     describe "permit?" do
       it "allows an active member to see the motion" do
         @motion_state.permit?(:see, @active_member).should be_true
