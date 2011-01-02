@@ -10,6 +10,10 @@ module MotionState
     include NoSecondable
     include NoObjetionable
 
+    def setup
+      notify_members_voting_beginning
+    end
+
     # Indicates whether or not a given member is allowed to vote on a motion.
     # @param [Member] member A member who wants to vote the motion.
     # @return [true, false] Only active members can vote only once on a motion when they don't have conflicts.
@@ -26,7 +30,12 @@ module MotionState
     # Updates the state of a motion to closed when 47 hours has been passed.
     def scheduled_update(time_elapsed)
       @motion.closed! if time_elapsed >= 48.hours
-      @motion.notify_members_of_outcome_of_voting
+    end
+
+    private
+
+    def notify_members_voting_beginning
+      send_email :voting_beginning
     end
   end
 end

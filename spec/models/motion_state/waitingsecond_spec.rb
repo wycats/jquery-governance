@@ -2,6 +2,14 @@ require 'spec_helper'
 
 module MotionState
   describe Waitingsecond do
+    describe "setup" do
+      it "should notify members of that a new motion has been created" do
+        @motion = Factory.build(:motion)
+        ActiveMemberNotifier.should_receive(:deliver).with(:motion_created, @motion)
+        @motion.save
+      end  
+    end
+
     describe "permit?" do
       before(:all) do
         @active_member = Factory(:membership).member
@@ -124,11 +132,6 @@ module MotionState
           it "updates the motion state to 'closed'" do
             @motion_state.scheduled_update(48.hours)
             @motion.should be_closed
-          end
-
-          it "enqueues a job to email all members that the motion failed to reach a vote" do
-            @motion.should_receive(:send_email_if_failure_to_reach_voting)
-            @motion_state.scheduled_update(48.hours)
           end
         end
 

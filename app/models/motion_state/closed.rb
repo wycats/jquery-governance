@@ -10,5 +10,15 @@ module MotionState
     include NoSecondable
     include NoObjetionable
     include NoVotable
+
+    def setup
+      notify_members_of_outcome
+    end
+
+    private
+
+    def notify_members_of_outcome
+      send_email :motion_closed
+    end
   end
 end

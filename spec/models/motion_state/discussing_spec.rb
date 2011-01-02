@@ -2,14 +2,21 @@ require 'spec_helper'
 
 module MotionState
   describe Discussing do
-    describe "permit?" do
-      before(:all) do
-        @active_member = Factory(:membership).member
-        @inactive_member = Factory(:expired_membership).member
-        @motion = Factory(:discussing_motion)
-        @motion_state = @motion.state
-      end
+    before(:all) do
+      @active_member = Factory(:membership).member
+      @inactive_member = Factory(:expired_membership).member
+      @motion = Factory(:discussing_motion)
+      @motion_state = @motion.state
+    end
 
+    describe "setup" do
+      it "should notify members of that discussion of the motion has begun" do
+        ActiveMemberNotifier.should_receive(:deliver).with(:discussion_beginning, @motion)
+        @motion_state.setup 
+      end  
+    end
+    
+    describe "permit?" do
       it "allows an active member to see the motion" do
         @motion_state.permit?(:see, @active_member).should be_true
       end

@@ -90,10 +90,9 @@ class Motion < ActiveRecord::Base
   after_save :schedule_updates, :if => :state_name_changed?
   after_create :schedule_updates
 
-  after_create :send_email_on_create
-  after_save :send_email_on_state_change, :if => :state_name_changed?
-
   after_initialize :assign_state
+
+  after_save :setup_state
 
   attr_reader :state
 
@@ -352,12 +351,6 @@ class Motion < ActiveRecord::Base
     end
   end
 
-  def notify_members_of_outcome_of_voting
-    # When a motion transitions in the closed state, ensure that
-    # members are notified of the outcome of the vote.
-    send_email_after_closing
-  end
-
 private
   # @todo Description
   def possible_votes
@@ -369,24 +362,8 @@ private
     state.schedule_updates
   end
 
-  def send_email_on_create
-    send_email :motion_created
-  end
-
-  def send_email_if_failure_to_reach_voting
-    send_email :motion_failed_to_reach_voting
-  end
-
-  def send_email_after_closing
-    send_email :motion_is_now_closed
-  end
-
-  def send_email_on_state_change
-    send_email :motion_state_changed
-  end
-
-  def send_email(notification)
-    ActiveMemberNotifier.deliver(notification, self)
+  def setup_state
+    @state.setup
   end
 
   def assign_state

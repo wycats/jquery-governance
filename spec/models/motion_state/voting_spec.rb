@@ -2,14 +2,21 @@ require 'spec_helper'
 
 module MotionState
   describe Voting do
+    before(:all) do
+      @active_member = Factory(:membership).member
+      @inactive_member = Factory(:expired_membership).member
+      @motion = Factory(:voting_motion)
+      @motion_state = @motion.state
+    end
+    
+    describe "setup" do
+      it "should notify members of that voting on the motion has begun" do
+        ActiveMemberNotifier.should_receive(:deliver).with(:voting_beginning, @motion)
+        @motion_state.setup
+      end  
+    end
+    
     describe "permit?" do
-      before(:all) do
-        @active_member = Factory(:membership).member
-        @inactive_member = Factory(:expired_membership).member
-        @motion = Factory(:voting_motion)
-        @motion_state = @motion.state
-      end
-
       it "allows an active member to see the motion" do
         @motion_state.permit?(:see, @active_member).should be_true
       end
@@ -87,11 +94,6 @@ module MotionState
         it "updates the motion state to 'closed'" do
           @motion_state.scheduled_update(48.hours)
           @motion.should be_closed
-        end
-
-        it "notifies the members that the motion has closed" do
-          @motion.should_receive(:notify_members_of_outcome_of_voting)
-          @motion_state.scheduled_update(48.hours)
         end
       end
     end
