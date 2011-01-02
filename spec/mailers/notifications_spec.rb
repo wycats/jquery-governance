@@ -13,104 +13,84 @@ describe Notifications do
       mail.to.should == [@member.email]
     end
 
-    describe "subject line" do
-      it "should include the motion's title" do
-        mail = Notifications.motion_created(@motion, @member)
-        mail.subject.should include(@motion.title)
-      end
+    it "should include the motion's title in the subject line" do
+      mail = Notifications.motion_created(@motion, @member)
+      mail.subject.should include(@motion.title)
+    end
 
-      it "should say a motion was created" do
-        mail = Notifications.motion_created(@motion, @member)
-        mail.subject.should include(I18n.t("notifications.motion_created.subject"))
-      end
+    it "should say a motion was created" do
+      mail = Notifications.motion_created(@motion, @member)
+      mail.subject.should include(I18n.t("notifications.motion_created.subject"))
     end
   end
 
-  describe "motion_failed_to_reach_voting" do
+  describe "motion_closed" do
     before do
       @motion = Factory.stub(:motion)
       @member = Factory.stub(:member, :email => "member@email.com")
     end
 
     it "should be sent to the specified member" do
-      mail = Notifications.motion_failed_to_reach_voting(@motion, @member)
+      mail = Notifications.motion_closed(@motion, @member)
       mail.to.should == [@member.email]
     end
 
-    describe "subject line" do
-      it "should include the motion's title" do
-        mail = Notifications.motion_failed_to_reach_voting(@motion, @member)
-        mail.subject.should include(@motion.title)
-      end
+    it "should include the motion's title in the subject line" do
+      mail = Notifications.motion_closed(@motion, @member)
+      mail.subject.should include(@motion.title)
+    end
 
-      it "should say the motion failed to reach a vote" do
-        mail = Notifications.motion_failed_to_reach_voting(@motion, @member)
-        mail.subject.should include(I18n.t("notifications.motion_failed_to_reach_voting.subject"))
-      end
+    it "should say the motion is now closed" do
+      mail = Notifications.motion_closed(@motion, @member)
+      mail.subject.should include(I18n.t("notifications.motion_closed.subject"))
     end
   end
 
-  describe "motion_is_now_closed" do
-    before do
-      @motion = Factory.stub(:motion)
-      @member = Factory.stub(:member, :email => "member@email.com")
-    end
-
-    it "should be sent to the specified member" do
-      mail = Notifications.motion_is_now_closed(@motion, @member)
-      mail.to.should == [@member.email]
-    end
-
-    describe "subject line" do
-      it "should include the motion's title" do
-        mail = Notifications.motion_is_now_closed(@motion, @member)
-        mail.subject.should include(@motion.title)
-      end
-
-      it "should say a motion was closed" do
-        mail = Notifications.motion_is_now_closed(@motion, @member)
-        mail.subject.should include(I18n.t("notifications.motion_is_now_closed.subject"))
-      end
-    end
-  end
-
-  describe "motion_state_changed" do
+  describe "voting_beginning" do
     before do
       @motion = Factory.stub(:motion, :state_name => "discussing")
       @member = Factory.stub(:member, :email => "member@email.com")
     end
 
     it "should be sent to the specified member" do
-      mail = Notifications.motion_state_changed(@motion, @member)
+      mail = Notifications.voting_beginning(@motion, @member)
       mail.to.should == [@member.email]
     end
 
     describe "subject line" do
-      it "should include the motion's title" do
-        mail = Notifications.motion_state_changed(@motion, @member)
+      it "should include the motion's title in the subject line" do
+        mail = Notifications.voting_beginning(@motion, @member)
         mail.subject.should include(@motion.title)
       end
-
-      context "when the motion is in the discussing state" do
-        it "should say a motion has changed its state to discussing" do
-          motion = Factory.stub(:discussing_motion)
-          mail = Notifications.motion_state_changed(motion, @member)
-          mail.subject.should include(I18n.t("notifications.motion_state_changed.subjects.discussing"))
-        end
-      end
-
-      context "when the motion is in the voting state" do
-        it "should say a motion has changed its state to voting" do
-          motion = Factory.stub(:voting_motion)
-          mail = Notifications.motion_state_changed(motion, @member)
-          mail.subject.should include(I18n.t("notifications.motion_state_changed.subjects.voting"))
-        end
-      end
-
-      context "when the motion is in the closed state" do
-        it "should say a motion has changed its state to closed"
+    end
+    
+    describe "content" do
+      it "should say that voting for the motion has begun" do
+        mail = Notifications.voting_beginning(@motion, @member)
+        mail.subject.should include(I18n.t("notifications.voting_beginning.subject"))
       end
     end
   end
 
+  describe "discussion_beginning" do
+    before do
+      @motion = Factory.stub(:motion, :state_name => "discussing")
+      @member = Factory.stub(:member, :email => "member@email.com")
+    end
+
+    it "should be sent to the specified member" do
+      mail = Notifications.discussion_beginning(@motion, @member)
+      mail.to.should == [@member.email]
+    end
+
+    it "should include the motion's title in the subject" do
+      mail = Notifications.discussion_beginning(@motion, @member)
+      mail.subject.should include(@motion.title)
+    end
+    
+    it "should say that discussion of the motion has begun" do
+      mail = Notifications.discussion_beginning(@motion, @member)
+      mail.subject.should include(I18n.t("notifications.discussion_beginning.subject"))
+    end
+  end
 end

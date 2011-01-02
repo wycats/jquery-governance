@@ -7,15 +7,13 @@ en:
   hello: "Hello world"
   notifications:
     motion_created:
-      subject: "New motion"
-    motion_failed_to_reach_voting:
-      subject: "has failed to reach a vote"
+      subject: "has been created"
+    discussion_beginning:
+      subject: "has begun discussion"
+    voting_beginning:
+      subject: "is now up for vote"
     motion_is_now_closed:
       subject: "is now closed"
-    motion_state_changed:
-      subjects:
-        discussing: "Motion seconded"
-        voting: "Motion now voting"
   admin:
     memberships:
       titles:

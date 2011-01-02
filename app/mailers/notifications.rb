@@ -1,54 +1,41 @@
 class Notifications < ActionMailer::Base
   default :from => "notifications@jquery.org"
 
+  helper :notifications
+
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
   #   en.notifications.motion_created.subject
   #
   def motion_created(motion, member)
-    @motion = motion
-    @member = member
-
-    subject_text = "#{I18n.t("notifications.motion_created.subject")}: #{motion.title}"
-
-    mail :to      => member.email,
-         :subject => subject_text
+    construct_message(:motion_created, motion, member)  
   end
 
-  def motion_failed_to_reach_voting(motion, member)
-    @motion = motion
-    @member = member
-
-    subject_text = "#{motion.title} #{I18n.t("notifications.motion_failed_to_reach_voting.subject")}"
-
-    mail :to      => member.email,
-         :subject => subject_text
+  def discussion_beginning(motion, member)
+    construct_message(:discussion_beginning, motion, member)
   end
 
-  def motion_is_now_closed(motion, member)
-    @motion = motion
-    @member = member
-
-    subject_text = "#{motion.title} #{I18n.t("notifications.motion_is_now_closed.subject")}"
-
-    mail :to      => member.email,
-         :subject => subject_text
+  def voting_beginning(motion, member)
+    construct_message(:voting_beginning, motion, member)
   end
 
+  def motion_closed(motion, member)
+    construct_message(:motion_closed, motion, member)
+  end
 
-  # Notifies a member via e-mail when a motion's state changes
-  # @param [Symbol] to_state The state change being performed
-  # @param [Motion] motion The motion being changed
-  # @param [Member] member The member receiving the e-mail notification
-  # @return [Mail::Message] The generated e-mail object
-  def motion_state_changed(motion, member)
+  private
+
+  def construct_message(name, motion, member)
     @motion = motion
     @member = member
 
-    subject_text = I18n.t("notifications.motion_state_changed.subjects.#{motion.state_name}") + ": #{motion.title}"
+    subject_text = "#{motion.title} #{I18n.t("notifications.#{name}.subject")}"
 
     mail :to      => member.email,
          :subject => subject_text
+
+    @template = name
+
   end
 end
