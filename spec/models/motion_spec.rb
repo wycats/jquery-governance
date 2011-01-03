@@ -86,16 +86,6 @@ describe Motion do
   end
 
   describe "voting actions", :database => true do
-    describe "vote" do
-      it "creates a new vote with the given member and value" do
-        current_motion = Factory.create(:motion)
-        voting_member  = Factory.create(:membership).member
-
-        current_motion.vote(voting_member, true)
-        Event.votes.last.member.should eql voting_member
-        Event.votes.last.value.should be_true
-      end
-    end
 
     describe 'second(member)' do
       it "creates a new second for the member" do

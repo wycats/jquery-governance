@@ -52,7 +52,7 @@ class MotionEventsController < ApplicationController
   def vote
     @motion = Motion.find(params[:motion_id])
 
-    if @motion.vote(current_member, params[:vote] == "aye")
+    if current_member.vote(@motion, params[:vote] == "aye")
       flash[:notice] = "You have successfully voted the motion."
     else
       flash[:alert] =  "Something went wrong when voting the motion"

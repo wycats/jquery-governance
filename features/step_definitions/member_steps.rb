@@ -72,7 +72,8 @@ end
 When /^the following members votes affirmatively the motion titled "([^"]*)"$/ do |motion_title, table|
   motion = Motion.find_by_title!(motion_title)
   table.rows.each do |member_name|
-    motion.vote(Member.find_by_name!(member_name), true)
+    member = Member.find_by_name!(member_name)
+    member.vote(motion, true)
   end
 end
 

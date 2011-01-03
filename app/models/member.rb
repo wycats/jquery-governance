@@ -32,6 +32,13 @@ class Member < ActiveRecord::Base
     true unless active_at?(Time.now).nil?
   end
 
+  # Cast a member's Vote.
+  # @param [Member] member An active member.
+  # @param [true, false] value An aye or nay vote, respectively.
+  # @return [Event] The Event of the vote just made.
+  def vote(motion, value)
+    votes.create(:motion => motion, :value => value)
+  end
   # Check if the member has permissions to perform the given action over the given motion or member
   # @param [Symbol] action The action the member wants to perform
   # @param [Member, Motion] motion or member The motion or member over which the member wants to perform the action

@@ -171,13 +171,6 @@ class Motion < ActiveRecord::Base
     objections.any?
   end
 
-  # Cast a member's Vote.
-  # @param [Member] member An active member.
-  # @param [true, false] value An aye or nay vote, respectively.
-  # @return [Event] The Event of the vote just made.
-  def vote(member, value)
-    votes.create(:member => member, :value => value)
-  end
 
   ##
   # States

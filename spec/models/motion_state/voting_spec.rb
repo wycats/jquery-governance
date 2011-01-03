@@ -83,6 +83,8 @@ module MotionState
       before do
         @motion = Factory(:voting_motion)
         @motion_state = @motion.state
+        @member = Factory(:membership).member
+        @second_member = Factory(:membership).member
       end
 
       it "doesn't update the motion state before 48 hours" do
