@@ -57,6 +57,7 @@ class Member < ActiveRecord::Base
   # @param [Motion] motion The motion the member wants to second.
   # @return [Event] The Event object of the second just made.
   def second(motion)
+    motion.seconds.to_sql # TODO WTF?
     seconds.create(:motion => motion)
   end
 
