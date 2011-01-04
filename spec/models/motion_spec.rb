@@ -85,21 +85,6 @@ describe Motion do
     end
   end
 
-  describe "voting actions", :database => true do
-
-    describe 'second(member)' do
-      it "creates a new second for the member" do
-        current_motion   = Factory.create(:motion)
-        seconding_member = Factory.create(:membership).member
-
-        lambda do
-          current_motion.second(seconding_member)
-        end.should change { current_motion.seconds.count }
-      end
-    end
-
-  end
-
   describe 'conflicts_with_member?', :database => true do
     before :each do
       @member   = Factory.build(:membership).member

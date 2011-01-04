@@ -47,7 +47,7 @@ module MotionState
       end
 
       it "doesn't allow an active member to second more than once another member's motion" do
-        @motion.second(@active_member)
+        @active_member.second(@motion)
         @motion_state.permit?(:second, @active_member).should be_false
       end
 
@@ -126,7 +126,7 @@ module MotionState
         context "when the motion fails to get at least 2 seconds in 48 hours" do
 
           before :all do
-            @motion.second(@member)
+            @member.second(@motion)
           end
 
           it "updates the motion state to 'closed'" do

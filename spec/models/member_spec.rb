@@ -166,6 +166,17 @@ describe Member do
     end
   end
 
+  describe "second" do
+    it "creates a second for the given motion" do
+      motion = Factory.create(:motion)
+      member = Factory.create(:membership).member
+
+      member.second(motion)
+      Event.seconds.last.member.should eql member
+      Event.seconds.last.motion.should eql motion
+    end
+  end
+
   describe "has_voted_on?" do
     it "knows if the member has voted on the specified motion" do
       @yes_vote = Factory.create(:yes_vote, :member => @member, :motion => @motion)

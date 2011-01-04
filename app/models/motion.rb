@@ -151,13 +151,6 @@ class Motion < ActiveRecord::Base
     state.permit?(action, member)
   end
 
-  # Second a motion.
-  # @param [Member] member The member who is seconding this motion.
-  # @return [Event] The Event object of the second just made.
-  def second(member)
-    seconds.create(:member => member)
-  end
-
   # Object a motion.
   # @param [Member] member The member who is objecting this motion.
   # @return [Event] The Event object of the objection just made.

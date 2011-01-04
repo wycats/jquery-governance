@@ -41,7 +41,7 @@ describe Membership do
         membership = Membership.new( attrs_for_membership )
         membership.save
 
-        membership.started_at.should == @motion.closed_at
+        membership.started_at.should eql @motion.closed_at
       end
     end
   end

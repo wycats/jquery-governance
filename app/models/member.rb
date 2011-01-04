@@ -52,6 +52,14 @@ class Member < ActiveRecord::Base
   def vote(motion, value)
     votes.create(:motion => motion, :value => value)
   end
+
+  # Second a motion.
+  # @param [Motion] motion The motion the member wants to second.
+  # @return [Event] The Event object of the second just made.
+  def second(motion)
+    seconds.create(:motion => motion)
+  end
+
   # Check if the member has permissions to perform the given action over the given motion or member
   # @param [Symbol] action The action the member wants to perform
   # @param [Member, Motion] motion or member The motion or member over which the member wants to perform the action
