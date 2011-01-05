@@ -9,6 +9,11 @@ Feature: Member creates motion
       | name          | email              |
       | John Resig    | john@jquery.com    |
       | Yehuda Katz   | yehuda@jquery.com  |
+    And these tags exist:
+      | name       |
+      | legal      |
+      | governance |
+      | events     |
 
   Scenario: A motion is created
     Given I am signed in as "John Resig"
@@ -23,6 +28,19 @@ Feature: Member creates motion
       And I should see "jQuery should take over the JS world"
       And I should see "Replace all websites' JS with jQuery."
       And I should see "Because it's just that cool."
+
+  Scenario: A motion is crated and tagged
+    Given I am signed in as "John Resig"
+     When I am on the home page
+      And I follow "New Motion"
+      And I fill in "Title" with "jQuery should take over the JS world"
+      And I fill in "Description" with "Replace all websites' JS with jQuery."
+      And I check "governance"
+      And I check "events"
+      And I press "Create Motion"
+     Then I should see "governance"
+      And I should see "events"
+      And I should not see "legal"
 
   Scenario: I am an inactive member
     Given I am signed in as an inactive member

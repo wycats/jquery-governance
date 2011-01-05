@@ -150,6 +150,11 @@ body {
     line-height: $font_label_height;
     vertical-align: middle;
     width: $label_width;
+
+    &.tag {
+      float: none;
+      width: auto;
+    }
   }
 
   input[type=text], input[type=password], textarea {

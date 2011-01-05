@@ -14,5 +14,10 @@
     .form_row
       = f.label :expedited, "Expedite Motion"
       = f.check_box :expedited
+    .form_row
+      = f.label :tags, "Tags"
+      - @tags.each do |tag|
+        = check_box_tag "motion[tag_ids][]", tag.id, @motion.tags.include?(tag), :id => dom_id(tag)
+        %label{ :for => dom_id(tag), :class => dom_class(tag) }= tag.name
     .form_row.centered.submit
       = f.submit "Create Motion", :class => 'button large'
