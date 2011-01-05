@@ -4,6 +4,10 @@ DEFAULTS: &DEFAULTS
   updated_at: 2010-12-01 18:00:00
   member: $LABEL
 
+admin_member:
+  <<: *DEFAULTS
+  is_admin: true
+
 cody_lindley:
   <<: *DEFAULTS
 

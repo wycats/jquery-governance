@@ -3,6 +3,9 @@ task :setup =>  [
                   "setup:bundle",              # Bundler, keep this first
                   "setup:copy_default_config", # Create database.yml
                   "doc:app",                   # YARD docs
+                  "db:create",
+                  "db:schema:load",
+                  "db:fixtures:load",           # Load up the development database with test data
                   "setup:intro"                # tl;dr, keep this last
                 ]
 

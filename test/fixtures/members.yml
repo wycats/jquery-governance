@@ -5,6 +5,11 @@ DEFAULTS: &DEFAULTS
   created_at: 2010-12-01 18:00:00
   updated_at: 2010-12-01 18:00:00
 
+admin_member:
+  <<: *DEFAULTS
+  name: Admin Member
+  email: admin@example.com
+
 cody_lindley:
   <<: *DEFAULTS
   name: Cody Lindley
@@ -54,4 +59,3 @@ yehuda_katz:
   <<: *DEFAULTS
   name: Yehuda Katz
   email: yehuda_katz@jquery.com
-  is_admin: true
