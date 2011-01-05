@@ -29,7 +29,7 @@ class MotionsController < ApplicationController
 
     if @motion.save
       flash[:notice] = "New motion was created successfully"
-      redirect_to root_url
+      redirect_to motion_events_url(@motion)
     else
       render :new
     end
