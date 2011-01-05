@@ -15,10 +15,10 @@
         %fieldset
           = membership.label :qualifying_motion_id, "Motion Reference #"
           = membership.text_field :qualifying_motion_id, :placeholder => "1234"
+        %fieldset
+          = membership.label :is_admin
+          = membership.check_box :is_admin
           = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => "memberships.qualifying_motion_id"}
           = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => "memberships.qualifying_motion"}
-    %fieldset
-      = form.label :is_admin
-      = form.check_box :is_admin
     .buttons
       = form.submit t("admin.members.actions.add_new_member")

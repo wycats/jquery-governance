@@ -9,7 +9,7 @@ class Membership < ActiveRecord::Base
 
   validates :qualifying_motion_id, :presence => true, :existence => true
 
-  attr_accessible :qualifying_motion_id, :disqualifying_motion_id
+  attr_accessible :qualifying_motion_id, :disqualifying_motion_id, :is_admin
 
   before_save :set_membership_timestamps
 

@@ -11,9 +11,6 @@
       = form.label :email
       = form.text_field :email, :placeholder => "jresig@example.com"
       = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => :email}
-    %fieldset
-      = form.label :is_admin
-      = form.check_box :is_admin
     -if admin?
       =link_to t("admin.members.actions.delete_member"), [:admin, @member], :method => 'delete', :confirm => 'Are you sure you want to delete the user?'
       =link_to t("admin.members.actions.edit_memberships_for_member"), admin_member_memberships_path(@member)

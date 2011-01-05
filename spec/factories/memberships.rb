@@ -14,9 +14,11 @@ FactoryGirl.define do
 
   factory :active_admin_membership, :parent => :membership do
     association :member, :factory => :admin_member
+    is_admin true
   end
 
   factory :active_non_admin_membership, :parent => :membership do
     association :member, :factory => :non_admin_member
+    is_admin true
   end
 end

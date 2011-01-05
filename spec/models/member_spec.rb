@@ -3,14 +3,16 @@ require 'spec_helper'
 describe Member do
   before :all do
     @motion = Factory.create(:closed_motion)
-    @member = Factory.create(:membership, :qualifying_motion => @motion).member
+    @members_membership = Factory.create(:membership, :qualifying_motion => @motion)
+    @member = @members_membership.member
     @inactive_member = Factory.create(:expired_membership).member
 
     @admin_member = Factory.create(:active_admin_membership).member
     @non_admin_member = Factory.create(:active_non_admin_membership).member
 
-    @renewed_member = Factory.create(:membership).member
-    Factory.create(:expired_membership, :member => @renewed_member)
+    @renewed_members_membership = Factory.create(:membership)
+    @renewed_member = @renewed_members_membership.member
+    @renewed_members_expired_membership = Factory.create(:expired_membership, :member => @renewed_member)
 
     @expired_member = Factory.create(:expired_membership).member
     Factory.create(:expired_membership, :member => @expired_member, :started_at => 5.months.ago, :ended_at => 4.days.ago)
@@ -95,6 +97,62 @@ describe Member do
         @expired_member.should_not be_active_at(1.month.from_now)
       end
     end
+  end
+
+  describe "active_membership" do
+    describe "a currently active member" do
+      it "returns its membershp" do
+        @member.active_membership.should == @members_membership
+      end
+    end
+
+    describe "a currently inactive member" do
+      it "returns nil" do
+        @inactive_member.active_membership.should be_nil
+      end
+    end
+
+    describe "a member with a renewed membership" do
+      it "returns the membership that is active now" do
+        @renewed_member.active_membership.should == @renewed_members_membership
+      end
+
+      it "shouldn't retrun the member's expired membership" do
+        @renewed_member.active_membership.should_not == @renewed_members_expired_membership
+      end
+    end
+  end
+
+  describe "membership_active?" do
+    describe "a currently active member" do
+      it "returns true" do
+        @member.membership_active?.should be_true
+      end
+    end
+
+    describe "a currently inactive member" do
+      it "returns false" do
+        @inactive_member.membership_active?.should be_false
+      end
+    end
+
+    describe "a member with a renewed membership" do
+      it "returns true" do
+        @renewed_member.membership_active?.should be_true
+      end
+    end
+  end
+
+  describe "is_admin?" do
+    describe "an admin member" do
+      it "returns true" do
+        @admin_member.is_admin?.should be_true
+      end
+    end
+
+    # describe "an non-admin member" do
+    #   @member.is_admin?.should be_false
+    # end
   end
 
   describe "vote" do

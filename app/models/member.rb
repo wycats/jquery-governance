@@ -26,10 +26,23 @@ class Member < ActiveRecord::Base
     memberships.active_at(time).first
   end
 
+  # Returns the active membership of this member
+  # @return [Membership]
+  def active_membership
+    active_at?(Time.now) if membership_active?
+  end
+
   # Returns the active membership status, of this member
   # @return [true, false] Whether or not member is currently active as true or false, respectively
   def membership_active?
     true unless active_at?(Time.now).nil?
+  end
+
+  # Return the admin status of this member
+  # @return [true, false] Whether or not this member is currently an admin
+  # @return [Membership]
+  def is_admin?
+    active_membership.is_admin? if active_membership
   end
 
   # Cast a member's Vote.

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101231011731) do
+ActiveRecord::Schema.define(:version => 20110104222352) do
 
   create_table "conflicts", :force => true do |t|
     t.string   "title"
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(:version => 20101231011731) do
     t.string   "reset_password_token"
     t.string   "remember_token"
     t.datetime "remember_created_at"
-    t.boolean  "is_admin"
   end
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
@@ -63,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20101231011731) do
     t.datetime "updated_at"
     t.integer  "qualifying_motion_id"
     t.integer  "disqualifying_motion_id"
+    t.boolean  "is_admin"
   end
 
   add_index "memberships", ["ended_at"], :name => "index_memberships_on_ended_at"
