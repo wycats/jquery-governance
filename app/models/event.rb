@@ -9,6 +9,11 @@ class Event < ActiveRecord::Base
     'second' => 'Second',
     'objection' => 'Objection'
   }
+  EVENT_TYPES_PAST_TENSE = {
+    'vote' => 'voted',
+    'second' => 'seconded',
+    'objection' => 'objected'
+  }
 
   belongs_to  :member
   belongs_to  :motion
@@ -64,10 +69,13 @@ class Event < ActiveRecord::Base
   def formatted_event_type(format = :human)
     if format == :human
       HUMAN_READABLE_EVENT_TYPES[event_type]
+    elsif format == :past_tense
+      EVENT_TYPES_PAST_TENSE[event_type]
     else
       event_type
     end
   end
+
 
 private
   # Will error if the motion creator attempts to second their motion

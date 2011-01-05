@@ -1,2 +1,2 @@
-= "#{event.member.name_or_email} #{event.event_type}ed #{time_ago_in_words(event.updated_at)} ago"
+= "#{event.member.name_or_email} #{event.formatted_event_type(:past_tense)} #{time_ago_in_words(event.updated_at)} ago"
 
