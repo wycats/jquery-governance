@@ -57,8 +57,21 @@ class Member < ActiveRecord::Base
   # @param [Motion] motion The motion the member wants to second.
   # @return [Event] The Event object of the second just made.
   def second(motion)
-    motion.seconds.to_sql # TODO WTF?
+    motion.seconds.to_sql # TODO what's going on here?
     seconds.create(:motion => motion)
+    # If we don't call motion.seconds.to_sql before the previous line,
+    # motion.seconds.to_sql will return something like this:
+    #
+    # SELECT "events".* FROM "events"
+    # WHERE "events"."event_type" = 'second'
+    #   AND ("events"."member_id" = 1)
+    #   AND ("events"."motion_id" = 1)
+    #
+    # If we do call it, it will return something better:
+    #
+    # SELECT "events".* FROM "events"
+    # WHERE "events"."event_type" = 'second'
+    #   AND ("events"."motion_id" = 1)
   end
 
   # Check if the member has permissions to perform the given action over the given motion or member
