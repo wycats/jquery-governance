@@ -30,7 +30,7 @@ module MotionState
       end
 
       it "doesn't allow a member to object the motion more than once" do
-        @motion.object(@active_member)
+        @active_member.object(@motion)
         @motion_state.permit?(:object, @active_member).should be_false
       end
 
@@ -96,7 +96,7 @@ module MotionState
         before do
           @motion = Factory(:discussing_motion)
           @motion_state = @motion.state
-          @motion.object(Factory(:membership).member)
+          Factory(:membership).member.object(@motion)
         end
 
         it "doesn't update the motion state before 48 hours" do

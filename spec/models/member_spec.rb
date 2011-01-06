@@ -177,6 +177,17 @@ describe Member do
     end
   end
 
+  describe "object" do
+    it "creates an objection for the given motion" do
+      motion = Factory.create(:discussing_motion)
+      member = Factory.create(:membership).member
+
+      member.object(motion)
+      Event.objections.last.member.should eql member
+      Event.objections.last.motion.should eql motion
+    end
+  end
+
   describe "has_voted_on?" do
     it "knows if the member has voted on the specified motion" do
       @yes_vote = Factory.create(:yes_vote, :member => @member, :motion => @motion)

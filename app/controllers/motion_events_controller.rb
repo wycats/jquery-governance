@@ -37,7 +37,7 @@ class MotionEventsController < ApplicationController
   def object
     @motion = Motion.find(params[:motion_id])
 
-    if @motion.object(current_member)
+    if current_member.object(@motion)
       flash[:notice] = "You have successfully objected the motion."
     else
       flash[:alert] =  "Something went wrong when objecting the motion"
@@ -45,6 +45,7 @@ class MotionEventsController < ApplicationController
 
     redirect_to motion_events_url(@motion)
   end
+
   # Create a Voting Event for a Motion
   # @option params [Fixnum] :motion_id The id of the motion in question
   # @option params [Fixnum] :vote The vote cast by the member, can be "aye" or "nay"

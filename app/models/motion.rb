@@ -151,19 +151,11 @@ class Motion < ActiveRecord::Base
     state.permit?(action, member)
   end
 
-  # Object a motion.
-  # @param [Member] member The member who is objecting this motion.
-  # @return [Event] The Event object of the objection just made.
-  def object(member)
-    objections.create(:member => member)
-  end
-
   # Check if a motion has been objected by any member.
   # @return [true, false] Whether or not the motion has received an objection.
   def objected?
     objections.any?
   end
-
 
   ##
   # States

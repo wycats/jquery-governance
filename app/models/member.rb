@@ -60,6 +60,13 @@ class Member < ActiveRecord::Base
     motion.seconds.create(:member => self)
   end
 
+  # Object a motion.
+  # @param [Motion] motion The motion the member wants to object.
+  # @return [Event] The Event object of the objection just made.
+  def object(motion)
+    motion.objections.create(:member => self)
+  end
+
   # Check if the member has permissions to perform the given action over the given motion or member
   # @param [Symbol] action The action the member wants to perform
   # @param [Member, Motion] motion or member The motion or member over which the member wants to perform the action
