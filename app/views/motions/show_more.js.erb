@@ -1,1 +1,11 @@
-<%= render_motions_list_items(@motions) %>
+var link      = $("a[href='<%= escape_javascript(request.fullpath) %>']");
+var container = link.parent();
+var ul        = container.prev('ul');
+
+ul.append("<%= escape_javascript(render_motions_list_items(@motions)) %>");
+
+<% if @motions.size < @motions.count %>
+  link.text('More').removeClass('disabled').attr('href', "<%= escape_javascript(show_more_motions_path(:id => @motions.last.id)) %>");
+<% else %>
+  container.remove();
+<% end %>
