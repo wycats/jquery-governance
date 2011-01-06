@@ -1,6 +1,8 @@
 = content_tag_for(:li, motion, :class => html_classes_for_motion_list_item(motion)) do
   .actions
-    .created_at= motion.created_at.strftime("%B #{motion.created_at.day.ordinalize}, %Y")
+    .created_at
+      %span.date= motion.created_at.strftime("%b %d, %Y")
+      %span.time= motion.created_at.strftime("at %l:%M %p")
     = motion_status_badge(motion)
   .summary
     %p.title= link_to motion.title, motion_events_url(motion)
