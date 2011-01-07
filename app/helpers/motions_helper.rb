@@ -6,10 +6,6 @@ module MotionsHelper
     classes.join(' ')
   end
 
-  def render_motions_list_items(motions)
-    render :partial => 'motions/list_item', :collection => motions, :as => :motion
-  end
-
   def motion_status_badge(motion)
     status = if motion.waitingsecond? && motion.expedited?
       'expedited'

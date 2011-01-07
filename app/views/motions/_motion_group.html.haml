@@ -4,7 +4,7 @@
     .empty=t("motions.#{name}.empty")
   - else
     %ul{ :class => "motions" }
-      = render_motions_list_items(motion_group)
+      = render :partial => motion_group
     - if motion_group.size < motion_group.count
       .show_more
         = link_to 'More', show_more_motions_path(:id => motion_group.last.id), :class => 'button more'
