@@ -3,11 +3,10 @@ class MotionSearchesController < ApplicationController
   end
 
   def results
-    # Here are the search results
-    results = Motion.search(params[:search][:keywords])
+    motion_search = MotionSearch.new(current_member)
 
-    # Scope them so that user's can't see motions they lack
-    # the permissons to view
-    @motions = Motion.motion_groups_for_user(current_member, results)
+    unless @motions = motion_search.find(params[:search][:keywords])
+      redirect_to new_motion_search_url, :alert => 'No results found'
+    end
   end
 end
