@@ -2,19 +2,26 @@
   #motion-details
     %h2
       = @motion.title
-      %span.author by #{@motion.member.name_or_email}
+      %span.author
+        by
+        %strong= @motion.member.name_or_email
     .description
       %p= @motion.description
     %h3 Rationale
-    %p= @motion.rationale
+    - if @motion.rationale.blank?
+      %p.empty No rationale has been given for this motion.
+    - else
+      %p= @motion.rationale
     %h3 Tags
-    .tags
-      - @motion.tags.each do |tag|
-        = tag_badge(tag)
+    - if @motion.tags.empty?
+      %p.empty This motion hasn't been tagged.
+    - else
+      .tags
+        - @motion.tags.each do |tag|
+          = tag_badge(tag)
     %h3 Events
     %ul#motion-events
-      - @motion.events.each do |event|
-        %li= render event
+      = render :partial => @motion.events
   #motion-actions
     %dl
       %dt State

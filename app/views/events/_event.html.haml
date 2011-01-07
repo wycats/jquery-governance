@@ -1,2 +1,3 @@
-= "#{event.member.name_or_email} #{event.event_type}ed #{time_ago_in_words(event.updated_at)} ago"
+%li{ :class => "#{event.member == current_member ? 'you' : 'other'}" }
+  = "#{event.member.name_or_email} #{event.event_type}ed #{time_ago_in_words(event.updated_at)} ago"
 

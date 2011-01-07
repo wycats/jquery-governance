@@ -1115,60 +1115,70 @@ div.motion {
 }
 /* line 299, ../../app/stylesheets/application.scss */
 div.motion h2 {
-  line-height: 1;
-}
-/* line 302, ../../app/stylesheets/application.scss */
-div.motion h2 .author {
-  display: block;
-  font-size: 0.7em;
-  font-weight: normal;
-  font-style: italic;
-  color: #80a080;
-}
-/* line 311, ../../app/stylesheets/application.scss */
-div.motion .description {
-  margin: 15px 0 25px;
-}
-/* line 314, ../../app/stylesheets/application.scss */
-div.motion .description p {
+  font-size: 27px;
+  font-weight: bold;
+  line-height: 1.2;
   color: #333;
 }
-/* line 319, ../../app/stylesheets/application.scss */
+/* line 305, ../../app/stylesheets/application.scss */
+div.motion h2 .author {
+  display: block;
+  color: #94ca3d;
+  font-size: 24px;
+  line-height: 1;
+}
+/* line 311, ../../app/stylesheets/application.scss */
+div.motion h2 .author strong {
+  font-weight: bold;
+}
+/* line 317, ../../app/stylesheets/application.scss */
+div.motion .description {
+  margin: 15px 0 25px;
+  line-height: 1.5;
+}
+/* line 321, ../../app/stylesheets/application.scss */
+div.motion .description p {
+  font-size: 15px;
+  color: #666;
+}
+/* line 327, ../../app/stylesheets/application.scss */
 div.motion .tags {
   width: 100%;
   overflow: hidden;
 }
-/* line 323, ../../app/stylesheets/application.scss */
+/* line 331, ../../app/stylesheets/application.scss */
 div.motion h3 {
-  font-size: 1.5em;
+  font-size: 15px;
+  line-height: 1.5;
   text-transform: uppercase;
+  border-bottom: 1px solid #eee !important;
 }
-/* line 328, ../../app/stylesheets/application.scss */
+/* line 338, ../../app/stylesheets/application.scss */
 div.motion p {
   margin: 8px 0;
   font-size: 1.5em;
   color: #666;
 }
-/* line 334, ../../app/stylesheets/application.scss */
+/* line 344, ../../app/stylesheets/application.scss */
 div.motion #motion-details {
   width: 490px;
   float: left;
 }
-/* line 339, ../../app/stylesheets/application.scss */
+/* line 349, ../../app/stylesheets/application.scss */
 div.motion #motion-actions {
-  width: 290px;
+  width: 260px;
   float: right;
 }
-/* line 343, ../../app/stylesheets/application.scss */
+/* line 353, ../../app/stylesheets/application.scss */
 div.motion #motion-actions dl {
   margin-bottom: 15px;
 }
-/* line 346, ../../app/stylesheets/application.scss */
+/* line 356, ../../app/stylesheets/application.scss */
 div.motion #motion-actions dl dt, div.motion #motion-actions dl dd {
-  background-color: #F3EFE4;
-  font-size: 1.2em;
+  background-color: #f6f6f6;
+  font-size: 14px;
 }
-/* line 351, ../../app/stylesheets/application.scss */
+/* line 361, ../../app/stylesheets/application.scss */
 div.motion #motion-actions dl dt {
   padding: 10px 15px 1px;
   -moz-border-radius-topleft: 5px;
@@ -1185,8 +1195,9 @@ div.motion #motion-actions dl dt {
   border-top-right-radius: 5px;
   font-weight: bold;
   text-transform: uppercase;
+  color: #333;
 }
-/* line 358, ../../app/stylesheets/application.scss */
+/* line 369, ../../app/stylesheets/application.scss */
 div.motion #motion-actions dl dd {
   margin-bottom: 10px;
   padding: 0 15px 8px;
@@ -1202,16 +1213,17 @@ div.motion #motion-actions dl dd {
   -ms-border-bottom-right-radius: 5px;
   -khtml-border-bottom-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  color: #666;
 }
-/* line 365, ../../app/stylesheets/application.scss */
+/* line 377, ../../app/stylesheets/application.scss */
 div.motion #motion-actions .button {
   margin: 6px 0;
 }
-/* line 370, ../../app/stylesheets/application.scss */
+/* line 382, ../../app/stylesheets/application.scss */
 div.motion #motion-events {
-  border-top: 1px solid #eee;
+  margin-top: -8px;
 }
-/* line 373, ../../app/stylesheets/application.scss */
+/* line 385, ../../app/stylesheets/application.scss */
 div.motion #motion-events li {
   padding: 5px 0;
   border-bottom: 1px solid #eee;
@@ -1221,7 +1233,7 @@ div.motion #motion-events li {
 
 /* @end */
 /* @group Homepage */
-/* line 386, ../../app/stylesheets/application.scss */
+/* line 398, ../../app/stylesheets/application.scss */
 #content a.remove {
   background-image: url("/images/remove.png");
   background-repeat: no-repeat;
@@ -1233,11 +1245,11 @@ div.motion #motion-events li {
   color: #fff;
   display: inline-block;
 }
-/* line 396, ../../app/stylesheets/application.scss */
+/* line 408, ../../app/stylesheets/application.scss */
 #content a.remove span {
   display: none;
 }
-/* line 399, ../../app/stylesheets/application.scss */
+/* line 411, ../../app/stylesheets/application.scss */
 #content h1 {
   padding: 0 0 0 170px;
   font-size: 35px;
@@ -1245,7 +1257,7 @@ div.motion #motion-events li {
   color: #835c33;
   letter-spacing: -1px;
 }
-/* line 406, ../../app/stylesheets/application.scss */
+/* line 418, ../../app/stylesheets/application.scss */
 #content h1.for_form {
   margin-bottom: 20px;
   padding: 0 570px 0 0;
@@ -1253,25 +1265,25 @@ div.motion #motion-events li {
   text-align: right;
 }
 
-/* line 417, ../../app/stylesheets/application.scss */
+/* line 429, ../../app/stylesheets/application.scss */
 #content div.motions h2 {
   margin: 20px 0 3px;
   padding-left: 170px;
   font-size: 24px;
   color: #cda658;
 }
-/* line 424, ../../app/stylesheets/application.scss */
+/* line 436, ../../app/stylesheets/application.scss */
 #content div.motions .button {
   float: right;
 }
-/* line 428, ../../app/stylesheets/application.scss */
+/* line 440, ../../app/stylesheets/application.scss */
 #content div.motions li {
   width: 100%;
   overflow: hidden;
   padding: 10px 0 30px;
   border-top: 1px solid #eee;
 }
-/* line 433, ../../app/stylesheets/application.scss */
+/* line 445, ../../app/stylesheets/application.scss */
 #content div.motions li .actions {
   position: relative;
   float: left;
@@ -1280,18 +1292,18 @@ div.motion #motion-events li {
   font-size: 11px;
   text-align: right;
 }
-/* line 441, ../../app/stylesheets/application.scss */
+/* line 453, ../../app/stylesheets/application.scss */
 #content div.motions li .actions .created_at {
   padding-top: 7px;
   font-size: 18px;
   line-height: 1.2;
   color: #999;
 }
-/* line 447, ../../app/stylesheets/application.scss */
+/* line 459, ../../app/stylesheets/application.scss */
 #content div.motions li .actions .created_at .time {
   display: block;
 }
-/* line 450, ../../app/stylesheets/application.scss */
+/* line 462, ../../app/stylesheets/application.scss */
 #content div.motions li .actions .badge.status {
   position: absolute;
   right: 0;
@@ -1299,17 +1311,17 @@ div.motion #motion-events li {
   margin: 18px 0 0;
   font-size: 13px;
 }
-/* line 460, ../../app/stylesheets/application.scss */
+/* line 472, ../../app/stylesheets/application.scss */
 #content div.motions li .summary {
   float: left;
   width: 600px;
 }
-/* line 464, ../../app/stylesheets/application.scss */
+/* line 476, ../../app/stylesheets/application.scss */
 #content div.motions li .summary p {
   margin: 0;
   font-size: 13px;
 }
-/* line 469, ../../app/stylesheets/application.scss */
+/* line 481, ../../app/stylesheets/application.scss */
 #content div.motions li .summary p.title a:link, #content div.motions li .summary p.title a:visited {
   font-size: 27px;
   font-weight: bold;
@@ -1317,28 +1329,28 @@ div.motion #motion-events li {
   text-decoration: none;
   color: #333 !important;
 }
-/* line 478, ../../app/stylesheets/application.scss */
+/* line 490, ../../app/stylesheets/application.scss */
 #content div.motions li .summary p.author {
   color: #94ca3d;
   font-size: 24px;
   line-height: 1;
 }
-/* line 483, ../../app/stylesheets/application.scss */
+/* line 495, ../../app/stylesheets/application.scss */
 #content div.motions li .summary p.author strong {
   font-weight: bold;
 }
-/* line 488, ../../app/stylesheets/application.scss */
+/* line 500, ../../app/stylesheets/application.scss */
 #content div.motions li .summary p.description {
   margin-top: 10px;
   font-size: 15px;
   line-height: 1.5;
   color: #666;
 }
-/* line 497, ../../app/stylesheets/application.scss */
+/* line 509, ../../app/stylesheets/application.scss */
 #content div.motions li.acted_on {
   background-color: #f8f8f8 !important;
 }
-/* line 502, ../../app/stylesheets/application.scss */
+/* line 514, ../../app/stylesheets/application.scss */
 #content div.motions div.empty {
   margin: 10px 0 40px;
   padding-left: 170px;
@@ -1346,33 +1358,33 @@ div.motion #motion-events li {
   font-style: italic;
   color: #333;
 }
-/* line 510, ../../app/stylesheets/application.scss */
+/* line 522, ../../app/stylesheets/application.scss */
 #content div.motions div.show_more {
   width: 100%;
   overflow: hidden;
   margin: 10px 0;
 }
-/* line 514, ../../app/stylesheets/application.scss */
+/* line 526, ../../app/stylesheets/application.scss */
 #content div.motions div.show_more .button {
   margin: 3px;
 }
 
-/* line 520, ../../app/stylesheets/application.scss */
+/* line 532, ../../app/stylesheets/application.scss */
 nav.main {
   width: 100%;
   overflow: hidden;
 }
-/* line 523, ../../app/stylesheets/application.scss */
+/* line 535, ../../app/stylesheets/application.scss */
 nav.main ul {
   float: right;
   height: 40px;
 }
-/* line 527, ../../app/stylesheets/application.scss */
+/* line 539, ../../app/stylesheets/application.scss */
 nav.main ul li {
   margin-top: 5px;
   float: left;
 }
-/* line 531, ../../app/stylesheets/application.scss */
+/* line 543, ../../app/stylesheets/application.scss */
 nav.main ul li.first a {
   -moz-border-radius-bottomleft: 6px;
   -webkit-border-bottom-left-radius: 6px;
@@ -1381,7 +1393,7 @@ nav.main ul li.first a {
   -khtml-border-bottom-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-/* line 535, ../../app/stylesheets/application.scss */
+/* line 547, ../../app/stylesheets/application.scss */
 nav.main ul li a {
   font-size: 1.25em;
   font-family: helvetica, arial, sans-serif;
@@ -1399,14 +1411,14 @@ nav.main ul li a {
   cursor: pointer;
   background: url("http://jquery.org/wp-content/themes/green/green/shadow.png") bottom left repeat-x;
 }
-/* line 548, ../../app/stylesheets/application.scss */
+/* line 560, ../../app/stylesheets/application.scss */
 nav.main ul li a:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
 /* @end */
 /* @group Flash alerts & Validation Errors */
-/* line 559, ../../app/stylesheets/application.scss */
+/* line 571, ../../app/stylesheets/application.scss */
 #flash_notice, #flash_alert {
   clear: both;
   margin: 10px 20px;
@@ -1416,21 +1428,21 @@ nav.main ul li a:hover {
   text-align: center;
 }
 
-/* line 568, ../../app/stylesheets/application.scss */
+/* line 580, ../../app/stylesheets/application.scss */
 #flash_notice {
   background-color: #fffecf;
   border-color: #dcda00;
   color: #5F5F5F;
 }
 
-/* line 574, ../../app/stylesheets/application.scss */
+/* line 586, ../../app/stylesheets/application.scss */
 #flash_alert {
   background-color: #FFEEEE;
   border-color: red;
   color: red;
 }
 
-/* line 580, ../../app/stylesheets/application.scss */
+/* line 592, ../../app/stylesheets/application.scss */
 #error_explanation {
   background: #FBB;
   border: 2px solid red;
@@ -1439,26 +1451,26 @@ nav.main ul li a:hover {
   font-size: 12px;
   margin: 20px;
 }
-/* line 588, ../../app/stylesheets/application.scss */
+/* line 600, ../../app/stylesheets/application.scss */
 #error_explanation ul {
   margin: 0;
 }
-/* line 592, ../../app/stylesheets/application.scss */
+/* line 604, ../../app/stylesheets/application.scss */
 #error_explanation h2 {
   font-size: 14px;
 }
-/* line 596, ../../app/stylesheets/application.scss */
+/* line 608, ../../app/stylesheets/application.scss */
 #error_explanation h3 {
   font-size: 12px;
 }
 
 /* @end */
-/* line 602, ../../app/stylesheets/application.scss */
+/* line 614, ../../app/stylesheets/application.scss */
 #tags li {
   font-size: 14px;
   margin: 1em 0;
 }
-/* line 607, ../../app/stylesheets/application.scss */
+/* line 619, ../../app/stylesheets/application.scss */
 #tags li a {
   padding: 4px;
   -moz-border-radius: 3px;
@@ -1469,7 +1481,7 @@ nav.main ul li a:hover {
   border-radius: 3px;
   text-decoration: none;
 }
-/* line 612, ../../app/stylesheets/application.scss */
+/* line 624, ../../app/stylesheets/application.scss */
 #tags li.remove a {
   background: #229922;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #44bb44), color-stop(100%, #229922));
@@ -1479,14 +1491,14 @@ nav.main ul li a:hover {
   color: #FFFEFE !important;
   border: 1px solid #070;
 }
-/* line 621, ../../app/stylesheets/application.scss */
+/* line 633, ../../app/stylesheets/application.scss */
 #tags li.remove a:hover {
   background: #3da83d;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #3da83d), color-stop(100%, #1d841d));
   background-image: -moz-linear-gradient(top, #3da83d 0%, #1d841d 100%);
   background-image: linear-gradient(top, #3da83d 0%, #1d841d 100%);
 }
-/* line 626, ../../app/stylesheets/application.scss */
+/* line 638, ../../app/stylesheets/application.scss */
 #tags li.remove a:active {
   background: #57c257;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #57c257), color-stop(100%, #27ae27));
@@ -1494,17 +1506,22 @@ nav.main ul li a:hover {
   background-image: linear-gradient(top, #57c257 0%, #27ae27 100%);
 }
 
-/* line 632, ../../app/stylesheets/application.scss */
+/* line 644, ../../app/stylesheets/application.scss */
 p.small {
   font-size: 1em;
 }
 
-/* line 633, ../../app/stylesheets/application.scss */
+/* line 645, ../../app/stylesheets/application.scss */
 .highlight_fade {
   background-color: #fffecf;
 }
 
-/* line 638, ../../app/stylesheets/application.scss */
+/* line 650, ../../app/stylesheets/application.scss */
 .inner-content {
   padding: 30px 50px 10px;
+}
+
+/* line 654, ../../app/stylesheets/application.scss */
+.you {
+  background-color: #ffffcc !important;
 }

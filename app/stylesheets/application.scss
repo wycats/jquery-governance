@@ -297,22 +297,30 @@ div.motion {
   @include float-container;
 
   h2 {
-    line-height: 1;
+    font-size: 27px;
+    font-weight: bold;
+    line-height: 1.2;
+    color: #333;
 
     .author {
       display: block;
-      font-size: 0.7em;
-      font-weight: normal;
-      font-style: italic;
-      color: #80a080;
+      color: #94ca3d;
+      font-size: 24px;
+      line-height: 1;
+
+      strong {
+        font-weight: bold;
+      }
     }
   }
 
   .description {
     margin: 15px 0 25px;
+    line-height: 1.5;
 
     p {
-      color: #333;
+      font-size: 15px;
+      color: #666;
     }
   }
 
@@ -321,8 +329,10 @@ div.motion {
   }
 
   h3 {
-    font-size: 1.5em;
+    font-size: 15px;
+    line-height: 1.5;
     text-transform: uppercase;
+    border-bottom: 1px solid #eee !important;
   }
 
   p {
@@ -337,15 +347,15 @@ div.motion {
   }
 
   #motion-actions {
-    width: 290px;
+    width: 260px;
     float: right;
 
     dl {
       margin-bottom: 15px;
 
       dt, dd {
-        background-color: #F3EFE4;
-        font-size: 1.2em;
+        background-color: #f6f6f6;
+        font-size: 14px;
       }
 
       dt {
@@ -353,12 +363,14 @@ div.motion {
         @include border-top-radius(5px);
         font-weight: bold;
         text-transform: uppercase;
+        color: #333;
       }
 
       dd {
         margin-bottom: 10px;
         padding: 0 15px 8px;
         @include border-bottom-radius(5px);
+        color: #666;
       }
     }
 
@@ -368,7 +380,7 @@ div.motion {
   }
 
   #motion-events {
-    border-top: 1px solid #eee;
+    margin-top: -8px;
 
     li {
       padding: 5px 0;
@@ -637,4 +649,8 @@ p.small { font-size: 1em; }
 
 .inner-content {
   padding: 30px 50px 10px;
+}
+
+.you {
+  background-color: #ffffcc !important;
 }
