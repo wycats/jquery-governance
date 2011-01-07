@@ -2,22 +2,24 @@
 
 #new_motion_form
   = form_for @motion do |f|
-    .form_row
+    .field.text
       = f.label :title
       = f.text_field :title
-    .form_row
-      = f.label :description
-      = f.text_area :description
-    .form_row
-      = f.label :rationale
-      = f.text_area :rationale
-    .form_row
-      = f.label :expedited, "Expedite Motion"
+    .check_box
+      = f.label :expedited, "Mark as expedited"
       = f.check_box :expedited
-    .form_row
-      = f.label :tags, "Tags"
-      - @tags.each do |tag|
-        = check_box_tag "motion[tag_ids][]", tag.id, @motion.tags.include?(tag), :id => dom_id(tag)
-        %label{ :for => dom_id(tag), :class => dom_class(tag) }= tag.name
-    .form_row.centered.submit
+    .field.text_area
+      = f.label :description
+      = f.text_area :description, :rows => 6
+    .field.text_area
+      = f.label :rationale
+      = f.text_area :rationale, :rows => 4
+    .check_boxes
+      .title
+        = f.label :tags
+      .options
+        - @tags.each do |tag|
+          = check_box_tag "motion[tag_ids][]", tag.id, @motion.tags.include?(tag), :id => dom_id(tag)
+          %label{ :for => dom_id(tag), :class => dom_class(tag) }= tag.name
+    .action.submit
       = f.submit "Create Motion", :class => 'button large'
