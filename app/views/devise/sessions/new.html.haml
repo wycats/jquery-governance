@@ -1,17 +1,20 @@
 %h2 Sign in
 #user_signin_form
   = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-    .form_row
+    .instructions
+      %p
+        Log in to your account or
+        = link_to 'reset your password', new_password_path(resource_name)
+        if you forgot it.
+    .field.text
       = f.label :email
       = f.text_field :email
-    .form_row
+    .field.password
       = f.label :password
       = f.password_field :password
     - if devise_mapping.rememberable?
-      .form_row
+      .check_box
         = f.check_box :remember_me
-        = f.label :remember_me
-    .form_row.centered.submit
+        = f.label :remember_me, 'Remember me on this computer'
+    .action.submit
       = f.submit "Sign in", :class => 'button large'
-    .form_row.centered
-      = render :partial => "devise/shared/links"
