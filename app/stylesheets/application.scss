@@ -397,12 +397,18 @@ div.motion {
   }
 
   h1 {
-    margin-bottom: 10px;
-    padding-top: 0;
-    font-size: 3em;
-    color: $header_green;
-    text-shadow: 0 1px 1px #ccc;
-    font-style: italic;
+    padding: 0 0 0 170px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #835c33;
+    letter-spacing: -1px;
+
+    &.for_form {
+      margin-bottom: 20px;
+      padding: 0 570px 0 0;
+      border-bottom: 1px solid #eee !important;
+      text-align: right;
+    }
   }
 }
 
@@ -411,23 +417,18 @@ div.motion {
   h2 {
     margin: 20px 0 3px;
     padding-left: 170px;
-    font-size: 27px;
+    font-size: 24px;
+    color: #cda658;
   }
 
   .button {
     float: right;
   }
 
-  ul {
-    overflow: hidden;
-    border-top: 2px solid #eee;
-  }
-
   li {
     @include float-container;
     padding: 10px 0 30px;
     border-top: 1px solid #eee;
-    margin-top: -1px;
 
     .actions {
       position: relative;
