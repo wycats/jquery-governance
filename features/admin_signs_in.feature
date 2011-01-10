@@ -12,7 +12,7 @@ Feature: Admin Member signs in
     And I fill in "Email" with "theman@example.com"
     And I fill in "Password" with "theman"
     And I press "Sign in"
-    Then I should be on the admin page
+    Then I should be on the admin members page
     And I should see "Signed in successfully."
 
   Scenario: I attempt to log into the admin page with member credentials

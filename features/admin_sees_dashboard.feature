@@ -8,5 +8,5 @@ Feature: Admin has a dashboard
 
   Scenario: See available actions
     Given I am on the admin page
-    When I follow "Manage members"
+    When I follow "Manage Members"
     Then I should be on the members admin page

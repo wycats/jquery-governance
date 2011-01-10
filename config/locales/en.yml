@@ -39,7 +39,7 @@ en:
         membership_not_renewed: "There was a problem renewing the membership"
     members:
       titles:
-        index: "Manage members"
+        index: "Manage Members"
         new:   "New member"
         edit:  "Edit member info"
       headings:

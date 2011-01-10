@@ -12,7 +12,7 @@ Feature: Admin manages members
       | John Resig | jresig@example.org |
       | Paul Irish | paul@example.com   |
     When I go to the members admin page
-    Then I should see "Manage members"
+    Then I should see "Manage Members"
     And I should see "Yehuda Katz"
     And I should see "John Resig"
     And I should see "Paul Irish"

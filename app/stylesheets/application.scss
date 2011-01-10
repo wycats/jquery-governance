@@ -424,6 +424,22 @@ div.motion {
   }
 }
 
+#content div#admin_members {
+  .button {
+    float: right;
+  }
+  table {
+    margin-left: 50px;
+  }
+  th, td {
+    min-width: 175px;
+    font-size: 15px;
+    padding: 2px;
+  }
+  .alt {
+    background-color: #DDD;
+  }
+}
 
 #content div.motions {
   h2 {

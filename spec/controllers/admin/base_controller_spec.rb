@@ -12,7 +12,7 @@ describe Admin::BaseController do
 
     it "should rendere the admin index template" do
       get :index
-      response.should render_template('admin/base/index')
+      response.should redirect_to(admin_members_path)
     end
   end
 

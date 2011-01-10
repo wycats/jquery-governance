@@ -5,6 +5,12 @@ module Admin
 
     respond_to :html
 
+    def index
+      # no point having a page with just 1 link - go ahead and redirect there
+      flash[:notice] = flash[:notice] if flash[:notice]
+      redirect_to admin_members_path
+    end
+
     private
 
     def admin_required
