@@ -1266,43 +1266,72 @@ div.motion #motion-events li {
 }
 
 /* line 428, ../../app/stylesheets/application.scss */
-#content div#admin_members .button {
+#content div#admin_members .right {
   float: right;
 }
 /* line 431, ../../app/stylesheets/application.scss */
+#content div#admin_members .left {
+  float: left;
+}
+/* line 434, ../../app/stylesheets/application.scss */
+#content div#admin_members .center {
+  margin-left: 300px;
+}
+/* line 437, ../../app/stylesheets/application.scss */
 #content div#admin_members table {
   margin-left: 50px;
 }
-/* line 434, ../../app/stylesheets/application.scss */
+/* line 440, ../../app/stylesheets/application.scss */
+#content div#admin_members fieldset, #content div#admin_members th, #content div#admin_members td {
+  font-size: 15px;
+}
+/* line 443, ../../app/stylesheets/application.scss */
 #content div#admin_members th, #content div#admin_members td {
   min-width: 175px;
-  font-size: 15px;
   padding: 2px;
 }
-/* line 439, ../../app/stylesheets/application.scss */
+/* line 447, ../../app/stylesheets/application.scss */
 #content div#admin_members .alt {
   background-color: #DDD;
 }
+/* line 450, ../../app/stylesheets/application.scss */
+#content div#admin_members label {
+  float: left;
+  font-size: 14px;
+  line-height: 30px;
+  vertical-align: middle;
+  width: 120px;
+}
+/* line 457, ../../app/stylesheets/application.scss */
+#content div#admin_members input[type=text] {
+  padding: 5px;
+  width: 550px;
+  border: 1px solid #cccccc;
+}
+/* line 462, ../../app/stylesheets/application.scss */
+#content div#admin_members submit {
+  margin-top: 40px;
+}
 
-/* line 445, ../../app/stylesheets/application.scss */
+/* line 468, ../../app/stylesheets/application.scss */
 #content div.motions h2 {
   margin: 20px 0 3px;
   padding-left: 170px;
   font-size: 24px;
   color: #cda658;
 }
-/* line 452, ../../app/stylesheets/application.scss */
+/* line 475, ../../app/stylesheets/application.scss */
 #content div.motions .button {
   float: right;
 }
-/* line 456, ../../app/stylesheets/application.scss */
+/* line 479, ../../app/stylesheets/application.scss */
 #content div.motions li {
   width: 100%;
   overflow: hidden;
   padding: 10px 0 30px;
   border-top: 1px solid #eee;
 }
-/* line 461, ../../app/stylesheets/application.scss */
+/* line 484, ../../app/stylesheets/application.scss */
 #content div.motions li .actions {
   position: relative;
   float: left;
@@ -1311,18 +1340,18 @@ div.motion #motion-events li {
   font-size: 11px;
   text-align: right;
 }
-/* line 469, ../../app/stylesheets/application.scss */
+/* line 492, ../../app/stylesheets/application.scss */
 #content div.motions li .actions .created_at {
   padding-top: 7px;
   font-size: 18px;
   line-height: 1.2;
   color: #999;
 }
-/* line 475, ../../app/stylesheets/application.scss */
+/* line 498, ../../app/stylesheets/application.scss */
 #content div.motions li .actions .created_at .time {
   display: block;
 }
-/* line 478, ../../app/stylesheets/application.scss */
+/* line 501, ../../app/stylesheets/application.scss */
 #content div.motions li .actions .badge.status {
   position: absolute;
   right: 0;
@@ -1330,17 +1359,17 @@ div.motion #motion-events li {
   margin: 18px 0 0;
   font-size: 13px;
 }
-/* line 488, ../../app/stylesheets/application.scss */
+/* line 511, ../../app/stylesheets/application.scss */
 #content div.motions li .summary {
   float: left;
   width: 600px;
 }
-/* line 492, ../../app/stylesheets/application.scss */
+/* line 515, ../../app/stylesheets/application.scss */
 #content div.motions li .summary p {
   margin: 0;
   font-size: 13px;
 }
-/* line 497, ../../app/stylesheets/application.scss */
+/* line 520, ../../app/stylesheets/application.scss */
 #content div.motions li .summary p.title a:link, #content div.motions li .summary p.title a:visited {
   font-size: 27px;
   font-weight: bold;
@@ -1348,28 +1377,28 @@ div.motion #motion-events li {
   text-decoration: none;
   color: #333 !important;
 }
-/* line 506, ../../app/stylesheets/application.scss */
+/* line 529, ../../app/stylesheets/application.scss */
 #content div.motions li .summary p.author {
   color: #94ca3d;
   font-size: 24px;
   line-height: 1;
 }
-/* line 511, ../../app/stylesheets/application.scss */
+/* line 534, ../../app/stylesheets/application.scss */
 #content div.motions li .summary p.author strong {
   font-weight: bold;
 }
-/* line 516, ../../app/stylesheets/application.scss */
+/* line 539, ../../app/stylesheets/application.scss */
 #content div.motions li .summary p.description {
   margin-top: 10px;
   font-size: 15px;
   line-height: 1.5;
   color: #666;
 }
-/* line 525, ../../app/stylesheets/application.scss */
+/* line 548, ../../app/stylesheets/application.scss */
 #content div.motions li.acted_on {
   background-color: #f8f8f8 !important;
 }
-/* line 530, ../../app/stylesheets/application.scss */
+/* line 553, ../../app/stylesheets/application.scss */
 #content div.motions div.empty {
   margin: 10px 0 40px;
   padding-left: 170px;
@@ -1377,33 +1406,33 @@ div.motion #motion-events li {
   font-style: italic;
   color: #333;
 }
-/* line 538, ../../app/stylesheets/application.scss */
+/* line 561, ../../app/stylesheets/application.scss */
 #content div.motions div.show_more {
   width: 100%;
   overflow: hidden;
   margin: 10px 0;
 }
-/* line 542, ../../app/stylesheets/application.scss */
+/* line 565, ../../app/stylesheets/application.scss */
 #content div.motions div.show_more .button {
   margin: 3px;
 }
 
-/* line 548, ../../app/stylesheets/application.scss */
+/* line 571, ../../app/stylesheets/application.scss */
 nav.main {
   width: 100%;
   overflow: hidden;
 }
-/* line 551, ../../app/stylesheets/application.scss */
+/* line 574, ../../app/stylesheets/application.scss */
 nav.main ul {
   float: right;
   height: 40px;
 }
-/* line 555, ../../app/stylesheets/application.scss */
+/* line 578, ../../app/stylesheets/application.scss */
 nav.main ul li {
   margin-top: 5px;
   float: left;
 }
-/* line 559, ../../app/stylesheets/application.scss */
+/* line 582, ../../app/stylesheets/application.scss */
 nav.main ul li.first a {
   -moz-border-radius-bottomleft: 6px;
   -webkit-border-bottom-left-radius: 6px;
@@ -1412,7 +1441,7 @@ nav.main ul li.first a {
   -khtml-border-bottom-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
-/* line 563, ../../app/stylesheets/application.scss */
+/* line 586, ../../app/stylesheets/application.scss */
 nav.main ul li a {
   font-size: 1.25em;
   font-family: helvetica, arial, sans-serif;
@@ -1430,14 +1459,14 @@ nav.main ul li a {
   cursor: pointer;
   background: url("http://jquery.org/wp-content/themes/green/green/shadow.png") bottom left repeat-x;
 }
-/* line 576, ../../app/stylesheets/application.scss */
+/* line 599, ../../app/stylesheets/application.scss */
 nav.main ul li a:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
 /* @end */
 /* @group Flash alerts & Validation Errors */
-/* line 587, ../../app/stylesheets/application.scss */
+/* line 610, ../../app/stylesheets/application.scss */
 #flash_notice, #flash_alert {
   clear: both;
   margin: 10px 20px;
@@ -1447,21 +1476,21 @@ nav.main ul li a:hover {
   text-align: center;
 }
 
-/* line 596, ../../app/stylesheets/application.scss */
+/* line 619, ../../app/stylesheets/application.scss */
 #flash_notice {
   background-color: #fffecf;
   border-color: #dcda00;
   color: #5F5F5F;
 }
 
-/* line 602, ../../app/stylesheets/application.scss */
+/* line 625, ../../app/stylesheets/application.scss */
 #flash_alert {
   background-color: #FFEEEE;
   border-color: red;
   color: red;
 }
 
-/* line 608, ../../app/stylesheets/application.scss */
+/* line 631, ../../app/stylesheets/application.scss */
 #error_explanation {
   background: #FBB;
   border: 2px solid red;
@@ -1470,26 +1499,26 @@ nav.main ul li a:hover {
   font-size: 12px;
   margin: 20px;
 }
-/* line 616, ../../app/stylesheets/application.scss */
+/* line 639, ../../app/stylesheets/application.scss */
 #error_explanation ul {
   margin: 0;
 }
-/* line 620, ../../app/stylesheets/application.scss */
+/* line 643, ../../app/stylesheets/application.scss */
 #error_explanation h2 {
   font-size: 14px;
 }
-/* line 624, ../../app/stylesheets/application.scss */
+/* line 647, ../../app/stylesheets/application.scss */
 #error_explanation h3 {
   font-size: 12px;
 }
 
 /* @end */
-/* line 630, ../../app/stylesheets/application.scss */
+/* line 653, ../../app/stylesheets/application.scss */
 #tags li {
   font-size: 14px;
   margin: 1em 0;
 }
-/* line 635, ../../app/stylesheets/application.scss */
+/* line 658, ../../app/stylesheets/application.scss */
 #tags li a {
   padding: 4px;
   -moz-border-radius: 3px;
@@ -1500,7 +1529,7 @@ nav.main ul li a:hover {
   border-radius: 3px;
   text-decoration: none;
 }
-/* line 640, ../../app/stylesheets/application.scss */
+/* line 663, ../../app/stylesheets/application.scss */
 #tags li.remove a {
   background: #229922;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #44bb44), color-stop(100%, #229922));
@@ -1510,14 +1539,14 @@ nav.main ul li a:hover {
   color: #FFFEFE !important;
   border: 1px solid #070;
 }
-/* line 649, ../../app/stylesheets/application.scss */
+/* line 672, ../../app/stylesheets/application.scss */
 #tags li.remove a:hover {
   background: #3da83d;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #3da83d), color-stop(100%, #1d841d));
   background-image: -moz-linear-gradient(top, #3da83d 0%, #1d841d 100%);
   background-image: linear-gradient(top, #3da83d 0%, #1d841d 100%);
 }
-/* line 654, ../../app/stylesheets/application.scss */
+/* line 677, ../../app/stylesheets/application.scss */
 #tags li.remove a:active {
   background: #57c257;
   background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #57c257), color-stop(100%, #27ae27));
@@ -1525,22 +1554,22 @@ nav.main ul li a:hover {
   background-image: linear-gradient(top, #57c257 0%, #27ae27 100%);
 }
 
-/* line 660, ../../app/stylesheets/application.scss */
+/* line 683, ../../app/stylesheets/application.scss */
 p.small {
   font-size: 1em;
 }
 
-/* line 661, ../../app/stylesheets/application.scss */
+/* line 684, ../../app/stylesheets/application.scss */
 .highlight_fade {
   background-color: #fffecf;
 }
 
-/* line 666, ../../app/stylesheets/application.scss */
+/* line 689, ../../app/stylesheets/application.scss */
 .inner-content {
   padding: 30px 50px 10px;
 }
 
-/* line 670, ../../app/stylesheets/application.scss */
+/* line 693, ../../app/stylesheets/application.scss */
 .you {
   background-color: #ffffcc !important;
 }
