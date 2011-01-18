@@ -2,6 +2,12 @@ require 'spec_helper'
 
 module MotionState
   describe Waitingsecond do
+    describe ".public?" do
+      it "returns false" do
+        Waitingsecond.should_not be_public
+      end
+    end
+
     describe "setup" do
       it "should notify members of that a new motion has been created" do
         @motion = Factory.build(:motion)

@@ -14,6 +14,15 @@ module MotionState
   # Mixin for the states of the motions who are visible to the public (i.e. any
   # other person who is not an active member).
   module PubliclyViewable
+    module ClassMethods
+      def public?
+        true
+      end
+    end
+
+    def self.included(klass)
+      klass.extend ClassMethods
+    end
 
     # Indicates whether or not a given member is allowed to see a motion.
     # @param [Member] member A member which wants to see the motion.
@@ -26,6 +35,15 @@ module MotionState
   # Mixin for the states of the motions who are visible only visible to the
   # active members.
   module ActiveMemberViewable
+    module ClassMethods
+      def public?
+        false
+      end
+    end
+
+    def self.included(klass)
+      klass.extend ClassMethods
+    end
 
     # Indicates whether or not a given member is allowed to see a motion.
     # @param [Member] member A member which wants to see the motion.

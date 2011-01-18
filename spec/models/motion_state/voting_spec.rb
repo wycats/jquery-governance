@@ -9,6 +9,12 @@ module MotionState
       @motion_state = @motion.state
     end
 
+    describe ".public?" do
+      it "returns true" do
+        Voting.should be_public
+      end
+    end
+
     describe "setup" do
       it "should notify members of that voting on the motion has begun" do
         ActiveMemberNotifier.should_receive(:deliver).with(:voting_beginning, @motion)

@@ -5,6 +5,9 @@ module MotionState
   # This class has stub methods for all the messages a state object needs to
   # understand.
   class Base
+    def self.public?
+    end
+
     # @param [Motion] The Motion to which belongs this state.
     # @return [Base subclass] A new instance of the class that extends Base.
     def initialize(motion)

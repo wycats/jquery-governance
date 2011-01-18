@@ -9,6 +9,12 @@ module MotionState
       @motion_state = @motion.state
     end
 
+    describe ".public?" do
+      it "returns false" do
+        Discussing.should_not be_public
+      end
+    end
+
     describe "setup" do
       it "should notify members of that discussion of the motion has begun" do
         ActiveMemberNotifier.should_receive(:deliver).with(:discussion_beginning, @motion)

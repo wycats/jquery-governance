@@ -9,6 +9,12 @@ module MotionState
       @motion_state = @motion.state
     end
 
+    describe ".public?" do
+      it "returns true" do
+        Closed.should be_public
+      end
+    end
+
     describe "setup" do
       it "should notify members of the outcome of the motion now that it is closed" do
         ActiveMemberNotifier.should_receive(:deliver).with(:motion_closed, @motion)
