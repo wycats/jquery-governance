@@ -8,6 +8,18 @@ module MotionState
       end
     end
 
+    describe ".open?" do
+      it "returns true" do
+        Waitingsecond.should be_open
+      end
+    end
+
+    describe ".closed?" do
+      it "returns false" do
+        Waitingsecond.should_not be_closed
+      end
+    end
+
     describe "setup" do
       it "should notify members of that a new motion has been created" do
         @motion = Factory.build(:motion)

@@ -15,6 +15,18 @@ module MotionState
       end
     end
 
+    describe ".open?" do
+      it "returns true" do
+        Discussing.should be_open
+      end
+    end
+
+    describe ".closed?" do
+      it "returns false" do
+        Discussing.should_not be_closed
+      end
+    end
+
     describe "setup" do
       it "should notify members of that discussion of the motion has begun" do
         ActiveMemberNotifier.should_receive(:deliver).with(:discussion_beginning, @motion)

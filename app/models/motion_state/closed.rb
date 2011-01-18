@@ -11,6 +11,10 @@ module MotionState
     include NoObjetionable
     include NoVotable
 
+    def self.open?
+      false
+    end
+
     def setup
       notify_members_of_outcome
     end

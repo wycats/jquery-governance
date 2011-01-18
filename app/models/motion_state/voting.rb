@@ -9,6 +9,7 @@ module MotionState
     include PubliclyViewable
     include NoSecondable
     include NoObjetionable
+    extend Open
 
     def setup
       notify_members_voting_beginning

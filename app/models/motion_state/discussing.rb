@@ -9,6 +9,7 @@ module MotionState
     include NoVotable
     include ActiveMemberViewable
     include NoSecondable
+    extend Open
 
     def setup
       notify_members_discussion_beginning

@@ -9,6 +9,7 @@ module MotionState
     include ActiveMemberViewable
     include NoObjetionable
     include NoVotable
+    extend Open
 
     def setup
       notify_members_of_new_motion

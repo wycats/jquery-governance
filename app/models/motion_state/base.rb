@@ -8,6 +8,13 @@ module MotionState
     def self.public?
     end
 
+    def self.open?
+    end
+
+    def self.closed?
+      !open?
+    end
+
     # @param [Motion] The Motion to which belongs this state.
     # @return [Base subclass] A new instance of the class that extends Base.
     def initialize(motion)

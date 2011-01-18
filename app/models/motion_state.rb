@@ -85,4 +85,10 @@ module MotionState
       false
     end
   end
+
+  module Open
+    def open?
+      true
+    end
+  end
 end

@@ -15,6 +15,18 @@ module MotionState
       end
     end
 
+    describe ".open?" do
+      it "returns false" do
+        Closed.should_not be_open
+      end
+    end
+
+    describe ".closed?" do
+      it "returns true" do
+        Closed.should be_closed
+      end
+    end
+
     describe "setup" do
       it "should notify members of the outcome of the motion now that it is closed" do
         ActiveMemberNotifier.should_receive(:deliver).with(:motion_closed, @motion)
