@@ -301,6 +301,10 @@ class Motion < ActiveRecord::Base
     order('created_at DESC').limit(size)
   end
 
+  def self.states
+    [:waitingsecond, :discussing, :voting, :closed]
+  end
+
 private
   # @todo Description
   def possible_votes

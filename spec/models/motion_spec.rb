@@ -168,4 +168,15 @@ describe Motion do
       @motion.tags.first.should_not be_a_new_record
     end
   end
+
+  describe ".states" do
+    it "returns the state names" do
+      Motion.states.should include(:waitingsecond)
+      Motion.states.should include(:discussing)
+      Motion.states.should include(:voting)
+      Motion.states.should include(:closed)
+
+      Motion.states.size.should == 4
+    end
+  end
 end
