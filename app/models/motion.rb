@@ -305,6 +305,14 @@ class Motion < ActiveRecord::Base
     [:waitingsecond, :discussing, :voting, :closed]
   end
 
+  def self.public_states
+    states.find_all { |state_name| state_class(state_name).public? }
+  end
+
+  def self.state_class(state_name)
+    "MotionState::#{state_name.capitalize}".constantize if states.include?(state_name)
+  end
+
 private
   # @todo Description
   def possible_votes

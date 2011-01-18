@@ -179,4 +179,13 @@ describe Motion do
       Motion.states.size.should == 4
     end
   end
+
+  describe ".public_states" do
+    it "returns the public state names" do
+      Motion.public_states.should include(:voting)
+      Motion.public_states.should include(:closed)
+
+      Motion.public_states.size.should == 2
+    end
+  end
 end
