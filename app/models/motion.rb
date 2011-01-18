@@ -309,18 +309,6 @@ class Motion < ActiveRecord::Base
     end
   end
 
-  def self.public_states
-    states(:public)
-  end
-
-  def self.open_states
-    states(:open)
-  end
-
-  def self.closed_states
-    states(:closed)
-  end
-
   def self.state_class(state_name)
     "MotionState::#{state_name.capitalize}".constantize if states.include?(state_name)
   end

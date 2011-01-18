@@ -170,7 +170,7 @@ describe Motion do
   end
 
   describe ".states" do
-    it "returns the state names" do
+    it "knows the available state names" do
       Motion.states.should include(:waitingsecond)
       Motion.states.should include(:discussing)
       Motion.states.should include(:voting)
@@ -178,30 +178,24 @@ describe Motion do
 
       Motion.states.size.should == 4
     end
-  end
 
-  describe ".public_states" do
-    it "returns the public state names" do
-      Motion.public_states.should include(:voting)
-      Motion.public_states.should include(:closed)
+    it "knows the public state names" do
+      Motion.states(:public).should include(:voting)
+      Motion.states(:public).should include(:closed)
 
-      Motion.public_states.size.should == 2
+      Motion.states(:public).size.should == 2
     end
-  end
 
-  describe ".open_states" do
-    it "returns the open state names" do
-      Motion.open_states.should include(:waitingsecond)
-      Motion.open_states.should include(:discussing)
-      Motion.open_states.should include(:voting)
+    it "knows the open state names" do
+      Motion.states(:open).should include(:waitingsecond)
+      Motion.states(:open).should include(:discussing)
+      Motion.states(:open).should include(:voting)
 
-      Motion.open_states.size.should == 3
+      Motion.states(:open).size.should == 3
     end
-  end
 
-  describe ".closed_states" do
-    it "returns the closed state names" do
-      Motion.closed_states.should == [:closed]
+    it "knows the closed state names" do
+      Motion.states(:closed).should == [:closed]
     end
   end
 end
