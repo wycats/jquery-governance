@@ -310,7 +310,9 @@ class Motion < ActiveRecord::Base
   end
 
   def self.state_class(state_name)
-    "MotionState::#{state_name.capitalize}".constantize if states.include?(state_name)
+    if states.include?(state_name.to_sym)
+      "MotionState::#{state_name.capitalize}".constantize
+    end
   end
 
 private
@@ -329,8 +331,6 @@ private
   end
 
   def assign_state
-    if MOTION_STATES.include?(state_name)
-      @state = "MotionState::#{state_name.capitalize}".constantize.new(self)
-    end
+    @state = self.class.state_class(state_name).try(:new, self)
   end
 end
