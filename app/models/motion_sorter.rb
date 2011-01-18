@@ -9,7 +9,7 @@ class MotionSorter
   # state.
   # @return [Hash] An entry for every group is in it, the key is the state name and the value are the motions.
   def public_groups
-    { :voting => scope.voting, :closed => scope.closed_state }
+    { :voting => scope.voting, :closed => scope.closed }
   end
 
   # Find motions that are currently in the open states grouped by state.
@@ -21,7 +21,7 @@ class MotionSorter
   # Find motions that are currently in the closed state.
   # @return [Hash] The key is the state name and the value are the motions.
   def closed_groups
-    { :closed => scope.closed_state }
+    { :closed => scope.closed }
   end
 
   def all_groups

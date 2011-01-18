@@ -73,7 +73,7 @@ class Motion < ActiveRecord::Base
   MOTION_STATES = OPEN_STATES + CLOSED_STATES
 
   scope :open_state,    where(:state_name => OPEN_STATES)
-  scope :closed_state,  where(:state_name => CLOSED_STATES)
+  scope :closed,        where(:state_name => CLOSED_STATES)
   scope :waitingsecond, where(:state_name => 'waitingsecond')
   scope :discussing,    where(:state_name => 'discussing')
   scope :voting,        where(:state_name => 'voting')
