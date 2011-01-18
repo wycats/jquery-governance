@@ -11,10 +11,10 @@ class MotionSearch
 
     # Scope them so that user's can't see motions they lack
     # the permissons to view
-    motions = MotionSorter.groups_for(@member, :scope => results)
+    group = MotionSorter.group_for(@member, :scope => results)
 
-    motions[:groups].delete_if { |name, group| group.empty? }
+    group[:motions].delete_if { |state, motions| motions.empty? }
 
-    motions[:groups].blank? ? nil : motions
+    group[:motions].blank? ? nil : group
   end
 end

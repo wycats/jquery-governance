@@ -41,7 +41,7 @@ describe MotionsController do
     it "should render the index template with motions" do
       get :index
       response.should render_template(:index)
-      assigns(:motions).should_not be_nil
+      assigns(:group).should_not be_nil
     end
     it "should render 1 more motion when the user clicks more"
   end
@@ -58,7 +58,7 @@ describe MotionsController do
     it "should render the index template with motion groups" do
       get :closed
       response.should render_template(:index)
-      assigns(:motions).should_not be_nil
+      assigns(:group).should_not be_nil
     end
   end
 end
