@@ -9,11 +9,6 @@ Feature: Member creates motion
       | name          | email              |
       | John Resig    | john@jquery.com    |
       | Yehuda Katz   | yehuda@jquery.com  |
-    And these tags exist:
-      | name       |
-      | legal      |
-      | governance |
-      | events     |
 
   Scenario: A motion is created
     Given I am signed in as "John Resig"
@@ -35,8 +30,7 @@ Feature: Member creates motion
       And I follow "New Motion"
       And I fill in "Title" with "jQuery should take over the JS world"
       And I fill in "Description" with "Replace all websites' JS with jQuery."
-      And I check "governance"
-      And I check "events"
+      And I fill in "Tag list" with "governance events"
       And I press "Create Motion"
      Then I should see "governance"
       And I should see "events"

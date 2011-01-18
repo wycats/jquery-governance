@@ -16,7 +16,6 @@ class MotionsController < ApplicationController
   # Start a new Motion
   def new
     @motion = current_member.motions.build
-    @tags = Tag.scoped
   end
 
   # Show more records for the motion state section
@@ -32,7 +31,6 @@ class MotionsController < ApplicationController
       flash[:notice] = "New motion was created successfully"
       redirect_to motion_events_url(@motion)
     else
-      @tags = Tag.scoped
       render :new
     end
   end

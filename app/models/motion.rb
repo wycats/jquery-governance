@@ -82,9 +82,10 @@ class Motion < ActiveRecord::Base
 
   validates :state_name, :inclusion => { :in => MOTION_STATES }
 
-  belongs_to  :member
-  has_many    :events
-  has_and_belongs_to_many :tags, :join_table => "taggings"
+  belongs_to :member
+  has_many   :events
+  has_many   :taggings, :dependent => :destroy
+  has_many   :tags, :through => :taggings
 
   after_save :schedule_updates, :if => :state_name_changed?
   after_create :schedule_updates
@@ -154,6 +155,16 @@ class Motion < ActiveRecord::Base
   # @return [true, false] Whether or not the motion has received an objection.
   def objected?
     objections.any?
+  end
+
+  def tag_list
+    tags.map(&:name).join(' ')
+  end
+
+  def tag_list=(tag_list='')
+    self.tags = tag_list.split(' ').map do |tag_name|
+      Tag.find_or_initialize_by_name(tag_name)
+    end
   end
 
   ##

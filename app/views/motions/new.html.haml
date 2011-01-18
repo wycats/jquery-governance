@@ -14,12 +14,8 @@
     .field.text_area
       = f.label :rationale
       = f.text_area :rationale, :rows => 4
-    .check_boxes
-      .title
-        = f.label :tags
-      .options
-        - @tags.each do |tag|
-          = check_box_tag "motion[tag_ids][]", tag.id, @motion.tags.include?(tag), :id => dom_id(tag)
-          %label{ :for => dom_id(tag), :class => dom_class(tag) }= tag.name
+    .field.text
+      = f.label :tag_list
+      = f.text_field :tag_list
     .action.submit
       = f.submit "Create Motion", :class => 'button large'

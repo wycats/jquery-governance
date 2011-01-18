@@ -133,4 +133,39 @@ describe Motion do
       end
     end
   end
+
+  describe "tag_list=" do
+    it "updates the motion tags" do
+      @motion = Factory.build(:motion)
+      @motion.tag_list = 'legal events'
+
+      @motion.tags.size.should == 2
+      @motion.tags.any? { |t| t.name == 'legal' }.should be_true
+      @motion.tags.any? { |t| t.name == 'events' }.should be_true
+    end
+
+    it "instantiates but doesn't save unexistent tags" do
+      @motion = Factory.build(:motion)
+      @motion.tag_list = 'legal'
+
+      @motion.tags.first.should be_a_new_record
+    end
+
+    it "doesn't instantiate existent tags" do
+      Factory.create(:tag, :name => 'legal')
+
+      @motion = Factory.build(:motion)
+      @motion.tag_list = 'legal'
+
+      @motion.tags.first.should_not be_a_new_record
+    end
+
+    it "saves the unexistent tags when the motion is saved" do
+      @motion = Factory.build(:motion)
+      @motion.tag_list = 'legal'
+
+      @motion.save
+      @motion.tags.first.should_not be_a_new_record
+    end
+  end
 end
