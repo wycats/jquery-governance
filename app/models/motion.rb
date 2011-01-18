@@ -301,44 +301,6 @@ class Motion < ActiveRecord::Base
     order('created_at DESC').limit(size)
   end
 
-  # Find motions that are currently being voted and already closed grouped by
-  # state.
-  # @param [ActiveRecord::Relation] scope The scope for every group.
-  # @return [Hash] An entry for every group is in it, the key is the state name and the value are the motions.
-  def self.public_groups(scope=scoped)
-    { :voting => scope.voting, :closed => scope.closed_state }
-  end
-
-  # Find motions that are currently in the open states grouped by state.
-  # @param [ActiveRecord::Relation] scope The scope for every group.
-  # @return [Hash] An entry for every group is in it, the key is the state name and the value are the motions.
-  def self.open_groups(scope=scoped)
-    { :waitingsecond => scope.waitingsecond, :discussing => scope.discussing, :voting => scope.voting }
-  end
-
-  # Find motions that are currently in the closed state.
-  # @param [ActiveRecord::Relation] scope The scope for the group.
-  # @return [Hash] The key is the state name and the value are the motions.
-  def self.closed_groups(scope=scoped)
-    { :groups => { :closed => scope.closed_state }, :name => :closed }
-  end
-
-  # Return the motion groups based on the user who is requesting them
-  # @param [Member] user The user who is requesting the motion groups 
-  # @param [ActiveRecord::Relation] scope The scope for the group.
-  # @return [Hash] :groups returns the actual groups, and :name returns the name of the group
-  def self.motion_groups_for_user(user, scope=nil)
-    # If there is no current user then that means that a guest is searching
-    # the motions, this is an easy way to handle a guest.
-    user ||= Member.new
-
-    if user.membership_active?
-      {:groups => Motion.open_groups(scope), :name => :open}
-    else
-      {:groups => Motion.public_groups(scope),:name => :public}
-    end
-  end
-
 private
   # @todo Description
   def possible_votes
