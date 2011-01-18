@@ -188,4 +188,20 @@ describe Motion do
       Motion.public_states.size.should == 2
     end
   end
+
+  describe ".open_states" do
+    it "returns the open state names" do
+      Motion.open_states.should include(:waitingsecond)
+      Motion.open_states.should include(:discussing)
+      Motion.open_states.should include(:voting)
+
+      Motion.open_states.size.should == 3
+    end
+  end
+
+  describe ".closed_states" do
+    it "returns the closed state names" do
+      Motion.closed_states.should == [:closed]
+    end
+  end
 end

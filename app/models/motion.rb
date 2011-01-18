@@ -301,12 +301,24 @@ class Motion < ActiveRecord::Base
     order('created_at DESC').limit(size)
   end
 
-  def self.states
-    [:waitingsecond, :discussing, :voting, :closed]
+  def self.states(kind=:all)
+    if kind == :all
+      [:waitingsecond, :discussing, :voting, :closed]
+    else
+      states.find_all { |state_name| state_class(state_name).public_send("#{kind}?") }
+    end
   end
 
   def self.public_states
-    states.find_all { |state_name| state_class(state_name).public? }
+    states(:public)
+  end
+
+  def self.open_states
+    states(:open)
+  end
+
+  def self.closed_states
+    states(:closed)
   end
 
   def self.state_class(state_name)
