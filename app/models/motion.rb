@@ -303,14 +303,14 @@ class Motion < ActiveRecord::Base
 
   def self.states(kind=:all)
     if kind == :all
-      [:waitingsecond, :discussing, :voting, :closed]
+      MOTION_STATES.dup
     else
       states.find_all { |state_name| state_class(state_name).public_send("#{kind}?") }
     end
   end
 
   def self.state_class(state_name)
-    if states.include?(state_name.to_sym)
+    if states.include?(state_name.to_s)
       "MotionState::#{state_name.capitalize}".constantize
     end
   end

@@ -20,7 +20,7 @@ private
 
   def self.hash_for(states, scope)
     state_pairs = states.map do |state|
-      [state, scope.public_send(state)]
+      [state.to_sym, scope.public_send(state)]
     end
 
     Hash[state_pairs]
