@@ -11,13 +11,17 @@ class Member < ActiveRecord::Base
   has_many :memberships
   has_many :motions
   has_many :events
-  has_many :member_conflicts
-  has_many :conflicts, :through => :member_conflicts
   has_many :seconded_motions, :through => :events, :source => :motion, :conditions => { :events => { :event_type => 'second' } }
   has_many :objected_motions, :through => :events, :source => :motion, :conditions => { :events => { :event_type => 'objection' } }
   has_many :voted_motions,    :through => :events, :source => :motion, :conditions => { :events => { :event_type => 'vote' } }
 
   accepts_nested_attributes_for :memberships
+
+  # Finds all members who currently have an active membership
+  # @return [Array] The list of members, which are currently active
+  def self.active
+    Member.all.collect {|member| member if member.membership_active?}
+  end
 
   # Checks membership status at a given Date/Time
   # @param [Date, Time, DateTime] time The time for which membership status should be checked

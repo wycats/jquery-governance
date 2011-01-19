@@ -83,8 +83,6 @@ class Motion < ActiveRecord::Base
 
   belongs_to  :member
   has_many    :events
-  has_many    :motion_conflicts
-  has_many    :conflicts, :through => :motion_conflicts
   has_and_belongs_to_many :tags, :join_table => "taggings"
 
   after_save :schedule_updates, :if => :state_name_changed?
@@ -333,7 +331,7 @@ private
   # @todo Description
   def possible_votes
     # @todo Deal with conflicts of interest
-    Membership.active_at(Time.now).count
+    active_members = Member.active.count
   end
 
   def schedule_updates

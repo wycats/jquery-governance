@@ -21,6 +21,16 @@ describe Member do
     @member_motion = Factory.create(:motion, :member => @member)
   end
 
+  describe "self.active" do
+    it "should return all members who currently have an active membership" do
+      Member.active.should include(@member, @admin_member, @non_admin_member, @renewed_member)
+    end
+
+    it "should not include members who currently do not have an active membership" do
+      Member.active.should_not include(@inactive_member, @expired_member)
+    end
+  end
+
   describe "active_at?" do
     describe "a currently active member" do
 
@@ -217,6 +227,14 @@ describe Member do
         @member.name = nil
         @member.name_or_email.should == @member.email
       end
+    end
+  end
+
+  describe "conflicts" do
+    before :all do
+      @conflict = Factory(:conflict)
+    end
+    it "should list all of the conflicts that are associated with the member" do
     end
   end
 end
