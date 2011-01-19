@@ -1,24 +1,26 @@
-%header
-  %h1= t("admin.members.titles.new")
+#admin_members
+  %header
+    %h2= t("admin.members.titles.new")
 
-%section#main
-  = form_for [:admin, @member] do |form|
-    %fieldset
-      = form.label  :name
-      = form.text_field :name, :placeholder => "John Resig"
-      = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => :name}
-    %fieldset
-      = form.label :email
-      = form.text_field :email, :placeholder => "jresig@example.com"
-      = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => :email}
-      = form.fields_for :memberships, @member.memberships.build  do |membership|
-        %fieldset
-          = membership.label :qualifying_motion_id, "Motion Reference #"
-          = membership.text_field :qualifying_motion_id, :placeholder => "1234"
-        %fieldset
-          = membership.label :is_admin
-          = membership.check_box :is_admin
-          = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => "memberships.qualifying_motion_id"}
-          = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => "memberships.qualifying_motion"}
-    .buttons
-      = form.submit t("admin.members.actions.add_new_member")
+  %section#main
+    = form_for [:admin, @member] do |form|
+      %fieldset
+        = form.label  :name
+        = form.text_field :name, :placeholder => "John Resig"
+        = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => :name}
+      %fieldset
+        = form.label :email
+        = form.text_field :email, :placeholder => "jresig@example.com"
+        = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => :email}
+        %br
+        = form.fields_for :memberships, @member.memberships.build do |membership|
+          %fieldset
+            = membership.label :qualifying_motion_id, "Motion Reference #"
+            = membership.text_field :qualifying_motion_id, :placeholder => "1234"
+          %fieldset
+            = membership.label :is_admin
+            = membership.check_box :is_admin
+            = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => "memberships.qualifying_motion_id"}
+            = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => "memberships.is_admin"}
+      .buttons
+        = form.submit t("admin.members.actions.add_new_member"), :class => 'button center'

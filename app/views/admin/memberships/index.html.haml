@@ -1,32 +1,34 @@
-%header
-  %h1= t("admin.memberships.titles.index")
+#admin_members
+  %header
+    %h1= t("admin.memberships.titles.index")
 
-%section#main
-  -if @active_membership
-    %h3= t("admin.memberships.headings.active_membership")
-    %table.active_membership
-      %tr.headings
-        %th= t("admin.memberships.headings.start_date")
-        %th= t("admin.memberships.headings.qualifying_motion")
-      %tr.active_membership[@active_membership]{:class => cycle("", "alt")}
-        %td= l(@active_membership.started_at, :format => :short)
-        %td= link_to "Motion ##{@active_membership.qualifying_motion.id}", @active_membership.qualifying_motion
-        %td= link_to t("admin.memberships.actions.end_membership"), terminate_admin_member_membership_path(@member, @active_membership)
-  - else
-    %h3= t("admin.memberships.headings.no_active_membership")
-    %td= link_to t("admin.memberships.actions.new_membership"), new_admin_member_membership_path(@member)
+  %section#main
+    -if @active_membership
+      %h3= t("admin.memberships.headings.active_membership")
+      %table.active_membership
+        %tr.headings
+          %th= t("admin.memberships.headings.start_date")
+          %th= t("admin.memberships.headings.qualifying_motion")
+          %th.actions= t("admin.members.headings.actions")
+        %tr.active_membership[@active_membership]{:class => cycle("", "alt")}
+          %td= l(@active_membership.started_at, :format => :short)
+          %td= link_to "Motion ##{@active_membership.qualifying_motion.id}", @active_membership.qualifying_motion
+          %td= link_to t("admin.memberships.actions.end_membership"), terminate_admin_member_membership_path(@member, @active_membership)
+    - else
+      %h3= t("admin.memberships.headings.no_active_membership")
+      %td= link_to t("admin.memberships.actions.new_membership"), new_admin_member_membership_path(@member)
 
-  - unless  @expired_memberships.empty?
-    %h3= t("admin.memberships.headings.expired_membership")
-    %table.expired_memberships
-      %tr.headings
-        %th= t("admin.memberships.headings.start_date")
-        %th= t("admin.memberships.headings.qualifying_motion")
-        %th= t("admin.memberships.headings.end_date")
-        %th= t("admin.memberships.headings.disqualifying_motion")
-      - @expired_memberships.each do |membership|
-        %tr.expired_membership[membership]{:class => cycle("", "alt")}
-          %td= l(membership.started_at, :format => :short)
-          %td= link_to "Motion ##{membership.qualifying_motion.id}", membership.qualifying_motion
-          %td= l(membership.ended_at,:format => :short)
-          %td= link_to "Motion ##{membership.disqualifying_motion.id}", membership.disqualifying_motion
+    - unless  @expired_memberships.empty?
+      %h3= t("admin.memberships.headings.expired_membership")
+      %table.expired_memberships
+        %tr.headings
+          %th= t("admin.memberships.headings.start_date")
+          %th= t("admin.memberships.headings.qualifying_motion")
+          %th= t("admin.memberships.headings.end_date")
+          %th= t("admin.memberships.headings.disqualifying_motion")
+        - @expired_memberships.each do |membership|
+          %tr.expired_membership[membership]{:class => cycle("", "alt")}
+            %td= l(membership.started_at, :format => :short)
+            %td= link_to "Motion ##{membership.qualifying_motion.id}", membership.qualifying_motion
+            %td= l(membership.ended_at,:format => :short)
+            %td= link_to "Motion ##{membership.disqualifying_motion.id}", membership.disqualifying_motion

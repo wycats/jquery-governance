@@ -452,12 +452,15 @@ div.motion {
     font-size: $font_label;
     line-height: $font_label_height;
     vertical-align: middle;
-    width: $label_width;
+    width: $label_width + 10px;
   }
   input[type=text] {
     padding: $input_padding;
-    width: $input_width;
+    width: $input_width - 50;
     border: 1px solid $border_color;
+  }
+  input[type=checkbox] {
+    margin-top: 9px;
   }
   submit {
     margin-top: $form_row_spacing * 4;
