@@ -58,6 +58,7 @@
 # rules.
 class Motion < ActiveRecord::Base
   include Voting
+  include ActsAsConflictable
 
   # This is the texticle sugar that sets up the fields that can be searched
   # by texticle
@@ -331,7 +332,7 @@ private
   # @todo Description
   def possible_votes
     # @todo Deal with conflicts of interest
-    active_members = Member.active.count
+    active_members = Membership.active_at(Time.now).count
   end
 
   def schedule_updates

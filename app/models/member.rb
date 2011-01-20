@@ -1,5 +1,6 @@
 class Member < ActiveRecord::Base
   include Voting
+  include ActsAsConflictable
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
@@ -14,6 +15,7 @@ class Member < ActiveRecord::Base
   has_many :seconded_motions, :through => :events, :source => :motion, :conditions => { :events => { :event_type => 'second' } }
   has_many :objected_motions, :through => :events, :source => :motion, :conditions => { :events => { :event_type => 'objection' } }
   has_many :voted_motions,    :through => :events, :source => :motion, :conditions => { :events => { :event_type => 'vote' } }
+
 
   accepts_nested_attributes_for :memberships
 

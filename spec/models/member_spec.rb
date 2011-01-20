@@ -230,11 +230,41 @@ describe Member do
     end
   end
 
-  describe "conflicts" do
-    before :all do
-      @conflict = Factory(:conflict)
+  describe "conflicts_list" do
+
+    context "when there are no conflicts asociated with the member" do
+      it "returns an empty array" do
+        @member.conflicts_list.should be_empty
+      end
     end
-    it "should list all of the conflicts that are associated with the member" do
+    
+    context "when the member has at least one conflict" do
+      before :all do
+        @member.conflicts_list = "test"
+        @member.save
+      end
+
+      it "returns an array of the names of the conflicts that are associated with the member" do
+        @member.conflicts_list.should == ["test"]
+      end
     end
   end
+
+  # describe "save_conflicts" do
+  #   before :all do
+  #     @new_member = Factory.create(:member)
+  #     @new_member.conflicts_list = ["conflict", "good", "awesome"]
+  #     @new_member.save
+  #     @new_member.conflicts_list = ["good", "awesome"]
+  #     @new_member.save
+  #   end
+
+  #   it "deletes any conflictions that aren't specified in the conflicts_list" do
+  #     Member.find(@new_member.id).conflicts.should_not include(Conflict.find_by_name("conflict"))
+  #   end
+
+  #   it "creates new conflictions for conflicts that aren't alraedy associated with the user" do
+  #     Member.find(@new_member.id).conflicts.should include(Conflict.find_by_name("good"), Conflict.find_by_name("awesome"))
+  #   end
+  # end
 end
