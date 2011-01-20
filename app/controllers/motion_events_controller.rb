@@ -23,7 +23,7 @@ class MotionEventsController < ApplicationController
   # @option params [Fixnum] :motion_id The id of the motion in question
   def second
     @motion = Motion.find(params[:motion_id])
-    if current_member.second(@motion)
+    if MotionSeconding.do(current_member, @motion)
       flash[:notice] = "You have successfully seconded the motion."
     else
       flash[:alert] =  "Something went wrong when seconding the motion"

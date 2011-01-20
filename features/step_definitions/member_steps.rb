@@ -55,7 +55,7 @@ end
 
 When /^the member "([^"]*)" (?:seconds the|has seconded a) motion titled "([^"]*)"$/ do |member_name, motion_title|
   member = Member.find_by_name!(member_name)
-  member.second(Motion.find_by_title!(motion_title))
+  MotionSeconding.do(member, Motion.find_by_title!(motion_title))
 end
 
 When /^the following members (?:seconds the|have seconded a) motion titled "([^"]*)"$/ do |motion_title, table|
