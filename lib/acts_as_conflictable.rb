@@ -33,7 +33,7 @@ module ActsAsConflictable
 
         joins = []
         conditions = []
-       
+
         if options.delete(:exclude)
           conflicts_conditions = conflict_list.map { |t| sanitize_sql(["conflicts.name LIKE ?", t]) }.join(" OR ")
           conditions << "#{table_name}.#{primary_key} NOT IN (SELECT conflictions.conflictable_id FROM conflictions JOIN conflicts ON conflictions.conflict_id = conflicts.id AND (#{conflicts_conditions}) WHERE conflictions.conflictable_type = #{quote_value(base_class.name)})"
@@ -102,7 +102,7 @@ module ActsAsConflictable
 
       # Find conflictions to remove:
       old_conflictions = conflictions.where(:conflict_id => old_conflicts)
-  
+
       if old_conflictions.present?
         # Destroy old conflictions:
         old_conflictions.destroy_all
@@ -112,7 +112,7 @@ module ActsAsConflictable
       new_conflicts.each do |conflict|
         conflictions.create!(:conflict_id => conflict.id)
       end
-    
+
       true
     end
   end

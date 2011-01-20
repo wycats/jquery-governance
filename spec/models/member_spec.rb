@@ -237,7 +237,7 @@ describe Member do
         @member.conflicts_list.should be_empty
       end
     end
-    
+
     context "when the member has at least one conflict" do
       before :all do
         @member.conflicts_list = "test"

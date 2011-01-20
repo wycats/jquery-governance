@@ -11,7 +11,7 @@ class DropMemberAndMotionConflicts < ActiveRecord::Migration
 
       t.timestamps
     end
-     
+
     create_table :member_conflicts do |t|
       t.integer :member_id
       t.integer :conflict_id
