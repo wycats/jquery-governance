@@ -10,10 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110104222352) do
+ActiveRecord::Schema.define(:version => 20110110001508) do
+
+  create_table "conflictions", :force => true do |t|
+    t.integer  "conflict_id"
+    t.integer  "conflictable_id"
+    t.string   "conflictable_type"
+    t.datetime "created_at"
+  end
+
+  add_index "conflictions", ["conflict_id"], :name => "index_conflictions_on_conflict_id"
+  add_index "conflictions", ["conflictable_id", "conflictable_type"], :name => "index_conflictions_on_conflictable_id_and_conflictable_type"
 
   create_table "conflicts", :force => true do |t|
-    t.string   "title"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,13 +41,6 @@ ActiveRecord::Schema.define(:version => 20110104222352) do
   add_index "events", ["member_id", "motion_id", "event_type"], :name => "event_validation_of_member_event_type", :unique => true
   add_index "events", ["motion_id", "event_type"], :name => "motion_events_by_event_type"
   add_index "events", ["motion_id", "value"], :name => "motion_events_by_value"
-
-  create_table "member_conflicts", :force => true do |t|
-    t.integer  "member_id"
-    t.integer  "conflict_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "members", :force => true do |t|
     t.string   "name"
@@ -68,13 +71,6 @@ ActiveRecord::Schema.define(:version => 20110104222352) do
   add_index "memberships", ["ended_at"], :name => "index_memberships_on_ended_at"
   add_index "memberships", ["member_id"], :name => "index_memberships_on_member_id"
   add_index "memberships", ["started_at"], :name => "index_memberships_on_started_at"
-
-  create_table "motion_conflicts", :force => true do |t|
-    t.integer  "motion_id"
-    t.integer  "conflict_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "motions", :force => true do |t|
     t.integer  "member_id"
