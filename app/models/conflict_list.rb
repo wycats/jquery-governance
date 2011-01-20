@@ -7,9 +7,9 @@ class ConflictList < Array
   def initialize(*args)
     add(*args)
   end
-  
+
   ##
-  # Add conflicts to the conflict_list. Duplicate or blank conflicts will be ignored.
+  # Add conflicts to the ConflictList. Duplicate or blank conflicts will be ignored.
   # Use the <tt>:parse</tt> option to add an unparsed conflict string.
   #
   # Example:
@@ -21,12 +21,12 @@ class ConflictList < Array
     clean!
     self
   end
-  
+
   ##
-  # Returns a new conflictList using the given conflict string.
+  # Returns a new ConflictList using the given conflict string.
   #
   # Example:
-  #   conflict_list = conflictList.from("One , Two,  Three")
+  #   conflict_list = ConflictList.from("One , Two,  Three")
   #   conflict_list # ["One", "Two", "Three"]
   def self.from(string)
     glue   = delimiter.ends_with?(" ") ? delimiter : "#{delimiter} "
