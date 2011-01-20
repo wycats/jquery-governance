@@ -88,10 +88,6 @@ module MotionState
       end
     end
 
-    it "responds to update" do
-      Factory(:discussing_motion).state.should respond_to(:update)
-    end
-
     describe "scheduled_update" do
       describe "for a non objected motion" do
         before do

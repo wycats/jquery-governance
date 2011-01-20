@@ -93,10 +93,6 @@ module MotionState
       end
     end
 
-    it "responds to update" do
-      Factory(:voting_motion).state.should respond_to(:update)
-    end
-
     describe "scheduled_update" do
       before do
         @motion = Factory(:voting_motion)

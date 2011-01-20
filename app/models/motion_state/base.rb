@@ -58,11 +58,6 @@ module MotionState
     def schedule_updates
     end
 
-    # Updates the state of a motion depending on the context of the current
-    # state.
-    def update
-    end
-
     # Updates the state of a motion given an amount of time has passed
     # depending on the context of the current state.
     def scheduled_update(time_elapsed)

@@ -271,14 +271,6 @@ class Motion < ActiveRecord::Base
     closed? && !has_met_requirement?
   end
 
-  # Try to update a motion state.  This method should be called every time a
-  # new {Event} object is created.  The corresponding {MotionState::Base}
-  # object knows the rules for updating the motion state.
-  # @see MotionState::Base#update
-  def update_state
-    state.update
-  end
-
   # Try to update a motion state.  This method should be called when a certain
   # amount of time has passed since the motion entered its current state.  The
   # corresponding {MotionState::Base} object knows the rules for updating the

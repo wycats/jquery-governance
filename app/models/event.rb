@@ -23,10 +23,6 @@ class Event < ActiveRecord::Base
 
   validate    :motion_creator_cannot_second,  :if => :is_second?
 
-  after_save  do
-    motion.update_state
-  end
-
   scope :votes,   where(:event_type  => "vote") do
     # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
     def yeas

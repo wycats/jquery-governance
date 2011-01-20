@@ -88,46 +88,6 @@ module MotionState
       end
     end
 
-    describe "update" do
-      describe "for a non expedited motion" do
-        before do
-          @motion = Factory(:motion)
-          @motion_state = @motion.state
-        end
-
-        it "updates the motion state to 'discussing' for a motion with 2 seconds" do
-          @motion.stub(:seconds_count => 2)
-          @motion_state.update
-          @motion.should be_discussing
-        end
-
-        it "doesn't update the motion state for a motion with less than 2 seconds" do
-          @motion.stub(:seconds_count => 1)
-          @motion_state.update
-          @motion.should be_waitingsecond
-        end
-      end
-
-      describe "for an expedited motion" do
-        before do
-          @motion = Factory(:motion, :expedited => true)
-          @motion_state = @motion.state
-        end
-
-        it "updates the motion state to 'voting' for a motion with enough seconds" do
-          @motion.stub(:seconds_count => 4, :seconds_for_expedition => 4)
-          @motion_state.update
-          @motion.should be_voting
-        end
-
-        it "doesn't update the motion state for a motion with less than the needed seconds" do
-          @motion.stub(:seconds_count => 3, :seconds_for_expedition => 4)
-          @motion_state.update
-          @motion.should be_waitingsecond
-        end
-      end
-    end
-
     describe "scheduled_update" do
       describe "for a non expedited motion" do
         before :all do

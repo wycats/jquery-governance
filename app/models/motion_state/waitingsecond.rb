@@ -28,17 +28,6 @@ module MotionState
       schedule_update_in(48.hours)
     end
 
-    # Updates the state of a motion to discussing when the motion has been
-    # seconded two times and is not marked as expedited, or when it has enough
-    # seconds to be expedited.
-    def update
-      if @motion.expedited?
-        @motion.voting! if @motion.seconds_count >= @motion.seconds_for_expedition
-      else
-        @motion.discussing! if @motion.seconds_count >= 2
-      end
-    end
-
     # Updates the state of a motion to discussing when 48 hours has been passed
     # and, even though the motion hasn't been seconded enough to be expedited
     # (i.e. skip the discussing state), has been seconded at least twice.
