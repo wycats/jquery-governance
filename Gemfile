@@ -18,6 +18,8 @@ gem 'texticle', :git => "https://github.com/tenderlove/texticle.git"
 
 gem 'resque'
 gem 'resque-scheduler', :require => "resque_scheduler"
+  
+gem 'yard'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -47,6 +49,5 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'yard'
 end
 
