@@ -15,3 +15,4 @@ namespace :doc do
     t.files += ['app/**/*.rb']
   end
 end
+
