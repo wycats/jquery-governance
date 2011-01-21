@@ -7,6 +7,33 @@ describe Motion do
     @motion = Factory.create(:motion)
   end
 
+  describe "discussing!" do
+    it "turns the motion into the discussing state" do
+      @motion.discussing!
+      @motion.should be_discussing
+    end
+  end
+
+  describe "voting!" do
+    it "turns the motion into the voting state" do
+      @motion.voting!
+      @motion.should be_voting
+    end
+  end
+
+  describe "closed!" do
+    it "turns the motion into the closed state" do
+      @motion.closed!
+      @motion.should be_closed
+    end
+
+    it "sets the time when the motion was closed" do
+      @motion.closed_at.should be_nil
+      @motion.closed!
+      @motion.closed_at.should_not be_nil
+    end
+  end
+
   describe "vote counting", :database => true do
     it "knows how many yea votes have been cast for the motion" do
       2.times { Factory.create(:yes_vote, :motion => @motion) }
