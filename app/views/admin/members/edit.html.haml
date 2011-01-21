@@ -3,21 +3,7 @@
     %h1.for_form= t("admin.members.titles.edit")
 
   %section#main
-    = form_for [:admin, @member] do |f|
-      .field.text
-        = f.label  :name
-        = f.text_field :name, :placeholder => "John Resig"
-        = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => :name}
-      .field.text
-        = f.label :email
-        = f.text_field :email, :placeholder => "jresig@example.com"
-        = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => :email}
-      .field.text
-        = f.label :conflicts_list
-        = f.text_field :conflicts_list
-      .action.submit
-        = f.submit t("admin.members.actions.update_member"), :class => 'button large'
-    -if admin?
-      %br{ :style => 'clear: both;' }
+    = render :partial => 'form'
+    - if admin?
       =link_to t("admin.members.actions.delete_member"), [:admin, @member], { :class => 'button negative left' }, :method => 'delete', :confirm => 'Are you sure you want to delete the user?'
       =link_to t("admin.members.actions.edit_memberships_for_member"), admin_member_memberships_path(@member), { :class => 'button positive right' }
