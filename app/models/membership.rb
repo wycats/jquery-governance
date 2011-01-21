@@ -49,7 +49,7 @@ class Membership < ActiveRecord::Base
   private
 
   def set_membership_timestamps
-    if self.disqualifying_motion.nil?
+    if self.qualifying_motion.nil?
       self.started_at = Time.now
     else
       self.started_at ||= self.qualifying_motion.closed_at
