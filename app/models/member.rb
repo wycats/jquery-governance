@@ -7,7 +7,7 @@ class Member < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :memberships_attributes
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :memberships_attributes, :conflicts_list
 
   has_many :memberships
   has_many :motions
