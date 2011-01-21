@@ -11,10 +11,6 @@ module MotionState
     include NoVotable
     extend Open
 
-    def setup
-      notify_members_of_new_motion
-    end
-
     # Indicates whether or not a given member is allowed to second a motion.
     # @param [Member] member A member who wants to second the motion.
     # @return [true, false] Only active members can second only once a motion which hasn't been created by them.
@@ -42,12 +38,6 @@ module MotionState
       else
         @motion.closed!
       end
-    end
-
-    private
-
-    def notify_members_of_new_motion
-      send_email :motion_created
     end
   end
 end

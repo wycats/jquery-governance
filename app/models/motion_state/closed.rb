@@ -14,15 +14,5 @@ module MotionState
     def self.open?
       false
     end
-
-    def setup
-      notify_members_of_outcome
-    end
-
-    private
-
-    def notify_members_of_outcome
-      send_email :motion_closed
-    end
   end
 end

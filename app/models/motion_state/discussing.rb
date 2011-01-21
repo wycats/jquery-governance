@@ -11,10 +11,6 @@ module MotionState
     include NoSecondable
     extend Open
 
-    def setup
-      notify_members_discussion_beginning
-    end
-
     # Indicates whether or not a given member is allowed to object a motion.
     # @param [Member] member A member who wants to object the motion.
     # @return [true, false] Only active members can object a motion and they can do it only once.
@@ -36,12 +32,6 @@ module MotionState
       elsif !@motion.objected? && time_elapsed >= 24.hours
         @motion.voting!
       end
-    end
-
-    private
-
-    def notify_members_discussion_beginning
-      send_email :discussion_beginning
     end
   end
 end

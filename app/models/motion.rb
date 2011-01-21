@@ -85,10 +85,9 @@ class Motion < ActiveRecord::Base
 
   after_save :schedule_updates, :if => :state_name_changed?
   after_create :schedule_updates
+  after_create :send_creation_notification
 
   after_initialize :assign_state
-
-  after_save :setup_state
 
   attr_reader :state
 
@@ -187,6 +186,7 @@ class Motion < ActiveRecord::Base
   # @return [true, false] Whether or not the motion has been moved to the discussing state.
   def discussing!
     update_attributes(:state_name => "discussing")
+    send_email(:discussion_beginning)
   end
 
   # Check if a motion is currently being discussed. For the details of the
@@ -202,6 +202,7 @@ class Motion < ActiveRecord::Base
   # @return [true, false] Whether or not the motion has been moved to the voting state.
   def voting!
     update_attributes(:state_name => "voting")
+    send_email(:voting_beginning)
   end
 
   # Check if a motion is currently being voted.  For the details of the
@@ -230,6 +231,7 @@ class Motion < ActiveRecord::Base
       :abstains => possible_votes - votes.count,
       :closed_at => Time.now
     )
+    send_email(:motion_closed)
   end
 
   # The time when the motion was approved.
@@ -322,11 +324,15 @@ private
     state.schedule_updates
   end
 
-  def setup_state
-    @state.setup
+  def send_creation_notification
+    send_email(:motion_created) if waitingsecond?
   end
 
   def assign_state
     @state = self.class.state_class(state_name).try(:new, self)
+  end
+
+  def send_email(notification)
+    ActiveMemberNotifier.deliver(notification, self)
   end
 end
