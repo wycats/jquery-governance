@@ -47,7 +47,7 @@ JqueryVoting::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  ENV["REDISTOGO_URL"] = 'redis://heroku:19e7b10803467f6950cc10655f28d5c2@filefish.redistogo.com:9360'
+  ENV["REDISTOGO_URL"] = 'redis://heroku:2e00951a4dfe0aaddae7590f719326a4@filefish.redistogo.com:9360'
   uri = URI.parse(ENV["REDISTOGO_URL"])
   REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
 end
