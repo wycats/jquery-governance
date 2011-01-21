@@ -29,7 +29,7 @@ JqueryVoting::Application.configure do
 
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
@@ -46,4 +46,6 @@ JqueryVoting::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  ENV["REDISTOGO_URL"] = 'redis://heroku:19e7b10803467f6950cc10655f28d5c2@filefish.redistogo.com:9360'
 end

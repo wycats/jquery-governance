@@ -4,5 +4,5 @@ redis         = resque_config[Rails.env]
 if redis
   Resque.redis = redis
 else
-  raise StandardError.new("Redis not defined for #{Rails.env}")
+  raise StandardError.new("Redis not defined for #{Rails.env}") unless Rails.env == "production"
 end
