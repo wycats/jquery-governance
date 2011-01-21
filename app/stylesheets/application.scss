@@ -138,10 +138,11 @@ body {
 form .field {
   @include float-container;
   margin: 0 auto 10px;
-  width: 530px;
+  width: 730px;
 
   input {
-    float: right;
+    float: left;
+    margin-left: 30px;
     width: 400px;
     padding: 6px;
     border: 1px solid #a5a5a5;
@@ -150,7 +151,8 @@ form .field {
   }
 
   textarea {
-    float: right;
+    float: left;
+    margin-left: 30px;
     width: 400px;
     padding: 6px;
     border: 1px solid #a5a5a5;
@@ -161,7 +163,7 @@ form .field {
   label {
     display: block;
     float: left;
-    width: 100px;
+    width: 200px;
     line-height: 35px;
     font-weight: bold;
     text-align: right;
@@ -172,8 +174,8 @@ form .field {
 
 form .check_box {
   margin: 0 auto 25px;
-  width: 400px;
-  padding-left: 130px;
+  width: 530px;
+  padding-left: 260px;
 
   input {
     float: left;
@@ -447,7 +449,7 @@ div.motion {
   .alt {
     background-color: #DDD;
   }
-  label {
+  /*label {
     float: left;
     font-size: $font_label;
     line-height: $font_label_height;
@@ -464,7 +466,7 @@ div.motion {
   }
   submit {
     margin-top: $form_row_spacing * 4;
-  }
+  }*/
 }
 
 #content div.motions {
