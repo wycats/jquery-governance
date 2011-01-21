@@ -20,14 +20,6 @@ module MotionState
       end
     end
 
-    describe "setup" do
-      it "should notify members of that a new motion has been created" do
-        @motion = Factory.build(:motion)
-        ActiveMemberNotifier.should_receive(:deliver).with(:motion_created, @motion)
-        @motion.save
-      end
-    end
-
     describe "permit?" do
       before(:all) do
         @active_member = Factory(:membership).member

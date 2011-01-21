@@ -7,10 +7,27 @@ describe Motion do
     @motion = Factory.create(:motion)
   end
 
+  context "a newly created motion" do
+    it "is in the waitingsecond state" do
+      @motion.should be_waitingsecond
+    end
+
+    it "notifies members of that a new motion has been created" do
+      @motion = Factory.build(:motion)
+      ActiveMemberNotifier.should_receive(:deliver).with(:motion_created, @motion)
+      @motion.save
+    end
+  end
+
   describe "discussing!" do
     it "turns the motion into the discussing state" do
       @motion.discussing!
       @motion.should be_discussing
+    end
+
+    it "notifies members of that discussion of the motion has begun" do
+      ActiveMemberNotifier.should_receive(:deliver).with(:discussion_beginning, @motion)
+      @motion.discussing!
     end
   end
 
@@ -18,6 +35,11 @@ describe Motion do
     it "turns the motion into the voting state" do
       @motion.voting!
       @motion.should be_voting
+    end
+
+    it "notifies members of that voting on the motion has begun" do
+      ActiveMemberNotifier.should_receive(:deliver).with(:voting_beginning, @motion)
+      @motion.voting!
     end
   end
 
@@ -31,6 +53,11 @@ describe Motion do
       @motion.closed_at.should be_nil
       @motion.closed!
       @motion.closed_at.should_not be_nil
+    end
+
+    it "notifies members of the outcome of the motion now that it is closed" do
+      ActiveMemberNotifier.should_receive(:deliver).with(:motion_closed, @motion)
+      @motion.closed!
     end
   end
 

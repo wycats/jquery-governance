@@ -27,13 +27,6 @@ module MotionState
       end
     end
 
-    describe "setup" do
-      it "should notify members of the outcome of the motion now that it is closed" do
-        ActiveMemberNotifier.should_receive(:deliver).with(:motion_closed, @motion)
-        @motion_state.setup
-      end
-    end
-
     describe "permit?" do
       it "allows an active member to see the motion" do
         @motion_state.permit?(:see, @active_member).should be_true
