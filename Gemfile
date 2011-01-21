@@ -7,7 +7,7 @@ gem 'rack-cache'#,   :git      => "https://github.com/rtomayko/rack-cache.git"
 gem 'rack'#,         :git      => "https://github.com/rack/rack.git"
 gem 'devise'
 gem 'jquery-rails'
-gem 'haml',         '~>3.0.23'
+gem 'haml'
 gem 'haml-rails'
 gem 'compass'
 
@@ -20,6 +20,8 @@ gem 'resque'
 gem 'resque-scheduler', :require => "resque_scheduler"
   
 gem 'yard'
+
+gem 'hassle'
 
 # Use unicorn as the web server
 # gem 'unicorn'

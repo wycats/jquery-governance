@@ -100,6 +100,9 @@ GEM
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
+    hassle (0.0.1)
+      haml
+      rack
     heroku (1.17.8)
       json (~> 1.4.6)
       launchy (~> 0.3.2)
@@ -211,8 +214,9 @@ DEPENDENCIES
   devise
   factory_girl (~> 2.0.0.beta1)
   factory_girl_rails!
-  haml (~> 3.0.23)
+  haml
   haml-rails
+  hassle
   heroku
   jquery-rails
   launchy
