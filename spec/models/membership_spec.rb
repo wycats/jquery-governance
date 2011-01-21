@@ -9,6 +9,7 @@ describe Membership do
     end
 
     it "requires that a qualifying motion be specified when creating a new membership" do
+      pending('we are relaxing this a bit for now')
       @membership.qualifying_motion = nil
       @membership.should_not be_valid
     end
