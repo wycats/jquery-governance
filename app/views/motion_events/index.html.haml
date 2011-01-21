@@ -21,7 +21,7 @@
           = tag_badge(tag)
     %h3 Events
     %ul#motion-events
-      = render :partial => @motion.events
+      = render :partial => active_member? ? @motion.events : @motion.votes
   #motion-actions
     %dl
       %dt State
