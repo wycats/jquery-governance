@@ -28,9 +28,13 @@ Given /^there is an active(:? admin)? member with email "([^"]*)" and password "
 end
 
 Given /^these (?:other )?members exist:$/ do |table|
-  table.rows.each do |name, email, id|
+  table.rows.each do |name, email, qualifying_motion_id|
     member = Factory.create(:member, name: name, email: email)
-    motion = Factory.create(:closed_motion, id: id)
+    if qualifying_motion_id
+      motion = Factory.create(:closed_motion, id: qualifying_motion_id)
+    else
+      motion = Factory.create(:closed_motion)
+    end
     Factory.create(:membership, member: member, qualifying_motion: motion)
   end
 end
