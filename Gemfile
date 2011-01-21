@@ -38,7 +38,7 @@ gem 'resque-scheduler', :require => "resque_scheduler"
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
-  gem 'ruby-debug19'
+  # gem 'ruby-debug19'
   gem 'rspec-rails'
   gem 'factory_girl', '~>2.0.0.beta1'
   gem 'factory_girl_rails', :git => 'https://github.com/thoughtbot/factory_girl_rails.git', :tag => 'v1.1.beta1'
