@@ -11,6 +11,8 @@ gem 'haml',         '~>3.0.23'
 gem 'haml-rails'
 gem 'compass'
 
+gem 'heroku'
+
 gem 'pg'
 gem 'texticle', :git => "https://github.com/tenderlove/texticle.git"
 

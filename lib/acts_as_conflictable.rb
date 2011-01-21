@@ -115,5 +115,9 @@ module ActsAsConflictable
 
       true
     end
+
+    def conflicts_with?(conflictable)
+      !(conflicts_list & conflictable.conflicts_list).empty?
+    end
   end
 end

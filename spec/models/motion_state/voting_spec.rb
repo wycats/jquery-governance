@@ -55,7 +55,7 @@ module MotionState
       end
 
       it "doesn't allow an active member to vote the motion if there's a conflict of interest" do
-        @motion.stub(:conflicts_with_member?).with(@active_member).and_return(true)
+        @motion.stub(:conflicts_with?).with(@active_member).and_return(true)
         @motion_state.permit?(:vote, @active_member).should be_false
       end
 

@@ -15,7 +15,7 @@ module MotionState
     # @param [Member] member A member who wants to second the motion.
     # @return [true, false] Only active members can second only once a motion which hasn't been created by them.
     def permit_second?(member)
-      member.membership_active? && member != @motion.member && !member.has_seconded?(@motion)
+      member.membership_active? && member != @motion.member && !member.has_seconded?(@motion) && !@motion.conflicts_with?(member)
     end
 
     # Updates the state of a motion to discussing when 48 hours has been passed

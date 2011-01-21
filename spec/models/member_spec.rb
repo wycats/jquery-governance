@@ -250,6 +250,35 @@ describe Member do
     end
   end
 
+    def conflicts_with?(conflictable)
+      (conflicts_list & conflictable.conflicts_list).empty?
+    end
+
+  describe "conflicts_with?" do
+    before :each do
+      @member = Factory.create(:member)
+      @member.conflicts_list = ["conflict", "test"]
+      @member.save
+
+      @motion = Factory.create(:motion)
+    end
+
+    context "when the member doesn't conflict with the motion" do
+      it "returns false" do
+        @motion.conflicts_list = ["good", "cool"]
+        @motion.save
+        @member.conflicts_with?(@motion).should be_false
+      end
+    end
+
+    context "when the member does conflict with the motion" do
+      it "returns true" do
+        @motion.conflicts_list = ["test", "cool"]
+        @motion.save
+        @member.conflicts_with?(@motion).should be_true
+      end
+    end
+  end
   # describe "save_conflicts" do
   #   before :all do
   #     @new_member = Factory.create(:member)

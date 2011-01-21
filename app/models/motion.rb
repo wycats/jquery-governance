@@ -127,15 +127,6 @@ class Motion < ActiveRecord::Base
     seconds.count
   end
 
-  # Checks to see if a member has a conflict on a motion.
-  # @param [Member] member The member who is voting on this motion.
-  # @return [true, false] Whether or not member has a conflict.
-  def conflicts_with_member?(member)
-    motion_conflicts = conflicts
-    member_conflicts = member.conflicts
-    (member_conflicts & motion_conflicts).size > 0
-  end
-
   # Check if the member is allowed to perform the given action.
   # @param [Symbol] action The action the member wants to perform.
   # @param [Member] member The member who wants to perfrom the action.
@@ -317,7 +308,8 @@ private
   # @todo Description
   def possible_votes
     # @todo Deal with conflicts of interest
-    active_members = Membership.active_at(Time.now).count
+    conflicted_members_count =   Member.conflicts_with(conflicts_list, :exclude => true).count
+    Membership.active_at(Time.now).count - conflicted_members_count
   end
 
   def waitingsecond!
