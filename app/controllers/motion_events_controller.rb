@@ -5,10 +5,7 @@ class MotionEventsController < ApplicationController
   # Display events for a given Motion
   # @option params [Fixnum] :motion_id The id of the motion in question
   def index
-    @motion     = Motion.find(params[:motion_id])
-    @events     = @motion.events if @motion.present?
-    @actionable = member_signed_in? and @motion.open?
-    @tags       = Tag.selectable(params[:motion_id])
+    @motion = Motion.find(params[:motion_id])
   end
 
   # Show an Event for a given Motion
