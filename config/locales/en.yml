@@ -41,7 +41,7 @@ en:
       titles:
         index: "Manage Members"
         new:   "New member"
-        edit:  "Edit member info"
+        edit:  "Edit member"
       headings:
         name: "Name"
         email: "E-mail address"
