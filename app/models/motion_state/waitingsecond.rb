@@ -27,7 +27,7 @@ module MotionState
 
       return if time_elapsed < 48.hours
 
-      if @motion.expedited? && @motion.can_wait_objection?
+      if @motion.expedited? && @motion.can_discuss?
         @motion.discussing!
       else
         @motion.closed!

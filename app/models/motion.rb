@@ -118,7 +118,7 @@ class Motion < ActiveRecord::Base
   # Check if a motion has enough seconds (more than two) to start being
   # discussed.
   # @return [true, false] Whether or not this motion has received enough seconds to start being discussed.
-  def can_wait_objection?
+  def can_discuss?
     seconds.count >= 2
   end
 

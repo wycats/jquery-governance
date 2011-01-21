@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe MotionSeconding do
   before do
-    @motion = mock_model('Motion', :expedited? => false, :can_expedite? => false, :can_wait_objection? => false)
+    @motion = mock_model('Motion', :expedited? => false, :can_expedite? => false, :can_discuss? => false)
     @member = mock_model('Member')
     @event  = mock_model('Event')
     Event.stub(:create => @event)
@@ -43,13 +43,13 @@ describe MotionSeconding do
         end
 
         it "changes its state to discussing if it has enough seconds" do
-          @motion.stub(:can_wait_objection? => true)
+          @motion.stub(:can_discuss? => true)
           @motion.should_receive(:discussing!)
           MotionSeconding.do(@member, @motion)
         end
 
         it "doesn't change its state to voting if it doesn't have enough seconds" do
-          @motion.stub(:can_wait_objection? => false)
+          @motion.stub(:can_discuss? => false)
           @motion.should_not_receive(:discussing!)
           MotionSeconding.do(@member, @motion)
         end

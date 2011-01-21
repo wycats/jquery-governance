@@ -110,13 +110,13 @@ module MotionState
         end
 
         it "updates the motion state to 'discussing' for a motion with 2 or more seconds after 48 hours" do
-          @motion.stub(:can_wait_objection? => true)
+          @motion.stub(:can_discuss? => true)
           @motion_state.scheduled_update(48.hours)
           @motion.should be_discussing
         end
 
         it "updates the motion state to 'closed' for a motion with less than 2 seconds after 48 hours" do
-          @motion.stub(:can_wait_objection? => false)
+          @motion.stub(:can_discuss? => false)
           @motion_state.scheduled_update(48.hours)
           @motion.should be_closed
         end

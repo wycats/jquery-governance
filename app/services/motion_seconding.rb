@@ -11,7 +11,7 @@ class MotionSeconding
     if motion.expedited?
       motion.voting! if motion.can_expedite?
     else
-      motion.discussing! if motion.can_wait_objection?
+      motion.discussing! if motion.can_discuss?
     end
   end
 end
