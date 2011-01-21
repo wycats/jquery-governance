@@ -83,7 +83,7 @@ class Motion < ActiveRecord::Base
   has_many   :taggings, :dependent => :destroy
   has_many   :tags, :through => :taggings
 
-  after_create :send_creation_notification, :schedule_initial_update
+  after_create :waitingsecond!, :if => :waitingsecond?
 
   after_initialize :assign_state
 
@@ -320,12 +320,9 @@ private
     active_members = Membership.active_at(Time.now).count
   end
 
-  def send_creation_notification
-    send_email(:motion_created) if waitingsecond?
-  end
-
-  def schedule_initial_update
-    schedule_update_in(48.hours) if waitingsecond?
+  def waitingsecond!
+    send_email(:motion_created)
+    schedule_update_in(48.hours)
   end
 
   def assign_state
