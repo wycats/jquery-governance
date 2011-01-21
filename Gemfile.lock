@@ -19,6 +19,14 @@ GIT
       term-ansicolor (~> 1.0.5)
 
 GIT
+  remote: git://github.com/koppen/hassle.git
+  revision: a08c757bce033cebc7ef8a4a3a831127afcb956a
+  specs:
+    hassle (0.0.1)
+      haml
+      rack
+
+GIT
   remote: https://github.com/tenderlove/texticle.git
   revision: 9c4e0901108c22909ff2b70dced7cce08f68d0e9
   specs:
@@ -100,9 +108,6 @@ GEM
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
-    hassle (0.0.1)
-      haml
-      rack
     heroku (1.17.8)
       json (~> 1.4.6)
       launchy (~> 0.3.2)
@@ -216,7 +221,7 @@ DEPENDENCIES
   factory_girl_rails!
   haml
   haml-rails
-  hassle
+  hassle!
   heroku
   jquery-rails
   launchy

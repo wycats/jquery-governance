@@ -21,7 +21,7 @@ gem 'resque-scheduler', :require => "resque_scheduler"
   
 gem 'yard'
 
-gem 'hassle'
+gem 'hassle', :git => 'git://github.com/koppen/hassle.git'
 
 # Use unicorn as the web server
 # gem 'unicorn'
