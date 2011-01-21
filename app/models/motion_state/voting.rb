@@ -18,12 +18,6 @@ module MotionState
       member.membership_active? && !member.has_voted_on?(@motion) && !@motion.conflicts_with_member?(member)
     end
 
-    # Schedule automatic updates in 48 hours.
-    # @see Base#schedule_updates_in
-    def schedule_updates
-      schedule_update_in(48.hours)
-    end
-
     # Updates the state of a motion to closed when 47 hours has been passed.
     def scheduled_update(time_elapsed)
       @motion.closed! if time_elapsed >= 48.hours

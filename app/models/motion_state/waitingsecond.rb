@@ -18,12 +18,6 @@ module MotionState
       member.membership_active? && member != @motion.member && !member.has_seconded?(@motion)
     end
 
-    # Schedule automatic updates in 48 hours.
-    # @see Base#schedule_updates_in
-    def schedule_updates
-      schedule_update_in(48.hours)
-    end
-
     # Updates the state of a motion to discussing when 48 hours has been passed
     # and, even though the motion hasn't been seconded enough to be expedited
     # (i.e. skip the discussing state), has been seconded at least twice.

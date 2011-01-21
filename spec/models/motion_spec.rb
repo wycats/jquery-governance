@@ -187,25 +187,6 @@ describe Motion do
     end
   end
 
-  describe 'schedule_updates' do
-    describe "when a motion is created" do
-      it "should ask the MotionState to schedule updates" do
-        @motion = Factory.build(:motion)
-        @motion.state.should_receive(:schedule_updates)
-        @motion.save
-      end
-    end
-
-    describe "when a motion is saved with a state change" do
-      it "should ask the MotionState to schedule updates" do
-        @motion = Factory.create(:motion)
-        @motion.state_name = "discussing"
-        @motion.state.should_receive(:schedule_updates)
-        @motion.save
-      end
-    end
-  end
-
   describe "tag_list=" do
     it "updates the motion tags" do
       @motion = Factory.build(:motion)

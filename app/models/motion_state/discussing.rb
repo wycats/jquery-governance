@@ -18,12 +18,6 @@ module MotionState
       member.membership_active? && @motion.objections.where(:member_id => member.id).blank?
     end
 
-    # Schedule automatic updates in 24 and 48 hours.
-    # @see Base#schedule_updates_in
-    def schedule_updates
-      schedule_updates_in(24.hours, 48.hours)
-    end
-
     # Updates the state of a motion to voting when 24 hours has been passed and
     # the motion hasn't been objected, or when 48 hours has been passed.
     def scheduled_update(time_elapsed)

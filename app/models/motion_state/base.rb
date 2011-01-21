@@ -53,25 +53,9 @@ module MotionState
     def permit_vote?(member)
     end
 
-    # Schedule automatic updates needed by the state.
-    # @see #schedule_updates_in
-    def schedule_updates
-    end
-
     # Updates the state of a motion given an amount of time has passed
     # depending on the context of the current state.
     def scheduled_update(time_elapsed)
     end
-
-  private
-
-    # Schedule automatic updates needed by the state in the given elapsed time.
-    #
-    # This creates a background job that tries to update the motion once the
-    # given amount of times has passed.
-    def schedule_updates_in(*times)
-      times.each { |time| ScheduledMotionUpdate.in(time, @motion) }
-    end
-    alias :schedule_update_in :schedule_updates_in
   end
 end

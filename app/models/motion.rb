@@ -83,9 +83,7 @@ class Motion < ActiveRecord::Base
   has_many   :taggings, :dependent => :destroy
   has_many   :tags, :through => :taggings
 
-  after_save :schedule_updates, :if => :state_name_changed?
-  after_create :schedule_updates
-  after_create :send_creation_notification
+  after_create :send_creation_notification, :schedule_initial_update
 
   after_initialize :assign_state
 
@@ -187,6 +185,7 @@ class Motion < ActiveRecord::Base
   def discussing!
     update_attributes(:state_name => "discussing")
     send_email(:discussion_beginning)
+    schedule_updates_in(24.hours, 48.hours)
   end
 
   # Check if a motion is currently being discussed. For the details of the
@@ -203,6 +202,7 @@ class Motion < ActiveRecord::Base
   def voting!
     update_attributes(:state_name => "voting")
     send_email(:voting_beginning)
+    schedule_update_in(48.hours)
   end
 
   # Check if a motion is currently being voted.  For the details of the
@@ -320,12 +320,12 @@ private
     active_members = Membership.active_at(Time.now).count
   end
 
-  def schedule_updates
-    state.schedule_updates
-  end
-
   def send_creation_notification
     send_email(:motion_created) if waitingsecond?
+  end
+
+  def schedule_initial_update
+    schedule_update_in(48.hours) if waitingsecond?
   end
 
   def assign_state
@@ -335,4 +335,13 @@ private
   def send_email(notification)
     ActiveMemberNotifier.deliver(notification, self)
   end
+
+  # Schedule automatic updates needed by the state in the given elapsed time.
+  #
+  # This creates a background job that tries to update the motion once the
+  # given amount of times has passed.
+  def schedule_updates_in(*times)
+    times.each { |time| ScheduledMotionUpdate.in(time, self) }
+  end
+  alias :schedule_update_in :schedule_updates_in
 end
