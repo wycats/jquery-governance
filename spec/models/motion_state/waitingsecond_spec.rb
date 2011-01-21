@@ -71,15 +71,6 @@ module MotionState
       end
     end
 
-    describe "schedule_updates" do
-      it "should schedule an update in 48 hours" do
-        @motion = Factory(:motion)
-        @motion_state = @motion.state
-        ScheduledMotionUpdate.should_receive(:in).with(48.hours, @motion)
-        @motion_state.schedule_updates
-      end
-    end
-
     describe "scheduled_update" do
       describe "for a non expedited motion" do
         before :all do

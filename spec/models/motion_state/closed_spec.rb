@@ -66,10 +66,6 @@ module MotionState
       end
     end
 
-    it "responds to schedule_updates" do
-      @motion_state.should respond_to(:schedule_updates)
-    end
-
     it "responds to scheduled_update" do
       @motion_state.should respond_to(:scheduled_update)
     end

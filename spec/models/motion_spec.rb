@@ -17,6 +17,12 @@ describe Motion do
       ActiveMemberNotifier.should_receive(:deliver).with(:motion_created, @motion)
       @motion.save
     end
+
+    it "schedules an update in 48 hours" do
+      @motion = Factory.build(:motion)
+      ScheduledMotionUpdate.should_receive(:in).with(48.hours, @motion)
+      @motion.save
+    end
   end
 
   describe "discussing!" do
@@ -29,6 +35,13 @@ describe Motion do
       ActiveMemberNotifier.should_receive(:deliver).with(:discussion_beginning, @motion)
       @motion.discussing!
     end
+
+
+    it "schedules updates in 24 and 48 hours" do
+      ScheduledMotionUpdate.should_receive(:in).with(24.hours, @motion)
+      ScheduledMotionUpdate.should_receive(:in).with(48.hours, @motion)
+      @motion.discussing!
+    end
   end
 
   describe "voting!" do
@@ -39,6 +52,11 @@ describe Motion do
 
     it "notifies members of that voting on the motion has begun" do
       ActiveMemberNotifier.should_receive(:deliver).with(:voting_beginning, @motion)
+      @motion.voting!
+    end
+
+    it "schedules an update in 48 hours" do
+      ScheduledMotionUpdate.should_receive(:in).with(48.hours, @motion)
       @motion.voting!
     end
   end
