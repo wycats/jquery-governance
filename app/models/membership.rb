@@ -7,9 +7,9 @@ class Membership < ActiveRecord::Base
   belongs_to :disqualifying_motion, :class_name => "Motion",
                                     :foreign_key => :disqualifying_motion_id
 
-  validates :qualifying_motion_id, :presence => true, :existence => true
+  # validates :qualifying_motion_id, :presence => true, :existence => true
 
-  attr_accessible :qualifying_motion_id, :disqualifying_motion_id, :is_admin
+  attr_accessible :qualifying_motion_id, :disqualifying_motion_id, :is_admin, :member_id
 
   before_save :set_membership_timestamps
 
@@ -49,7 +49,12 @@ class Membership < ActiveRecord::Base
   private
 
   def set_membership_timestamps
-    self.started_at ||= self.qualifying_motion.closed_at
+    if self.disqualifying_motion.nil?
+      self.started_at = Time.now
+    else
+      self.started_at ||= self.qualifying_motion.closed_at
+    end
+
     self.ended_at ||= self.disqualifying_motion.closed_at unless self.disqualifying_motion.nil?
   end
 end
