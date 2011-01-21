@@ -18,7 +18,7 @@ gem 'texticle', :git => "https://github.com/tenderlove/texticle.git"
 
 gem 'resque'
 gem 'resque-scheduler', :require => "resque_scheduler"
-  
+
 gem 'yard'
 
 gem 'hassle', :git => 'git://github.com/koppen/hassle.git'
