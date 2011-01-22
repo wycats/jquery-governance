@@ -5,5 +5,7 @@
   %section#main
     = render :partial => 'form'
     - if admin?
-      =link_to t("admin.members.actions.delete_member"), [:admin, @member], { :class => 'button negative left' }, :method => 'delete', :confirm => 'Are you sure you want to delete the user?'
-      =link_to t("admin.members.actions.edit_memberships_for_member"), admin_member_memberships_path(@member), { :class => 'button positive right' }
+      - if @member.membership_active?
+        =link_to t("admin.memberships.actions.end_membership"), terminate_admin_member_membership_path(@member, @member.active_membership), { :class => 'button negative left' }
+      - else
+        =link_to t("admin.memberships.actions.renew_membership"), new_admin_member_membership_path(@member, @member.active_membership), { :class => 'button negative left' }

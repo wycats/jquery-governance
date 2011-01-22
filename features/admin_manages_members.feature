@@ -53,16 +53,6 @@ Feature: Admin manages members
     And the "Name" field should contain "Donald Duck"
     And I should see "Member updated"
 
-  Scenario: View a member's membership history
-    Given these other members exist:
-      | name       | email              |
-      | John Resig | jresig@example.org |
-      | Paul Irish | paul@example.com   |
-    When I go to the members admin page
-    And I follow the edit link for "Paul Irish"
-    When I follow "Edit memberships for member"
-    Then I should be on the membership history page for "Paul Irish"
-
   Scenario: Terminate a member's membership
     Given these other members exist:
       | name       | email              |
@@ -71,8 +61,7 @@ Feature: Admin manages members
     And a disqualifying motion exists with the reference number "1234"
     When I go to the members admin page
     And I follow the edit link for "Paul Irish"
-    When I follow "Edit memberships for member"
-    And I follow "End this membership"
+    And I follow "End membership"
     And I fill in "1234" for "Motion Reference #"
     And I press "Terminate membership"
     Then I should be on the membership history page for "Paul Irish"
@@ -83,8 +72,7 @@ Feature: Admin manages members
     And a qualifying motion exists with the reference number "1234"
     When I go to the members admin page
     And I follow the edit link for "Paul Irish"
-    When I follow "Edit memberships for member"
-    And I follow "Renew this member's membership"
+    And I follow "Renew membership"
     And I fill in "1234" for "Motion Reference #"
     And I press "Renew membership"
     Then I should be on the membership history page for "Paul Irish"

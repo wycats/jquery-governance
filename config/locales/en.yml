@@ -18,8 +18,8 @@ en:
     memberships:
       titles:
         index: "Manage user's memberships"
-        terminate: "Please specify the motion that terminates this member's membership"
-        renew: "Pleae specify the motion that re-instated this member"
+        terminate: "End membership"
+        renew: "Specify the motion that re-instated this member"
       headings:
         no_active_membership: "No active memberships"
         active_membership: "Current membership"
@@ -29,7 +29,7 @@ en:
       actions:
         renew_membership: "Renew membership"
         update_membership: "Terminate membership"
-        end_membership: "End this membership"
+        end_membership: "End membership"
         new_membership: "Renew this member's membership"
       notices:
         membership_terminated: "This member's membership was successfully terminated"
