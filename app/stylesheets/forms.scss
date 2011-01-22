@@ -1,0 +1,64 @@
+$form_left_column_width: 240px;
+$form_right_column_width: 400px;
+$form_columns_separation: 30px;
+
+form .field {
+  @include float-container;
+  margin-bottom: 10px;
+}
+
+form .field label {
+  float: left;
+  display: block;
+  width: $form_left_column_width;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 35px;
+  text-align: right;
+  color: #333;
+}
+
+form .field input,
+form .field textarea {
+  float: left;
+  width: $form_right_column_width;
+  margin-left: $form_columns_separation;
+  padding: 6px;
+  border: 1px solid #a5a5a5;
+  font-size: 16px;
+  color: #333;
+}
+
+form .check_box {
+  margin-bottom: 10px;
+  margin-left: $form_left_column_width + $form_columns_separation;
+}
+
+form .check_box input {
+  float: left;
+  margin-right: 6px;
+}
+
+form .check_box label {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1;
+  color: #333;
+}
+
+form .action.submit {
+  margin-top: 25px;
+  margin-left: $form_left_column_width + $form_columns_separation;
+}
+
+form .instructions {
+  width: $form_right_column_width;
+  margin-bottom: 10px;
+  margin-left: $form_left_column_width + $form_columns_separation;
+}
+
+form .instructions p {
+  font-size: 14px;
+  font-style: italic;
+  color: #666;
+}

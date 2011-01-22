@@ -1,14 +1,16 @@
-@import "compass/css3";
-@import "blueprint";
-@import "common";
-
-@include blueprint-grid;
-
-
 @mixin float-container {
   width: 100%;
   overflow: hidden;
 }
+
+@import "compass/css3";
+@import "blueprint";
+@import "common";
+@import "forms";
+
+@include blueprint-grid;
+
+
 
 /* @group Variables */
 
@@ -37,162 +39,6 @@ body {
   text-align: center;
 }
 
-/* @group Forms */
-form .field {
-  @include float-container;
-  margin: 0 auto 10px;
-  width: 730px;
-
-  input {
-    float: left;
-    margin-left: 30px;
-    width: 400px;
-    padding: 6px;
-    border: 1px solid #a5a5a5;
-    font-size: 16px;
-    color: #333;
-  }
-
-  textarea {
-    float: left;
-    margin-left: 30px;
-    width: 400px;
-    padding: 6px;
-    border: 1px solid #a5a5a5;
-    font-size: 16px;
-    color: #333;
-  }
-
-  label {
-    display: block;
-    float: left;
-    width: 200px;
-    line-height: 35px;
-    font-weight: bold;
-    text-align: right;
-    font-size: 16px;
-    color: #333;
-  }
-}
-
-form .check_box {
-  margin: 0 auto 25px;
-  width: 530px;
-  padding-left: 260px;
-
-  input {
-    float: left;
-    margin-right: 6px;
-  }
-
-  label {
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 1;
-    color: #333;
-  }
-}
-
-form .check_boxes {
-  @include float-container;
-  margin: 0 auto 10px;
-  width: 530px;
-
-  .title label {
-    display: block;
-    float: left;
-    width: 100px;
-    line-height: 35px;
-    font-weight: bold;
-    text-align: right;
-    font-size: 16px;
-    color: #333;
-  }
-
-  .options {
-    float: right;
-    width: 400px;
-    padding-top: 8px;
-  }
-
-  .options label {
-    float: left;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 1;
-    color: #333;
-  }
-
-  .options input {
-    float: left;
-    clear: left;
-    margin-right: 6px;
-  }
-
-  .options label, .options input {
-    margin-bottom: 8px;
-  }
-}
-
-form .submit {
-  margin: 25px auto 0;
-  width: 530px;
-  text-align: right;
-}
-
-form .instructions {
-  margin: 0 auto 10px;
-  width: 400px;
-  padding-left: 130px;
-
-  p {
-    font-size: 14px;
-    font-style: italic;
-    color: #666;
-  }
-
-}
-
-.form_row {
-  margin-bottom: $form_row_spacing;
-  clear: both;
-
-  &.submit {
-    margin-top: $form_row_spacing * 4;
-  }
-
-  label {
-    float: left;
-    font-size: $font_label;
-    line-height: $font_label_height;
-    vertical-align: middle;
-    width: $label_width;
-
-    &.tag {
-      float: none;
-      width: auto;
-    }
-  }
-
-  input[type=text], input[type=password], textarea {
-    padding: $input_padding;
-    width: $input_width;
-    border: 1px solid $border_color;
-  }
-  input[type=checkbox] {
-    margin-top: $form_row_spacing / 2;
-  }
-
-  textarea {
-    height: 10em;
-    width: $textarea_width;
-  }
-}
-
-#new_motion_form {
-  width: 700px;
-  margin: 20px auto;
-}
 
 /* @end */
 
@@ -352,24 +198,6 @@ div.motion {
   .alt {
     background-color: #DDD;
   }
-  /*label {
-    float: left;
-    font-size: $font_label;
-    line-height: $font_label_height;
-    vertical-align: middle;
-    width: $label_width + 10px;
-  }
-  input[type=text] {
-    padding: $input_padding;
-    width: $input_width - 50;
-    border: 1px solid $border_color;
-  }
-  input[type=checkbox] {
-    margin-top: 9px;
-  }
-  submit {
-    margin-top: $form_row_spacing * 4;
-  }*/
 }
 
 #content div.motions {
