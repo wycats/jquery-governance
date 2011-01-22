@@ -30,6 +30,11 @@
         %span.current_state= t("motions.#{@motion.state_name}.description")
       %dt Expedited
       %dd= @motion.expedited? ? 'Yes' : 'No'
+      %dt Votes
+      %dd
+        %span.ayes #{@motion.ayes} ayes
+        \/
+        %span.nays #{@motion.nays} nays
     - if member? && current_member.can?(:second, @motion)
       =positive_button_to "Second This Motion", motion_second_path(@motion)
     - if member? && current_member.can?(:vote, @motion)
