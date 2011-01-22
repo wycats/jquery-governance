@@ -7,6 +7,40 @@ describe Motion do
     @motion = Factory.create(:motion)
   end
 
+  describe "validations" do
+    before do
+      @motion = Motion.new(
+        :title => 'Budget for Printed Programs',
+        :description => 'This vote is to set a max budget of $1500 for...',
+        :member_id => 1
+      )
+    end
+
+    it "is valid with valid attributes" do
+      @motion.should be_valid
+    end
+
+    it "is not valid without a title" do
+      @motion.title = nil
+      @motion.should_not be_valid
+    end
+
+    it "is not valid without a description" do
+      @motion.description = nil
+      @motion.should_not be_valid
+    end
+
+    it "is not valid without a member" do
+      @motion.member_id = nil
+      @motion.should_not be_valid
+    end
+
+    it "is not valid with an inexistent state name" do
+      @motion.state_name = 'inexistent'
+      @motion.should_not be_valid
+    end
+  end
+
   context "a newly created motion" do
     it "is in the waitingsecond state" do
       @motion.should be_waitingsecond
