@@ -104,3 +104,8 @@ en:
        public: "Motions"
        open: "Open Motions"
        closed: "Closed Motions"
+  events:
+    actions:
+      second: has seconded
+      objection: has objected
+      vote: has voted %{vote}
