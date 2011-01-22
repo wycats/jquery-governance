@@ -122,11 +122,6 @@ class Motion < ActiveRecord::Base
     seconds.count >= 2
   end
 
-  # @return [Fixnum] The numbers of seconds this motion has received.
-  def seconds_count
-    seconds.count
-  end
-
   # Check if the member is allowed to perform the given action.
   # @param [Symbol] action The action the member wants to perform.
   # @param [Member] member The member who wants to perfrom the action.
