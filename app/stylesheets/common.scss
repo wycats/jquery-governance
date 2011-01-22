@@ -15,6 +15,17 @@
   }
 }
 
+@mixin badge($fg-color, $bg-color) {
+  display: inline-block;
+  padding: 2px 5px;
+  @include border-radius(3px);
+  background-color: $bg-color;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: $fg-color;
+}
+
 
 #content .button {
   &, &:visited {
@@ -56,3 +67,15 @@
     border: 1px solid #888;
   }
 }
+
+#content .badge.tag {
+  @include badge(#999, #eee);
+  float: left;
+  margin: 3px 3px 0 0;
+  text-transform: lowercase;
+}
+
+#content .badge.status.expedited { @include badge(#fff, #a1bee6); }
+#content .badge.status.approved  { @include badge(#fff, #94ca3d); }
+#content .badge.status.passed    { @include badge(#fff, #94ca3d); }
+#content .badge.status.failed    { @include badge(#fff, #ff8080); }

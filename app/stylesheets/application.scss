@@ -37,43 +37,6 @@ body {
   text-align: center;
 }
 
-/* @end */
-
-/* @group Badges */
-#content .badge {
-  display: block;
-  padding: 2px 5px;
-  @include border-radius(3px);
-  font-size: 11px;
-  font-weight: bold;
-  text-transform: lowercase;
-
-  &.tag {
-   float: left;
-   margin: 3px 3px 0 0;
-   background-color: #eee;
-   color: #999;
-  }
-
-  &.status {
-    color: #fff;
-    text-transform: uppercase;
-
-    &.expedited {
-      background-color: #a1bee6;
-    }
-
-    &.passed, &.approved {
-      background-color: #94ca3d;
-    }
-
-    &.failed {
-      background-color: #ff8080;
-    }
-  }
-}
-/* @end */
-
 /* @group Forms */
 form .field {
   @include float-container;
