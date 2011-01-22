@@ -51,7 +51,7 @@ JqueryVoting::Application.configure do
   uri = URI.parse(ENV["REDISTOGO_URL"])
   REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   
-  config.action_mailer.default_url_options = { :host => 'jquery-governance.com' }
+  config.action_mailer.default_url_options = { :host => 'jquery-voting.heroku.com' }
 
   ENV["SENDGRID_USERNAME"] = "info@jquery-governance.com"
   ENV["SENDGRID_PASSWORD"] = "rosebud"
