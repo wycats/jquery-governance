@@ -238,21 +238,6 @@ describe Member do
     end
   end
 
-  describe "name_or_email" do
-    context "when the name of the member is known" do
-      it "reutrns the name of the member" do
-        @member.name_or_email.should == @member.name
-      end
-    end
-
-    context "when the name of the member isn't known" do
-      it "returns the email address of the member" do
-        @member.name = nil
-        @member.name_or_email.should == @member.email
-      end
-    end
-  end
-
   describe "conflicts_list" do
 
     context "when there are no conflicts asociated with the member" do

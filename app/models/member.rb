@@ -117,9 +117,4 @@ class Member < ActiveRecord::Base
       motion.discussing? && objected_motions.scoped.include?(motion) ||
       motion.voting? && voted_motions.scoped.include?(motion)
   end
-
-  # Return name if present, email if not
-  def name_or_email
-    self.name || self.email
-  end
 end
