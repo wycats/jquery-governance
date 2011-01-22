@@ -47,8 +47,5 @@ JqueryVoting::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  uri = URI.parse(ENV["REDISTOGO_URL"])
-  REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-
   config.action_mailer.default_url_options = { :host => 'jquery-voting.heroku.com' }
 end
