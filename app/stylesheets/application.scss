@@ -1,40 +1,9 @@
 @import "compass/css3";
 @import "blueprint";
+@import "common";
 
 @include blueprint-grid;
 
-@mixin gradient-button($top-color, $bottom-color) {
-  &, &:visited {
-    position: relative;
-    display: block;
-    padding: 6px 9px;
-    border: 1px solid #4e6642;
-    @include border-radius(3px);
-    background: $bottom-color;
-    @include linear-gradient(color-stops($top-color, $bottom-color));
-    @include box-shadow(rgba(0,0,0,0.5), 1px, 1px);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight: bold;
-    text-decoration: none;
-    text-transform: uppercase;
-    @include text-shadow(rgba(0,0,0,0.5), 1px, 1px);
-    color: #FFFEFE !important;
-    cursor: pointer;
-  }
-
-  &:hover {
-    background: darken($top-color, 5%);
-    @include linear-gradient(color-stops(darken($top-color, 5%), darken($bottom-color, 5%)));
-  }
-
-  &:active {
-    top: 1px;
-    left: 1px;
-    background: lighten($top-color, 5%);
-    @include linear-gradient(color-stops(lighten($top-color, 5%), lighten($bottom-color, 5%)));
-  }
-}
 
 @mixin float-container {
   width: 100%;
@@ -68,35 +37,6 @@ body {
   text-align: center;
 }
 
-/* @end */
-
-/* @group Buttons */
-#content .button {
-  @include gradient-button(#595959, #363636);
-
-  &, &:visited {
-    display: inline-block;
-  }
-
-  &.large {
-    padding: 8px 14px 9px;
-    font-size: 14px;
-  }
-
-  &.positive {
-    @include gradient-button(#6e914d, #57763b);
-  }
-
-  &.negative {
-    @include gradient-button(#a75144, #893a36);
-  }
-
-  &.disabled {
-    &, &:hover, &:active {
-      @include linear-gradient(color-stops(lighten(#595959, 30%), lighten(#363636, 30%)));
-    }
-  }
-}
 /* @end */
 
 /* @group Badges */

@@ -1,0 +1,58 @@
+@mixin gradient-button($top-color, $bottom-color) {
+  &, &:visited {
+    background: $bottom-color;
+    @include linear-gradient(color-stops($top-color, $bottom-color));
+  }
+
+  &:hover {
+    background: darken($top-color, 5%);
+    @include linear-gradient(color-stops(darken($top-color, 5%), darken($bottom-color, 5%)));
+  }
+
+  &:active {
+    background: lighten($top-color, 5%);
+    @include linear-gradient(color-stops(lighten($top-color, 5%), lighten($bottom-color, 5%)));
+  }
+}
+
+
+#content .button {
+  &, &:visited {
+    display: inline-block;
+    padding: 6px 9px;
+    border: 1px solid #4e6642;
+    @include border-radius(3px);
+    background: #363636;
+    @include box-shadow(rgba(0,0,0,0.5), 1px, 1px);
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    @include text-shadow(rgba(0,0,0,0.5), 1px, 1px);
+    color: #fffefe !important;
+    cursor: pointer;
+  }
+
+  &:hover { background: darken(#363636, 5%); }
+
+  &:active {
+    top: 1px; left: 1px;
+    background: lighten(#363636, 5%);
+  }
+
+  @include gradient-button(#595959, #363636);
+}
+
+#content .button.large {
+  padding: 8px 14px 9px;
+  font-size: 14px;
+}
+
+#content .button.positive { @include gradient-button(#6e914d, #57763b); }
+#content .button.negative { @include gradient-button(#a75144, #893a36); }
+#content .button.disabled {
+  &, &:hover, &:active {
+    @include linear-gradient(color-stops(#a6a6a6, #838383));
+    border: 1px solid #888;
+  }
+}
