@@ -21,6 +21,29 @@ describe Member do
     @member_motion = Factory.create(:motion, :member => @member)
   end
 
+  describe "validations" do
+    before do
+      @member = Member.new(
+        :name  => 'John Resig',
+        :email => 'john_resig@jquery.com'
+      )
+    end
+
+    it "is valid with valid attributes" do
+      @member.should be_valid
+    end
+
+    it "is not valid without a name" do
+      @member.name = nil
+      @member.should_not be_valid
+    end
+
+    it "is not valid without an email" do
+      @member.email = nil
+      @member.should_not be_valid
+    end
+  end
+
   describe "self.active" do
     it "should return all members who currently have an active membership" do
       Member.active.should include(@member, @admin_member, @non_admin_member, @renewed_member)

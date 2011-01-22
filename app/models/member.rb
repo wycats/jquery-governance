@@ -2,6 +2,9 @@ class Member < ActiveRecord::Base
   include Voting
   include ActsAsConflictable
 
+  validates :name,  :presence => true
+  validates :email, :presence => true
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :recoverable, :rememberable
