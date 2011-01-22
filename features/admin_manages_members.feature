@@ -30,19 +30,14 @@ Feature: Admin manages members
      And I should see "Sam Spade"
      And I should see "Member added"
 
-  # NOTE: This is disabled for now, since we are allowing (for now) memberships
-  # without a qualifying motion, this scenario will fail.  We also need to
-  # validate the presence of the name and the email.
-  #
-  #
-  # Scenario: Validation failure on create
-  #   Given I am on the members admin page
-  #   When I follow "Add new member"
-  #   And I fill in "Name" with ""
-  #   And I fill in "Email" with ""
-  #   And I press "Add new member"
-  #   Then I should see "Member could not be created"
-  #   And I should see "can't be blank"
+  Scenario: Validation failure on create
+    Given I am on the members admin page
+    When I follow "Add new member"
+    And I fill in "Name" with ""
+    And I fill in "Email" with ""
+    And I press "Add new member"
+    Then I should see "Member could not be created"
+    And I should see "can't be blank"
 
   Scenario: Update existing member
     Given these other members exist:
