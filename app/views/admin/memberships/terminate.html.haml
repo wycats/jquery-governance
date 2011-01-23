@@ -6,7 +6,7 @@
     .field.text
       = membership.label :disqualifying_motion_id, "Motion Reference #"
       = membership.text_field :disqualifying_motion_id, :placeholder => "Please specify a motion that ends the membership"
-      = render :partial => "shared/error_on_field", :locals => {:resource => @membership, :field => "disqualifying_motion_id"}
-      = render :partial => "shared/error_on_field", :locals => {:resource => @membership, :field => "disqualifying_motion"}
+      = membership.error_msg :disqualifying_motion_id
+      = membership.error_msg :disqualifying_motion
     .action.submit
       = membership.submit t("admin.memberships.actions.update_membership"), :class => "button large"
