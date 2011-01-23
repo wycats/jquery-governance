@@ -32,6 +32,8 @@ module JqueryVoting
 
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
+    require 'jquery_voting/form_builder'
+    config.action_view.default_form_builder = JqueryVoting::FormBuilder
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
