@@ -45,6 +45,7 @@ en:
       headings:
         name: "Name"
         email: "E-mail address"
+        active: "Active"
         actions: "Actions"
       actions:
         edit_memberships_for_member: "Edit memberships for member"

@@ -1,18 +1,21 @@
 #admin_members
   %header
     %h1= t("admin.members.titles.index")
-    %nav
-      %ul
-        %li= link_to t("admin.members.actions.add_new_member"), new_admin_member_path, { :class => 'button positive right' }
+
+  %nav
+    %ul
+      %li= link_to t("admin.members.actions.add_new_member"), new_admin_member_path, { :class => 'button positive' }
 
   %section#main
     %table.members
       %tr.headings
         %th= t("admin.members.headings.name")
         %th= t("admin.members.headings.email")
+        %th= t("admin.members.headings.active")
         %th.actions= t("admin.members.headings.actions")
       - @members.each do |member|
         %tr.member[member]{:class => cycle("", "alt")}
           %td= member.name
           %td= member.email
+          %td.active= member.membership_active? ? "Yes" : "No"
           %td{ :style => 'text-align: center;' }= link_to t("admin.members.actions.edit_member"), [:edit, :admin, member]

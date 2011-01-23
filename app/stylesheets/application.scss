@@ -176,15 +176,23 @@ div.motion {
 }
 
 #content div#admin_members {
-  .right {
+
+  header {
+    border-bottom: 1px solid #eee !important;
+  }
+
+  h1 {
+    padding: 0;
+  }
+
+  nav {
+    margin: 15px 0px;
     float: right;
   }
-  .left {
-    float: left;
-  }
-  .center {
-    margin-left: 300px;
-  }
+
+  .active{
+    text-align: center;}
+
   table {
     margin-left: 50px;
   }
