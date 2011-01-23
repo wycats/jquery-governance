@@ -2,21 +2,20 @@
   .field.text
     = f.label  :name
     = f.text_field :name, :placeholder => "John Resig"
-    = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => :name}
+    = f.error_msg :name
   .field.text
     = f.label :email
     = f.text_field :email, :placeholder => "jresig@example.com"
-    = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => :email}
+    = f.error_msg :email
   - if @member.new_record?
     = f.fields_for :memberships, @member.memberships.build do |membership|
       .check_box
         = membership.label :is_admin
         = membership.check_box :is_admin
-        = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => "memberships.is_admin"}
       .field.text
         = membership.label :qualifying_motion_id, "Motion Reference #"
         = membership.text_field :qualifying_motion_id, :placeholder => "1234"
-        = render :partial => "shared/error_on_field", :locals => {:resource => @member, :field => "memberships.qualifying_motion_id"}
+        = f.error_msg 'memberships.qualifying_motion_id'
   .field.text
     = f.label :conflicts_list
     = f.text_field :conflicts_list
