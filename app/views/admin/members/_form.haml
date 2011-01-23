@@ -1,6 +1,6 @@
 = form_for [:admin, @member] do |f|
   .field.text
-    = f.label  :name
+    = f.label :name
     = f.text_field :name, :placeholder => "John Resig"
     = f.error_msg :name
   .field.text
