@@ -62,3 +62,11 @@ form .instructions p {
   font-style: italic;
   color: #666;
 }
+
+form .error_msg {
+  clear: both;
+  width: $form_right_column_width;
+  margin-left: $form_left_column_width + $form_columns_separation;
+  padding: 4px 0 0 7px;
+  color: #a75144;
+}
