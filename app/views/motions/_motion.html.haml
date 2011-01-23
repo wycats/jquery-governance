@@ -8,5 +8,5 @@
     %p.title= link_to motion.title, motion_events_url(motion)
     %p.author
       by
-      %strong #{motion_creator_display_name(motion)}
+      %strong= motion.member.name
     %p.description= truncate(motion.description, :length => 200)
