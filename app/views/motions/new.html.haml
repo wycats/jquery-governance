@@ -5,12 +5,14 @@
     .field.text
       = f.label :title
       = f.text_field :title
+      = f.error_msg :title
     .check_box
       = f.label :expedited, "Mark as expedited"
       = f.check_box :expedited
     .field.text_area
       = f.label :description
       = f.text_area :description, :rows => 6
+      = f.error_msg :description
     .field.text_area
       = f.label :rationale
       = f.text_area :rationale, :rows => 4
