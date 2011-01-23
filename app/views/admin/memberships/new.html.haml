@@ -6,9 +6,9 @@
     %fieldset
       = membership.label :qualifying_motion_id, "Motion Reference #"
       = membership.text_field :qualifying_motion_id, :placeholder => "1234"
+      = membership.error_msg :quailifying_motion_id
+      = membership.error_msg :quailifying_motion
       = membership.label :is_admin
       = membership.check_box :is_admin
-      = render :partial => "shared/error_on_field", :locals => {:resource => @membership, :field => "qualifying_motion_id"}
-      = render :partial => "shared/error_on_field", :locals => {:resource => @membership, :field => "qualifying_motion"}
     .buttons
       = membership.submit t("admin.memberships.actions.renew_membership")
