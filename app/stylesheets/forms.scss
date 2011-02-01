@@ -2,12 +2,14 @@ $form_left_column_width: 240px;
 $form_right_column_width: 400px;
 $form_columns_separation: 30px;
 
-form .field {
+form .field,
+form .select {
   @include float-container;
   margin-bottom: 10px;
 }
 
-form .field label {
+form .field label,
+form .select label {
   float: left;
   display: block;
   width: $form_left_column_width;
@@ -27,6 +29,13 @@ form .field textarea {
   border: 1px solid #a5a5a5;
   font-size: 16px;
   color: #333;
+}
+
+form .select select {
+  float: left;
+  margin-top: 3px;
+  margin-left: $form_columns_separation;
+  padding: 6px;
 }
 
 form .check_box {

@@ -12,9 +12,9 @@
       .check_box
         = membership.label :is_admin
         = membership.check_box :is_admin
-      .field.text
-        = membership.label :qualifying_motion_id, "Motion Reference #"
-        = membership.text_field :qualifying_motion_id, :placeholder => "1234"
+      .select
+        = membership.label :qualifying_motion_id, "Motion Reference"
+        = membership.approved_motions_select :qualifying_motion_id
         = f.error_msg 'memberships.qualifying_motion_id'
   .field.text
     = f.label :conflicts_list

@@ -3,11 +3,12 @@
 
 %section#main
   = form_for [:admin, @member, @membership] do |membership|
-    %fieldset
-      = membership.label :qualifying_motion_id, "Motion Reference #"
-      = membership.text_field :qualifying_motion_id, :placeholder => "1234"
+    .select
+      = membership.label :qualifying_motion_id, "Motion Reference"
+      = membership.approved_motions_select :qualifying_motion_id
       = membership.error_msg :quailifying_motion_id
       = membership.error_msg :quailifying_motion
+    .check_box
       = membership.label :is_admin
       = membership.check_box :is_admin
     .buttons

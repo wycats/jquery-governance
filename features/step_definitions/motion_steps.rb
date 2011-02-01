@@ -3,6 +3,11 @@ Given /^a motion titled "([^"]*)" exists(?: in the "(.*)" state)?$/ do |title, s
   Factory(:motion, title: title, state_name: state_name)
 end
 
+Given /^a approved motion titled "([^"]*)"$/ do |title|
+  motion = Factory(:closed_motion, title: title)
+  10.times { Factory(:yes_vote, motion: motion) }
+end
+
 Then /^the motion titled "([^"]*)" is in discussion$/ do |title|
   Motion.find_by_title!(title).should be_discussing
 end

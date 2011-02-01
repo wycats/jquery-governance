@@ -19,11 +19,11 @@ Feature: Admin manages members
 
   Scenario: Create new member
    Given I am on the members admin page
-     And a qualifying motion exists with the reference number "1234"
+     And a approved motion titled "Add Voting Member 'Sam Spade'"
     When I follow "Add new member"
      And I fill in "Name" with "Sam Spade"
      And I fill in "Email" with "sspade@gumshoes.com"
-     And I fill in "Motion Reference #" with "1234"
+     And I select "Add Voting Member 'Sam Spade'" from "Motion Reference"
      And I check "Is admin"
      And I press "Add new member"
     Then I should be on the members admin page
@@ -58,22 +58,22 @@ Feature: Admin manages members
       | name       | email              |
       | John Resig | jresig@example.org |
       | Paul Irish | paul@example.com   |
-    And a disqualifying motion exists with the reference number "1234"
+    And a approved motion titled "Remove Voting Member 'Paul Irish'"
     When I go to the members admin page
     And I follow the edit link for "Paul Irish"
     And I follow "End membership"
-    And I fill in "1234" for "Motion Reference #"
+    And I select "Remove Voting Member 'Paul Irish'" from "Motion Reference"
     And I press "Terminate membership"
     Then I should be on the membership history page for "Paul Irish"
     And I should see "No active memberships"
 
   Scenario: Add a new membership to a member
     Given the expired member "Paul Irish" exists
-    And a qualifying motion exists with the reference number "1234"
+    And a approved motion titled "Add Voting Member 'Paul Irish'"
     When I go to the members admin page
     And I follow the edit link for "Paul Irish"
     And I follow "Renew membership"
-    And I fill in "1234" for "Motion Reference #"
+    And I select "Add Voting Member 'Paul Irish'" from "Motion Reference"
     And I press "Renew membership"
     Then I should be on the membership history page for "Paul Irish"
     And I should see "Membership successfully renewed"
