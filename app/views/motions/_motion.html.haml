@@ -5,7 +5,7 @@
       %span.time= motion.created_at.strftime("at %l:%M %p")
     = motion_status_badge(motion)
   .summary
-    %p.title= link_to motion.title, motion_events_url(motion)
+    %p.title= link_to motion.title, motion
     %p.author
       by
       %strong= motion.member.name

@@ -1,6 +1,6 @@
 class MotionsController < ApplicationController
 
-  before_filter :authenticate_member!, :except => [:index, :show_more]
+  before_filter :authenticate_member!, :except => [:index, :show, :show_more]
 
   # List Motions that are open (NOT passed, failed, approved)
   def index
@@ -11,6 +11,10 @@ class MotionsController < ApplicationController
   def closed
     @group = MotionSorter.group_for(current_member, :name => :closed)
     render :index
+  end
+
+  def show
+    @motion = Motion.find(params[:id])
   end
 
   # Start a new Motion
@@ -29,7 +33,7 @@ class MotionsController < ApplicationController
 
     if @motion.save
       flash[:notice] = "New motion was created successfully"
-      redirect_to motion_events_url(@motion)
+      redirect_to motion_url(@motion)
     else
       render :new
     end

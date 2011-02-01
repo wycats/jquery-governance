@@ -1,12 +1,6 @@
 class MotionEventsController < ApplicationController
 
-  before_filter :authenticate_member!, :except => [:index, :show]
-
-  # Display events for a given Motion
-  # @option params [Fixnum] :motion_id The id of the motion in question
-  def index
-    @motion = Motion.find(params[:motion_id])
-  end
+  before_filter :authenticate_member!, :except => [:show]
 
   # Show an Event for a given Motion
   # @option params [Fixnum] :motion_id The id of the motion in question
@@ -26,7 +20,7 @@ class MotionEventsController < ApplicationController
       flash[:alert] =  "Something went wrong when seconding the motion"
     end
 
-    redirect_to motion_events_url(@motion)
+    redirect_to motion_url(@motion)
   end
 
   # Create an Objection Event for a Motion
@@ -40,7 +34,7 @@ class MotionEventsController < ApplicationController
       flash[:alert] =  "Something went wrong when objecting the motion"
     end
 
-    redirect_to motion_events_url(@motion)
+    redirect_to motion_url(@motion)
   end
 
   # Create a Voting Event for a Motion
@@ -55,6 +49,6 @@ class MotionEventsController < ApplicationController
       flash[:alert] =  "Something went wrong when voting the motion"
     end
 
-    redirect_to motion_events_url(@motion)
+    redirect_to motion_url(@motion)
   end
 end
