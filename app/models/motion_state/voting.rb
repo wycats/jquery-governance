@@ -15,7 +15,7 @@ module MotionState
     # @param [Member] member A member who wants to vote the motion.
     # @return [true, false] Only active members can vote only once on a motion when they don't have conflicts.
     def permit_vote?(member)
-      member.membership_active? && !member.has_voted_on?(@motion) && !@motion.conflicts_with?(member)
+      member && member.membership_active? && !member.has_voted_on?(@motion) && !@motion.conflicts_with?(member)
     end
 
     # Updates the state of a motion to closed when 47 hours has been passed.

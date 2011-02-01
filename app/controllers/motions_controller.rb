@@ -15,6 +15,9 @@ class MotionsController < ApplicationController
 
   def show
     @motion = Motion.find(params[:id])
+    unless @motion.permit?(:see, current_member)
+      render :file => "#{Rails.root}/public/404.html", :status => 404, :layout => false
+    end
   end
 
   # Start a new Motion

@@ -15,8 +15,7 @@ module MotionState
     # @param [Member] member A member who wants to object the motion.
     # @return [true, false] Only active members can object a motion and they can do it only once.
     def permit_object?(member)
-      member.membership_active? && @motion.objections.where(:member_id => member.id).blank? && !@motion.conflicts_with?(member)
-
+      member && member.membership_active? && @motion.objections.where(:member_id => member.id).blank? && !@motion.conflicts_with?(member)
     end
 
     # Updates the state of a motion to voting when 24 hours has been passed and

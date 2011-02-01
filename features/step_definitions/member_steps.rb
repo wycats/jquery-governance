@@ -27,7 +27,7 @@ Given /^there is an active(:? admin)? member with email "([^"]*)" and password "
   Factory(:membership, member: member, is_admin: is_admin.present?)
 end
 
-Given /^these (?:other )?members exist:$/ do |table|
+Given /^these (?:other )?members? exist:$/ do |table|
   table.rows.each do |name, email, qualifying_motion_id|
     member = Factory.create(:member, name: name, email: email)
     if qualifying_motion_id

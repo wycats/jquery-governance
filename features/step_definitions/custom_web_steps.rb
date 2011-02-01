@@ -23,6 +23,10 @@ Then /^I should not see an? "([^"]*)" submit button$/ do |title|
   page.should have_no_xpath("//button[@value='#{title}']")
 end
 
+Then /^I should get a "(\d+)" response$/ do |status|
+  page.status_code.should == status.to_i
+end
+
 
 
 # Use semantic sections as a shortcut to add contextual

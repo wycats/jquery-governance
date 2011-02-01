@@ -16,3 +16,12 @@ Feature: Public browses votes
     When I follow "jQuery should rule the JS World"
     And I should see "jQuery should rule the JS World"
     And I should see "Test Member" in the author section
+
+  Scenario: A guest can't see a private motion
+    Given these member exist:
+      | name          | email              |
+      | John Resig    | john@jquery.com    |
+    Given the member "John Resig" has created a motion titled "jQuery is cool"
+    When I go to the motions page for "jQuery is cool"
+    Then I should get a "404" response
+    And I should not see "jQuery is cool"

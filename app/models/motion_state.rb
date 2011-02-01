@@ -49,7 +49,7 @@ module MotionState
     # @param [Member] member A member which wants to see the motion.
     # @return [true, false] Only active members are allowed to see a motion which isn't visible to anyone.
     def permit_see?(member)
-      member.membership_active?
+      member && member.membership_active?
     end
   end
 
