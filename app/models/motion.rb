@@ -130,13 +130,22 @@ class Motion < ActiveRecord::Base
   # @param [Member] member The member who wants to perfrom the action.
   # @return [true, false] Whether or not the member is allowed to perform the action on this motion, respectively.
   def permit?(action, member)
-    state.permit?(action, member)
+    if %w(see second object vote).include?(action.to_s)
+      method = "permit_#{action}?"
+      send(method, member)
+    else
+      false
+    end
   end
 
   # Check if a motion has been objected by any member.
   # @return [true, false] Whether or not the motion has received an objection.
   def objected?
     objections.any?
+  end
+
+  def publicly_viewable?
+    voting? || closed?
   end
 
   def tag_list
@@ -303,6 +312,23 @@ class Motion < ActiveRecord::Base
   end
 
 private
+
+  def permit_see?(member)
+    publicly_viewable? || (member && member.membership_active?)
+  end
+
+  def permit_second?(member)
+    waitingsecond? && member && member.membership_active? && self.member != member && !member.has_seconded?(self) && !conflicts_with?(self)
+  end
+
+  def permit_object?(member)
+    discussing? && member && member.membership_active? && objections.where(:member_id => member.id).blank? && !conflicts_with?(member)
+  end
+
+  def permit_vote?(member)
+    voting? && member && member.membership_active? && !member.has_voted_on?(self) && !conflicts_with?(member)
+  end
+
   # @todo Description
   def possible_votes
     # @todo Deal with conflicts of interest
