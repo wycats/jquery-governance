@@ -88,7 +88,7 @@ div.motion {
 
   p {
     margin: 8px 0;
-    font-size: 1.5em;
+    font-size: 15px;
     color: #666;
   }
 
@@ -136,8 +136,13 @@ div.motion {
     li {
       padding: 5px 0;
       border-bottom: 1px solid #eee;
-      font-size: 1.5em;
-      color: #666;
+      color: #333;
+
+      p { margin: 0; }
+
+      p.action { color: #333; }
+
+      .member { font-weight: bold; }
     }
   }
 }

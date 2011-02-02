@@ -1,4 +1,6 @@
 %li{ :class => event.member == current_member ? 'you' : 'other' }
-  %span.member= event.member.name
-  %span.event_type= event_action(event)
-  %span.at #{time_ago_in_words(event.updated_at)} ago
+  %p.action
+    %span.member= event.member.name
+    %span.event_type= event_action(event)
+  %p.time
+    %span.at #{time_ago_in_words(event.updated_at)} ago
