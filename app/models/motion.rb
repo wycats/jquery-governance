@@ -290,10 +290,11 @@ class Motion < ActiveRecord::Base
   end
 
   def self.states(kind=:all)
-    if kind == :all
-      MOTION_STATES.dup
-    else
-      states.find_all { |state_name| state_class(state_name).public_send("#{kind}?") }
+    case kind
+    when :all    then MOTION_STATES.dup
+    when :public then %w(voting closed)
+    when :open   then %w(waitingsecond discussing voting)
+    when :closed then %w(closed)
     end
   end
 
