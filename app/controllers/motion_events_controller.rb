@@ -10,6 +10,18 @@ class MotionEventsController < ApplicationController
     @event  = @motion.events.where :event_id => params[:event_id]
   end
 
+  def create
+    @motion = Motion.find(params[:motion_id])
+    @event  = current_member.events.new(params[:event].merge(:motion => @motion))
+
+    if @event.save
+      flash[:notice] = "You have successfully objected the motion."
+      redirect_to motion_url(@motion)
+    else
+      # TODO
+    end
+  end
+
   # Create a Seconding Event for a Motion
   # @option params [Fixnum] :motion_id The id of the motion in question
   def second

@@ -4,3 +4,5 @@
     %span.event_type= event_action(event)
   %p.time
     %span.at #{time_ago_in_words(event.updated_at)} ago
+  - unless event.comment.blank?
+    %p.comment= event.comment

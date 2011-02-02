@@ -20,6 +20,12 @@ form .select label {
   color: #333;
 }
 
+form#new_event .field label {
+  display: block;
+  width: auto;
+  text-align: left;
+}
+
 form .field input,
 form .field textarea {
   float: left;
@@ -29,6 +35,12 @@ form .field textarea {
   border: 1px solid #a5a5a5;
   font-size: 16px;
   color: #333;
+}
+
+form#new_event .field textarea {
+  float: none;
+  width: 490px;
+  margin: 0;
 }
 
 form .select select {

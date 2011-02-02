@@ -29,7 +29,13 @@
         =positive_button_to "Vote Aye On This Motion", motion_vote_path(@motion, :vote => :aye)
         =negative_button_to "Vote Nay On This Motion", motion_vote_path(@motion, :vote => :nay)
       - if member? && current_member.can?(:object, @motion)
-        =negative_button_to "Object This Motion", motion_object_path(@motion)
+        = form_for([@motion, @motion.objections.new]) do |f|
+          = f.hidden_field :event_type
+          .field.text
+            = f.label :comment
+            = f.text_area :comment, :rows => 5
+          .actions
+            = f.submit 'Object This Motion', :class => 'button negative'
   #motion-status
     %dl
       %dt State
