@@ -22,7 +22,15 @@
     %h3 Events
     %ul#motion-events
       = render :partial => active_member? ? @motion.events : @motion.votes
-  #motion-actions
+    #motion-actions
+      - if member? && current_member.can?(:second, @motion)
+        =positive_button_to "Second This Motion", motion_second_path(@motion)
+      - if member? && current_member.can?(:vote, @motion)
+        =positive_button_to "Vote Aye On This Motion", motion_vote_path(@motion, :vote => :aye)
+        =negative_button_to "Vote Nay On This Motion", motion_vote_path(@motion, :vote => :nay)
+      - if member? && current_member.can?(:object, @motion)
+        =negative_button_to "Object This Motion", motion_object_path(@motion)
+  #motion-status
     %dl
       %dt State
       %dd
@@ -35,10 +43,3 @@
         %span.ayes #{@motion.ayes} ayes
         \/
         %span.nays #{@motion.nays} nays
-    - if member? && current_member.can?(:second, @motion)
-      =positive_button_to "Second This Motion", motion_second_path(@motion)
-    - if member? && current_member.can?(:vote, @motion)
-      =positive_button_to "Vote Aye On This Motion", motion_vote_path(@motion, :vote => :aye)
-      =negative_button_to "Vote Nay On This Motion", motion_vote_path(@motion, :vote => :nay)
-    - if member? && current_member.can?(:object, @motion)
-      =negative_button_to "Object This Motion", motion_object_path(@motion)

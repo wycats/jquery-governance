@@ -97,7 +97,7 @@ div.motion {
     float: left;
   }
 
-  #motion-actions {
+  #motion-status {
     width: 260px;
     float: right;
 
@@ -124,14 +124,11 @@ div.motion {
         color: #666;
       }
     }
-
-    .button {
-      margin: 6px 0;
-    }
   }
 
   #motion-events {
     margin-top: -8px;
+    margin-bottom: 15px;
 
     li {
       padding: 5px 0;
@@ -146,6 +143,8 @@ div.motion {
     }
   }
 }
+
+#motion-actions { padding: 5px 0; }
 
 /* @end */
 
