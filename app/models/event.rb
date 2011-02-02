@@ -3,11 +3,12 @@ class Event < ActiveRecord::Base
   # which currently assumes the #{event}ed always converts an event to
   # its past tense form
   # TODO objection breaks this convention
-  EVENT_TYPES = ["vote", "second", "objection"]
+  EVENT_TYPES = ["vote", "second", "objection", "comment"]
   HUMAN_READABLE_EVENT_TYPES = {
     'vote' => 'Vote',
     'second' => 'Second',
-    'objection' => 'Objection'
+    'objection' => 'Objection',
+    'comment' => 'Comment'
   }
 
   belongs_to  :member
@@ -15,7 +16,8 @@ class Event < ActiveRecord::Base
 
   validates   :member_id,   :uniqueness => {
                               :scope => [:motion_id, :event_type]
-                            }
+                            },
+                            :unless => :comment?
   validates   :event_type,  :presence   => true,
                             :inclusion  => {
                               :in => EVENT_TYPES
@@ -56,6 +58,10 @@ class Event < ActiveRecord::Base
     event_type == "objection"
   end
   alias :objection? :is_objection?
+
+  def comment?
+    event_type == 'comment'
+  end
 
   def formatted_event_type(format = :human)
     if format == :human
