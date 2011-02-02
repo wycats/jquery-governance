@@ -106,7 +106,11 @@ en:
        open: "Open Motions"
        closed: "Closed Motions"
   events:
+    notices:
+      objection: You have successfully objected the motion.
+      comment: You have successfully commented the motion.
     actions:
       second: has seconded
       objection: has objected
       vote: has voted %{vote}
+      comment: has commented
