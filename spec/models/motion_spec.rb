@@ -286,3 +286,212 @@ describe Motion do
     end
   end
 end
+
+describe Motion, "waitingsecond" do
+  before(:all) do
+    @active_member = Factory(:membership).member
+    @inactive_member = Factory(:expired_membership).member
+    @motion = Factory(:motion)
+  end
+
+  describe "permit?" do
+    it "allows an active member to see the motion" do
+      @motion.permit?(:see, @active_member).should be_true
+    end
+
+    it "doesn't allow an inactive member to see the motion" do
+      @motion.permit?(:see, @inactive_member).should be_false
+    end
+
+    it "doesn't allow an active member to object the motion" do
+      @motion.permit?(:object, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to object the motion" do
+      @motion.permit?(:object, @inactive_member).should be_false
+    end
+
+    it "doesn't allow an active member to vote the motion" do
+      @motion.permit?(:vote, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to vote the motion" do
+      @motion.permit?(:vote, @inactive_member).should be_false
+    end
+
+    it "allows an active member to second another member's motion" do
+      @motion.permit?(:second, @active_member).should be_true
+    end
+
+    it "doesn't allow an active member to second more than once another member's motion" do
+      @active_member.second(@motion)
+      @motion.permit?(:second, @active_member).should be_false
+    end
+
+    it "doesn't allow an active member to second its own motion" do
+      @owned_motion = Factory(:motion, :member => @active_member)
+      @owned_motion.permit?(:second, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to second the motion" do
+      @motion.permit?(:second, @inactive_member).should be_false
+    end
+  end
+end
+
+describe Motion, "discussing" do
+  before(:all) do
+    @active_member = Factory(:membership).member
+    @inactive_member = Factory(:expired_membership).member
+    @motion = Factory(:discussing_motion)
+  end
+
+  describe "permit?" do
+    it "allows an active member to see the motion" do
+      @motion.permit?(:see, @active_member).should be_true
+    end
+
+    it "doesn't allow an inactive member to see the motion" do
+      @motion.permit?(:see, @inactive_member).should be_false
+    end
+
+    it "allows an active member to object the motion" do
+      @motion.permit?(:object, @active_member).should be_true
+    end
+
+    it "doesn't allow a member to object the motion more than once" do
+      @active_member.object(@motion)
+      @motion.permit?(:object, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to object the motion" do
+      @motion.permit?(:object, @inactive_member).should be_false
+    end
+
+    it "doesn't allow an active member to vote the motion" do
+      @motion.permit?(:vote, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to vote the motion" do
+      @motion.permit?(:vote, @inactive_member).should be_false
+    end
+
+    it "doesn't allow an active member to second another member's motion" do
+      @motion.permit?(:second, @active_member).should be_false
+    end
+
+    it "doesn't allow an active member to second its own motion" do
+      @owned_motion = Factory(:discussing_motion, :member => @active_member)
+      @owned_motion.permit?(:second, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to second the motion" do
+      @motion.permit?(:second, @inactive_member).should be_false
+    end
+  end
+end
+
+describe Motion, "voting" do
+  before(:all) do
+    @active_member = Factory(:membership).member
+    @inactive_member = Factory(:expired_membership).member
+    @motion = Factory(:voting_motion)
+  end
+
+  describe "permit?" do
+    it "allows an active member to see the motion" do
+      @motion.permit?(:see, @active_member).should be_true
+    end
+
+    it "allows an inactive member to see the motion" do
+      @motion.permit?(:see, @inactive_member).should be_true
+    end
+
+    it "doesn't allow an active member to object the motion" do
+      @motion.permit?(:object, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to object the motion" do
+      @motion.permit?(:object, @inactive_member).should be_false
+    end
+
+    it "allows an active member to vote the motion" do
+      @motion.permit?(:vote, @active_member).should be_true
+    end
+
+    it "doesn't allow an active member to vote the motion more than once" do
+      @motion.stub(:vote).and_return(Factory(:yes_vote, :motion => @motion, :member => @active_member))
+      @motion.vote(@active_member, true)
+      @motion.permit?(:vote, @active_member).should be_false
+    end
+
+    it "doesn't allow an active member to vote the motion if there's a conflict of interest" do
+      @motion.stub(:conflicts_with?).with(@active_member).and_return(true)
+      @motion.permit?(:vote, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to vote the motion" do
+      @motion.permit?(:vote, @inactive_member).should be_false
+    end
+
+    it "doesn't allow an active member to second another member's motion" do
+      @motion.permit?(:second, @active_member).should be_false
+    end
+
+    it "doesn't allow an active member to second its own motion" do
+      @owned_motion = Factory(:voting_motion, :member => @active_member)
+      @owned_motion.permit?(:second, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to second the motion" do
+      @motion.permit?(:second, @inactive_member).should be_false
+    end
+  end
+end
+
+describe Motion, "closed" do
+  before(:all) do
+    @active_member = Factory(:membership).member
+    @inactive_member = Factory(:expired_membership).member
+    @motion = Factory(:closed_motion)
+  end
+
+  describe "permit?" do
+    it "allows an active member to see the motion" do
+      @motion.permit?(:see, @active_member).should be_true
+    end
+
+    it "allows an inactive member to see the motion" do
+      @motion.permit?(:see, @inactive_member).should be_true
+    end
+
+    it "doesn't allow an active member to object the motion" do
+      @motion.permit?(:object, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to object the motion" do
+      @motion.permit?(:object, @inactive_member).should be_false
+    end
+
+    it "doesn't allow an active member to vote the motion" do
+      @motion.permit?(:vote, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to vote the motion" do
+      @motion.permit?(:vote, @inactive_member).should be_false
+    end
+
+    it "doesn't allows an active member to second another member's motion" do
+      @motion.permit?(:second, @active_member).should be_false
+    end
+
+    it "doesn't allow an active member to second its own motion" do
+      @owned_motion = Factory(:closed_motion, :member => @active_member)
+      @owned_motion.permit?(:second, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to second the motion" do
+      @motion.permit?(:second, @inactive_member).should be_false
+    end
+  end
+end
