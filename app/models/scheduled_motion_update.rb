@@ -14,7 +14,9 @@ class ScheduledMotionUpdate
   # @param [Fixnum] time_elapsed The time elapsed since the motion has entered the current state.
   def self.perform(motion_id, motion_state_name, time_elapsed)
     motion = Motion.find_by_id_and_state_name(motion_id, motion_state_name)
-    motion.scheduled_update(time_elapsed) unless motion.nil?
+    unless motion.nil?
+      send("update_#{motion_state_name}_motion", motion, time_elapsed)
+    end
   end
 
   # Helper to create and enqueue this Resque job, whose processing will be
@@ -23,5 +25,27 @@ class ScheduledMotionUpdate
   # @param [Motion] motion The motion that needs to update its state in a given amount of time.
   def self.in(time, motion)
     Resque.enqueue_at(time.from_now, self, motion.id, motion.state_name, time)
+  end
+
+  def self.update_waitingsecond_motion(motion, time_elapsed)
+    return if time_elapsed < 48.hours
+
+    if motion.expedited? && motion.can_discuss?
+      motion.discussing!
+    else
+      motion.closed!
+    end
+  end
+
+  def self.update_discussing_motion(motion, time_elapsed)
+    if time_elapsed >= 48.hours
+      motion.voting!
+    elsif !motion.objected? && time_elapsed >= 24.hours
+      motion.voting!
+    end
+  end
+
+  def self.update_voting_motion(motion, time_elapsed)
+    motion.closed! if time_elapsed >= 48.hours
   end
 end
