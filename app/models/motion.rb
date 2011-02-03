@@ -88,10 +88,6 @@ class Motion < ActiveRecord::Base
 
   after_create :waitingsecond!, :if => :waitingsecond?
 
-  after_initialize :assign_state
-
-  attr_reader :state
-
   # More than the half of the possible votes are required to approve a motion.
   # @return [Fixnum] The number of votes required to approve this motion.
   def required_votes
@@ -161,16 +157,6 @@ class Motion < ActiveRecord::Base
   ##
   # States
   ##
-
-  # Updates the motion's attribute <tt>state_name</tt>, and assigns the state
-  # object corresponding to the new state.
-  # @note There's a convention between state names and state object classes: a state with the name 'waitingsecond' will instantiate a {MotionState::Waitingsecond} object.
-  # @param [String] state_name The name of the new motion state.
-  # @return [MotionState::Base, nil] The state object if it exists, nil otherwise.
-  def state_name=(state_name)
-    write_attribute(:state_name, state_name)
-    assign_state
-  end
 
   # Check if a motion is currently waiting for seconds.
   # @return [true, false] Whether or not the motion is in the waiting for seconds state.
@@ -298,12 +284,6 @@ class Motion < ActiveRecord::Base
     end
   end
 
-  def self.state_class(state_name)
-    if states.include?(state_name.to_s)
-      "MotionState::#{state_name.capitalize}".constantize
-    end
-  end
-
   def self.open
     where :state_name => states(:open)
   end
@@ -340,10 +320,6 @@ private
   def waitingsecond!
     send_email(:motion_created)
     schedule_update_in(48.hours)
-  end
-
-  def assign_state
-    @state = self.class.state_class(state_name).try(:new, self)
   end
 
   def send_email(notification)

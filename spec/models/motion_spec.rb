@@ -125,19 +125,6 @@ describe Motion do
     end
   end
 
-  describe "state_name=" do
-    it "updates the motion's state name" do
-      @motion.state_name = 'waitingsecond'
-      @motion.state_name.should == 'waitingsecond'
-    end
-
-    it "updates the motion's state" do
-      # NOTE this isn't a good spec, but I don't expect it to live long
-      @motion.state_name = 'voting'
-      @motion.state.should be_instance_of MotionState::Voting
-    end
-  end
-
   describe 'voting requirements' do
     before do
       # This represents all of the members who currently have the right to vote

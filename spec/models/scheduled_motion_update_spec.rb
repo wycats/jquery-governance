@@ -5,7 +5,6 @@ describe ScheduledMotionUpdate do
     context "for a motion waiting for seconds that hasn't been marked as expedited" do
       before :all do
         @motion = Factory(:motion)
-        @motion_state = @motion.state
       end
 
       it "doesn't update the motion state before 48 hours" do
