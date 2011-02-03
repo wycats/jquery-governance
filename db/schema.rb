@@ -41,15 +41,6 @@ ActiveRecord::Schema.define(:version => 20110204190344) do
   add_index "events", ["member_id", "motion_id", "event_type"], :name => "event_validation_of_member_event_type"
   add_index "events", ["motion_id", "event_type"], :name => "motion_events_by_event_type"
 
-  create_table "hotspots", :force => true do |t|
-    t.string   "location"
-    t.string   "address"
-    t.string   "lat"
-    t.string   "lng"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "members", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
