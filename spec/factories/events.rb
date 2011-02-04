@@ -4,16 +4,12 @@ FactoryGirl.define do
     motion
   end
 
-  factory :vote, :parent => :event do
-    event_type "vote"
+  factory :yes_vote, :parent => :event do
+    event_type "yes_vote"
   end
 
-  factory :yes_vote, :parent => :vote  do
-    value true
-  end
-
-  factory :no_vote, :parent => :vote do
-    value false
+  factory :no_vote, :parent => :event do
+    event_type "no_vote"
   end
 
   factory :second, :parent => :event do

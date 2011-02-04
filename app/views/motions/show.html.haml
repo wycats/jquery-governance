@@ -38,10 +38,9 @@
               %button.button.positive{ :name => 'event[event_type]', :value => 'second' }
                 Second This Motion
             - if current_member.can?(:vote, @motion)
-              = hidden_field_tag 'event[event_type]', 'vote'
-              %button.button.positive{ :name => 'event[value]', :value => true }
+              %button.button.positive{ :name => 'event[event_type]', :value => 'yes_vote' }
                 Vote Aye On This Motion
-              %button.button.negative{ :name => 'event[value]', :value => false }
+              %button.button.negative{ :name => 'event[event_type]', :value => 'no_vote' }
                 Vote Nay On This Motion
   #motion-status
     %dl

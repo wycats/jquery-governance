@@ -21,11 +21,11 @@ describe Event do
   end
 
   it "knows how many of the votes are yeas" do
-    Event.votes.yeas.count.should == 2
+    Event.yes_votes.count.should == 2
   end
 
   it "knows how many of the votes are nays" do
-    Event.votes.nays.count.should == 1
+    Event.no_votes.count.should == 1
   end
 
   describe "a vote" do

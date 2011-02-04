@@ -19,8 +19,4 @@ module MotionsHelper
 
     badge(status, :class => "status #{status}") unless status.blank?
   end
-
-  def event_action(event)
-    t("events.actions.#{event.event_type}", :vote => event.value ? 'yea' : 'nay')
-  end
 end

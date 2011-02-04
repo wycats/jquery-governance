@@ -19,12 +19,12 @@ module Voting
 
   # @return [Fixnum] Count of current yea votes
   def yeas
-    votes.yeas.count
+    events.yes_votes.count
   end
   alias :ayes :yeas
 
   # @return [Fixnum] Count of current nay votes
   def nays
-    votes.nays.count
+    events.no_votes.count
   end
 end

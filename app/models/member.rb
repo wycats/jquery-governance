@@ -59,7 +59,11 @@ class Member < ActiveRecord::Base
   # @param [true, false] value An aye or nay vote, respectively.
   # @return [Event] The Event of the vote just made.
   def vote(motion, value)
-    votes.create(:motion => motion, :value => value)
+    if value
+      events.yes_votes.create(:motion => motion)
+    else
+      events.no_votes.create(:motion => motion)
+    end
   end
 
   # Second a motion.

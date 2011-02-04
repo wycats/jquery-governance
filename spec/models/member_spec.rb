@@ -194,8 +194,7 @@ describe Member do
       voting_member  = Factory.create(:membership).member
 
       voting_member.vote(current_motion, true)
-      Event.votes.last.member.should eql voting_member
-      Event.votes.last.value.should be_true
+      Event.yes_votes.last.member.should eql voting_member
     end
   end
 

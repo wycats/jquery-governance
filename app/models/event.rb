@@ -3,9 +3,10 @@ class Event < ActiveRecord::Base
   # which currently assumes the #{event}ed always converts an event to
   # its past tense form
   # TODO objection breaks this convention
-  EVENT_TYPES = ["vote", "second", "objection", "comment"]
+  EVENT_TYPES = ["yes_vote", "no_vote", "second", "objection", "comment"]
   HUMAN_READABLE_EVENT_TYPES = {
-    'vote' => 'Vote',
+    'yes_vote' => 'Yes Vote',
+    'no_vote' => 'No Vote',
     'second' => 'Second',
     'objection' => 'Objection',
     'comment' => 'Comment'
@@ -26,25 +27,16 @@ class Event < ActiveRecord::Base
   validate    :motion_creator_cannot_second,  :if => :is_second?
   after_create :update_waitingsecond_motion, :if => :is_second?
 
-  scope :votes,   where(:event_type  => "vote") do
-    # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
-    def yeas
-      where :value => true
-    end
-
-    # @return [ActiveRecord::Relation] An Array-like structure, of all nay-votes cast
-    def nays
-      where :value => false
-    end
-  end
-
+  scope :votes,   where(:event_type  => %w(yes_vote no_vote))
+  scope :yes_votes, where(:event_type => 'yes_vote')
+  scope :no_votes, where(:event_type => 'no_vote')
   scope :seconds,    where(:event_type  => "second")
   scope :objections, where(:event_type  => "objection")
   scope :for_motion, lambda { |motion_id| where(:motion_id => motion_id) }
 
   # @return [true, false] Whether or not this is a Voting Event
   def is_vote?
-    event_type == "vote"
+    %w(yes_vote no_vote).include?(event_type)
   end
   alias :vote? :is_vote?
 
