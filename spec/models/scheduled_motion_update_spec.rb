@@ -29,6 +29,7 @@ describe ScheduledMotionUpdate do
       end
 
       it "updates the motion state to 'discussing' after 48 if it can be discussed" do
+        6.times { Factory(:membership) }
         2.times { Factory(:second, :motion_id => @motion.id) }
         ScheduledMotionUpdate.perform(@motion.id, 'waitingsecond', 48.hours)
         @motion.reload.should be_discussing

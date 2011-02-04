@@ -24,6 +24,7 @@ class Event < ActiveRecord::Base
                             }
 
   validate    :motion_creator_cannot_second,  :if => :is_second?
+  after_create :update_waitingsecond_motion, :if => :is_second?
 
   scope :votes,   where(:event_type  => "vote") do
     # @return [ActiveRecord::Relation] An Array-like structure, of all aye-votes cast
@@ -75,5 +76,14 @@ private
   # Will error if the motion creator attempts to second their motion
   def motion_creator_cannot_second
     errors.add(:member, "Member cannot second a motion that they created.") if motion.member == member
+  end
+
+  def update_waitingsecond_motion
+    return unless motion.waitingsecond?
+    if motion.expedited?
+      motion.voting! if motion.can_expedite?
+    else
+      motion.discussing! if motion.can_discuss?
+    end
   end
 end

@@ -65,3 +65,46 @@ describe Event do
     pending "Members should be able to override (negate) prior votes, but only within the given motion-event's timeframe"
   end
 end
+
+describe Event, "second creation" do
+  before do
+    @second = Factory.build(:second)
+    @motion = @second.motion
+  end
+
+  context "when the motion is marked as expedited" do
+    before do
+      @motion.stub(:expedited? => true)
+    end
+
+    it "changes its state to voting if it has enough seconds" do
+      @motion.stub(:can_expedite? => true)
+      @motion.should_receive(:voting!)
+      @second.save
+    end
+
+    it "doesn't change its state to voting if it doesn't have enough seconds" do
+      @motion.stub(:can_expedite? => false)
+      @motion.should_not_receive(:voting!)
+      @second.save
+    end
+  end
+
+  context "when the motion isn't marked as expedited" do
+    before do
+      @motion.stub(:expedited? => false)
+    end
+
+    it "changes its state to discussing if it has enough seconds" do
+      @motion.stub(:can_discuss? => true)
+      @motion.should_receive(:discussing!)
+      @second.save
+    end
+
+    it "doesn't change its state to voting if it doesn't have enough seconds" do
+      @motion.stub(:can_discuss? => false)
+      @motion.should_not_receive(:discussing!)
+      @second.save
+    end
+  end
+end
