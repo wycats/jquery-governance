@@ -23,14 +23,8 @@
     %ul#motion-events
       = render :partial => active_member? ? @motion.events : @motion.votes
     #motion-actions
-      - if member? && current_member.can?(:second, @motion)
-        =positive_button_to "Second This Motion", motion_second_path(@motion)
-      - if member? && current_member.can?(:vote, @motion)
-        =positive_button_to "Vote Aye On This Motion", motion_vote_path(@motion, :vote => :aye)
-        =negative_button_to "Vote Nay On This Motion", motion_vote_path(@motion, :vote => :nay)
-      - if member? && @motion.discussing?
-        = form_for([@motion, @motion.objections.new]) do |f|
-          = f.hidden_field :event_type
+      - if member?
+        = form_for([@motion, @motion.events.new]) do |f|
           .field.text
             = f.label :comment
             = f.text_area :comment, :rows => 5
@@ -40,6 +34,15 @@
             - if current_member.can?(:object, @motion)
               %button.button.negative{ :name => 'event[event_type]', :value => 'objection' }
                 Object This Motion
+            - if current_member.can?(:second, @motion)
+              %button.button.positive{ :name => 'event[event_type]', :value => 'second' }
+                Second This Motion
+            - if current_member.can?(:vote, @motion)
+              = hidden_field_tag 'event[event_type]', 'vote'
+              %button.button.positive{ :name => 'event[value]', :value => true }
+                Vote Aye On This Motion
+              %button.button.negative{ :name => 'event[value]', :value => false }
+                Vote Nay On This Motion
   #motion-status
     %dl
       %dt State

@@ -107,7 +107,9 @@ en:
        closed: "Closed Motions"
   events:
     notices:
+      second: You have successfully seconded the motion.
       objection: You have successfully objected the motion.
+      vote: You have successfully voted the motion.
       comment: You have successfully commented the motion.
     actions:
       second: has seconded
