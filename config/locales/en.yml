@@ -109,6 +109,7 @@ en:
     notices:
       second: You have successfully seconded the motion.
       objection: You have successfully objected the motion.
+      objection_withdrawn: You have successfully withdrawn your objection.
       yes_vote: You have successfully voted the motion.
       no_vote: You have successfully voted the motion.
       comment: You have successfully commented the motion.

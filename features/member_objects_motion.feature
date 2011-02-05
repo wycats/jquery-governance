@@ -1,3 +1,4 @@
+
 Feature: Member objects motion
 
   In order to prolong the time to discuss it
@@ -30,3 +31,34 @@ Feature: Member objects motion
     And I follow "jQuery is cool"
     And I press "Object This Motion"
     Then I should not see "Object This Motion"
+
+  Scenario: A motion objection is withdrawn
+    Given I am signed in as "Yehuda Katz"
+    When I go to the motions page
+    And I follow "jQuery is cool"
+    And I press "Object This Motion"
+    And I press "Withdraw Objection"
+    Then I should see "You have successfully withdrawn your objection"
+    And I should see "Object This Motion"
+
+  Scenario: A motion objection is withdrawn during its added discussion time
+    Given I am signed in as "Yehuda Katz"
+    When I go to the motions page
+    And I follow "jQuery is cool"
+    And I press "Object This Motion"
+    And 24 hours has passed
+    And I press "Withdraw Objection"
+    Then I should see "You have successfully withdrawn your objection"
+    And I should see "Vote Aye On This Motion"
+    And I should see "Vote Nay On This Motion"
+
+  Scenario: An objection is withdrawn for a motion with several objections during its added discussion time
+    Given the member "John Resig" objects the motion titled "jQuery is cool"
+    And I am signed in as "Yehuda Katz"
+    When I go to the motions page
+    And I follow "jQuery is cool"
+    And I press "Object This Motion"
+    And 24 hours has passed
+    And I press "Withdraw Objection"
+    Then I should see "You have successfully withdrawn your objection"
+    And I should see "Object This Motion"

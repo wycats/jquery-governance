@@ -27,6 +27,7 @@ class Event < ActiveRecord::Base
 
   validate    :motion_creator_cannot_second,  :if => :is_second?
   after_create :update_waitingsecond_motion, :if => :is_second?
+  after_create :update_discussing_motion, :if => :objection_withdrawn?
 
   scope :votes,   where(:event_type  => %w(yes_vote no_vote))
   scope :yes_votes, where(:event_type => 'yes_vote')
@@ -54,6 +55,10 @@ class Event < ActiveRecord::Base
   end
   alias :objection? :is_objection?
 
+  def objection_withdrawn?
+    event_type == 'objection_withdrawn'
+  end
+
   def comment?
     event_type == 'comment'
   end
@@ -79,5 +84,10 @@ private
     else
       motion.discussing! if motion.can_discuss?
     end
+  end
+
+  def update_discussing_motion
+    return unless motion.discussing?
+    motion.voting! if !motion.objected? && motion.updated_at <= Time.now - 1.day
   end
 end

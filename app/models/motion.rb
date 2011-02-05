@@ -137,8 +137,7 @@ class Motion < ActiveRecord::Base
   # Check if a motion has been objected by any member.
   # @return [true, false] Whether or not the motion has received an objection.
   def objected?
-    # TODO take into consideration objection withdrawns
-    objections.any?
+    objections.count - objection_withdrawns.count > 0
   end
 
   def objected_by?(member)

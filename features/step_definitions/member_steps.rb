@@ -68,7 +68,7 @@ When /^the following members (?:seconds the|have seconded a) motion titled "([^"
   end
 end
 
-When /^the member "([^"]*)" objects a motion titled "([^"]*)"$/ do |member_name, motion_title|
+When /^the member "([^"]*)" objects (?:a|the) motion titled "([^"]*)"$/ do |member_name, motion_title|
   member = Member.find_by_name!(member_name)
   member.object(Motion.find_by_title!(motion_title))
 end
