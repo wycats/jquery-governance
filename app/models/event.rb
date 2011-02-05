@@ -3,12 +3,13 @@ class Event < ActiveRecord::Base
   # which currently assumes the #{event}ed always converts an event to
   # its past tense form
   # TODO objection breaks this convention
-  EVENT_TYPES = ["yes_vote", "no_vote", "second", "objection", "comment"]
+  EVENT_TYPES = ["yes_vote", "no_vote", "second", "objection", "objection_withdrawn", "comment"]
   HUMAN_READABLE_EVENT_TYPES = {
     'yes_vote' => 'Yes Vote',
     'no_vote' => 'No Vote',
     'second' => 'Second',
     'objection' => 'Objection',
+    'objection_withdrawn' => 'Objection Withdrawn',
     'comment' => 'Comment'
   }
 
@@ -32,6 +33,7 @@ class Event < ActiveRecord::Base
   scope :no_votes, where(:event_type => 'no_vote')
   scope :seconds,    where(:event_type  => "second")
   scope :objections, where(:event_type  => "objection")
+  scope :objection_withdrawns, where(:event_type => 'objection_withdrawn')
   scope :for_motion, lambda { |motion_id| where(:motion_id => motion_id) }
 
   # @return [true, false] Whether or not this is a Voting Event

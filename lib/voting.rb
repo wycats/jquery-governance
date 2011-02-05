@@ -17,6 +17,10 @@ module Voting
     events.objections
   end
 
+  def objection_withdrawns
+    events.objection_withdrawns
+  end
+
   # @return [Fixnum] Count of current yea votes
   def yeas
     events.yes_votes.count
