@@ -298,6 +298,14 @@ describe Motion, "waitingsecond" do
       @motion.permit?(:object, @inactive_member).should be_false
     end
 
+    it "doesn't allow an active member to withdraw an objection" do
+      @motion.permit?(:withdraw_objection, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to withdraw an objection" do
+      @motion.permit?(:withdraw_objection, @inactive_member).should be_false
+    end
+
     it "doesn't allow an active member to vote the motion" do
       @motion.permit?(:vote, @active_member).should be_false
     end
@@ -342,17 +350,51 @@ describe Motion, "discussing" do
       @motion.permit?(:see, @inactive_member).should be_false
     end
 
-    it "allows an active member to object the motion" do
-      @motion.permit?(:object, @active_member).should be_true
+    context "when an active member hasn't objected the motion" do
+      it "allows him/her to object it" do
+        @motion.permit?(:object, @active_member).should be_true
+      end
+
+      it "doesn't allow him/her to withdraw an objection" do
+        @motion.permit?(:withdraw_objection, @active_member).should be_false
+      end
     end
 
-    it "doesn't allow a member to object the motion more than once" do
-      @active_member.object(@motion)
-      @motion.permit?(:object, @active_member).should be_false
+    context "when an active member has objected the motion" do
+      before do
+        @active_member.object(@motion)
+      end
+
+      it "doesn't allow him/her to object it again" do
+        @motion.permit?(:object, @active_member).should be_false
+      end
+
+      it "allows him/her to withdraw the objection" do
+        @motion.permit?(:withdraw_objection, @active_member).should be_true
+      end
+    end
+
+    context "when an active member has objected the motion and then withdrawn it" do
+      before do
+        @active_member.object(@motion)
+        @active_member.withdrawn_objection(@motion)
+      end
+
+      it "allows him/her to object it again" do
+        @motion.permit?(:object, @active_member).should be_true
+      end
+
+      it "doesn't allow him/her to withdraw an objection" do
+        @motion.permit?(:withdraw_objection, @active_member).should be_false
+      end
     end
 
     it "doesn't allow an inactive member to object the motion" do
       @motion.permit?(:object, @inactive_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to withdraw an objection" do
+      @motion.permit?(:withdraw_objection, @inactive_member).should be_false
     end
 
     it "doesn't allow an active member to vote the motion" do
@@ -400,6 +442,14 @@ describe Motion, "voting" do
 
     it "doesn't allow an inactive member to object the motion" do
       @motion.permit?(:object, @inactive_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to object the motion" do
+      @motion.permit?(:object, @inactive_member).should be_false
+    end
+
+    it "doesn't allow an active member to withdraw an objection" do
+      @motion.permit?(:withdraw_objection, @active_member).should be_false
     end
 
     it "allows an active member to vote the motion" do
@@ -458,6 +508,14 @@ describe Motion, "closed" do
 
     it "doesn't allow an inactive member to object the motion" do
       @motion.permit?(:object, @inactive_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to object the motion" do
+      @motion.permit?(:object, @inactive_member).should be_false
+    end
+
+    it "doesn't allow an active member to withdraw an objection" do
+      @motion.permit?(:withdraw_objection, @active_member).should be_false
     end
 
     it "doesn't allow an active member to vote the motion" do

@@ -126,7 +126,7 @@ class Motion < ActiveRecord::Base
   # @param [Member] member The member who wants to perfrom the action.
   # @return [true, false] Whether or not the member is allowed to perform the action on this motion, respectively.
   def permit?(action, member)
-    if %w(see second object vote).include?(action.to_s)
+    if %w(see second object withdraw_objection vote).include?(action.to_s)
       method = "permit_#{action}?"
       send(method, member)
     else
@@ -137,7 +137,14 @@ class Motion < ActiveRecord::Base
   # Check if a motion has been objected by any member.
   # @return [true, false] Whether or not the motion has received an objection.
   def objected?
+    # TODO take into consideration objection withdrawns
     objections.any?
+  end
+
+  def objected_by?(member)
+    objections_count = objections.where(:member_id => member).count
+    withdrawns_count = objection_withdrawns.where(:member_id => member).count
+    objections_count - withdrawns_count > 0
   end
 
   def publicly_viewable?
@@ -303,7 +310,11 @@ private
   end
 
   def permit_object?(member)
-    discussing? && member && member.membership_active? && objections.where(:member_id => member.id).blank? && !conflicts_with?(member)
+    discussing? && member && member.membership_active? && !objected_by?(member) && !conflicts_with?(member)
+  end
+
+  def permit_withdraw_objection?(member)
+    discussing? && member && member.membership_active? && objected_by?(member)
   end
 
   def permit_vote?(member)
