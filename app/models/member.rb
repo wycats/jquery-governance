@@ -80,6 +80,10 @@ class Member < ActiveRecord::Base
     motion.objections.create(:member => self)
   end
 
+  def withdrawn_objection(motion)
+    motion.objection_withdrawns.create(:member => self)
+  end
+
   # Check if the member has permissions to perform the given action over the given motion or member
   # @param [Symbol] action The action the member wants to perform
   # @param [Member, Motion] motion or member The motion or member over which the member wants to perform the action

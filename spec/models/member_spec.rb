@@ -220,6 +220,18 @@ describe Member do
     end
   end
 
+  describe "withdrawn_objection" do
+    it "creates a withdrawn objection for the given motion" do
+      motion = Factory.create(:discussing_motion)
+      member = Factory.create(:membership).member
+
+      member.object(motion)
+      member.withdrawn_objection(motion)
+      Event.objection_withdrawns.last.member.should eql member
+      Event.objection_withdrawns.last.motion.should eql motion
+    end
+  end
+
   describe "has_voted_on?" do
     it "knows if the member has voted on the specified motion" do
       @yes_vote = Factory.create(:yes_vote, :member => @member, :motion => @motion)
