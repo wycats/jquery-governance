@@ -36,10 +36,9 @@ class Event < ActiveRecord::Base
   end
 
   # @return [true, false] Whether or not this is a Objecting Event
-  def is_objection?
+  def objection?
     event_type == "objection"
   end
-  alias :objection? :is_objection?
 
   def objection_withdrawn?
     event_type == 'objection_withdrawn'
