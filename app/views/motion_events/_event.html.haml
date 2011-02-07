@@ -1,5 +1,0 @@
-%div{:class => [:event, event.event_type, event.value]}
-  %div.evented_by
-    =event.member.name
-  %div.evented_on
-    =distance_of_time_in_words(event.created_at, Time.now)
