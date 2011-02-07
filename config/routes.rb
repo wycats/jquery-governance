@@ -23,7 +23,7 @@ JqueryVoting::Application.routes.draw do
   end
 
   resources :motions do
-    resources :events, :controller => :motion_events
+    resources :events, :only => :create
     post 'second',  :to => 'motion_events#second'
     post 'object',  :to => 'motion_events#object'
     post 'vote',    :to => 'motion_events#vote'

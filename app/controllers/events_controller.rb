@@ -1,6 +1,5 @@
-class MotionEventsController < ApplicationController
-
-  before_filter :authenticate_member!, :except => [:show]
+class EventsController < ApplicationController
+  before_filter :authenticate_member!
 
   def create
     @motion = Motion.find(params[:motion_id])
