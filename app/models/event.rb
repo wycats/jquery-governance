@@ -13,8 +13,8 @@ class Event < ActiveRecord::Base
                               :in => EVENT_TYPES
                             }
 
-  validate    :motion_creator_cannot_second,  :if => :is_second?
-  after_create :update_waitingsecond_motion, :if => :is_second?
+  validate    :motion_creator_cannot_second,  :if => :second?
+  after_create :update_waitingsecond_motion, :if => :second?
   after_create :update_discussing_motion, :if => :objection_withdrawn?
 
   scope :votes,   where(:event_type  => %w(yes_vote no_vote))
@@ -32,10 +32,9 @@ class Event < ActiveRecord::Base
   alias :vote? :is_vote?
 
   # @return [true, false] Whether or not this is a Seconding Event
-  def is_second?
+  def second?
     event_type == "second"
   end
-  alias :second? :is_second?
 
   # @return [true, false] Whether or not this is a Objecting Event
   def is_objection?
