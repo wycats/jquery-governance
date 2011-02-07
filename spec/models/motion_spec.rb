@@ -115,11 +115,13 @@ describe Motion do
 
   describe "vote counting", :database => true do
     it "knows how many yea votes have been cast for the motion" do
+      @motion.voting!
       2.times { Factory.create(:yes_vote, :motion => @motion) }
       @motion.yeas.should == 2
     end
 
     it "knows how many nea votes have been cast for the motion" do
+      @motion.voting!
       1.times { Factory.create(:no_vote, :motion => @motion) }
       @motion.nays.should == 1
     end

@@ -190,7 +190,7 @@ describe Member do
 
   describe "vote" do
     it "creates a new vote with the given member and value" do
-      current_motion = Factory.create(:motion)
+      current_motion = Factory.create(:voting_motion)
       voting_member  = Factory.create(:membership).member
 
       voting_member.vote(current_motion, true)
@@ -234,6 +234,7 @@ describe Member do
 
   describe "has_voted_on?" do
     it "knows if the member has voted on the specified motion" do
+      @motion.voting!
       @yes_vote = Factory.create(:yes_vote, :member => @member, :motion => @motion)
       @member.has_voted_on?(@motion).should be_true
     end

@@ -4,17 +4,11 @@ class Event < ActiveRecord::Base
   belongs_to  :member
   belongs_to  :motion
 
-  validates   :member_id,   :uniqueness => {
-                              :scope => [:motion_id, :event_type]
-                            },
-                            :unless => :comment?
-  validates   :event_type,  :presence   => true,
-                            :inclusion  => {
-                              :in => EVENT_TYPES
-                            }
+  validates :event_type, :presence => true, :inclusion => { :in => EVENT_TYPES }
+  validates :member_id, :presence => true
+  validates :motion_id, :presence => true
 
-  validate :allowed?
-  validate    :motion_creator_cannot_second,  :if => :second?
+  validate :validate_event_action
   after_create :update_waitingsecond_motion, :if => :second?
   after_create :update_discussing_motion, :if => :objection_withdrawn?
 
@@ -63,9 +57,9 @@ class Event < ActiveRecord::Base
   end
 
 private
-  # Will error if the motion creator attempts to second their motion
-  def motion_creator_cannot_second
-    errors.add(:member, "Member cannot second a motion that they created.") if motion.member == member
+
+  def validate_event_action
+    errors.add(:member, "Member is not allowed to do this.") unless allowed?
   end
 
   def update_waitingsecond_motion

@@ -4,8 +4,9 @@ Given /^a motion titled "([^"]*)" exists(?: in the "(.*)" state)?$/ do |title, s
 end
 
 Given /^a approved motion titled "([^"]*)"$/ do |title|
-  motion = Factory(:closed_motion, title: title)
+  motion = Factory(:voting_motion, title: title)
   10.times { Factory(:yes_vote, motion: motion) }
+  motion.closed!
 end
 
 Then /^the motion titled "([^"]*)" is in discussion$/ do |title|
