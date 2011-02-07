@@ -263,17 +263,6 @@ class Motion < ActiveRecord::Base
     closed? && !has_met_requirement?
   end
 
-  # Try to update a motion state.  This method should be called when a certain
-  # amount of time has passed since the motion entered its current state.  The
-  # corresponding {MotionState::Base} object knows the rules for updating the
-  # motion state.
-  # @see MotionState::Base#scheduled_update
-  # @see #schedule_updates
-  # @param [Fixnum] The number of seconds that has been passed since the motion entered its current state.
-  def scheduled_update(time_elapsed)
-    state.scheduled_update(time_elapsed)
-  end
-
   # Scope to limit and sort the motions in reverse cronological order.
   # @param [Fixnum] size The (max) number of motions returned.
   # @return [ActiveRecord::Relation] Motions in reverse cronological order of creation.
