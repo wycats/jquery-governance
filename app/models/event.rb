@@ -13,6 +13,7 @@ class Event < ActiveRecord::Base
                               :in => EVENT_TYPES
                             }
 
+  validate :allowed?
   validate    :motion_creator_cannot_second,  :if => :second?
   after_create :update_waitingsecond_motion, :if => :second?
   after_create :update_discussing_motion, :if => :objection_withdrawn?
@@ -46,6 +47,19 @@ class Event < ActiveRecord::Base
 
   def comment?
     event_type == 'comment'
+  end
+
+  def allowed?
+    motion.permit?(action, member)
+  end
+
+  def action
+    case event_type.to_sym
+    when :second, :comment    then event_type.to_sym
+    when :objection           then :object
+    when :objection_withdrawn then :withdraw_objection
+    when :yes_vote, :no_vote  then :vote
+    end
   end
 
 private
