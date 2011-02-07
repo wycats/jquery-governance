@@ -1,8 +1,4 @@
 class Event < ActiveRecord::Base
-  # if more types are added, make sure to update app/views/events/_event,
-  # which currently assumes the #{event}ed always converts an event to
-  # its past tense form
-  # TODO objection breaks this convention
   EVENT_TYPES = ["yes_vote", "no_vote", "second", "objection", "objection_withdrawn", "comment"]
 
   belongs_to  :member
