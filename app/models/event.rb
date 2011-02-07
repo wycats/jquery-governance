@@ -4,14 +4,6 @@ class Event < ActiveRecord::Base
   # its past tense form
   # TODO objection breaks this convention
   EVENT_TYPES = ["yes_vote", "no_vote", "second", "objection", "objection_withdrawn", "comment"]
-  HUMAN_READABLE_EVENT_TYPES = {
-    'yes_vote' => 'Yes Vote',
-    'no_vote' => 'No Vote',
-    'second' => 'Second',
-    'objection' => 'Objection',
-    'objection_withdrawn' => 'Objection Withdrawn',
-    'comment' => 'Comment'
-  }
 
   belongs_to  :member
   belongs_to  :motion
@@ -61,14 +53,6 @@ class Event < ActiveRecord::Base
 
   def comment?
     event_type == 'comment'
-  end
-
-  def formatted_event_type(format = :human)
-    if format == :human
-      HUMAN_READABLE_EVENT_TYPES[event_type]
-    else
-      event_type
-    end
   end
 
 private
