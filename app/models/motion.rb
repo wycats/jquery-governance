@@ -69,6 +69,7 @@ class Motion < ActiveRecord::Base
   end
 
   MOTION_STATES = %w(waitingsecond discussing voting closed)
+  ACTIONS = %w(see second object withdraw_objection vote)
 
   scope :waitingsecond, where(:state_name => 'waitingsecond')
   scope :discussing,    where(:state_name => 'discussing')
@@ -126,7 +127,7 @@ class Motion < ActiveRecord::Base
   # @param [Member] member The member who wants to perfrom the action.
   # @return [true, false] Whether or not the member is allowed to perform the action on this motion, respectively.
   def permit?(action, member)
-    if %w(see second object withdraw_objection vote).include?(action.to_s)
+    if ACTIONS.include?(action.to_s)
       method = "permit_#{action}?"
       send(method, member)
     else
