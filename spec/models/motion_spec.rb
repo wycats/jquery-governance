@@ -290,6 +290,14 @@ describe Motion, "waitingsecond" do
       @motion.permit?(:see, @inactive_member).should be_false
     end
 
+    it "allows an active member to comment the motion" do
+      @motion.permit?(:comment, @active_member).should be_true
+    end
+
+    it "doesn't allow an inactive member to comment the motion" do
+      @motion.permit?(:comment, @inactive_member).should be_false
+    end
+
     it "doesn't allow an active member to object the motion" do
       @motion.permit?(:object, @active_member).should be_false
     end
@@ -348,6 +356,14 @@ describe Motion, "discussing" do
 
     it "doesn't allow an inactive member to see the motion" do
       @motion.permit?(:see, @inactive_member).should be_false
+    end
+
+    it "allows an active member to comment the motion" do
+      @motion.permit?(:comment, @active_member).should be_true
+    end
+
+    it "doesn't allow an inactive member to comment the motion" do
+      @motion.permit?(:comment, @inactive_member).should be_false
     end
 
     context "when an active member hasn't objected the motion" do
@@ -436,6 +452,14 @@ describe Motion, "voting" do
       @motion.permit?(:see, @inactive_member).should be_true
     end
 
+    it "allows an active member to comment the motion" do
+      @motion.permit?(:comment, @active_member).should be_true
+    end
+
+    it "doesn't allow an inactive member to comment the motion" do
+      @motion.permit?(:comment, @inactive_member).should be_false
+    end
+
     it "doesn't allow an active member to object the motion" do
       @motion.permit?(:object, @active_member).should be_false
     end
@@ -500,6 +524,14 @@ describe Motion, "closed" do
 
     it "allows an inactive member to see the motion" do
       @motion.permit?(:see, @inactive_member).should be_true
+    end
+
+    it "doesn't allow an active member to comment the motion" do
+      @motion.permit?(:comment, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to comment the motion" do
+      @motion.permit?(:comment, @inactive_member).should be_false
     end
 
     it "doesn't allow an active member to object the motion" do
