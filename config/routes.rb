@@ -24,9 +24,6 @@ JqueryVoting::Application.routes.draw do
 
   resources :motions do
     resources :events, :only => :create
-    post 'second',  :to => 'motion_events#second'
-    post 'object',  :to => 'motion_events#object'
-    post 'vote',    :to => 'motion_events#vote'
 
     collection do
       get :closed
