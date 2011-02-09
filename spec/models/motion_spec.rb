@@ -292,6 +292,18 @@ describe Motion, "waitingsecond" do
       @motion.permit?(:see, @inactive_member).should be_false
     end
 
+    it "allows the motion creator to withdraw it" do
+      @motion.permit?(:withdraw, @motion.member).should be_true
+    end
+
+    it "doesn't allow an active member other than the motion creator to withdraw it" do
+      @motion.permit?(:withdraw, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to withdraw the motion" do
+      @motion.permit?(:withdraw, @inactive_member).should be_false
+    end
+
     it "allows an active member to comment the motion" do
       @motion.permit?(:comment, @active_member).should be_true
     end
@@ -358,6 +370,18 @@ describe Motion, "discussing" do
 
     it "doesn't allow an inactive member to see the motion" do
       @motion.permit?(:see, @inactive_member).should be_false
+    end
+
+    it "allows the motion creator to withdraw it" do
+      @motion.permit?(:withdraw, @motion.member).should be_true
+    end
+
+    it "doesn't allow an active member other than the motion creator to withdraw it" do
+      @motion.permit?(:withdraw, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to withdraw the motion" do
+      @motion.permit?(:withdraw, @inactive_member).should be_false
     end
 
     it "allows an active member to comment the motion" do
@@ -454,6 +478,18 @@ describe Motion, "voting" do
       @motion.permit?(:see, @inactive_member).should be_true
     end
 
+    it "doesn't allow the motion creator to withdraw it" do
+      @motion.permit?(:withdraw, @motion.member).should be_false
+    end
+
+    it "doesn't allow an active member to withdraw the motion" do
+      @motion.permit?(:withdraw, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to withdraw the motion" do
+      @motion.permit?(:withdraw, @inactive_member).should be_false
+    end
+
     it "allows an active member to comment the motion" do
       @motion.permit?(:comment, @active_member).should be_true
     end
@@ -526,6 +562,18 @@ describe Motion, "closed" do
 
     it "allows an inactive member to see the motion" do
       @motion.permit?(:see, @inactive_member).should be_true
+    end
+
+    it "doesn't allow the motion creator to withdraw it" do
+      @motion.permit?(:withdraw, @motion.member).should be_false
+    end
+
+    it "doesn't allow an active member to withdraw the motion" do
+      @motion.permit?(:withdraw, @active_member).should be_false
+    end
+
+    it "doesn't allow an inactive member to withdraw the motion" do
+      @motion.permit?(:withdraw, @inactive_member).should be_false
     end
 
     it "doesn't allow an active member to comment the motion" do

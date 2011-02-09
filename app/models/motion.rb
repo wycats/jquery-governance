@@ -69,7 +69,7 @@ class Motion < ActiveRecord::Base
   end
 
   MOTION_STATES = %w(waitingsecond discussing voting closed)
-  ACTIONS = %w(see comment second object withdraw_objection vote)
+  ACTIONS = %w(see withdraw comment second object withdraw_objection vote)
 
   scope :waitingsecond, where(:state_name => 'waitingsecond')
   scope :discussing,    where(:state_name => 'discussing')
@@ -292,6 +292,10 @@ private
 
   def permit_see?(member)
     publicly_viewable? || (member && member.membership_active?)
+  end
+
+  def permit_withdraw?(member)
+    !voting? && !closed? && self.member == member
   end
 
   def permit_comment?(member)
