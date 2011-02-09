@@ -86,7 +86,7 @@ Feature: Application updates motion states
     When the member "John Resig" creates a motion titled "jQuery should be even more awesome"
     And the following members seconds the motion titled "jQuery should be even more awesome"
       | name        |
-      | John Resig  |
+      | Paul Irish  |
       | Yehuda Katz |
     And 24 hours has passed
     And the following members votes affirmatively the motion titled "jQuery should be even more awesome"
