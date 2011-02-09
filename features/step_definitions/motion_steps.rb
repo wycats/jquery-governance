@@ -17,6 +17,10 @@ Then /^the motion titled "([^"]*)" is being voted$/ do |title|
   Motion.find_by_title!(title).should be_voting
 end
 
+Then /^the motion titled "([^"]*)" should be closed$/ do |title|
+  Motion.find_by_title!(title).should be_closed
+end
+
 Then /^the motion titled "([^"]*)" is approved$/ do |title|
   Motion.find_by_title!(title).should be_approved
 end

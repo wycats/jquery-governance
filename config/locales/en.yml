@@ -113,9 +113,11 @@ en:
       yes_vote: You have successfully voted the motion.
       no_vote: You have successfully voted the motion.
       comment: You have successfully commented the motion.
+      withdrawn: You have successfully withdrawn the motion.
     actions:
       second: has seconded
       objection: has objected
       yes_vote: has voted yea
       no_vote: has voted nay
       comment: has commented
+      widthdraw: has withdrawn

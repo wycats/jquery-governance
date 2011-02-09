@@ -37,6 +37,9 @@
             - if current_member.can?(:withdraw_objection, @motion)
               %button.button.positive{ :name => 'event[event_type]', :value => 'objection_withdrawn' }
                 Withdraw Objection
+            - if current_member.can?(:withdraw, @motion)
+              %button.button.negative{ :name => 'event[event_type]', :value => 'withdrawn' }
+                Withdraw This Motion
             - if current_member.can?(:second, @motion)
               %button.button.positive{ :name => 'event[event_type]', :value => 'second' }
                 Second This Motion
