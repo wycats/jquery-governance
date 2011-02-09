@@ -25,7 +25,7 @@ class Member < ActiveRecord::Base
   # Finds all members who currently have an active membership
   # @return [Array] The list of members, which are currently active
   def self.active
-    Member.all.collect {|member| member if member.membership_active?}
+    Member.all.select { |member| member.membership_active? }
   end
 
   # Checks membership status at a given Date/Time
