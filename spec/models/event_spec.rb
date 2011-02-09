@@ -108,3 +108,12 @@ describe Event, "second creation" do
     end
   end
 end
+
+describe Event, "withdrawn creation" do
+  it "closes the motion" do
+    member = Factory(:membership).member
+    motion = Factory(:motion, :member => member)
+    Factory(:withdrawn, :motion => motion, :member => member)
+    motion.should be_closed
+  end
+end

@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
   validate :validate_event_action
   after_create :update_waitingsecond_motion, :if => :second?
   after_create :update_discussing_motion, :if => :objection_withdrawn?
+  after_create :close_motion, :if => :withdrawn?
 
   scope :votes,   where(:event_type  => %w(yes_vote no_vote))
   scope :yes_votes, where(:event_type => 'yes_vote')
@@ -79,5 +80,9 @@ private
   def update_discussing_motion
     return unless motion.discussing?
     motion.voting! if !motion.objected? && motion.updated_at <= Time.now - 1.day
+  end
+
+  def close_motion
+    motion.closed!
   end
 end
