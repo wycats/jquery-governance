@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  EVENT_TYPES = ["yes_vote", "no_vote", "second", "objection", "objection_withdrawn", "comment"]
+  EVENT_TYPES = ["yes_vote", "no_vote", "second", "objection", "objection_withdrawn", "comment", "withdrawn"]
 
   belongs_to  :member
   belongs_to  :motion
@@ -43,6 +43,10 @@ class Event < ActiveRecord::Base
     event_type == 'comment'
   end
 
+  def withdrawn?
+    event_type == 'withdrawn'
+  end
+
   def allowed?
     motion.permit?(action, member)
   end
@@ -50,6 +54,7 @@ class Event < ActiveRecord::Base
   def action
     case event_type.to_sym
     when :second, :comment    then event_type.to_sym
+    when :withdrawn           then :withdraw
     when :objection           then :object
     when :objection_withdrawn then :withdraw_objection
     when :yes_vote, :no_vote  then :vote

@@ -22,4 +22,10 @@ FactoryGirl.define do
     event_type "objection"
     association :motion, :factory => :discussing_motion
   end
+
+  factory :withdrawn, :parent => :event do
+    event_type "withdrawn"
+    motion
+  end
+
 end
