@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110204190344) do
+ActiveRecord::Schema.define(:version => 20110210210708) do
 
   create_table "conflictions", :force => true do |t|
     t.integer  "conflict_id"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(:version => 20110204190344) do
   add_index "events", ["member_id", "event_type"], :name => "member_events_by_event_type"
   add_index "events", ["member_id", "motion_id", "event_type"], :name => "event_validation_of_member_event_type"
   add_index "events", ["motion_id", "event_type"], :name => "motion_events_by_event_type"
+
+  create_table "hotspots", :force => true do |t|
+    t.string   "location"
+    t.string   "address"
+    t.string   "lat"
+    t.string   "lng"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "members", :force => true do |t|
     t.string   "name"
@@ -82,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20110204190344) do
     t.datetime "updated_at"
     t.boolean  "expedited",   :default => false
     t.datetime "closed_at"
+    t.boolean  "public",      :default => false
   end
 
   add_index "motions", ["member_id"], :name => "index_motions_on_member_id"
