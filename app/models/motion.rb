@@ -191,7 +191,7 @@ class Motion < ActiveRecord::Base
   # Move a motion to the voting state.
   # @return [true, false] Whether or not the motion has been moved to the voting state.
   def voting!
-    update_attributes(:state_name => "voting")
+    update_attributes(:state_name => "voting", :public => true)
     send_email(:voting_beginning)
     schedule_update_in(48.hours)
   end

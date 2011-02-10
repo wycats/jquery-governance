@@ -93,6 +93,12 @@ describe Motion do
       ScheduledMotionUpdate.should_receive(:in).with(48.hours, @motion)
       @motion.voting!
     end
+
+    it "makes the motion public" do
+      @motion.should_not be_public
+      @motion.voting!
+      @motion.should be_public
+    end
   end
 
   describe "closed!" do
