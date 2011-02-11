@@ -74,6 +74,7 @@ class Motion < ActiveRecord::Base
   scope :waitingsecond, where(:state_name => 'waitingsecond')
   scope :discussing,    where(:state_name => 'discussing')
   scope :voting,        where(:state_name => 'voting')
+  scope :closed,        where(:state_name => 'closed')
   scope :publicly_viewable, where(:public => true)
   scope :privately_viewable, where(:public => false)
 
@@ -280,10 +281,6 @@ class Motion < ActiveRecord::Base
     when :open   then %w(waitingsecond discussing voting)
     when :closed then %w(closed)
     end
-  end
-
-  def self.closed
-    where :state_name => states(:closed)
   end
 
 private
