@@ -2,6 +2,10 @@ module Voting
   #Since its useful to keep track of the votes of members and motions, its preferred to
   #refactor this methods into a module
 
+  def publicly_viewable_events
+    events.publicly_viewable
+  end
+
   # @return [ActiveRecord::Relation] All of the votes cast on this motion
   def votes
     events.votes

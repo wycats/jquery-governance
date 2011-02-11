@@ -23,6 +23,7 @@ class Event < ActiveRecord::Base
   scope :objections, where(:event_type  => "objection")
   scope :objection_withdrawns, where(:event_type => 'objection_withdrawn')
   scope :for_motion, lambda { |motion_id| where(:motion_id => motion_id) }
+  scope :publicly_viewable, where(:public => true)
 
   # @return [true, false] Whether or not this is a Voting Event
   def vote?
