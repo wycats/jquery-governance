@@ -1,7 +1,8 @@
+- if active_member?
+  = link_to "New Motion", new_motion_path, { :id => 'new_motion_button', :class => 'button positive' }
+%h1.motions= t("motions.titles.index.#{@group[:name]}")
+
 %div{ :class => "motions #{@group[:name]}" }
-  - if active_member?
-    = link_to "New Motion", new_motion_path, { :class => 'button positive' }
-  %h1.motions= t("motions.titles.index.#{@group[:name]}")
   - @group[:motions].each do |name, motions|
     = render :partial => "motions/motion_group", :locals => {:name => name, :motion_group => motions}
 
