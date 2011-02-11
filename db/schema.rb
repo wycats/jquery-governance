@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110210210708) do
+ActiveRecord::Schema.define(:version => 20110211010038) do
 
   create_table "conflictions", :force => true do |t|
     t.integer  "conflict_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20110210210708) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "comment"
+    t.boolean  "public",     :default => false
   end
 
   add_index "events", ["member_id", "event_type"], :name => "member_events_by_event_type"
