@@ -250,36 +250,6 @@ describe Motion do
       @motion.tags.first.should_not be_a_new_record
     end
   end
-
-  describe ".states" do
-    it "knows the available state names" do
-      Motion.states.should include('waitingsecond')
-      Motion.states.should include('discussing')
-      Motion.states.should include('voting')
-      Motion.states.should include('closed')
-
-      Motion.states.size.should == 4
-    end
-
-    it "knows the public state names" do
-      Motion.states(:public).should include('voting')
-      Motion.states(:public).should include('closed')
-
-      Motion.states(:public).size.should == 2
-    end
-
-    it "knows the open state names" do
-      Motion.states(:open).should include('waitingsecond')
-      Motion.states(:open).should include('discussing')
-      Motion.states(:open).should include('voting')
-
-      Motion.states(:open).size.should == 3
-    end
-
-    it "knows the closed state names" do
-      Motion.states(:closed).should == %w(closed)
-    end
-  end
 end
 
 describe Motion, "waitingsecond" do

@@ -274,15 +274,6 @@ class Motion < ActiveRecord::Base
     order('created_at DESC').limit(size)
   end
 
-  def self.states(kind=:all)
-    case kind
-    when :all    then MOTION_STATES.dup
-    when :public then %w(voting closed)
-    when :open   then %w(waitingsecond discussing voting)
-    when :closed then %w(closed)
-    end
-  end
-
 private
 
   def permit_see?(member)
