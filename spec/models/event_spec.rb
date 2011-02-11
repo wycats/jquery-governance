@@ -56,6 +56,20 @@ describe Event do
     proc { Factory.create!(:second, :motion => @motion, :member => @member) }.should raise_exception
   end
 
+  describe "public?" do
+    context "when it has been created with a publicly viewable motion" do
+      it "returns true" do
+        Factory(:yes_vote).should be_public
+      end
+    end
+
+    context "when it has been created with a non publicly viewable motion" do
+      it "returns false" do
+        Factory(:second).should_not be_public
+      end
+    end
+  end
+
   describe "Objecting" do
     pending "Objection process needs specs"
   end

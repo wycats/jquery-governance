@@ -9,6 +9,9 @@ class Event < ActiveRecord::Base
   validates :motion_id, :presence => true
 
   validate :validate_event_action
+
+  before_create :define_visibility
+
   after_create :update_waitingsecond_motion, :if => :second?
   after_create :update_discussing_motion, :if => :objection_withdrawn?
   after_create :close_motion, :if => :withdrawn?
@@ -66,6 +69,11 @@ private
 
   def validate_event_action
     errors.add(:member, "Member is not allowed to do this.") unless allowed?
+  end
+
+  def define_visibility
+    self.public = motion.public?
+    true
   end
 
   def update_waitingsecond_motion
