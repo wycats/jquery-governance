@@ -131,8 +131,7 @@ class Motion < ActiveRecord::Base
   # @return [true, false] Whether or not the member is allowed to perform the action on this motion, respectively.
   def permit?(action, member)
     if ACTIONS.include?(action.to_s)
-      method = "permit_#{action}?"
-      send(method, member)
+      send("permit_#{action}?", member)
     else
       false
     end
