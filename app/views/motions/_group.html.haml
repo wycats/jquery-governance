@@ -1,5 +1,5 @@
-%div{ :class => "motions #{group[:name]}" }
-  - group[:motions].each do |name, motions|
+%div{ :class => "motions #{group.name}" }
+  - group.collections.each do |name, motions|
     %section
       %h2=t("motions.#{name}.heading")
       - if motions.empty?

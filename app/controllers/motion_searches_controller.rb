@@ -3,9 +3,9 @@ class MotionSearchesController < ApplicationController
   end
 
   def results
-    motion_search = MotionSearch.new(current_member)
+    @group = MotionGroup.search(params[:search][:keywords], current_member)
 
-    unless @group = motion_search.find(params[:search][:keywords])
+    if @group.empty?
       redirect_to new_motion_search_url, :alert => 'No results found'
     end
   end

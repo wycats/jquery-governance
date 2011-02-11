@@ -100,9 +100,15 @@ en:
      heading: "Closed"
      empty: "There are no closed motions."
      description: "closed"
+   publicly_viewable:
+     heading: "Reached a Vote"
+     empty: "There are no closed motions that reached a vote."
+   privately_viewable:
+     heading: "Didn't reach a vote"
+     empty: "There are no closed motions that didn't reach a vote."
    titles:
      index:
-       public: "Motions"
+       publicly_viewable: "Motions"
        open: "Open Motions"
        closed: "Closed Motions"
   events:

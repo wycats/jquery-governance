@@ -4,12 +4,13 @@ class MotionsController < ApplicationController
 
   # List Motions that are open (NOT passed, failed, approved)
   def index
-    @group = MotionSorter.group_for(current_member, :name => active_member? ? :open : :public)
+    @group = active_member? ?
+      MotionGroup.open : MotionGroup.publicly_viewable
   end
 
   # List Motions that are closed (passed, failed, approved)
   def closed
-    @group = MotionSorter.group_for(current_member, :name => :closed)
+    @group = MotionGroup.closed
     render :index
   end
 
