@@ -1,6 +1,3 @@
 %h1.motions Search Results
 
-%div{ :class => "motions #{@group[:name]}" }
-  - @group[:motions].each do |name, motions|
-    = render :partial => "motions/motion_group", :locals => {:name => name, :motion_group => motions}
-
+= render :partial => 'motions/group', :object => @group

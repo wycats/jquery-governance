@@ -2,8 +2,6 @@
   = link_to "New Motion", new_motion_path, { :id => 'new_motion_button', :class => 'button positive' }
 %h1.motions= t("motions.titles.index.#{@group[:name]}")
 
-%div{ :class => "motions #{@group[:name]}" }
-  - @group[:motions].each do |name, motions|
-    = render :partial => "motions/motion_group", :locals => {:name => name, :motion_group => motions}
+= render :partial => 'motions/group', :object => @group
 
 / TODO: show/hide motions you've already acted on
