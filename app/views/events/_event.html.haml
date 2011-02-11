@@ -1,7 +1,7 @@
 %li{ :class => event.member == current_member ? 'you' : 'other' }
   %p.action
     %span.member= event.member.name
-    %span.event_type= t("events.actions#{event.event_type}")
+    %span.event_type= t("events.actions.#{event.event_type}")
   %p.time
     %span.at #{time_ago_in_words(event.updated_at)} ago
   - unless event.comment.blank?
