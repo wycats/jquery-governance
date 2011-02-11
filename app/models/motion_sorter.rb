@@ -8,6 +8,7 @@ class MotionSorter
     states = Motion.states(group_options[:name])
     unless member.try(:membership_active?)
       states.keep_if { |state| Motion.states(:public).include?(state) }
+      group_options[:scope] = group_options[:scope].publicly_viewable
     end
 
     {

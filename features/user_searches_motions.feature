@@ -6,10 +6,10 @@ Feature: User searches motion
 
   Background:
     Given the following motions exist:
-      | title           | description                   | rationale                             | state_name    |
-      | Sample Motion 1 | This is the first test motion | Motions are good to have              | discussing    |
-      | Sample Vote   2 | This second motiom is cool    | We need more motions to look cool     | voting        |
-      | Test   Motion 3 | Third test motions are bad    | Too many motions makes us pretentious | voting        |
+      | title           | description                   | rationale                             | state_name | public |
+      | Sample Motion 1 | This is the first test motion | Motions are good to have              | discussing | false  |
+      | Sample Vote   2 | This second motiom is cool    | We need more motions to look cool     | voting     | true   |
+      | Test   Motion 3 | Third test motions are bad    | Too many motions makes us pretentious | voting     | true   |
 
   Scenario: Member navigates to the search page
     Given I am signed in as an active member

@@ -8,6 +8,7 @@ FactoryGirl.define do
 
   factory :voting_motion, :parent => :motion do
     state_name "voting"
+    public true
   end
 
   factory :discussing_motion, :parent => :motion do
@@ -16,6 +17,7 @@ FactoryGirl.define do
 
   factory :closed_motion, :parent => :motion do
     state_name "closed"
+    public true
     closed_at  Time.now
   end
 end

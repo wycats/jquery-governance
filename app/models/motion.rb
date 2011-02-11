@@ -74,6 +74,7 @@ class Motion < ActiveRecord::Base
   scope :waitingsecond, where(:state_name => 'waitingsecond')
   scope :discussing,    where(:state_name => 'discussing')
   scope :voting,        where(:state_name => 'voting')
+  scope :publicly_viewable, where(:public => true)
 
   scope :prev_with_same_state, lambda { |id| where('id < ?', id).where(:state_name => Motion.find(id).state_name) }
 
