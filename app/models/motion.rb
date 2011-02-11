@@ -282,10 +282,6 @@ class Motion < ActiveRecord::Base
     end
   end
 
-  def self.open
-    where :state_name => states(:open)
-  end
-
   def self.closed
     where :state_name => states(:closed)
   end
