@@ -149,10 +149,6 @@ class Motion < ActiveRecord::Base
     objections_count - withdrawns_count > 0
   end
 
-  def publicly_viewable?
-    voting? || closed?
-  end
-
   def tag_list
     tags.map(&:name).join(' ')
   end
@@ -276,7 +272,7 @@ class Motion < ActiveRecord::Base
 private
 
   def permit_see?(member)
-    publicly_viewable? || (member && member.membership_active?)
+    public? || (member && member.membership_active?)
   end
 
   def permit_withdraw?(member)
