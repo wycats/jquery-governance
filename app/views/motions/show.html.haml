@@ -23,7 +23,7 @@
     %ul#motion-events
       = render :partial => active_member? ? @motion.events : @motion.publicly_viewable_events
     #motion-actions
-      - if member?
+      - if member? && @motion.open?
         = form_for([@motion, @motion.events.new]) do |f|
           .field.text
             = f.label :comment
