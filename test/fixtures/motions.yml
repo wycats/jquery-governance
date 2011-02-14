@@ -5,6 +5,7 @@ change_conservancy_representative:
   description: This is a vote to change the representative of the jQuery Project to the Software Freedom Conservancy from John Resig to Leah Silber.
   state_name: closed
   abstains: 3
+  public: true
   closed_at: 2010-12-05 19:15:00
   created_at: 2010-12-01 19:00:00
   updated_at: 2010-12-01 19:00:00
@@ -16,6 +17,7 @@ kickstart_funding_for_jquery_ui_grid:
   description: This is a motion to approve up to $24K of work to be completed by Richard Worth and Jörn Zaefferer in development towards the jQuery UI grid. This approval is preemptive allocation in funding being contributed by 3rd party donors of which as much must be received prior to payment being issued.  Additionally a contract must be in place prior to invoices being issued from the contractors and payment being disbursed.
   state_name: closed
   abstains: 4
+  public: true
   closed_at: 2010-12-05 13:00:00
   created_at: 2010-12-02 11:00:00
   updated_at: 2010-12-02 11:00:00
@@ -28,6 +30,7 @@ additional_hours_for_jquery_mobile:
   rationale: The Filament Group has increased their rates at this time. We are voting to allow them to continue work on the jQuery Mobile project to get the project to 1.0.
   state_name: closed
   abstains: 7
+  public: true
   closed_at: 2010-12-06 17:00:00
   created_at: 2010-12-03 15:00:00
   updated_at: 2010-12-03 15:00:00
@@ -40,6 +43,7 @@ conference_tshirts:
   expedited: true
   state_name: closed
   abstains: 0
+  public: true
   closed_at: 2010-12-12 20:00:00
   created_at: 2010-12-10 17:00:00
   updated_at: 2010-12-10 17:00:00
@@ -52,6 +56,7 @@ badges_for_boston_jquery_conference_2010:
   expedited: true
   state_name: closed
   abstains: 10
+  public: false
   closed_at: 2010-12-13 10:00:00
   created_at: 2010-12-11 10:00:00
   updated_at: 2010-12-11 10:00:00
@@ -62,6 +67,7 @@ formation_of_events_team:
   title: Formation of Events Team
   description: This vote will be for the formation of a new Events team. This team will be responsible for planning and executing events related to jQuery.
   state_name: voting
+  public: true
   created_at: <%= 3.days.ago.to_s(:db) %>
   updated_at: <%= 3.days.ago.to_s(:db) %>
 
@@ -72,6 +78,7 @@ project_basecamp_account:
   description: That the jQuery project allocates $24/month in order to pay for a Basecamp account for project collaboration and organization.
   expedited: true
   state_name: voting
+  public: true
   created_at: <%= 1.day.ago.to_s(:db) %>
   updated_at: <%= 1.day.ago.to_s(:db) %>
 
@@ -81,6 +88,7 @@ budget_for_printed_programs:
   title: Budget for Printed Programs
   description: "This vote is to set a max budget of $1500 for the purchase of the printed programs from Avalon for jQuery Conference 2010: Boston. Budget includes printing and shipping costs."
   state_name: discussing
+  public: false
   created_at: <%= 10.hours.ago.to_s(:db) %>
   updated_at: <%= 10.hours.ago.to_s(:db) %>
 
@@ -90,6 +98,7 @@ filament_group_jquery_mobile_payment:
   title: Filament Group jQuery Mobile Payment
   description: This is a vote to approve payment to Filament Group in the amount of $45,000 for 600 hours of work completed on jQuery Mobile. Associated documentation for this payment is attached and available for review.
   state_name: discussing
+  public: false
   created_at: <%= 7.hours.ago.to_s(:db) %>
   updated_at: <%= 7.hours.ago.to_s(:db) %>
 
@@ -100,6 +109,7 @@ jquery_conference_boston_2010_venue_expenses:
   description: This vote will be to allocate a total budget of up to $65,000 USD that will go towards venue costs for the jQuery Boston 2010 Conference.  Prior to the event, the final cost is unknown, to this vote will only allocate a maximum budget for this expense.  Another vote will be cast once the final bill comes through.
   expedited: true
   state_name: waitingsecond
+  public: false
   created_at: <%= 5.hours.ago.to_s(:db) %>
   updated_at: <%= 5.hours.ago.to_s(:db) %>
 
@@ -109,6 +119,7 @@ funds_for_postconference_ui_sprint_hotel_rooms:
   title: Funds for Post-Conference UI Sprint Hotel Rooms
   description: This vote is on spending the amont of $1503.88 on two hotel rooms for the jQuery UI Sprint to immediately follow jQuery Conference Boston DevDays.  John, Todd, Scott, Jorn and Richard will be attending this sprint.
   state_name: waitingsecond
+  public: false
   created_at: <%= 4.hours.ago.to_s(:db) %>
   updated_at: <%= 4.hours.ago.to_s(:db) %>
 
@@ -119,6 +130,7 @@ jquery_sf_mobile_planning:
   description: This is a vote to reimburse jQuery Team Members in the total amount of $4,617.26, for expenses related to a jQuery Mobile team sprint held in San Francisco, CA in late September.
   state_name: waitingsecond
   expedited: true
+  public: false
   created_at: <%= 3.hours.ago.to_s(:db) %>
   updated_at: <%= 3.hours.ago.to_s(:db) %>
 
@@ -128,6 +140,7 @@ elections_for_executive_board:
   title: Elections for Executive Board
   description: "This is a vote on the first elections of the Executive Board. There are seven nominees: Rey Bango, Yehuda Katz, John Resig, Jonathan Sharp, Leah Silber, Ralph Whitbeck, Richard D. Worth.  Each vote should contain a list of the nominees they wish to vote for."
   state_name: waitingsecond
+  public: false
   created_at: <%= 50.minutes.ago.to_s(:db) %>
   updated_at: <%= 50.minutes.ago.to_s(:db) %>
 
@@ -137,6 +150,7 @@ conference_speaker_reimbursements:
   title: Conference Speaker Reimbursements
   description: This vote is to approve an expense of $3355.19 for speaker travel reimbursements for the upcoming jQuery Conference in Boston.
   state_name: waitingsecond
+  public: false
   created_at: <%= 30.minutes.ago.to_s(:db) %>
   updated_at: <%= 30.minutes.ago.to_s(:db) %>
 
@@ -147,5 +161,6 @@ conference_signage:
   description: This is a vote to spend no more than $1500 on signage for the upcoming jQuery Conference in Boston.
   expedited: true
   state_name: waitingsecond
+  public: false
   created_at: <%= 5.minutes.ago.to_s(:db) %>
   updated_at: <%= 5.minutes.ago.to_s(:db) %>

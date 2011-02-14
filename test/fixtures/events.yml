@@ -2,6 +2,7 @@ cody_lindley_seconds_change_conservancy_representative:
   event_type: second
   member: cody_lindley
   motion_id: 1
+  public: false
   created_at: 2010-12-01 19:10:00
   updated_at: 2010-12-01 19:10:00
 
@@ -9,6 +10,7 @@ dave_methvin_seconds_change_conservancy_representative:
   event_type: second
   member: dave_methvin
   motion_id: 1
+  public: false
   created_at: 2010-12-01 19:15:00
   updated_at: 2010-12-01 19:15:00
 
@@ -16,62 +18,63 @@ jonathan_sharp_objects_change_conservancy_representative:
   event_type: objection
   member: jonathan_sharp
   motion_id: 1
+  public: false
   created_at: 2010-12-01 20:00:00
   updated_at: 2010-12-01 20:00:00
 
 john_resig_votes_aye_on_change_conservancy_representative:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: john_resig
   motion_id: 1
+  public: true
   created_at: 2010-12-03 20:00:00
   updated_at: 2010-12-03 20:00:00
 
 leah_silber_votes_aye_on_change_conservancy_representative:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: leah_silber
   motion_id: 1
+  public: true
   created_at: 2010-12-03 20:00:00
   updated_at: 2010-12-03 20:00:00
 
 mike_hostetler_votes_aye_on_change_conservancy_representative:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: mike_hostetler
   motion_id: 1
+  public: true
   created_at: 2010-12-03 20:01:00
   updated_at: 2010-12-03 20:01:00
 
 paul_irish_votes_nay_on_change_conservancy_representative:
-  event_type: vote
-  value: false
+  event_type: no_vote
   member: paul_irish
   motion_id: 1
+  public: true
   created_at: 2010-12-03 20:10:00
   updated_at: 2010-12-03 20:10:00
 
 ralph_whitbeck_votes_aye_on_change_conservancy_representative:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: ralph_whitbeck
   motion_id: 1
+  public: true
   created_at: 2010-12-04 10:00:00
   updated_at: 2010-12-04 10:00:00
 
 todd_parker_votes_aye_on_change_conservancy_representative:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: todd_parker
   motion_id: 1
+  public: true
   created_at: 2010-12-04 11:00:00
   updated_at: 2010-12-04 11:00:00
 
 yehuda_katz_votes_aye_on_change_conservancy_representative:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: yehuda_katz
   motion_id: 1
+  public: true
   created_at: 2010-12-05 18:00:00
   updated_at: 2010-12-05 18:00:00
 
@@ -79,6 +82,7 @@ ralph_whitbeck_seconds_kickstart_funding_for_jquery_ui_grid:
   event_type: second
   member: ralph_whitbeck
   motion_id: 2
+  public: false
   created_at: 2010-12-02 12:00:00
   updated_at: 2010-12-02 12:00:00
 
@@ -86,54 +90,55 @@ todd_parker_seconds_kickstart_funding_for_jquery_ui_grid:
   event_type: second
   member: todd_parker
   motion_id: 2
+  public: false
   created_at: 2010-12-02 13:00:00
   updated_at: 2010-12-02 13:00:00
 
 jonathan_sharp_votes_aye_on_kickstart_funding_for_jquery_ui_grid:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: jonathan_sharp
   motion_id: 2
+  public: true
   created_at: 2010-12-03 14:00:00
   updated_at: 2010-12-03 14:00:00
 
 leah_silber_votes_aye_on_kickstart_funding_for_jquery_ui_grid:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: leah_silber
   motion_id: 2
+  public: true
   created_at: 2010-12-03 15:00:00
   updated_at: 2010-12-03 15:00:00
 
 mike_hostetler_votes_aye_on_kickstart_funding_for_jquery_ui_grid:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: mike_hostetler
   motion_id: 2
+  public: true
   created_at: 2010-12-03 16:00:00
   updated_at: 2010-12-03 16:00:00
 
 paul_irish_votes_aye_on_kickstart_funding_for_jquery_ui_grid:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: paul_irish
   motion_id: 2
+  public: true
   created_at: 2010-12-03 17:00:00
   updated_at: 2010-12-03 17:00:00
 
 ralph_whitbeck_votes_aye_on_kickstart_funding_for_jquery_ui_grid:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: ralph_whitbeck
   motion_id: 2
+  public: true
   created_at: 2010-12-03 18:00:00
   updated_at: 2010-12-03 18:00:00
 
 todd_parker_votes_aye_on_kickstart_funding_for_jquery_ui_grid:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: todd_parker
   motion_id: 2
+  public: true
   created_at: 2010-12-03 19:00:00
   updated_at: 2010-12-03 19:00:00
 
@@ -141,6 +146,7 @@ dave_methvin_seconds_additional_hours_for_jquery_mobile:
   event_type: second
   member: dave_methvin
   motion_id: 3
+  public: false
   created_at: 2010-12-03 16:00:00
   updated_at: 2010-12-03 16:00:00
 
@@ -148,30 +154,31 @@ john_resig_seconds_additional_hours_for_jquery_mobile:
   event_type: second
   member: john_resig
   motion_id: 3
+  public: false
   created_at: 2010-12-03 17:00:00
   updated_at: 2010-12-03 17:00:00
 
 yehuda_katz_votes_aye_on_additional_hours_for_jquery_mobile:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: yehuda_katz
   motion_id: 3
+  public: true
   created_at: 2010-12-04 17:00:00
   updated_at: 2010-12-04 17:00:00
 
 dave_methvin_votes_aye_on_additional_hours_for_jquery_mobile:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: dave_methvin
   motion_id: 3
+  public: true
   created_at: 2010-12-05 18:00:00
   updated_at: 2010-12-05 18:00:00
 
 john_resig_votes_aye_on_additional_hours_for_jquery_mobile:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: john_resig
   motion_id: 3
+  public: true
   created_at: 2010-12-05 19:00:00
   updated_at: 2010-12-05 19:00:00
 
@@ -179,6 +186,7 @@ cody_lindley_seconds_conference_tshirts:
   event_type: second
   member: cody_lindley
   motion_id: 4
+  public: false
   created_at: 2010-12-10 19:00:00
   updated_at: 2010-12-10 19:00:00
 
@@ -186,6 +194,7 @@ dave_methvin_seconds_conference_tshirts:
   event_type: second
   member: dave_methvin
   motion_id: 4
+  public: false
   created_at: 2010-12-10 19:10:00
   updated_at: 2010-12-10 19:10:00
 
@@ -193,6 +202,7 @@ john_resig_seconds_conference_tshirts:
   event_type: second
   member: john_resig
   motion_id: 4
+  public: false
   created_at: 2010-12-10 19:10:00
   updated_at: 2010-12-10 19:10:00
 
@@ -200,86 +210,87 @@ jonathan_sharp_seconds_conference_tshirts:
   event_type: second
   member: jonathan_sharp
   motion_id: 4
+  public: false
   created_at: 2010-12-10 20:00:00
   updated_at: 2010-12-10 20:00:00
 
 cody_lindley_votes_aye_on_conference_tshirts:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: cody_lindley
   motion_id: 4
+  public: true
   created_at: 2010-12-10 21:00:00
   updated_at: 2010-12-10 21:00:00
 
 dave_methvin_votes_aye_on_conference_tshirts:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: dave_methvin
   motion_id: 4
+  public: true
   created_at: 2010-12-10 22:00:00
   updated_at: 2010-12-10 22:00:00
 
 john_resig_votes_aye_on_conference_tshirts:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: john_resig
   motion_id: 4
+  public: true
   created_at: 2010-12-10 23:00:00
   updated_at: 2010-12-10 23:00:00
 
 jonathan_sharp_votes_aye_on_conference_tshirts:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: jonathan_sharp
   motion_id: 4
+  public: true
   created_at: 2010-12-11 10:00:00
   updated_at: 2010-12-11 10:00:00
 
 leah_silber_votes_aye_on_conference_tshirts:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: leah_silber
   motion_id: 4
+  public: true
   created_at: 2010-12-11 11:00:00
   updated_at: 2010-12-11 11:00:00
 
 mike_hostetler_votes_aye_on_conference_tshirts:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: mike_hostetler
   motion_id: 4
+  public: true
   created_at: 2010-12-11 12:00:00
   updated_at: 2010-12-11 12:00:00
 
 paul_irish_votes_aye_on_conference_tshirts:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: paul_irish
   motion_id: 4
+  public: true
   created_at: 2010-12-11 13:00:00
   updated_at: 2010-12-11 13:00:00
 
 ralph_whitbeck_votes_aye_on_conference_tshirts:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: ralph_whitbeck
   motion_id: 4
+  public: true
   created_at: 2010-12-11 14:00:00
   updated_at: 2010-12-11 14:00:00
 
 todd_parker_votes_aye_on_conference_tshirts:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: todd_parker
   motion_id: 4
+  public: true
   created_at: 2010-12-11 15:00:00
   updated_at: 2010-12-11 15:00:00
 
 yehuda_katz_votes_aye_on_conference_tshirts:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: yehuda_katz
   motion_id: 4
+  public: true
   created_at: 2010-12-11 16:00:00
   updated_at: 2010-12-11 16:00:00
 
@@ -287,6 +298,7 @@ john_resig_seconds_badges_for_boston_jquery_conference_2010:
   event_type: second
   member: john_resig
   motion_id: 5
+  public: false
   created_at: 2010-12-11 12:00:00
   updated_at: 2010-12-11 12:00:00
 
@@ -294,6 +306,7 @@ paul_irish_seconds_formation_of_events_team:
   event_type: second
   member: paul_irish
   motion_id: 6
+  public: false
   created_at: <%= (2.days + 20.hours).ago.to_s(:db) %>
   updated_at: <%= (2.days + 20.hours).ago.to_s(:db) %>
 
@@ -301,22 +314,23 @@ ralph_whitbeck_seconds_formation_of_events_team:
   event_type: second
   member: ralph_whitbeck
   motion_id: 6
+  public: false
   created_at: <%= (2.days + 19.hours).ago.to_s(:db) %>
   updated_at: <%= (2.days + 19.hours).ago.to_s(:db) %>
 
 todd_parker_votes_nay_on_formation_of_events_team:
-  event_type: vote
-  value: false
+  event_type: no_vote
   member: todd_parker
   motion_id: 6
+  public: true
   created_at: <%= 1.day.ago.to_s(:db) %>
   updated_at: <%= 1.day.ago.to_s(:db) %>
 
 yehuda_katz_votes_aye_on_formation_of_events_team:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: yehuda_katz
   motion_id: 6
+  public: true
   created_at: <%= 23.hours.ago.to_s(:db) %>
   updated_at: <%= 23.hours.ago.to_s(:db) %>
 
@@ -324,6 +338,7 @@ jonathan_sharp_seconds_project_basecamp_account:
   event_type: second
   member: jonathan_sharp
   motion_id: 7
+  public: false
   created_at: <%= 23.hours.ago.to_s(:db) %>
   updated_at: <%= 23.hours.ago.to_s(:db) %>
 
@@ -331,6 +346,7 @@ leah_silber_seconds_project_basecamp_account:
   event_type: second
   member: leah_silber
   motion_id: 7
+  public: false
   created_at: <%= 22.hours.ago.to_s(:db) %>
   updated_at: <%= 22.hours.ago.to_s(:db) %>
 
@@ -338,6 +354,7 @@ mike_hostetler_seconds_project_basecamp_account:
   event_type: second
   member: mike_hostetler
   motion_id: 7
+  public: false
   created_at: <%= 21.hours.ago.to_s(:db) %>
   updated_at: <%= 21.hours.ago.to_s(:db) %>
 
@@ -345,68 +362,68 @@ paul_irish_seconds_project_basecamp_account:
   event_type: second
   member: paul_irish
   motion_id: 7
+  public: false
   created_at: <%= 20.hours.ago.to_s(:db) %>
   updated_at: <%= 20.hours.ago.to_s(:db) %>
 
 john_resig_votes_aye_on_project_basecamp_account:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: john_resig
   motion_id: 7
+  public: true
   created_at: <%= 4.hours.ago.to_s(:db) %>
   updated_at: <%= 4.hours.ago.to_s(:db) %>
 
 jonathan_sharp_votes_aye_on_project_basecamp_account:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: jonathan_sharp
   motion_id: 7
+  public: true
   created_at: <%= 3.hours.ago.to_s(:db) %>
   updated_at: <%= 3.hours.ago.to_s(:db) %>
 
 leah_silber_votes_nay_on_project_basecamp_account:
-  event_type: vote
-  value: false
+  event_type: no_vote
   member: leah_silber
   motion_id: 7
+  public: true
   created_at: <%= 2.hours.ago.to_s(:db) %>
   updated_at: <%= 2.hours.ago.to_s(:db) %>
 
 mike_hostetler_votes_aye_on_project_basecamp_account:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: mike_hostetler
   motion_id: 7
+  public: true
   created_at: <%= 1.hour.ago.to_s(:db) %>
   updated_at: <%= 1.hour.ago.to_s(:db) %>
 
 paul_irish_votes_aye_on_project_basecamp_account:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: paul_irish
   motion_id: 7
+  public: true
   created_at: <%= 30.minutes.ago.to_s(:db) %>
   updated_at: <%= 30.minutes.ago.to_s(:db) %>
 
 ralph_whitbeck_votes_aye_on_project_basecamp_account:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: ralph_whitbeck
   motion_id: 7
+  public: true
   created_at: <%= 20.minutes.ago.to_s(:db) %>
   updated_at: <%= 20.minutes.ago.to_s(:db) %>
 
 todd_parker_votes_aye_on_project_basecamp_account:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: todd_parker
   motion_id: 7
+  public: true
   created_at: <%= 10.minutes.ago.to_s(:db) %>
   updated_at: <%= 10.minutes.ago.to_s(:db) %>
 
 yehuda_katz_votes_aye_on_project_basecamp_account:
-  event_type: vote
-  value: true
+  event_type: yes_vote
   member: yehuda_katz
   motion_id: 7
   created_at: <%= 5.minutes.ago.to_s(:db) %>
@@ -416,6 +433,7 @@ paul_irish_seconds_budget_for_printed_programs:
   event_type: second
   member: paul_irish
   motion_id: 8
+  public: false
   created_at: <%= 9.hours.ago.to_s(:db) %>
   updated_at: <%= 9.hours.ago.to_s(:db) %>
 
@@ -423,6 +441,7 @@ ralph_whitbeck_seconds_budget_for_printed_programs:
   event_type: second
   member: ralph_whitbeck
   motion_id: 8
+  public: false
   created_at: <%= 8.hours.ago.to_s(:db) %>
   updated_at: <%= 8.hours.ago.to_s(:db) %>
 
@@ -430,6 +449,7 @@ leah_silber_seconds_filament_group_jquery_mobile_payment:
   event_type: second
   member: leah_silber
   motion_id: 9
+  public: false
   created_at: <%= 6.hours.ago.to_s(:db) %>
   updated_at: <%= 6.hours.ago.to_s(:db) %>
 
@@ -437,6 +457,7 @@ mike_hostetler_seconds_filament_group_jquery_mobile_payment:
   event_type: second
   member: mike_hostetler
   motion_id: 9
+  public: false
   created_at: <%= 5.hours.ago.to_s(:db) %>
   updated_at: <%= 5.hours.ago.to_s(:db) %>
 
@@ -444,6 +465,7 @@ john_resig_seconds_funds_for_postconference_ui_sprint_hotel_rooms:
   event_type: second
   member: john_resig
   motion_id: 11
+  public: false
   created_at: <%= 3.hours.ago.to_s(:db) %>
   updated_at: <%= 3.hours.ago.to_s(:db) %>
 
@@ -451,5 +473,6 @@ john_resig_seconds_elections_for_executive_board:
   event_type: second
   member: john_resig
   motion_id: 13
+  public: false
   created_at: <%= 40.minutes.ago.to_s(:db) %>
   updated_at: <%= 40.minutes.ago.to_s(:db) %>
