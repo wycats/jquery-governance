@@ -56,6 +56,8 @@
         %span.current_state= t("motions.#{@motion.state_name}.description")
       %dt Expedited
       %dd= @motion.expedited? ? 'Yes' : 'No'
+      %dt Conflict of interest
+      %dd= @motion.conflicts.any? ? @motion.conflicts.to_sentence : 'None'
       %dt Votes
       %dd
         %span.ayes #{@motion.ayes} ayes
