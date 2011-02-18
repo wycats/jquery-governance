@@ -91,3 +91,34 @@ form .error_msg {
   padding: 4px 0 0 7px;
   color: #a75144;
 }
+
+form #motion_conflicts_list {
+  margin-left: $form_left_column_width + $form_columns_separation;
+}
+
+form .button.add {
+  margin-left: 5px;
+  line-height: 18px;
+}
+
+form ul.conflicts {
+  position: relative;
+  clear: both;
+  width: 400px;
+  margin-left: $form_left_column_width + $form_columns_separation;
+}
+
+form ul.conflicts li {
+  padding: 4px 9px;
+  font-size: 16px;
+}
+
+
+#content form ul.conflicts a {
+  cursor: pointer;
+  color: #a75144 !important;
+}
+
+#content form ul.conflicts span {
+  @include badge(#999, #eee);
+}

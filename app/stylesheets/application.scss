@@ -151,21 +151,6 @@ div.motion {
 /* @end */
 
 /* @group Homepage */
-#content {
-  a.remove {
-    background-image: url('/images/remove.png');
-    background-repeat: no-repeat;
-    background-position: top right;
-    text-decoration: none;
-    font-size: 1px;
-    height: 16px;
-    width: 16px;
-    color: #fff;
-    display: inline-block;
-    span { display: none; }
-  }
-}
-
 #content h1 {
   margin-bottom: 20px;
   padding-left: 20px;
