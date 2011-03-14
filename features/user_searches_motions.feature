@@ -14,14 +14,14 @@ Feature: User searches motion
   Scenario: Member navigates to the search page
     Given I am signed in as an active member
       And I am on the home page
-     When I follow "Search Motions"
+     When I follow "Search Votes"
      Then I should be on the search page
 
   Scenario: Member searches for a motion
     Given I am signed in as an active member
      When I go to the search page
       And I fill in "Sample" for my search terms
-      And I press "Search for motions"
+      And I press "Search for votes"
      Then I should be on the search results page
       And I should see "Sample Motion 1"
       And I should see "Sample Vote 2"
@@ -29,7 +29,7 @@ Feature: User searches motion
   Scenario: Public user only see results he has permission to see
     Given I am on the search page
       And I fill in "Sample" for my search terms
-      And I press "Search for motions"
+      And I press "Search for votes"
      Then I should be on the search results page
       But I should not see "Sample Motion 1"
       And I should see "Sample Vote 2"

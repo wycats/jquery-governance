@@ -24,20 +24,20 @@ Feature: Member votes motion
     Given I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I press "Vote Aye On This Motion"
-    Then I should see "You have successfully voted the motion"
+    And I press "Vote Aye On This Vote"
+    Then I should see "You have successfully voted the vote"
 
   Scenario: A motion is voted negatively
     Given I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I press "Vote Nay On This Motion"
-    Then I should see "You have successfully voted the motion"
+    And I press "Vote Nay On This Vote"
+    Then I should see "You have successfully voted the vote"
 
   Scenario: A motion can't be voted more than once by the same member
     Given I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I press "Vote Aye On This Motion"
-    Then I should not see "Vote Aye On This Motion"
-    And I should not see "Vote Nay On This Motion"
+    And I press "Vote Aye On This Vote"
+    Then I should not see "Vote Aye On This Vote"
+    And I should not see "Vote Nay On This Vote"

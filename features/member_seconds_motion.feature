@@ -19,8 +19,8 @@ Feature: Member seconds motion
     And I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I press "Second This Motion"
-    Then I should see "You have successfully seconded the motion."
+    And I press "Second This Vote"
+    Then I should see "You have successfully seconded the vote."
     And I should see "Currently waiting for seconds"
 
   Scenario: A motion is seconded enough times to been brough to discussion
@@ -29,8 +29,8 @@ Feature: Member seconds motion
     And I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I press "Second This Motion"
-    Then I should see "You have successfully seconded the motion."
+    And I press "Second This Vote"
+    Then I should see "You have successfully seconded the vote."
     And I should see "Currently being discussed"
 
   Scenario: An expedited motion is seconded but still needs more seconds to been brough to a vote
@@ -39,8 +39,8 @@ Feature: Member seconds motion
     And I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I press "Second This Motion"
-    Then I should see "You have successfully seconded the motion."
+    And I press "Second This Vote"
+    Then I should see "You have successfully seconded the vote."
     And I should see "Currently waiting for seconds"
 
   Scenario: An expedited motion is seconded enough times to been brough to a vote
@@ -52,8 +52,8 @@ Feature: Member seconds motion
     And I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I press "Second This Motion"
-    Then I should see "You have successfully seconded the motion."
+    And I press "Second This Vote"
+    Then I should see "You have successfully seconded the vote."
     And I should see "Currently being voted"
 
   Scenario: A motion can't be seconded by it's creator
@@ -61,12 +61,12 @@ Feature: Member seconds motion
     And I am signed in as "John Resig"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I should not see "Second This Motion"
+    And I should not see "Second This Vote"
 
   Scenario: A motion can't be seconded more than once by the same member
     Given the member "John Resig" has created a motion titled "jQuery is cool"
     And I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I press "Second This Motion"
-    Then I should not see "Second This Motion"
+    And I press "Second This Vote"
+    Then I should not see "Second This Vote"

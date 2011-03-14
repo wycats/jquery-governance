@@ -13,7 +13,7 @@
         = membership.label :is_admin
         = membership.check_box :is_admin
       .select
-        = membership.label :qualifying_motion_id, "Motion Reference"
+        = membership.label :qualifying_motion_id, "Vote Reference"
         = membership.approved_motions_select :qualifying_motion_id
         = f.error_msg 'memberships.qualifying_motion_id'
   .field.text

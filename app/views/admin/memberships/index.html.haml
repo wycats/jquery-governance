@@ -12,7 +12,7 @@
           %th.actions= t("admin.members.headings.actions")
         %tr.active_membership[@active_membership]{:class => cycle("", "alt")}
           %td= l(@active_membership.started_at, :format => :short)
-          %td= link_to "Motion ##{@active_membership.qualifying_motion.id}", @active_membership.qualifying_motion
+          %td= link_to "Vote ##{@active_membership.qualifying_motion.id}", @active_membership.qualifying_motion
           %td= link_to t("admin.memberships.actions.end_membership"), terminate_admin_member_membership_path(@member, @active_membership)
     - else
       %h3= t("admin.memberships.headings.no_active_membership")
@@ -29,6 +29,6 @@
         - @expired_memberships.each do |membership|
           %tr.expired_membership[membership]{:class => cycle("", "alt")}
             %td= l(membership.started_at, :format => :short)
-            %td= link_to "Motion ##{membership.qualifying_motion.id}", membership.qualifying_motion
+            %td= link_to "Vote ##{membership.qualifying_motion.id}", membership.qualifying_motion
             %td= l(membership.ended_at,:format => :short)
-            %td= link_to "Motion ##{membership.disqualifying_motion.id}", membership.disqualifying_motion
+            %td= link_to "Vote ##{membership.disqualifying_motion.id}", membership.disqualifying_motion

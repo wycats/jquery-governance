@@ -36,7 +36,7 @@ class MotionsController < ApplicationController
     @motion = current_member.motions.build(params[:motion])
 
     if @motion.save
-      flash[:notice] = "New motion was created successfully"
+      flash[:notice] = "New vote was created successfully"
       redirect_to motion_url(@motion)
     else
       render :new

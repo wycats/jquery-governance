@@ -1,7 +1,7 @@
-%h1 Motion search
+%h1 Vote search
 = form_for :search, :url => results_of_motion_search_path do |search|
   .text.field
     = search.label :keywords
     = search.text_field :keywords, :placeholder => "Enter your search terms here..."
   .action.submit
-    = search.submit "Search for motions", :class => "button large"
+    = search.submit "Search for votes", :class => "button large"

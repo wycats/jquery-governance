@@ -22,43 +22,43 @@ Feature: Member objects motion
     Given I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I press "Object This Motion"
-    Then I should see "You have successfully objected the motion"
+    And I press "Object This Vote"
+    Then I should see "You have successfully objected the vote"
 
   Scenario: A motion can't be objected more than once by the same member
     Given I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I press "Object This Motion"
-    Then I should not see "Object This Motion"
+    And I press "Object This Vote"
+    Then I should not see "Object This Vote"
 
   Scenario: A motion objection is withdrawn
     Given I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I press "Object This Motion"
+    And I press "Object This Vote"
     And I press "Withdraw Objection"
     Then I should see "You have successfully withdrawn your objection"
-    And I should see "Object This Motion"
+    And I should see "Object This Vote"
 
   Scenario: A motion objection is withdrawn during its added discussion time
     Given I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I press "Object This Motion"
+    And I press "Object This Vote"
     And 24 hours has passed
     And I press "Withdraw Objection"
     Then I should see "You have successfully withdrawn your objection"
-    And I should see "Vote Aye On This Motion"
-    And I should see "Vote Nay On This Motion"
+    And I should see "Vote Aye On This Vote"
+    And I should see "Vote Nay On This Vote"
 
   Scenario: An objection is withdrawn for a motion with several objections during its added discussion time
     Given the member "John Resig" objects the motion titled "jQuery is cool"
     And I am signed in as "Yehuda Katz"
     When I go to the motions page
     And I follow "jQuery is cool"
-    And I press "Object This Motion"
+    And I press "Object This Vote"
     And 24 hours has passed
     And I press "Withdraw Objection"
     Then I should see "You have successfully withdrawn your objection"
-    And I should see "Object This Motion"
+    And I should see "Object This Vote"

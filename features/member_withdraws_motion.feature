@@ -18,14 +18,14 @@ Feature: Member withdraws motion
   Scenario: A motion waiting for seconds is withdrawn
     Given I am signed in as "John Resig"
     When I go to the motions page for "jQuery is cool"
-    And I press "Withdraw This Motion"
-    Then I should see "You have successfully withdrawn the motion"
+    And I press "Withdraw This Vote"
+    Then I should see "You have successfully withdrawn the vote"
     And the motion titled "jQuery is cool" should be closed
 
   Scenario: Another member can't withdraw a motion waiting for seconds
     Given I am signed in as "Yehuda Katz"
     When I go to the motions page for "jQuery is cool"
-    Then I should not see "Withdraw This Motion"
+    Then I should not see "Withdraw This Vote"
 
   Scenario: A motion beign discussed is withdrawn
     Given the following members have seconded a motion titled "jQuery is cool"
@@ -34,8 +34,8 @@ Feature: Member withdraws motion
       | Brandon Aaron |
     And I am signed in as "John Resig"
     When I go to the motions page for "jQuery is cool"
-    And I press "Withdraw This Motion"
-    Then I should see "You have successfully withdrawn the motion"
+    And I press "Withdraw This Vote"
+    Then I should see "You have successfully withdrawn the vote"
     And the motion titled "jQuery is cool" should be closed
 
   Scenario: Another member can't withdraw a motion being discussed
@@ -45,7 +45,7 @@ Feature: Member withdraws motion
       | Brandon Aaron |
     And I am signed in as "Yehuda Katz"
     When I go to the motions page for "jQuery is cool"
-    Then I should not see "Withdraw This Motion"
+    Then I should not see "Withdraw This Vote"
 
   Scenario: A motion being voted can't be withdrawn
     Given the following members have seconded a motion titled "jQuery is cool"
@@ -55,4 +55,4 @@ Feature: Member withdraws motion
     And 24 hours has passed
     And I am signed in as "Yehuda Katz"
     When I go to the motions page for "jQuery is cool"
-    Then I should not see "Withdraw This Motion"
+    Then I should not see "Withdraw This Vote"

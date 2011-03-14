@@ -1,4 +1,4 @@
-%h1 New motion
+%h1 New vote
 
 #new_motion_form
   = form_for @motion do |f|
@@ -23,4 +23,4 @@
       = f.label :tag_list
       = f.text_field :tag_list
     .action.submit
-      = f.submit "Create Motion", :class => 'button large'
+      = f.submit "Create Vote", :class => 'button large'

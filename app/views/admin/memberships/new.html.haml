@@ -4,7 +4,7 @@
 %section#main
   = form_for [:admin, @member, @membership] do |membership|
     .select
-      = membership.label :qualifying_motion_id, "Motion Reference"
+      = membership.label :qualifying_motion_id, "Vote Reference"
       = membership.approved_motions_select :qualifying_motion_id
       = membership.error_msg :quailifying_motion_id
       = membership.error_msg :quailifying_motion

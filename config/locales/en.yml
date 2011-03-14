@@ -19,7 +19,7 @@ en:
       titles:
         index: "Manage user's memberships"
         terminate: "End membership"
-        renew: "Specify the motion that re-instated this member"
+        renew: "Specify the vote that re-instated this member"
       headings:
         no_active_membership: "No active memberships"
         active_membership: "Current membership"
@@ -86,40 +86,40 @@ en:
   motions:
    waitingsecond:
      heading: "Waiting For Seconds"
-     empty: "There are no motions waiting for seconds."
+     empty: "There are no votes waiting for seconds."
      description: "waiting for seconds"
    discussing:
      heading: "Discussing"
-     empty: "There are no motions being discussed."
+     empty: "There are no votes being discussed."
      description: "being discussed"
    voting:
      heading: "Voting"
-     empty: "There are no motions being voted."
+     empty: "There are no votes being voted."
      description: "being voted"
    closed:
      heading: "Closed"
-     empty: "There are no closed motions."
+     empty: "There are no closed votes."
      description: "closed"
    publicly_viewable:
      heading: "Reached a Vote"
-     empty: "There are no closed motions that reached a vote."
+     empty: "There are no closed votes that reached voting."
    privately_viewable:
      heading: "Didn't reach a vote"
-     empty: "There are no closed motions that didn't reach a vote."
+     empty: "There are no closed vote that didn't reach voting"
    titles:
      index:
-       publicly_viewable: "Motions"
-       open: "Open Motions"
-       closed: "Closed Motions"
+       publicly_viewable: "Votes"
+       open: "Open Votes"
+       closed: "Closed Votes"
   events:
     notices:
-      second: You have successfully seconded the motion.
-      objection: You have successfully objected the motion.
+      second: You have successfully seconded the vote.
+      objection: You have successfully objected the vote.
       objection_withdrawn: You have successfully withdrawn your objection.
-      yes_vote: You have successfully voted the motion.
-      no_vote: You have successfully voted the motion.
-      comment: You have successfully commented the motion.
-      withdrawn: You have successfully withdrawn the motion.
+      yes_vote: You have successfully voted the vote.
+      no_vote: You have successfully voted the vote.
+      comment: You have successfully commented the vote.
+      withdrawn: You have successfully withdrawn the vote.
     actions:
       second: has seconded
       objection: has objected

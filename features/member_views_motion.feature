@@ -21,4 +21,4 @@ Feature: Member views motion
     And the member "Member" creates a motion titled "Make it work"
 
     When I go to the motions page for "Make it work"
-    Then I should not see "Second This Motion"
+    Then I should not see "Second This Vote"

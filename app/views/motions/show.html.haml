@@ -33,21 +33,21 @@
               Comment
             - if current_member.can?(:object, @motion)
               %button.button.negative{ :name => 'event[event_type]', :value => 'objection' }
-                Object This Motion
+                Object This Vote
             - if current_member.can?(:withdraw_objection, @motion)
               %button.button.positive{ :name => 'event[event_type]', :value => 'objection_withdrawn' }
                 Withdraw Objection
             - if current_member.can?(:withdraw, @motion)
               %button.button.negative{ :name => 'event[event_type]', :value => 'withdrawn' }
-                Withdraw This Motion
+                Withdraw This Vote
             - if current_member.can?(:second, @motion)
               %button.button.positive{ :name => 'event[event_type]', :value => 'second' }
-                Second This Motion
+                Second This Vote
             - if current_member.can?(:vote, @motion)
               %button.button.positive{ :name => 'event[event_type]', :value => 'yes_vote' }
-                Vote Aye On This Motion
+                Vote Aye On This Vote
               %button.button.negative{ :name => 'event[event_type]', :value => 'no_vote' }
-                Vote Nay On This Motion
+                Vote Nay On This Vote
   #motion-status
     %dl
       %dt State
